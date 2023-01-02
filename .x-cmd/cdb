@@ -1,0 +1,12 @@
+
+(
+    cd "$(x wsroot)/.x-cmd"
+
+    [ -d "x-cmd" ] || {
+        git clone git@gitee.com:x-cmd/x-cmd
+    }
+
+    cd "x-cmd"
+
+    "$@"
+)
