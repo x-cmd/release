@@ -3,11 +3,11 @@
     cd "$(x wsroot)/../"
 
 
-    [ -d "x-cmd" ] || {
-        git clone git@gitee.com:x-cmd/x-cmd
+    [ -d "x-cmd-tgt" ] || {
+        git clone git@gitee.com:x-cmd/x-cmd x-cmd-tgt
     }
 
-    cd "x-cmd"
+    cd "x-cmd-tgt"
     # git fetch
 
     "$@"
