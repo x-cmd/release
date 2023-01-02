@@ -21,7 +21,10 @@ buildone(){
 TGT="$(x wsroot)/dist"
 
 build(){
-    inner | while read -r v; do
+    {
+        printf "%s\n" latest
+        inner
+    } | while read -r v; do
         buildone $v "$TGT/$v.tgz"
     done
 }
