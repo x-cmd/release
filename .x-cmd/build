@@ -12,8 +12,16 @@ inner(){
 buildone(){
     local version=${1:?Provide version}
     local tgz="${2:?Provide tgt path}"
+    local hashsum="${3}"
+
     # version
     git checkout "$version" || return 1
+
+    [ "$hashsum" != $(cat version_sum) ] || {
+        x:info "Hashsum matched. Already generated. Exit: $hashsum"
+        return 0
+    }
+
     x z $tgz mod mod.index.txt mod.sha512.txt reference.txt version_sum X LICENSE license_of_components
     git checkout latest
 }
@@ -25,7 +33,11 @@ build(){
         printf "%s\n" latest
         inner
     } | while read -r v; do
-        buildone $v "$TGT/$v.tgz"
+
+        hashsum=
+        [ ! -f "$TGT/$v.tgz" ] || hashsum="$(x zuz cat "$TGT/$v.tgz" version_sum)"
+
+        buildone "$v" "$TGT/$v.tgz" "$hashsum"
     done
 }
 
