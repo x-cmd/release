@@ -1,12 +1,14 @@
 
 (
-    cd "$(x wsroot)/.x-cmd"
+    cd "$(x wsroot)/../"
+
 
     [ -d "x-cmd" ] || {
         git clone git@gitee.com:x-cmd/x-cmd
     }
 
     cd "x-cmd"
+    # git fetch
 
     "$@"
 )
