@@ -2,13 +2,19 @@
 (
     cd "$(x wsroot)/../"
 
-
-    [ -d "x-cmd-tgt" ] || {
+    if [ -d "x-cmd-tgt" ]; then
+        cd "x-cmd-tgt"
+        lastfetch=$(x git meta sincelastfetch)
+        if (( lastfetch >= (60 * 60 * 1) )); then
+            git fetch
+            git checkout latest
+            git pull origin latest
+        fi
+    else
         git clone git@gitee.com:x-cmd/x-cmd x-cmd-tgt
-    }
+        cd "x-cmd-tgt"
+    fi
 
-    cd "x-cmd-tgt"
     # git fetch
-
     "$@"
 )
