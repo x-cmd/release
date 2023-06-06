@@ -15,7 +15,7 @@ buildone(){
     # version
     git checkout "$version" || return 1
 
-    local hashsum; hashsum="$(cat version_sum)" || {
+    local hashsum; hashsum="$(cat version_sum || cat .x-cmd/metadata/version_sum)" || {
         x:info "Cannot found version_sum. Exit: $hashsum"
         return 0
     }
