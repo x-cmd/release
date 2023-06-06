@@ -23,7 +23,7 @@ buildone(){
     hashsum="${hashsum#*=}"
 
     [ -f "${RELEASE_HASH}/${hashsum}.tgz" ] || {
-        x z "${RELEASE_HASH}/${hashsum}.tgz" mod mod.index.txt mod.sha512.txt reference.txt version_sum X LICENSE license_of_components
+        x z "${RELEASE_HASH}/${hashsum}.tgz" mod adv .x-cmd X LICENSE
     }
 
     x cp "${RELEASE_HASH}/${hashsum}.tgz" "${RELEASE_DIST}/${version}.tgz"
