@@ -37,6 +37,8 @@ RELEASE_DIST="$(x wsroot)/dist"
 build(){
     {
         printf "%s\n" latest
+        printf "%s\n" beta
+        printf "%s\n" alpha
         inner
     } | while read -r v; do
         buildone "$v"
