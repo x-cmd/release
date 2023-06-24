@@ -1,4 +1,4 @@
-name: x-cmd/x-cmd ==> x-cmd/release
+name: release
 on:
   # push:
   workflow_dispatch:
