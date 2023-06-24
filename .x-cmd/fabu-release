@@ -7,6 +7,7 @@
     sumfolder="$PWD/release/sum"
     mkdir -p "$distfolder" "$sumfolder"
 
+    # x gita git@github.com:x-cmd/x-cmd-version release "$distfolder" "$sumfolder"
     (
         git clone git@github.com:x-cmd/x-cmd-version
         cd x-cmd-version || {
