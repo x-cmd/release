@@ -1,6 +1,6 @@
 name: x-cmd/x-cmd ==> x-cmd/release
 on:
-  push:
+  # push:
   workflow_dispatch:
 
 jobs:
