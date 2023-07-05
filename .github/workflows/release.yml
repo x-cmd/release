@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      QYWX_BOT_RELEASE_WEBHOOK: ${{ secrets.QYWX_BOT_RELEASE_WEBHOOK }}
       ssh_key: ${{ secrets.SSH_PRIVATE_KEY_FOR_SYNC }}
       git_user: l
       git_email: l@x-cmd.com
