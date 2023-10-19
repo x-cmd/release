@@ -5,6 +5,7 @@
 
     distfolder="$PWD/release/dist"
     sumfolder="$PWD/release/sum"
+    index_yml="$PWD/release/index.yml"
     mkdir -p "$distfolder" "$sumfolder"
 
     # x gita git@github.com:x-cmd/x-cmd-version release "$distfolder" "$sumfolder"
@@ -16,6 +17,9 @@
         }
 
         xws release "$distfolder" "$sumfolder" || exit 1
+
+        x:info "Copy $PWD/version/index.yml ==> $index_yml"
+        cp -rf version/index.yml "$index_yml"
     ) && (
         cd release || {
             x:error "Cannot cd to release"
