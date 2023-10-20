@@ -25,7 +25,7 @@ v0.1.13:
           en: Optimize segment completion and file path completion in the bash3 environment
 v0.1.12:
   sum: d4be353157e149ed25ea5817bf0b5f166711ade73f8d79078c986793ecbf69e9ce342f456ab9b7e24f4ba23e195347aeb0fcf053a2346a5bd9b1df9bd38f0d48
-  date: null
+  date: 2023-10-17 01:25:36+0000
   beta: true
   latest: true
   change:
@@ -47,7 +47,7 @@ v0.1.12:
           en: Fix the problem of using xz compression in the Windows environment when `x hub file eput`.
 v0.1.11:
   sum: 76655f38a1bd0a7ad48e59b3f2a1bd0da463c2372564a13f745f5e45199e4dbdb0974610941ae7930fab3f05531582d7a6b4aa4be97b9d533b21453d7601b770
-  date: null
+  date: 2023-10-11 14:13:21+0000
   change:
     theme:
       update:
