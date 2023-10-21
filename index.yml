@@ -1,7 +1,11 @@
 v0.1.14:
-  sum: 1fafd8944f3dc0e5006aa058fbc1c2d4686563dfc291af416f8d56863b2f1436c753a8369849f5ccf92fd14dda972a4e371fc08bf490808dc38edefb328133d6
-  date: 2023-10-21 01:40:33+0000
+  sum: 65dc4a13eca519149a2d14259d846d62d19fda74b6d1826bc45b132e221a050d7af8654ba4b9c47080f6f3d3376e35794edb69bb293dd3e4554dda374f865c11
+  date: 2023-10-21 03:11:42+0000
   change:
+    colr:
+      update:
+        - cn: 新增 colr 模块
+          en: Added colr module
     tui:
       bugfix:
         - cn: 修复 dash 环境 ctrl+c 的问题
