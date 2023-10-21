@@ -2,13 +2,12 @@
 # x-cmd-advise/x-cmd-advise => x-cmd/advise
 
 (
-    repo=x-cmd-version
-    x rmrf "$repo"
-    x:info "正在下载 x-cmd/$repo"
-    git clone git@github.com:x-cmd/"$repo"
+    x rmrf x-cmd-version
+    x:info "正在下载 x-cmd/x-cmd-version"
+    git clone git@github.com:x-cmd/x-cmd-version
 
-    cd "$repo" || {
-        x:error "Cannnot cd to x-cmd/$repo"
+    cd x-cmd-version || {
+        x:error "Cannnot cd to x-cmd/x-cmd-version"
         return 1
     }
 
