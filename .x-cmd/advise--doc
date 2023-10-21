@@ -1,0 +1,18 @@
+
+# x-cmd-advise/x-cmd-advise => x-cmd/advise
+
+(
+    repo=x-cmd-version
+    x rmrf "$repo"
+    x:info "正在下载 x-cmd/$repo"
+    git clone git@github.com:x-cmd/"$repo"
+
+    cd "$repo" || {
+        x:error "Cannnot cd to x-cmd/$repo"
+        return 1
+    }
+
+    x ws advise "$INPUTS_YY_REPO" "$INPUTS_YY_COMMIT"
+
+)
+
