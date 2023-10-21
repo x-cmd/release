@@ -1,7 +1,31 @@
+v0.1.14:
+  sum: 1fafd8944f3dc0e5006aa058fbc1c2d4686563dfc291af416f8d56863b2f1436c753a8369849f5ccf92fd14dda972a4e371fc08bf490808dc38edefb328133d6
+  date: 2023-10-21 01:40:33+0000
+  change:
+    tui:
+      bugfix:
+        - cn: 修复 dash 环境 ctrl+c 的问题
+          en: Fix the problem of dash environment ctrl+c
+    xrc:
+      update:
+        - cn: 修复 `export ___X_CMD_VERSION` 带来的问题
+          en: Fix the problem caused by `export ___X_CMD_VERSION`
+    version:
+      bugfix:
+        - cn: 修复 `x version verify` 校验 x-cmd 完整性时的问题
+          en: Fix the problem of `x version verify` verifying the integrity of x-cmd
+    hub:
+      update:
+        - cn: 优化 hub 云文件路径的补全
+          en: Optimize the completion of hub cloud file path
+    tldr:
+      bugfix:
+        - cn: 修复 app 使用时数据量过大的问题
+          en: Fix the problem of excessive data volume when using the app
+  alpha: true
 v0.1.13:
   sum: b1ae9e3cb8b5b01c5f9516966ce5d06af2083a687ac1690ea8a05853343007d624ac10641a073ae0fcba3db3749672ad4c291a727eef9980b0b90d55c1bbd9ee
   date: 2023-10-19 03:32:04+0000
-  alpha: true
   change:
     boot:
       bugfix:
@@ -23,11 +47,11 @@ v0.1.13:
       update:
         - cn: 优化分段补全，以及 bash3 环境的文件路径补全
           en: Optimize segment completion and file path completion in the bash3 environment
+  beta: true
+  latest: true
 v0.1.12:
   sum: d4be353157e149ed25ea5817bf0b5f166711ade73f8d79078c986793ecbf69e9ce342f456ab9b7e24f4ba23e195347aeb0fcf053a2346a5bd9b1df9bd38f0d48
   date: 2023-10-17 01:25:36+0000
-  beta: true
-  latest: true
   change:
     ui:
       bugfix:
