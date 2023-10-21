@@ -12,6 +12,5 @@
     }
 
     x ws advise "$INPUTS_YY_REPO" "$INPUTS_YY_COMMIT"
-
 )
 
