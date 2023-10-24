@@ -20,6 +20,10 @@
 
         x:info "Copy $PWD/version/index.yml ==> $index_yml"
         cp -rf version/index.yml "$index_yml"
+        git add version/index.yml
+        git status -s
+        git commit -m "Update: version/index.yml"
+        xws push
     ) && (
         cd release || {
             x:error "Cannot cd to release"
