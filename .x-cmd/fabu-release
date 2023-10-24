@@ -27,6 +27,7 @@
         }
 
         git add .
+        git status -s
         git commit -m ...
         git push git@github.com:x-cmd/release main
         git push git@gitee.com:x-cmd/release main
