@@ -11,6 +11,36 @@ v0.1.15:
         - cn: 更新了 tldr --lang 的选项补全
           en: Updated option completion for tldr --lang
   alpha: true
+v0.1.14:
+  sum: d53d7f346bb031caffa85c8e53a649b70107b005c9d7b58e9828ab1c3a03a2477a2462e8787ca26307484ad9925cb026467e2ddb6850428bbc50a0107b1cd7aa
+  date: 2023-10-21 07:40:54+0000
+  change:
+    colr:
+      update:
+        - cn: 新增 colr 模块
+          en: Added colr module
+    tui:
+      bugfix:
+        - cn: 修复 dash 环境 ctrl+c 的问题
+          en: Fix the problem of dash environment ctrl+c
+    xrc:
+      update:
+        - cn: 修复 `export ___X_CMD_VERSION` 带来的问题
+          en: Fix the problem caused by `export ___X_CMD_VERSION`
+    version:
+      bugfix:
+        - cn: 修复 `x version verify` 校验 x-cmd 完整性时的问题
+          en: Fix the problem of `x version verify` verifying the integrity of x-cmd
+    hub:
+      update:
+        - cn: 优化 hub 云文件路径的补全
+          en: Optimize the completion of hub cloud file path
+    tldr:
+      bugfix:
+        - cn: 修复 app 使用时数据量过大的问题
+          en: Fix the problem of excessive data volume when using the app
+  beta: true
+  latest: true
 v0.1.13:
   sum: b1ae9e3cb8b5b01c5f9516966ce5d06af2083a687ac1690ea8a05853343007d624ac10641a073ae0fcba3db3749672ad4c291a727eef9980b0b90d55c1bbd9ee
   date: 2023-10-19 03:32:04+0000
