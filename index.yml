@@ -30,14 +30,15 @@ v0.2.0:
           en: Optimization changes upgrade code
 
     tldr:
-      fix:
+      bugfix:
         - cn: 修复 --ls 和 --app 相关的 bug
           en: Fix bugs related to --ls and --app
       update:
         - cn: 支持 restarg 参数，查找 子命令的文档
+          en: Support for restarg parameter, find documentation for subcommands
 
     theme:
-      fix:
+      bugfix:
         - cn: 修复了 bash 环境 HISTCONTROL 变量对于 transient 的 bug
           en: Fixed the bash environment HISTCONTROL variable transient bug
       break:
