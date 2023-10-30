@@ -38,8 +38,8 @@ v0.2.0:
         - cn: 修复了 bash 环境 HISTCONTROL 变量对于 transient 的 bug
           en: Fixed the bash environment HISTCONTROL variable transient bug
       update:
-        - cn: 部分 theme 在 zsh 环境去除了对于国旗 emoji 的显示，更新使用了 v0.0.3 版本
-          en: Some themes have removed the display of the national flag emoji in the zsh environment, and have updated to use the v0.0.3 version
+        - cn: 部分 theme 在 zsh 环境去除了对于旗帜 emoji 的显示，资源包更新使用了 v0.0.3 版本
+          en: Some themes have removed the display of flag emoji in the zsh environment, and the resource package has updated to use version v0.0.3
     awk:
       update:
         - cn: 新增了 awk init
