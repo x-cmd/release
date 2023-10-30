@@ -15,20 +15,17 @@ v0.2.0:
             x githook clear; x githook apply;
             ```
     boot:
-      break:
+      update:
         - cn: 更改了 boot init 代码
           en: Changed the boot init code
-      update:
         - cn: 增加 boot clear 功能，清除 rc 文件中设置的 “启动x-cmd” 代码
           en: Added boot clear function to clear the "start x-cmd" code set in the rc file
     xrc:
-      break:
+      update:
         - cn: unexport ___X_CMD_VERSION ___X_CMD_ROOT ___X_CMD_ROOT_MOD ___X_CMD_ROOT_CODE 变量
           en: unexport ___X_CMD_VERSION ___X_CMD_ROOT ___X_CMD_ROOT_MOD ___X_CMD_ROOT_CODE variables
-      update:
         - cn: 优化更改 upgrade 代码
           en: Optimization changes upgrade code
-
     tldr:
       bugfix:
         - cn: 修复 --ls 和 --app 相关的 bug
@@ -36,15 +33,13 @@ v0.2.0:
       update:
         - cn: 支持 restarg 参数，查找 子命令的文档
           en: Support for restarg parameter, find documentation for subcommands
-
     theme:
       bugfix:
         - cn: 修复了 bash 环境 HISTCONTROL 变量对于 transient 的 bug
           en: Fixed the bash environment HISTCONTROL variable transient bug
-      break:
+      update:
         - cn: 部分 theme 在 zsh 环境去除了对于国旗 emoji 的显示，更新使用了 v0.0.3 版本
           en: Some themes have removed the display of the national flag emoji in the zsh environment, and have updated to use the v0.0.3 version
-
     awk:
       update:
         - cn: 新增了 awk init
@@ -56,8 +51,8 @@ v0.1.15:
   change:
     get:
       break:
-        - cn: 更新了 get 脚本
-          en: Updated get script
+        - cn: 更新了 x-cmd 安装脚本
+          en: Updated x-cmd install script
     tldr:
       update:
         - cn: 更新了 tldr --lang 的选项补全
