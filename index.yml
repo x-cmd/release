@@ -1,14 +1,6 @@
-v0.2.2.yml.20231107:
-  sum: null
-  date: 2023-11-04 02:43:00+0000
-  change:
-v0.2.2.yml.20231110:
-  sum: null
-  date: 2023-11-04 02:43:00+0000
-  change:
 v0.2.1:
-  sum: 8cc4dbd3d7ecce0d76006619d0e05d6d62d1077f80ff78175629d4e34e3ef712acf84d055bc1213b6770110c0b21a056f47f0567bad1ddb09c2d48d7bae83806
-  date: 2023-11-04 02:42:57+0000
+  sum: 51b09e19b11322279aea738193c1e5817088451d58e627a6db995eae9b7bbc75306fdce798037a6999d9c0748de1381fc83694865a7303a19b21522e627be86c
+  date: 2023-11-04 03:24:44+0000
   change:
     awk:
       update:
@@ -59,18 +51,6 @@ v0.2.0:
   sum: 2930f0d813de332623f812341133ce27950f22beded74f800fcf20e37e1b88982550c88b430e3efd26601249625863274cc4d394183d659f6c51ca0e3459a704
   date: 2023-10-28 06:14:06+0000
   change:
-    githook:
-      break:
-        - cn: |
-            修复更新版本后 githook 失效问题。采用 hook 文件的指向全局应用文件夹，不依靠版本文件夹<br>更新当前版本可使用以下命令更新项目 githook 指向:
-            ```sh
-            x githook clear; x githook apply;
-            ```
-          en: |
-            Fixed the problem that githook is invalid after updating x version. Use the hook file to point to the global apply folder, not the mod version folder<br>To update the current version, you can use the following command to update the project githook:
-            ```sh
-            x githook clear; x githook apply;
-            ```
     boot:
       update:
         - cn: 更改了 boot init 代码
@@ -88,19 +68,34 @@ v0.2.0:
         - cn: 修复 --ls 和 --app 相关的 bug
           en: Fix bugs related to --ls and --app
       update:
-        - cn: 支持 restarg 参数，查找 子命令的文档
+        - cn: 支持 restarg 参数，优化查找子命令的文档
           en: Support for restarg parameter, find documentation for subcommands
     theme:
+      break:
+        - cn: '`pink` 主题更名为 `catppuccin`. 灵感来源于 [catppuccino](https://github.com/catppuccin/catppuccin#readme)'
+          en: '`pink` theme renamed to `catppuccin`. Inspired by [catppuccino](https://github.com/catppuccin/catppuccin#readme)'
+      update:
+        - cn: 资源版本包更新使用了 `v0.0.3` 版本
+          en: The resource version package has been updated to use version `v0.0.3`
+        - cn: 优化部分主题使用的配色与主题色
+          en: Optimize the color and theme color used by some themes
+        - cn: 部分 theme 在 zsh 环境去除了对于旗帜 emoji 的显示
+          en: Some themes have removed the display of flag emoji in the zsh environment
       bugfix:
         - cn: 修复了 bash 环境 HISTCONTROL 变量对于 transient 的 bug
           en: Fixed the bash environment HISTCONTROL variable transient bug
-      update:
-        - cn: 部分 theme 在 zsh 环境去除了对于旗帜 emoji 的显示，资源包更新使用了 v0.0.3 版本
-          en: Some themes have removed the display of flag emoji in the zsh environment, and the resource package has updated to use version v0.0.3
-    awk:
-      update:
-        - cn: 新增了 awk init
-          en: Added awk init
+    githook:
+      break:
+        - cn: |
+            修复更新版本后 githook 失效问题。采用 hook 文件的指向全局应用文件夹，不依靠版本文件夹<br>更新当前版本可使用以下命令更新项目 githook 指向:
+            ```sh
+            x githook clear; x githook apply;
+            ```
+          en: |
+            Fixed the problem that githook is invalid after updating x version. Use the hook file to point to the global apply folder, not the mod version folder<br>To update the current version, you can use the following command to update the project githook:
+            ```sh
+            x githook clear; x githook apply;
+            ```
   beta: true
   latest: true
 v0.1.15:
