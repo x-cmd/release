@@ -1,3 +1,20 @@
+v0.2.2:
+  sum: 027059569d6f0bae0d4bca2ce5ddef474f7f7068fc2ec6eb91ec74e28cce7ada3ebfe47d1099369d205d606383530b6518857cbd4297f123f05e234380c30190
+  date: 2023-11-08 06:59:18+0000
+  change:
+    advise:
+      update:
+        - cn: advise man 资源包的更新时间改为七天
+          en: The update time of advise man resource package is changed to seven days
+    scoop:
+      update:
+        - cn: 完善 advise option 的描述
+          en: Improve the description of advise option
+    choco:
+      update:
+        - cn: 完善 advise option 的描述
+          en: Improve the description of advise option
+  alpha: true
 v0.2.1:
   sum: 51b09e19b11322279aea738193c1e5817088451d58e627a6db995eae9b7bbc75306fdce798037a6999d9c0748de1381fc83694865a7303a19b21522e627be86c
   date: 2023-11-04 03:24:44+0000
@@ -46,7 +63,8 @@ v0.2.1:
       bugfix:
         - cn: 修复 ip 地址显示不全的问题
           en: Fix the IP address was not displayed completely
-  alpha: true
+  beta: true
+  latest: true
 v0.2.0:
   sum: 2930f0d813de332623f812341133ce27950f22beded74f800fcf20e37e1b88982550c88b430e3efd26601249625863274cc4d394183d659f6c51ca0e3459a704
   date: 2023-10-28 06:14:06+0000
@@ -96,8 +114,6 @@ v0.2.0:
             ```sh
             x githook clear; x githook apply;
             ```
-  beta: true
-  latest: true
 v0.1.15:
   sum: 12e35a1b24dd85991cdef25ac45944f2d2d694260d6783bdfefa81a164c680feeb2a399f3dda05ee44a1bb2b1a69bdd274892de7d575a1fe17d15dc4a19993a2
   date: 2023-10-24 01:49:51+0000
