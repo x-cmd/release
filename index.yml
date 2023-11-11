@@ -19,50 +19,36 @@ v0.2.1:
   sum: 51b09e19b11322279aea738193c1e5817088451d58e627a6db995eae9b7bbc75306fdce798037a6999d9c0748de1381fc83694865a7303a19b21522e627be86c
   date: 2023-11-04 03:24:44+0000
   change:
-    awk:
-      update:
-        - cn: 增加 awk 初始化功能，判断当前环境的 awk 以及 locale 语言
-          en: Add awk initialization function to determine the awk and locale language of the current environment
     advise:
       update:
-        - cn: 增加 `<exec:stdout>` 和 `<exec:stdout:nospace>` 两个字段的功能
-          en: Added functions of `<exec:stdout>` and `<exec:stdout:nospace>`
         - cn: 优化 advise 首次启动的执行时间
           en: Optimize the execution time of advise for first startup
       bugfix:
         - cn: 修复 zsh 环境 LC_ALL 变量泄露的问题
           en: Fix the problem of leakage of LC_ALL variable in zsh environment
+    pkg:
+      update:
+        - cn: 中国区的 pkg 资源信息包从 gitee 迁移到 gitcode
+          en: The package resource information packages in the Chinese region have been migrated from Gitee to Gitcode.
+    install:
+      update:
+        - cn: 增加了更多软件包资源，可通过 `x install update` 来更新
+          en: More resources have been added, and you can update them using `x install update`.
+    ip:
+      bugfix:
+        - cn: 修复 ip 地址显示不全的问题
+          en: Fix the IP address was not displayed completely
     gh:
       update:
         - cn: 增加 使用ui界面添加私人令牌, endpoint, onwer 进行默认初始化, 通过 `x gh --init` 使用
-          en: Use the UI interface to setup access token for default initialization , which can be used via x gh --init
+          en: Use the UI interface to setup access token for default initialization , which can be used via `x gh --init`
       bugfix:
         - cn: 修复了分支名的正则匹配问题
           en: Fixed the regular expression matching issue for branch names.
     gt:
       update:
         - cn: 增加 使用ui界面添加私人令牌, endpoint, onwer 进行默认初始化, 通过 `x gt --init` 使用
-          en: Use the UI interface to setup access token for default initialization , which can be used via x gt --init
-    gcode:
-      update:
-        - cn: 增加 使用ui界面添加私人令牌, endpoint, onwer 进行默认初始化, 通过 `x gcode --init` 使用
-          en: Use the UI interface to setup access token for default initialization , which can be used via x gcode --init
-    gl:
-      update:
-        - cn: 增加 使用ui界面添加私人令牌, endpoint, onwer 进行默认初始化, 通过 `x gl --init` 使用
-          en: Use the UI interface to setup access token for default initialization , which can be used via x gl --init
-    pkg:
-      update:
-        - cn: 中国区的pkg资源信息包从 gitee 迁移到 gitcode
-          en: The package resource information packages in the Chinese region have been migrated from Gitee to Gitcode.
-    install:
-      update:
-        - cn: 增加了更多资源，通过 `x install update` 来更新
-          en: More resources have been added, and you can update them using `x install update`.
-    ip:
-      bugfix:
-        - cn: 修复 ip 地址显示不全的问题
-          en: Fix the IP address was not displayed completely
+          en: Use the UI interface to setup access token for default initialization , which can be used via `x gt --init`
   beta: true
   latest: true
 v0.2.0:
@@ -90,8 +76,8 @@ v0.2.0:
           en: Support for restarg parameter, find documentation for subcommands
     theme:
       break:
-        - cn: '`pink` 主题更名为 `catppuccin`. 灵感来源于 [catppuccino](https://github.com/catppuccin/catppuccin#readme)'
-          en: '`pink` theme renamed to `catppuccin`. Inspired by [catppuccino](https://github.com/catppuccin/catppuccin#readme)'
+        - cn: '`pink` 主题更名为 `catppuccin`. [主题预览](/theme/catppuccin). 灵感来源于 [catppuccino](https://github.com/catppuccin/catppuccin#readme)'
+          en: '`pink` theme renamed to `catppuccin`. [Theme preview](/theme/catppuccin). Inspired by [catppuccino](https://github.com/catppuccin/catppuccin#readme)'
       update:
         - cn: 资源版本包更新使用了 `v0.0.3` 版本
           en: The resource version package has been updated to use version `v0.0.3`
