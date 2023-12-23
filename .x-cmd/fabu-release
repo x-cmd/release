@@ -10,7 +10,7 @@
 
     # x gita git@github.com:x-cmd/x-cmd-version release "$distfolder" "$sumfolder"
     (
-        command git clone command git@github.com:x-cmd/x-cmd-version
+        command git clone git@github.com:x-cmd/x-cmd-version
         ___x_cmd_cmds_cd x-cmd-version || {
             x:error "Cannot ___x_cmd_cmds_cd to release"
             exit 1
