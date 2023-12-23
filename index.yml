@@ -1,3 +1,28 @@
+v0.2.5:
+  sum: ba77025265b17cbbc8ca7e2b8193927b1a0329b8057bd52ef6b5aea8f97758ebc05698ea10f05ea941eb1b2640110f1c67975fd58c53434a9eca012a4dd8fd15
+  date: 2023-12-23 07:28:50+0000
+  change:
+    xrc:
+      update:
+        - en: Use ___x_cmd_cmds instead of command
+          cn: 使用 ___x_cmd_cmds 替代 command
+    pkg:
+      break:
+        - en: Refactor the design of pkg gc
+          cn: 重构 pkg gc 的设计
+    fslock:
+      update:
+        - en: Added file lock function
+          cn: 增加文件锁功能
+    notify:
+      update:
+        - en: Added the function of sending system notifications
+          cn: 增加发送系统通知功能
+    ps:
+      update:
+        - en: Add fingerprint design to check if the original process exists
+          cn: 加入 fingerprint 设计，检查原进程是否存在
+  alpha: true
 v0.2.4:
   sum: 04b0c039d3fb612ece02ece28003300248395596e7c2a0db035d72d41988f76224ff49dee64cbe3d9d195a3019b4a432867caffcfb9bf5c46f0438d24b1302da
   date: 2023-12-01 13:18:01+0000
@@ -10,7 +35,8 @@ v0.2.4:
       break:
         - en: Optimize the process design of env use/try, the previous env use cannot be reused
           cn: 优化 env use/try 的流程设计，之前的 env use 无法复用
-  alpha: true
+  beta: true
+  latest: true
 v0.2.3:
   sum: 578885fd41b1117bdc2a0bcd3f4ff90f4b99ade7302fa0ee942d9ce13a957bf96232637fdf9203b2c930dfd7b239b8e3f566988ca33c175235072c994b6093a0
   date: 2023-11-15 06:47:40+0000
@@ -48,8 +74,6 @@ v0.2.3:
       update:
         - cn: 限制单一进程下载 curl ,避免重复调用。
           en: Limiting the download to a single process with curl to avoid redundant calls..
-  beta: true
-  latest: true
 v0.2.2:
   sum: 027059569d6f0bae0d4bca2ce5ddef474f7f7068fc2ec6eb91ec74e28cce7ada3ebfe47d1099369d205d606383530b6518857cbd4297f123f05e234380c30190
   date: 2023-11-08 06:59:18+0000
