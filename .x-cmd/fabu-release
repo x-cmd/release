@@ -16,14 +16,14 @@
             exit 1
         }
 
-        xws release "$distfolder" "$sumfolder" || exit 1
+        x ws release "$distfolder" "$sumfolder" || exit 1
 
         x:info "Copy $PWD/version/index.yml ==> $index_yml"
         cp -rf version/index.yml "$index_yml"
         git add version/index.yml
         git status -s
         git commit -m "Update: version/index.yml"
-        xws push
+        x ws push
     ) && (
         cd release || {
             x:error "Cannot cd to release"
