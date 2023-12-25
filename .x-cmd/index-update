@@ -1,0 +1,37 @@
+
+# x-cmd-advise/x-cmd-advise => x-cmd/advise
+
+(
+    x rmrf release
+    x:info "正在下载 x-cmd/release"
+    command git clone git@github.com:x-cmd/release  || return
+    index_yml="$PWD/release/index.yml"
+
+    x rmrf x-cmd-version
+    x:info "正在下载 x-cmd/x-cmd-version"
+    git clone git@github.com:x-cmd/x-cmd-version    || return
+
+    (
+        ___x_cmd_cmds_cd x-cmd-version || {
+            x:error "Cannnot cd to x-cmd/x-cmd-version"
+            exit 1
+        }
+
+        x ws index update
+        cp -rf version/index.yml "$index_yml"
+    ) && (
+        ___x_cmd_cmds_cd release || {
+            x:error "Cannnot cd to x-cmd/release"
+            exit 1
+        }
+
+        command git add index.yml
+        command git status -s
+        command git commit -m "Update: version index.yml" || return
+        command git push git@github.com:x-cmd/release main
+        command git push git@gitee.com:x-cmd/release main
+        command git push git@gitcode.net:x-cmd/release main
+    )
+
+
+)

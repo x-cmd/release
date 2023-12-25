@@ -1,7 +1,7 @@
 # shellcheck shell=dash
 
 (
-    command git clone git@github.com:x-cmd/release
+    [ -d release ] || command git clone git@github.com:x-cmd/release || return
 
     distfolder="$PWD/release/dist"
     sumfolder="$PWD/release/sum"
@@ -32,7 +32,7 @@
 
         command git add .
         command git status -s
-        command git commit -m ...
+        command git commit -m ... || return
         command git push git@github.com:x-cmd/release main
         command git push git@gitee.com:x-cmd/release main
         command git push git@gitcode.net:x-cmd/release main
