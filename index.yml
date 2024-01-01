@@ -11,6 +11,8 @@ v0.2.6:
             对 x chat --send 的功能进行了优化调整，支持使用 openai 和 gemini
             增加了 @gpt3 @gpt4 @g alias
   alpha: true
+  beta: true
+  latest: true
 v0.2.5:
   sum: 21d03468c74f299f51bd1f2ac5a5ee05eaf7b47af8989365b8a74483796ed77b10d61c8fcf581244fb035286ac73c893f3d511b7e30037591ce0409a23961cf5
   date: 2023-12-23 14:12:21+0000
@@ -39,8 +41,6 @@ v0.2.5:
       update:
         - en: Inner command avoid alias to fix apply fail, update apply hook resource package version
           cn: 内部命令使用避免 alias, 更新应用 hook 资源包版本
-  beta: true
-  latest: true
 v0.2.4:
   sum: 04b0c039d3fb612ece02ece28003300248395596e7c2a0db035d72d41988f76224ff49dee64cbe3d9d195a3019b4a432867caffcfb9bf5c46f0438d24b1302da
   date: 2023-12-01 13:18:01+0000
