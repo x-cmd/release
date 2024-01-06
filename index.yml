@@ -1,3 +1,29 @@
+v0.2.7:
+  sum: 77db249e02866c8343810aee61a392b1b11602fda93ed6d70e89428c43958b7e7f6412fa3445ef8ed64f3a487edc3a4585bca5ecbc63128f5c26ae53099b11c7
+  date: 2024-01-06 08:45:28+0000
+  change:
+    chat:
+      update:
+        - en: Optimize ai-related code, replace co, coco, txt with the latest chat request feature
+          cn: 优化 ai 相关的代码，co、coco、txt 更换使用最新的 chat request
+    gd:
+      update:
+        - en: Added a feature to jump to a specified path and execute code
+          cn: 新增跳转到指定路径执行代码功能
+      bugfix:
+        - en: Fixed `gd -` feature
+          cn: 修复了 `gd -` 功能
+    asdf:
+      update:
+        - cn: 新增 asdf 模块，第一次使用该模块时会自动下载并激活 asdf
+          en: Add asdf module, asdf will be downloaded and activated automatically when the module is used for the first time
+        - cn: 添加 use unuse 作为增强功能，将 plugin add + install + global 三者合一，可以让用户更方便的使用 asdf
+          en: Add use unuse as an enhanced feature, which combines plugin add + install + global, which allows users to use asdf more conveniently
+    ui:
+      update:
+        - en: Added ui rotate feature
+          cn: 新增了 ui rotate 功能
+  alpha: true
 v0.2.6:
   sum: c5b2a8b4b18fdf0775a96ebc1bf22d4f3f7ce769b02dab8253bed29ca5bfb7779d7b3d67adccf3ecb744140401ba9a77f191148d3bd709c0ee24fc3d7989c174
   date: 2023-12-29 15:35:49+0000
@@ -10,7 +36,6 @@ v0.2.6:
           cn: |
             对 x chat --send 的功能进行了优化调整，支持使用 openai 和 gemini
             增加了 @gpt3 @gpt4 @g alias
-  alpha: true
   beta: true
   latest: true
 v0.2.5:
