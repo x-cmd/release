@@ -1,3 +1,73 @@
+v0.2.8:
+  sum: c199e75873902aa2f08865bf096c1ec66813db3f195a8600d5b0388b53e5576734516442850b341f3dcbd65ca5f1c93c474ddf334a146ea9046141e2e33e136b
+  date: 2024-02-09 05:05:22+0000
+  change:
+    gh|gt:
+      update:
+        - cn: 列表性数据提供更多的数据输出方式 `--yml` `--csv`
+          en: List data provides more output data ways `--yml` `--csv`
+      break:
+        - cn: |
+            部分 `ls` 子命令在交互模式下使用交互表格进行预览. 添加 `ll` 子命令为静态罗列数据表格
+
+            ```sh
+            x gh repo ls        # 在交互模式下使用交互表格进行浏览仓库数据
+            x gh repo ls | cat  # 在非交互模式中输出单列的关键索引数据 (例如id. owner/repo 等)
+            x gh repo ll        # 罗列仓库仓库数据
+            ```
+          en: |
+            Some `ls` subcommands use interactive tables to preview in interactive mode. Add `ll` subcommand to list static data tables
+
+            ```sh
+            x gh repo ls        # In interactive mode. Using app tables.
+            x gh repo ls | cat  # In non-interactive mode Output single-column key index data (such as id. owner/repo etc.)
+            x gh repo ll        # List repository data
+            ```
+    githook|gitconfig:
+      bugfix:
+        - cn: 修复若重装 x-cmd 后, `githook` 未检测全局 hook 文件夹, `gitconfig` 未提供 theme 提示更新
+          en: Fix if `githook` is not detected after reinstalling x-cmd, `gitconfig` does not provide theme message to update
+    xx:
+      update:
+        - cn: 新增了 Ai fix 以及从 history 查找下一条命令的功能
+          en: Added Ai fix and the ability to find the next command from history
+    ui|tui:
+      bugfix:
+        - cn: 修复 ui select ctrl c 没有清屏的问题
+          en: Fix the problem of ui select ctrl c not clearing the screen
+        - cn: 修复 ui rotate 部分问题
+          en: Fix some issues with ui rotate
+      update:
+        - cn: 部分 tui app 增加了记录上一次位置历史功能
+          en: Some tui apps have added the feature of recording the history of the previous location.
+    pkg:
+      update:
+        - en: Package resource upgrade to v0.0.6.
+          cn: pkg 资源包升级为 v0.0.6
+        - en: Optimize garbage collection process
+          cn: 优化垃圾回收流程
+    pick:
+      update:
+        - cn: 进一步优化 pick app 的用户体验
+          en: Further optimize the user experience of pick app
+    hn:
+      update:
+        - cn: 新增 hn 模块，可以在命令行界面浏览 Hacker News
+          en: Add the hn module, which allows browsing Hacker News in the command line interface.
+    hub:
+      bugfix:
+        - cn: 修复部份登陆方面的功能
+          en: Fix some login-related functions
+    proxy:
+      bugfix:
+        - cn: 修复 homebrew 设置镜像源的问题
+          en: Fix the problem of setting the mirror source for homebrew
+      update:
+        - cn: 补充更多的 npm、apt、brew 镜像源，以及修改了部份功能的接口
+          en: Supplement more npm, apt, brew mirror sources, and modify the interfaces of some functions
+  alpha: true
+  beta: true
+  latest: true
 v0.2.7:
   sum: 77db249e02866c8343810aee61a392b1b11602fda93ed6d70e89428c43958b7e7f6412fa3445ef8ed64f3a487edc3a4585bca5ecbc63128f5c26ae53099b11c7
   date: 2024-01-06 08:45:28+0000
@@ -35,8 +105,6 @@ v0.2.6:
           cn: |
             对 x chat --send 的功能进行了优化调整，支持使用 openai 和 gemini
             增加了 @gpt3 @gpt4 @g alias
-  beta: true
-  latest: true
 v0.2.5:
   sum: 21d03468c74f299f51bd1f2ac5a5ee05eaf7b47af8989365b8a74483796ed77b10d61c8fcf581244fb035286ac73c893f3d511b7e30037591ce0409a23961cf5
   date: 2023-12-23 14:12:21+0000
