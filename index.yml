@@ -6,6 +6,9 @@ v0.2.9:
       update:
         - cn: 调整了缓存时间和文档
           en: Adjust the cache time and documentation
+  alpha: true
+  beta: true
+  latest: true
 v0.2.8:
   sum: c199e75873902aa2f08865bf096c1ec66813db3f195a8600d5b0388b53e5576734516442850b341f3dcbd65ca5f1c93c474ddf334a146ea9046141e2e33e136b
   date: 2024-02-09 05:05:22+0000
@@ -73,9 +76,6 @@ v0.2.8:
       update:
         - cn: 补充更多的 npm、apt、brew 镜像源，以及修改了部份功能的接口
           en: Supplement more npm, apt, brew mirror sources, and modify the interfaces of some functions
-  alpha: true
-  beta: true
-  latest: true
 v0.2.7:
   sum: 77db249e02866c8343810aee61a392b1b11602fda93ed6d70e89428c43958b7e7f6412fa3445ef8ed64f3a487edc3a4585bca5ecbc63128f5c26ae53099b11c7
   date: 2024-01-06 08:45:28+0000
