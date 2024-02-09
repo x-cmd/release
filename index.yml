@@ -1,3 +1,11 @@
+v0.2.9:
+  sum: 9238d94d7cc3b84e12bf5584e0bb594421bf7a547d794bb33a266b89eb90569465ecc997524adb3e684480931c5a8a5ea2665ba0389db620efded027922c97f0
+  date: 2024-02-09 13:23:03+0000
+  change:
+    shodan:
+      update:
+        - cn: 调整了缓存时间和文档
+          en: Adjust the cache time and documentation
 v0.2.8:
   sum: c199e75873902aa2f08865bf096c1ec66813db3f195a8600d5b0388b53e5576734516442850b341f3dcbd65ca5f1c93c474ddf334a146ea9046141e2e33e136b
   date: 2024-02-09 05:05:22+0000
