@@ -1,3 +1,20 @@
+v0.2.10:
+  sum: 8f54581cb52caf7a8340230db24321bfcf437573daf17771cdb4b4dd27c0c11f093f4017cad50ffc7df236578dd0a6a736e45f1ece07257b5c907556788e6846
+  date: 2024-02-24 09:09:08+0000
+  change:
+    shaodan:
+      update:
+        - cn: 增加了更多功能
+          en: Added more features
+    pkg:
+      bugfix:
+        - cn: 修复了首次使用 X 命令需要 x pkg 的问题
+          en: Fixed the issue of requiring "x pkg" on the first use of the "X" command
+    hn:
+      update:
+        - cn: 新增 user, hidx 功能
+          en: Added user and hidx function
+  alpha: true
 v0.2.9:
   sum: 9238d94d7cc3b84e12bf5584e0bb594421bf7a547d794bb33a266b89eb90569465ecc997524adb3e684480931c5a8a5ea2665ba0389db620efded027922c97f0
   date: 2024-02-09 13:23:03+0000
@@ -6,7 +23,6 @@ v0.2.9:
       update:
         - cn: 调整了缓存时间和文档
           en: Adjust the cache time and documentation
-  alpha: true
   beta: true
   latest: true
 v0.2.8:
