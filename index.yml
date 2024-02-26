@@ -1,6 +1,6 @@
 v0.2.10:
-  sum: d8b8c5d86facbce4fb16e2fd5db6ca15d0e422446c0dab6c8ff7cbfb83ae6a46990be80a4df2d73d486a0b01314222b2d4b79d9b2d2728d4f977a65b0cb8bf12
-  date: 2024-02-24 10:26:49+0000
+  sum: 510193010f81fd1c3e0e43d5f9f8bd6f9467efde1d2f42f1c13e4021b4ec1e92fa88c17324a9e1ee5cedd32ef2b2a00590255201bf39f6b6822f0c526c66f4f3
+  date: 2024-02-26 10:40:14+0000
   change:
     shaodan:
       update:
@@ -15,6 +15,7 @@ v0.2.10:
         - cn: 新增 user, hidx 功能
           en: Added user and hidx function
   alpha: true
+  beta: true
 v0.2.9:
   sum: 9238d94d7cc3b84e12bf5584e0bb594421bf7a547d794bb33a266b89eb90569465ecc997524adb3e684480931c5a8a5ea2665ba0389db620efded027922c97f0
   date: 2024-02-09 13:23:03+0000
@@ -23,7 +24,6 @@ v0.2.9:
       update:
         - cn: 调整了缓存时间和文档
           en: Adjust the cache time and documentation
-  beta: true
   latest: true
 v0.2.8:
   sum: c199e75873902aa2f08865bf096c1ec66813db3f195a8600d5b0388b53e5576734516442850b341f3dcbd65ca5f1c93c474ddf334a146ea9046141e2e33e136b
