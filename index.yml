@@ -1,3 +1,49 @@
+v0.2.11:
+  sum: 7b6cda826e5f645476e534f2ae844aebac85997ab348ffcb530a9eda9bf0992809caae1d071de0ef8ee86fa5a1caee4e7cf0cf0413e67aa025387f6789229b3b
+  date: 2024-02-29 03:11:23+0000
+  change:
+    proxy:
+      break:
+        - cn: 将所有更换镜像源的相关功能移动到了 mirror 模块
+          en: Move all mirror-related functions to the mirror module
+    mirror:
+      update:
+        - cn: 新增了更换镜像源的功能
+          en: Add the function of changing the mirror source
+    env:
+      bugfix:
+        - cn: 修复了与 autojump 同时使用时的 x env ls 卡住的问题
+          en: Fixed the problem of x env ls stuck when used with autojump
+    hn:
+      update:
+        - cn: 更新 hn item 功能
+          en: Updated hn item function
+    apt:
+      update:
+        - cn: 新增了 apt 模块
+          en: Add apt mod
+    pacman:
+      update:
+        - cn: 新增了 pacman 模块
+          en: Add pacman mod
+    brew:
+      update:
+        - cn: 新增了 brew 模块
+          en: Add brew mod
+    dnf:
+      update:
+        - cn: 新增了 dnf 模块
+          en: Add dnf mod
+    yum:
+      update:
+        - cn: 新增了 yum 模块
+          en: Add yum mod
+    apk:
+      update:
+        - cn: 新增了 apk 模块
+          en: Add apk mod
+  alpha: true
+  beta: true
 v0.2.10:
   sum: b03559ea8f733fd7b46cc44f434b125fafb9585349bd1f4cdf426a72994ddd6cbc5f9aa4b3577ad595fa7461d3acb32ed8a98482d6dfcc1005451f55bda09caa
   date: 2024-02-26 11:21:52+0000
@@ -14,8 +60,7 @@ v0.2.10:
       update:
         - cn: 新增 user, hidx 功能
           en: Added user and hidx function
-  alpha: true
-  beta: true
+  latest: true
 v0.2.9:
   sum: 9238d94d7cc3b84e12bf5584e0bb594421bf7a547d794bb33a266b89eb90569465ecc997524adb3e684480931c5a8a5ea2665ba0389db620efded027922c97f0
   date: 2024-02-09 13:23:03+0000
@@ -24,7 +69,6 @@ v0.2.9:
       update:
         - cn: 调整了缓存时间和文档
           en: Adjust the cache time and documentation
-  latest: true
 v0.2.8:
   sum: c199e75873902aa2f08865bf096c1ec66813db3f195a8600d5b0388b53e5576734516442850b341f3dcbd65ca5f1c93c474ddf334a146ea9046141e2e33e136b
   date: 2024-02-09 05:05:22+0000
