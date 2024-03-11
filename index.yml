@@ -1,3 +1,36 @@
+v0.2.12:
+  sum: accc4a8a0004edfee1ab0cec071d80bc8253eca664cbe13b8c1be5da9d2e6494feb51f6e509170f8d435d336539dcc217e8e291c2dad857cd755165431c4a453
+  date: 2024-03-11 02:19:04+0000
+  change:
+    pick:
+      update:
+        - cn: 过滤搜索不区分大小写
+          en: Filter search is case insensitive
+    brew:
+      update:
+        - cn: 添加了 mirror proxy 两个子命令
+          en: Added two subcommands for mirror proxy
+    hub:
+      update:
+        - cn: 添加了 get 作为下载的子命令
+          en: Added get as a subcommand for download
+      bugfix:
+        - cn: 修复了在 bash 上无法使用的问题
+          en: Fixed the issue that cannot be used on bash
+    mirror:
+      bugfix:
+        - cn: 修复 brew 以及 pacman 的 mirror 问题
+          en: Fixed the mirror problem of brew and pacman
+    proxy:
+      update:
+        - cn: 全新的 proxy 模块, 支持 httpx 以及 adapt 两种新的代理方式
+          en: Brand new proxy module, supporting two new proxy methods httpx and adapt
+    zshplugin:
+      bugfix:
+        - cn: 移除了原有的 ctrl + r 的快捷键
+          en: Removed the original ctrl + r shortcut
+  alpha: true
+  beta: true
 v0.2.11:
   sum: 7b6cda826e5f645476e534f2ae844aebac85997ab348ffcb530a9eda9bf0992809caae1d071de0ef8ee86fa5a1caee4e7cf0cf0413e67aa025387f6789229b3b
   date: 2024-02-29 03:11:23+0000
