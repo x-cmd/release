@@ -42,8 +42,7 @@ v0.2.11:
       update:
         - cn: 新增了 apk 模块
           en: Add apk mod
-  alpha: true
-  beta: true
+  latest: true
 v0.2.10:
   sum: b03559ea8f733fd7b46cc44f434b125fafb9585349bd1f4cdf426a72994ddd6cbc5f9aa4b3577ad595fa7461d3acb32ed8a98482d6dfcc1005451f55bda09caa
   date: 2024-02-26 11:21:52+0000
@@ -60,7 +59,6 @@ v0.2.10:
       update:
         - cn: 新增 user, hidx 功能
           en: Added user and hidx function
-  latest: true
 v0.2.9:
   sum: 9238d94d7cc3b84e12bf5584e0bb594421bf7a547d794bb33a266b89eb90569465ecc997524adb3e684480931c5a8a5ea2665ba0389db620efded027922c97f0
   date: 2024-02-09 13:23:03+0000
