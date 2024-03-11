@@ -23,7 +23,7 @@
         command git add version/index.yml
         command git status -s
         command git commit -m "Update: version/index.yml"
-        x ws push || true
+        command git push git@github.com:x-cmd/x-cmd-version main || true
     ) && (
         ___x_cmd_cmds_cd release || {
             x:error "Cannot ___x_cmd_cmds_cd to release"
