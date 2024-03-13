@@ -1,3 +1,9 @@
+v0.2.13:
+  sum: 8f8937eab94ed2fb7fff8296ef72228f90d0c386142bb9065aae07398c990c8df04dfd43d622bb8ac976040a4bbe3aa041840a2c6fa94d4b660686098529ca78
+  date: 2024-03-13 16:46:24+0000
+  change: {}
+  alpha: true
+  beta: true
 v0.2.12:
   sum: accc4a8a0004edfee1ab0cec071d80bc8253eca664cbe13b8c1be5da9d2e6494feb51f6e509170f8d435d336539dcc217e8e291c2dad857cd755165431c4a453
   date: 2024-03-11 02:19:04+0000
@@ -29,8 +35,7 @@ v0.2.12:
       bugfix:
         - cn: 移除了原有的 ctrl + r 的快捷键
           en: Removed the original ctrl + r shortcut
-  alpha: true
-  beta: true
+  latest: true
 v0.2.11:
   sum: 7b6cda826e5f645476e534f2ae844aebac85997ab348ffcb530a9eda9bf0992809caae1d071de0ef8ee86fa5a1caee4e7cf0cf0413e67aa025387f6789229b3b
   date: 2024-02-29 03:11:23+0000
@@ -75,7 +80,6 @@ v0.2.11:
       update:
         - cn: 新增了 apk 模块
           en: Add apk mod
-  latest: true
 v0.2.10:
   sum: b03559ea8f733fd7b46cc44f434b125fafb9585349bd1f4cdf426a72994ddd6cbc5f9aa4b3577ad595fa7461d3acb32ed8a98482d6dfcc1005451f55bda09caa
   date: 2024-02-26 11:21:52+0000
