@@ -6,8 +6,17 @@ v0.2.13:
       update:
         - cn: advise man 资源包更新提示时间调整为 30 天
           en: advise man resource package update prompt time adjusted to 30 days
+    mirror:
+      bugfix:
+        - cn: 修复 dnf 的 mirror 问题
+          en: Fixed the mirror problem of dnf
+    fslock:
+      bugfix:
+        - cn: 将 `fslock:info` 更改为 `fslock:debug`
+          en: Change 'fslock:info' to 'fslock:debug'
   alpha: true
   beta: true
+  latest: true
 v0.2.12:
   sum: accc4a8a0004edfee1ab0cec071d80bc8253eca664cbe13b8c1be5da9d2e6494feb51f6e509170f8d435d336539dcc217e8e291c2dad857cd755165431c4a453
   date: 2024-03-11 02:19:04+0000
@@ -39,7 +48,6 @@ v0.2.12:
       bugfix:
         - cn: 移除了原有的 ctrl + r 的快捷键
           en: Removed the original ctrl + r shortcut
-  latest: true
 v0.2.11:
   sum: 7b6cda826e5f645476e534f2ae844aebac85997ab348ffcb530a9eda9bf0992809caae1d071de0ef8ee86fa5a1caee4e7cf0cf0413e67aa025387f6789229b3b
   date: 2024-02-29 03:11:23+0000
