@@ -1,3 +1,9 @@
+v0.2.15:
+  sum: fc3cd41b3cbb55b32e0cad53221bcac54fae443262f99c5d97316d56b01d0081a856f8e54871be8388461bc4ad1a91d256adfcb8ef636bf40516183e6f706599
+  date: 2024-03-18 14:58:16+0000
+  change: {}
+  alpha: true
+  beta: true
 v0.2.14:
   sum: 9113441279ca041486b27a8510b57073e1df383f6f9a5609473825d956b8eb44fb26fcb8d1518f747a95f7b8637fc3d41ec28dffa4176aeb83995f3cb389df94
   date: 2024-03-15 12:18:53+0000
@@ -14,8 +20,7 @@ v0.2.14:
       update:
         - cn: Improve the user experience for `x tldr --lang`
           en: 优化有关 `x tldr --lang` 的用户体验
-  alpha: true
-  beta: true
+  latest: true
 v0.2.13:
   sum: a77b9bc6ff99bce6459ed2b15bd1a35fc607b2f8bfb945fbe9be92bbb0b7d2c76f4aefe88a6c22322141957ce47c23763540cdd6ed98f603a728db1df2248c17
   date: 2024-03-14 03:33:30+0000
@@ -32,7 +37,6 @@ v0.2.13:
       bugfix:
         - cn: 将 `fslock:info` 更改为 `fslock:debug`
           en: Change 'fslock:info' to 'fslock:debug'
-  latest: true
 v0.2.12:
   sum: accc4a8a0004edfee1ab0cec071d80bc8253eca664cbe13b8c1be5da9d2e6494feb51f6e509170f8d435d336539dcc217e8e291c2dad857cd755165431c4a453
   date: 2024-03-11 02:19:04+0000
