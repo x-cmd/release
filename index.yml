@@ -55,10 +55,6 @@ v0.3.2:
   sum: 470ca18d05a26a46a7b70e5836c39c0addae0e47d0b4cc577872df31272afabcdb6ef6575e646f072e3f6eea1f4133f5493d694497064082497f5a98c967a205
   date: 2024-03-30 09:48:15+0000
   change:
-    cd:
-      update:
-        - cn: alias cd 指向 x cd
-          en: alias cd points to x cd
     gd:
       update:
         - cn: alias c 指向 x gd
