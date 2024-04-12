@@ -1,6 +1,6 @@
 v0.3.3:
-  sum: 26f05444bb3b5f2911e64499138b741dc6c013d421b22a44d4a43512b771d2eec18ce32cfacc7ad89a99e42702e1261a1b38900466c15640334c8578f5702c5b
-  date: 2024-04-12 12:46:38+0000
+  sum: 18420f6f15cab00a2155505197a567ec88b18b4b6b8c547a4bb9fc52f57e881231dbca9996a760091a546e8eee6e243a9abdd5bcf9ec3dcbd779b29dae5bc711
+  date: 2024-04-12 13:16:03+0000
   change:
     ui/tui:
       update:
@@ -48,6 +48,7 @@ v0.3.3:
           en: Save the cache to a file instead of using x ccmd
   alpha: true
   beta: true
+  latest: true
 v0.3.2:
   sum: 470ca18d05a26a46a7b70e5836c39c0addae0e47d0b4cc577872df31272afabcdb6ef6575e646f072e3f6eea1f4133f5493d694497064082497f5a98c967a205
   date: 2024-03-30 09:48:15+0000
@@ -64,7 +65,6 @@ v0.3.2:
       update:
         - cn: 完善包管理模块功能
           en: Improve package management module feature
-  latest: true
 v0.3.1:
   sum: d6efa703c4206c181427915b6256eb75ee3d2c04bfc5b546195b291dac272fda5e070f445df04801d4d845f9a6dcb9af0d9ff3f4854578ffd18791b6be901369
   date: 2024-03-26 06:08:00+0000
