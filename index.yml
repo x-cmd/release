@@ -1,3 +1,17 @@
+v0.3.4:
+  sum: c1caec6596ac7803d090e886031bf1208ad7fb291b42588ccb2a14544f016cb08fa3e2726cc8ac128db12b774b1a44310a22905ff12aa75674ea3bda4bd719dd
+  date: 2024-04-13 09:07:00+0000
+  change:
+    pick:
+      update:
+        - cn: 修复 pick 在 zsh 环境的部分问题
+          en: Fixed some problems in pick in zsh environment
+    cd:
+      update:
+        - cn: 优化 cd 模块交互方面的代码
+          en: Optimize the code for interaction in the cd module
+  alpha: true
+  beta: true
 v0.3.3:
   sum: 18420f6f15cab00a2155505197a567ec88b18b4b6b8c547a4bb9fc52f57e881231dbca9996a760091a546e8eee6e243a9abdd5bcf9ec3dcbd779b29dae5bc711
   date: 2024-04-12 13:16:03+0000
@@ -46,8 +60,6 @@ v0.3.3:
       update:
         - cn: 将缓存保存到文件中，而不是使用 x ccmd
           en: Save the cache to a file instead of using x ccmd
-  alpha: true
-  beta: true
   latest: true
 v0.3.2:
   sum: 470ca18d05a26a46a7b70e5836c39c0addae0e47d0b4cc577872df31272afabcdb6ef6575e646f072e3f6eea1f4133f5493d694497064082497f5a98c967a205
