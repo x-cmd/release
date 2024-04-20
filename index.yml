@@ -1,7 +1,15 @@
 v0.3.5:
-  sum: c9216195e9f05b5a12b078dff5ecda254c949e27aecdc442c93076ff4295d4beaa78d4d444b0865aab00717cf77cfdd4406a4f7a5b7b898c01ad59ce0930e67c
-  date: 2024-04-20 15:49:58+0000
-  change: {}
+  sum: 0ddd9b28fe7c1e3f8cb00b3b0690ca7f55713eed59ba00d593e604e957ea840ae14ea0178505aecee8818bc61f920de6166626eae36af4f022a2690345543d1d
+  date: 2024-04-20 16:34:06+0000
+  change:
+    llmf:
+      update:
+        - cn: 新增了 chat 的功能
+          en: Add chat function
+    pacman:
+      update:
+        - cn: nv 功能修复
+          en: fix nv function
   alpha: true
   beta: true
   latest: true
