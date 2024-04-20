@@ -1,3 +1,10 @@
+v0.3.5:
+  sum: c9216195e9f05b5a12b078dff5ecda254c949e27aecdc442c93076ff4295d4beaa78d4d444b0865aab00717cf77cfdd4406a4f7a5b7b898c01ad59ce0930e67c
+  date: 2024-04-20 15:49:58+0000
+  change: {}
+  alpha: true
+  beta: true
+  latest: true
 v0.3.4:
   sum: 2eaceb8bd255b98acf6b005ed7807ac629d4a97a9f47d71f1728ebfd583088723a16b7f78f252b0640656cb8529e356d668c5b1f4c610c270c6d3ecbd34ccff5
   date: 2024-04-13 13:48:15+0000
@@ -10,8 +17,6 @@ v0.3.4:
       update:
         - cn: 优化 cd 模块交互方面的代码
           en: Optimize the code for interaction in the cd module
-  alpha: true
-  beta: true
 v0.3.3:
   sum: 18420f6f15cab00a2155505197a567ec88b18b4b6b8c547a4bb9fc52f57e881231dbca9996a760091a546e8eee6e243a9abdd5bcf9ec3dcbd779b29dae5bc711
   date: 2024-04-12 13:16:03+0000
@@ -60,7 +65,6 @@ v0.3.3:
       update:
         - cn: 将缓存保存到文件中，而不是使用 x ccmd
           en: Save the cache to a file instead of using x ccmd
-  latest: true
 v0.3.2:
   sum: 470ca18d05a26a46a7b70e5836c39c0addae0e47d0b4cc577872df31272afabcdb6ef6575e646f072e3f6eea1f4133f5493d694497064082497f5a98c967a205
   date: 2024-03-30 09:48:15+0000
