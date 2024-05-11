@@ -1,3 +1,29 @@
+v0.3.6:
+  sum: 220ac6190906aac9974b6037a913c4afb5bd337540f5dbcfe9c9bbf6367f755dd3851b33ee5f8f19994bfba6aebbd73d7c40b3b2aee8322ae716ba6ffb559ecc
+  date: 2024-05-11 15:17:26+0000
+  change:
+    jina:
+      update:
+        - cn: 新增了 jina 模块。jina 模块基于 jina.ai 公司的接口，我们提供了网址内容获取，生成文本向量和相关信息检索排序检索的功能
+          en: |
+            A new module, Jina, has been added. The Jina module is based on the interface of jina.ai company.
+            We provide functionalities for fetching web content, generating text vectors,
+            and conducting information retrieval with relevance ranking
+    ddgo:
+      update:
+        - cn: 新增了 ddgo 模块。ddgo 模块基于 duckduckgo 互联网搜索引擎的接口，提供了互联网内容搜索功能，并优化了交互式 UI 的使用体验
+          en: |
+            A new module, DDGo, has been added. The DDGo module is based on the interface of the DuckDuckGo internet search engine,
+            providing website retrieval functionality, and optimizing the user experience for interactive UI
+    writer:
+      update:
+        - cn: 新增了 writer 模块。writer 可以自由选择不同的 AI 模型和语言风格， 提供了翻译，摘要， 总结， 解释，扩写的功能
+          en: |
+            A new module, Writer, has been added.
+            Writer allows for the free selection of different AI models and language styles, providing functionalities for translation,
+            summarization, synthesis, explanation, and paraphrasing
+  alpha: true
+  beta: true
 v0.3.5:
   sum: 0ddd9b28fe7c1e3f8cb00b3b0690ca7f55713eed59ba00d593e604e957ea840ae14ea0178505aecee8818bc61f920de6166626eae36af4f022a2690345543d1d
   date: 2024-04-20 16:34:06+0000
@@ -10,8 +36,6 @@ v0.3.5:
       update:
         - cn: nv 功能修复
           en: fix nv function
-  alpha: true
-  beta: true
   latest: true
 v0.3.4:
   sum: 2eaceb8bd255b98acf6b005ed7807ac629d4a97a9f47d71f1728ebfd583088723a16b7f78f252b0640656cb8529e356d668c5b1f4c610c270c6d3ecbd34ccff5
