@@ -1,6 +1,6 @@
 v0.3.6:
-  sum: 220ac6190906aac9974b6037a913c4afb5bd337540f5dbcfe9c9bbf6367f755dd3851b33ee5f8f19994bfba6aebbd73d7c40b3b2aee8322ae716ba6ffb559ecc
-  date: 2024-05-11 15:17:26+0000
+  sum: 2e4ea44d7159ad4e26486c705c932b4b2fe2d9fbbe93136bb11d3760ed6ea2ad7262b943489a57aa5058387caa7994670e463c04ff2ebe891ff50a075ecfc1a2
+  date: 2024-05-12 01:45:52+0000
   change:
     jina:
       update:
@@ -22,8 +22,21 @@ v0.3.6:
             A new module, Writer, has been added.
             Writer allows for the free selection of different AI models and language styles, providing functionalities for translation,
             summarization, synthesis, explanation, and paraphrasing
+    wkp:
+      update:
+        - cn: wikipedia 更名为 wkp，并调整 search、extract 功能的 UI
+          en: Wikipedia has been renamed to wkp, and the UI for search and extract functionalities has been adjusted
+    se:
+      update:
+        - cn: 新增了 se 模块，用于搜索和浏览 Stack Exchange
+          en: A new module, SE, has been added for searching and browsing Stack Exchange
+    cosmo:
+      update:
+        - cn: 增加 `--ls --local` 查看所有下载的二进制
+          en: Add --ls --local to view all locally downloaded binaries
   alpha: true
   beta: true
+  latest: true
 v0.3.5:
   sum: 0ddd9b28fe7c1e3f8cb00b3b0690ca7f55713eed59ba00d593e604e957ea840ae14ea0178505aecee8818bc61f920de6166626eae36af4f022a2690345543d1d
   date: 2024-04-20 16:34:06+0000
@@ -36,7 +49,6 @@ v0.3.5:
       update:
         - cn: nv 功能修复
           en: fix nv function
-  latest: true
 v0.3.4:
   sum: 2eaceb8bd255b98acf6b005ed7807ac629d4a97a9f47d71f1728ebfd583088723a16b7f78f252b0640656cb8529e356d668c5b1f4c610c270c6d3ecbd34ccff5
   date: 2024-04-13 13:48:15+0000
