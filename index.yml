@@ -1,6 +1,6 @@
 v0.3.7:
-  sum: b65e4e0951b32b27025e51c767bb4a023ecb2fd6c9a57dcb9dbf4a921097114316bd1701b1b848d333be39b6ddda7cfeeeeff25ac0f7d75ec2a86be13d2218a5
-  date: 2024-05-16 15:00:20+0000
+  sum: 694dca40a3a9c124bbeece1555373b1dd5b8b6f1d10e785d95ceba409e5fff9fc8531dbc24225878fbe7a32abb43539140386be9421f9e98e61f7dd9810b3da8
+  date: 2024-05-16 15:42:52+0000
   change:
     gemini:
       update:
@@ -13,6 +13,7 @@ v0.3.7:
   blog: /blog/240516
   alpha: true
   beta: true
+  latest: true
 v0.3.6:
   sum: 3aa426a620e18f3c6f33163b027ed01e7fd3ef3b7d5b626f7d0275052b7765bb1769c184c9b803402f1e1daebcd59088628e7543cae978b79df4db04f6c59094
   date: 2024-05-12 02:03:12+0000
@@ -50,7 +51,6 @@ v0.3.6:
         - cn: 增加 `--ls --local` 查看所有下载的二进制
           en: Add --ls --local to view all locally downloaded binaries
   blog: /blog/240512
-  latest: true
 v0.3.5:
   sum: 0ddd9b28fe7c1e3f8cb00b3b0690ca7f55713eed59ba00d593e604e957ea840ae14ea0178505aecee8818bc61f920de6166626eae36af4f022a2690345543d1d
   date: 2024-04-20 16:34:06+0000
