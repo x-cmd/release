@@ -9,7 +9,7 @@
 
     x rmrf x-cmd-version
     x:info "正在下载 x-cmd/x-cmd-version"
-    git clone git@github.com:x-cmd/x-cmd-version    || return
+    command git clone git@github.com:x-cmd/x-cmd-version    || return
 
     (
         ___x_cmd_cmds_cd x-cmd-version || {
@@ -17,7 +17,11 @@
             exit 1
         }
 
-        x ws index update
+        x ws index update || return
+        command git add version/index.yml
+        command git status -s
+        command git commit -m "Update: version index.yml" || return
+        command git push git@github.com:x-cmd/x-cmd-version main
         cp -rf version/index.yml "$index_yml"
     ) && (
         ___x_cmd_cmds_cd release || {
