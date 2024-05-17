@@ -4,13 +4,32 @@ v0.3.7:
   change:
     gemini:
       update:
-        - cn: 新增了 gemini-1.5-pro-latest 和 gemini-1.5-flash-latest， 现在可以上传图片
-          en: Added gemini-1.5-pro-latest and gemini-1.5-flash-latest, image upload is now available
+        - cn: 新增模型了 **gemini-1.5-pro-latest** 和 **gemini-1.5-flash-latest**
+          en: Added models **gemini-1.5-pro-latest** and **gemini-1.5-flash-latest**
+        - cn: 支持上传图片
+          en: Supports uploading images
     openai:
       update:
-        - cn: 加入 gpt-4o 模型，支持请求带上图片
-          en: Added gpt-4o model, supports requests with images
-  blog: /blog/240516
+        - cn: 加入 **gpt-4o** 模型
+          en: Added model **gpt-4o**
+        - cn: 支持请求带上图片
+          en: Supports requests with images
+    gtb:
+      update:
+        - cn: 新增了 gtb 模块，采用与早前发布的 wkp（维基百科），se（StackExchange，StackOverflow） 模块一致的交互设计模式，用户 和 AI 可以借助这个模块自由获取 Gutenberg 项目中的海量电子书籍
+          en: |
+            The gtb module has been added,
+            Adopting the same interaction design pattern as the wkp (Wikipedia), se (StackExchange, StackOverflow) modules previously released,
+            users and AI can use this module to freely access a wealth of e-books in the Gutenberg project
+    jina:
+      update:
+        - cn: 集成了 jina 搜索 (search) 功能
+          en: Integrated jina search feature
+    tui:
+      bugfix:
+        - cn: '修复 awk `default` 关键字错误, #14'
+          en: 'Fixed awk `default` keyword error, #14'
+  blog: /blog/240517
   alpha: true
   beta: true
   latest: true
@@ -44,12 +63,15 @@ v0.3.6:
           en: Wikipedia has been renamed to wkp, and the UI for search and extract functionalities has been adjusted
     se:
       update:
-        - cn: 新增了 se 模块，用于搜索和浏览 Stack Exchange
-          en: A new module, SE, has been added for searching and browsing Stack Exchange
+        - cn: 新增了 se 模块，借助 StackExchange 的 API，x-cmd 的用户可以快速在 Stack Exchange 和 Stack Overflow 检索问题。借助 x-cmd 的一众 llm 模块，用户可以组合借助 ai 的力量，来实现信息的检索和处理
+          en: |
+            The se module has been added,
+            allowing users of x-cmd to quickly search for questions on Stack Exchange and Stack Overflow using the StackExchange API.
+            With the help of the llm module in x-cmd, users can combine the power of AI to retrieve and process information
     cosmo:
       update:
-        - cn: 增加 `--ls --local` 查看所有下载的二进制
-          en: Add --ls --local to view all locally downloaded binaries
+        - cn: 增加 `--ls --local` 查看所有下载的二进制，另外，引入了 llamafile-0.8.4 和 llamafile-tokenize
+          en: Add `--ls --local` to view all downloaded binaries, additionally, introduced llamafile-0.8.4 and llamafile-tokenize
   blog: /blog/240512
 v0.3.5:
   sum: 0ddd9b28fe7c1e3f8cb00b3b0690ca7f55713eed59ba00d593e604e957ea840ae14ea0178505aecee8818bc61f920de6166626eae36af4f022a2690345543d1d
