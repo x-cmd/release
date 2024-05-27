@@ -2,6 +2,25 @@ v0.3.8:
   sum: 58268710b7ebbef90b75d3684492497d2f5630ea2f150bef426c2d98367746b33fa182092a70bf87c1960a895cfb82fc990449ccc684fa5a4cdd1df33d0b9166
   date: 2024-05-25 08:34:08+0000
   change:
+    osv:
+      update:
+        - cn: 新增了 osv 模块，数据来源于 OSV 项目，主要用于获取开源漏洞信息。它还提供 scan 命令来快速安装并调用 osv-scanner。
+          en: |
+            The osv module has been added.
+            The data comes from the OSV project and is primarily used to obtain open source vulnerability information.
+            It also provides a scan command to quickly install and invoke osv-scanner.
+    rfc:
+      update:
+        - cn: 新增了 rfc 模块，用于查阅 RFC 文档和相关内容，文档下载源为 www.rfc-editor.org 网站。
+          en: A new RFC module has been added for viewing RFC documents and related content. The documents are downloaded from the www.rfc-editor.org website.
+    se:
+      update:
+        - cn: 增加了 site 功能。通过指定 Stack Exchange 的网站缩写，即可在 duckduckgo 中搜索对应 Exchange 的匹配内容。
+          en: Added site function. By specifying the abbreviation of the Stack Exchange website, you can search for corresponding Exchange content in duckduckgo.
+    jina:
+      update:
+        - cn: 搜索功能增加 `-i|--index` 参数，可以指定返回第几条数据。
+          en: The search function adds the `-i|--index` parameter, which can specify which data to return.
     tui:
       update:
         - cn: 优化了 tui form 表单功能，提升了交互体验
@@ -10,8 +29,10 @@ v0.3.8:
       bugfix:
         - cn: 修复了 csv 数据 parse 错误的问题
           en: Fixed an issue of parsing csv data incorrectly
+  blog: /blog/240526
   alpha: true
   beta: true
+  latest: true
 v0.3.7:
   sum: 694dca40a3a9c124bbeece1555373b1dd5b8b6f1d10e785d95ceba409e5fff9fc8531dbc24225878fbe7a32abb43539140386be9421f9e98e61f7dd9810b3da8
   date: 2024-05-16 15:42:52+0000
@@ -44,7 +65,6 @@ v0.3.7:
         - cn: '修复 awk `default` 关键字错误, #14'
           en: 'Fixed awk `default` keyword error, #14'
   blog: /blog/240517
-  latest: true
 v0.3.6:
   sum: 3aa426a620e18f3c6f33163b027ed01e7fd3ef3b7d5b626f7d0275052b7765bb1769c184c9b803402f1e1daebcd59088628e7543cae978b79df4db04f6c59094
   date: 2024-05-12 02:03:12+0000
