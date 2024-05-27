@@ -36,5 +36,8 @@
         command git push git@github.com:x-cmd/release main
         command git push git@gitee.com:x-cmd/release main
         command git push git@gitcode.net:x-cmd/release main
+
+        # 同步
+        x gh action workflow run -r x-cmd/xx oss-sync.yml
     )
 )
