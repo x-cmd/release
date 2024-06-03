@@ -1,6 +1,6 @@
 v0.3.9:
-  sum: 6e3b70d4fa08fdf8ec97aa2105908c7876f4c3d93daa2fc3441a1461db79073e7d35f796d6a0c02ce65b5d0afaf5a7246eb5d2ca8271c2238b87b4aa3d06d3ed
-  date: 2024-06-03 12:46:52+0000
+  sum: 9145ac65f1fd90acbf4f6b614319266927cf3d066fd20583fd69fdf3718531dccf48298197e8c6c508236a8690f1d458561c620f7e0b27132b265253d23fa9f4
+  date: 2024-06-03 13:11:07+0000
   change:
     gh:
       update:
@@ -41,12 +41,12 @@ v0.3.9:
             using DuckDuckGo and summarize the search content with the configured AI module, [x osv :: -h](https://www.x-cmd.com/mod/osv/ddgoai)
     rfc:
       update:
-        - cn: '新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 RFC 网站文档内容，[x rfc : -h](https://cn.x-cmd.com/mod/rfc/ddgo)'
-          en: 'Added `ddgo|:` subcommand to search RFC website documentation using DuckDuckGo, [x rfc : -h](https://www.x-cmd.com/mod/rfc/ddgo)'
-        - cn: '新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容，[x rfc :: -h](https://cn.x-cmd.com/mod/rfc/ddgoai)'
+        - cn: '新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 RFC 网站文档内容，[x rfc : -h](https://cn.x-cmd.com/mod/rfc)'
+          en: 'Added `ddgo|:` subcommand to search RFC website documentation using DuckDuckGo, [x rfc : -h](https://www.x-cmd.com/mod/rfc)'
+        - cn: '新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容，[x rfc :: -h](https://cn.x-cmd.com/mod/rfc)'
           en: |
             Add `ddgoai|::` enhanced subcommand to search RFC website documentation
-            using DuckDuckGo and summarize the search content with the configured AI module, [x rfc :: -h](https://www.x-cmd.com/mod/rfc/ddgoai)
+            using DuckDuckGo and summarize the search content with the configured AI module, [x rfc :: -h](https://www.x-cmd.com/mod/rfc)
     chat:
       update:
         - cn: 交互式环境时，对 AI 输出的内容进行颜色编码，以提高可读性和清晰度。
@@ -81,6 +81,28 @@ v0.3.9:
 
                 According to the experiment on the page, Gemini 1.0 Pro's favorite number is 72.
                 While 42 is the second most popular number, 72 is far ahead.
+    shodan:
+      update:
+        - cn: 新增检查漏洞的 cve 和 cpe 的子命令
+          en: ADD new sumcmd cve and cpe for vulnerability checks
+        - cn: 新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 shodan.io 收录的漏洞信息
+          en: Add a new `ddgo|:` subcommand to search for vulnerabilities listed on shodan.io using DuckDuckGo.
+        - cn: 新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容)
+          en: |
+            Added `ddgoai|::` enhancer command, which uses DuckDuckGo and combines it with configured AI modules to summarize and organize search content.
+    scoop:
+      update:
+        - cn: 新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 scoop 仓库收录的信息
+          en: Add a new `ddgo|:` subcommand to search for vulnerabilities listed on scoop's github repo using DuckDuckGo.
+        - cn: 新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容)
+          en: Added `ddgoai|::` enhancer command, which uses DuckDuckGo and combines it with configured AI modules to summarize and organize search content.
+    asdf:
+      update:
+        - cn: 新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 asdf 仓库收录的信息
+          en: Add a new `ddgo|:` subcommand to search for vulnerabilities listed on asdf's github repo using DuckDuckGo.
+        - cn: 新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容)
+          en: Added `ddgoai|::` enhancer command, which uses DuckDuckGo and combines it with configured AI modules to summarize and organize search content.
+  blog: /blog/240603
   alpha: true
   beta: true
 v0.3.8:
