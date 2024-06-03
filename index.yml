@@ -64,7 +64,6 @@ v0.3.9:
             >>> What is Gemini's favorite number?
 
                 根据页面上的实验，Gemini 1.0 Pro 最喜欢的数字是 72。
-
                 虽然 42 是第二受欢迎的数字，但 72 远远领先。
 
             ```
@@ -79,6 +78,7 @@ v0.3.9:
                 This is a fascinating analysis of LLMs' "favorite numbers" and ...
 
             >>> What is Gemini's favorite number?
+
                 According to the experiment on the page, Gemini 1.0 Pro's favorite number is 72.
                 While 42 is the second most popular number, 72 is far ahead.
   alpha: true
