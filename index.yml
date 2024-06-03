@@ -1,3 +1,88 @@
+v0.3.9:
+  sum: 6e3b70d4fa08fdf8ec97aa2105908c7876f4c3d93daa2fc3441a1461db79073e7d35f796d6a0c02ce65b5d0afaf5a7246eb5d2ca8271c2238b87b4aa3d06d3ed
+  date: 2024-06-03 12:46:52+0000
+  change:
+    gh:
+      update:
+        - cn: '新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 GitHub 相关的信息，[x gh : -h](https://cn.x-cmd.com/mod/gh/ddgo)'
+          en: 'Add `ddgo|:` enhanced subcommand to search for GitHub-related information using DuckDuckGo, [x gh : -h](https://www.x-cmd.com/mod/gh/ddgo)'
+        - cn: '新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容，[x gh :: -h](https://cn.x-cmd.com/mod/gh/ddgoai)'
+          en: |
+            Add `ddgoai|::` enhanced subcommand to search for GitHub-related information
+            using DuckDuckGo and summarize the search content with the configured AI module, [x gh :: -h](https://www.x-cmd.com/mod/gh/ddgoai)
+    npm:
+      bugfix:
+        - cn: |
+            修复了 `x env use node` 后使用 npm 全局下载安装包时，无法找到命令的问题
+            ```sh
+            x pkg update; x env unuse node; x env gc node; x env use node
+            ```
+          en: |
+            Fixed the issue that the command could not be found when using npm to install packages globally after `x env use node`
+            ```sh
+            x pkg update; x env unuse node; x env gc node; x env use node
+            ```
+      update:
+        - cn: '新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 npm 相关的信息，[x npm : -h](https://cn.x-cmd.com/mod/npm)'
+          en: 'Add `ddgo|:` enhanced subcommand to search for npm-related information using DuckDuckGo, [x npm : -h](https://www.x-cmd.com/mod/npm)'
+        - cn: '新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容，[x npm :: -h](https://cn.x-cmd.com/mod/npm)'
+          en: |
+            Add `ddgoai|::` enhanced subcommand to search for npm-related information
+            using DuckDuckGo and summarize the search content with the configured AI module, [x npm :: -h](https://www.x-cmd.com/mod/npm)
+    osv:
+      update:
+        - cn: 新增 `sarif` 子命令，用于扫描系统安装的软件包或本地项目的依赖并以生成统一的 SARIF 报告，[x osv sarif -h](https://cn.x-cmd.com/mod/osv/ddgo)
+          en: 'Added `sarif` subcommand for scanning system installed packages or local project dependencies to generate unified SARIF reports, [x osv :: -h](https://www.x-cmd.com/mod/osv/ddgoai)'
+        - cn: '新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 osv.dev 收录的漏洞信息，[x osv : -h](https://cn.x-cmd.com/mod/osv/ddgo)'
+          en: 'Add `ddgo|:` enhanced subcommand to search for vulnerability information listed on osv.dev using DuckDuckGo, [x osv : -h](https://www.x-cmd.com/mod/osv/ddgo)'
+        - cn: '新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容，[x osv :: -h](https://cn.x-cmd.com/mod/osv/ddgoai)'
+          en: |
+            Add `ddgoai|::` enhanced subcommand to search for vulnerability information listed on osv.dev
+            using DuckDuckGo and summarize the search content with the configured AI module, [x osv :: -h](https://www.x-cmd.com/mod/osv/ddgoai)
+    rfc:
+      update:
+        - cn: '新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 RFC 网站文档内容，[x rfc : -h](https://cn.x-cmd.com/mod/rfc/ddgo)'
+          en: 'Added `ddgo|:` subcommand to search RFC website documentation using DuckDuckGo, [x rfc : -h](https://www.x-cmd.com/mod/rfc/ddgo)'
+        - cn: '新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容，[x rfc :: -h](https://cn.x-cmd.com/mod/rfc/ddgoai)'
+          en: |
+            Add `ddgoai|::` enhanced subcommand to search RFC website documentation
+            using DuckDuckGo and summarize the search content with the configured AI module, [x rfc :: -h](https://www.x-cmd.com/mod/rfc/ddgoai)
+    chat:
+      update:
+        - cn: 交互式环境时，对 AI 输出的内容进行颜色编码，以提高可读性和清晰度。
+          en: When in an interactive environment, color-code AI output to improve readability and clarity.
+        - cn: |
+            新增了 `repl` 交互式聊天功能，用户可以在命令行与 AI 逐行进行对话，并自动保留历史上下文。
+            使用 `@gemini`、`@gpt`、`@kimi` 等命令选择对应模型进行聊天。
+            e.g.
+            ```sh
+            $ x jina r 'https://gramener.com/llmrandom/' | @gemini
+            >>> about this page, respond in Chinese
+
+                这个页面展示了一个有趣的实验，研究了三种流行的LLM（大型语言模型）在随机选择数字时表现出的偏好。实验发现...
+
+            >>> Gemini 最喜欢哪个数字
+
+                根据页面上的实验，Gemini 1.0 Pro 最喜欢的数字是 72。
+
+                虽然 42 是第二受欢迎的数字，但 72 远远领先。
+
+            ```
+          en: |
+            A new `repl` interactive chat feature has been added, allowing users to interact with the AI line by line in the command line, and automatically preserving historical context.
+            Use commands like `@gemini`, `@gpt`, `@kimi` to select the corresponding model for chat.
+            e.g.
+            ```sh
+            $ x jina r 'https://gramener.com/llmrandom/' | @gemini
+            >>> about this page
+
+                This is a fascinating analysis of LLMs' "favorite numbers" and ...
+
+            >>> What is Gemini's favorite number?
+                According to the experiment on the page, Gemini 1.0 Pro's favorite number is 72.
+                While 42 is the second most popular number, 72 is far ahead.
+  alpha: true
+  beta: true
 v0.3.8:
   sum: 58268710b7ebbef90b75d3684492497d2f5630ea2f150bef426c2d98367746b33fa182092a70bf87c1960a895cfb82fc990449ccc684fa5a4cdd1df33d0b9166
   date: 2024-05-25 08:34:08+0000
@@ -30,8 +115,6 @@ v0.3.8:
         - cn: 修复了 csv 数据 parse 错误的问题
           en: Fixed an issue of parsing csv data incorrectly
   blog: /blog/240526
-  alpha: true
-  beta: true
   latest: true
 v0.3.7:
   sum: 694dca40a3a9c124bbeece1555373b1dd5b8b6f1d10e785d95ceba409e5fff9fc8531dbc24225878fbe7a32abb43539140386be9421f9e98e61f7dd9810b3da8
