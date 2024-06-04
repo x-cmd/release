@@ -38,6 +38,10 @@
         command git push git@gitcode.net:x-cmd/release main
 
         # 同步
+        if [ -n "$QYWX_BOT_RELEASE_WEBHOOK" ]; then
+            x qywx --cfg "webhook=$QYWX_BOT_RELEASE_WEBHOOK"
+            x qywx --send --markdown  "### 🔔 正在同步 oss"
+        fi
         x gh action workflow run -r x-cmd/xx oss-sync.yml
     )
 )
