@@ -2,14 +2,36 @@ v0.3.9:
   sum: 9145ac65f1fd90acbf4f6b614319266927cf3d066fd20583fd69fdf3718531dccf48298197e8c6c508236a8690f1d458561c620f7e0b27132b265253d23fa9f4
   date: 2024-06-03 13:11:07+0000
   change:
+    kev:
+      update:
+        - cn: 新增了 kev 模块，用户可以使用该模块获取 Known Exploited Vulnerabilities Catalog 中的信息，获取已知利用的漏洞信息。
+          en: A new kev module has been added. Users can use this module to obtain information in the Known Exploited Vulnerabilities Catalog and obtain information on known exploited vulnerabilities.
+    ollama:
+      update:
+        - cn: 增强了 ollama 模块，设计参考已有的 OpenAI，Gemini，Moonshot，Kimi 模块，轻松管理本地模型。
+          en: The ollama module has been enhanced, and the design refers to the existing OpenAI, Gemini, Moonshot, and Kimi modules to easily manage local models.
     gh:
       update:
-        - cn: '新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 GitHub 相关的信息，[x gh : -h](https://cn.x-cmd.com/mod/gh/ddgo)'
-          en: 'Add `ddgo|:` enhanced subcommand to search for GitHub-related information using DuckDuckGo, [x gh : -h](https://www.x-cmd.com/mod/gh/ddgo)'
-        - cn: '新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容，[x gh :: -h](https://cn.x-cmd.com/mod/gh/ddgoai)'
+        - cn: |
+            新增 ddgo（简写为 冒号 -- ':' ) 子命令，使用 DuckDuckGo 搜索 GitHub 相关的信息。
+            ```sh
+            # 在终端中运行命令，搜索 github.com 上关于 linux kernel 上信息
+            # 第一条结果 就是 torvalds/linux 仓库
+            x gh : linux kernel
+
+            # 访问官网了解更多用法：
+            https://cn.x-cmd.com/mod/gh/ddgo
+            ```
           en: |
-            Add `ddgoai|::` enhanced subcommand to search for GitHub-related information
-            using DuckDuckGo and summarize the search content with the configured AI module, [x gh :: -h](https://www.x-cmd.com/mod/gh/ddgoai)
+            Added ddgo (abbreviated as colon -- ':' ) subcommand to use DuckDuckGo to search GitHub related information.
+            ```sh
+            # Run the command in the terminal and search for information about linux kernel on github.com
+            # The first result is the torvalds/linux warehouse
+            x gh : linux kernel
+
+            # Visit the official website to learn more about usage:
+            https://cn.x-cmd.com/mod/gh/ddgo
+            ```
     npm:
       bugfix:
         - cn: |
@@ -23,30 +45,69 @@ v0.3.9:
             x pkg update; x env unuse node; x env gc node; x env use node
             ```
       update:
-        - cn: '新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 npm 相关的信息，[x npm : -h](https://cn.x-cmd.com/mod/npm)'
-          en: 'Add `ddgo|:` enhanced subcommand to search for npm-related information using DuckDuckGo, [x npm : -h](https://www.x-cmd.com/mod/npm)'
-        - cn: '新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容，[x npm :: -h](https://cn.x-cmd.com/mod/npm)'
+        - cn: |
+            新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 npm 相关的信息。
+            ```sh
+            # 搜索 在 npm 官网上 关于 rolldown 的项目信息
+
+            x npm : rolldown
+
+            # 访问官网了解 更详细 的 使用方法：
+
+            https://cn.x-cmd.com/mod/npm
+            ```
           en: |
-            Add `ddgoai|::` enhanced subcommand to search for npm-related information
-            using DuckDuckGo and summarize the search content with the configured AI module, [x npm :: -h](https://www.x-cmd.com/mod/npm)
+            Add `ddgo|:` enhanced subcommand to search for npm-related information using DuckDuckGo.
+            ```sh
+            # Search for project information about rolldown on the npm official website
+
+            x npm : rolldown
+
+            # Visit the official website for more detailed instructions:
+            https://cn.x-cmd.com/mod/npm
+            ```
     osv:
       update:
-        - cn: 新增 `sarif` 子命令，用于扫描系统安装的软件包或本地项目的依赖并以生成统一的 SARIF 报告，[x osv sarif -h](https://cn.x-cmd.com/mod/osv/ddgo)
-          en: 'Added `sarif` subcommand for scanning system installed packages or local project dependencies to generate unified SARIF reports, [x osv :: -h](https://www.x-cmd.com/mod/osv/ddgoai)'
-        - cn: '新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 osv.dev 收录的漏洞信息，[x osv : -h](https://cn.x-cmd.com/mod/osv/ddgo)'
-          en: 'Add `ddgo|:` enhanced subcommand to search for vulnerability information listed on osv.dev using DuckDuckGo, [x osv : -h](https://www.x-cmd.com/mod/osv/ddgo)'
-        - cn: '新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容，[x osv :: -h](https://cn.x-cmd.com/mod/osv/ddgoai)'
+        - cn: |
+            新增 `sarif` 子命令，用于扫描系统安装的软件包或本地项目的依赖并以生成统一的 SARIF 报告。
+            ```sh
+            # 在终端中运行命令，如果目录有 package.json，将扫描依赖中的漏洞
+            x osv sarif .
+
+            # 访问官网了解更多的用法：
+            https://cn.x-cmd.com/mod/osv/sarif
+            ```
           en: |
-            Add `ddgoai|::` enhanced subcommand to search for vulnerability information listed on osv.dev
-            using DuckDuckGo and summarize the search content with the configured AI module, [x osv :: -h](https://www.x-cmd.com/mod/osv/ddgoai)
+            Added `sarif` subcommand for scanning system installed packages or local project dependencies to generate unified SARIF reports.
+            ```sh
+            # Run the command in the terminal. If the directory has package.json, the dependencies will be scanned for vulnerabilities.
+            x osv sarif .
+
+            # Visit the official website to learn more about usage:
+            https://cn.x-cmd.com/mod/osv/sarif
+            ```
+        - cn: |
+            新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 osv.dev 收录的漏洞信息。
+            ```sh
+            # 在终端中运行命令
+            x osv : nodejs.
+
+            # 访问官网了解更多的用法：
+            https://cn.x-cmd.com/mod/osv/ddgo
+            ```
+          en: |
+            Add `ddgo|:` enhanced subcommand to search for vulnerability information listed on osv.dev using DuckDuckGo.
+            ```sh
+            # Run command in terminal
+            x osv : nodejs.
+
+            # Visit the official website to learn more about usage:
+            https://cn.x-cmd.com/mod/osv/ddgo
+            ```
     rfc:
       update:
         - cn: '新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 RFC 网站文档内容，[x rfc : -h](https://cn.x-cmd.com/mod/rfc)'
           en: 'Added `ddgo|:` subcommand to search RFC website documentation using DuckDuckGo, [x rfc : -h](https://www.x-cmd.com/mod/rfc)'
-        - cn: '新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容，[x rfc :: -h](https://cn.x-cmd.com/mod/rfc)'
-          en: |
-            Add `ddgoai|::` enhanced subcommand to search RFC website documentation
-            using DuckDuckGo and summarize the search content with the configured AI module, [x rfc :: -h](https://www.x-cmd.com/mod/rfc)
     chat:
       update:
         - cn: 交互式环境时，对 AI 输出的内容进行颜色编码，以提高可读性和清晰度。
@@ -56,55 +117,81 @@ v0.3.9:
             使用 `@gemini`、`@gpt`、`@kimi` 等命令选择对应模型进行聊天。
             e.g.
             ```sh
-            $ x jina r 'https://gramener.com/llmrandom/' | @gemini
-            >>> about this page, respond in Chinese
+            x kev
 
-                这个页面展示了一个有趣的实验，研究了三种流行的LLM（大型语言模型）在随机选择数字时表现出的偏好。实验发现...
+            # 使用 x kev 将获得最近的热门安全漏洞信息（ 最近 15 条 ）
 
-            >>> What is Gemini's favorite number?
+            x kev | @gemini "给 chrome 用户的总结"
 
-                根据页面上的实验，Gemini 1.0 Pro 最喜欢的数字是 72。
-                虽然 42 是第二受欢迎的数字，但 72 远远领先。
+            x kev | @o
 
+            # @o 是 x ollama 的简称，最近我们封装了 ollama 模块，当前使用的是 llama 3 本地模型
+            # 将进入到交互界面，启动一个聊天，与 llama 3 聊聊相关的安全威胁及防护措施
             ```
           en: |
             A new `repl` interactive chat feature has been added, allowing users to interact with the AI line by line in the command line, and automatically preserving historical context.
             Use commands like `@gemini`, `@gpt`, `@kimi` to select the corresponding model for chat.
             e.g.
             ```sh
-            $ x jina r 'https://gramener.com/llmrandom/' | @gemini
-            >>> about this page
+            x kev
 
-                This is a fascinating analysis of LLMs' "favorite numbers" and ...
+            # Using x kev will get the latest popular security vulnerability information (last 15 items)
 
-            >>> What is Gemini's favorite number?
+            x kev | @gemini "Summary for chrome users"
 
-                According to the experiment on the page, Gemini 1.0 Pro's favorite number is 72.
-                While 42 is the second most popular number, 72 is far ahead.
+            x kev | @o
+
+            # @o is the abbreviation of x ollama. Recently we have encapsulated the ollama module and currently use the llama 3 local model.
+            # You will enter the interactive interface, start a chat, and chat with llama 3 about related security threats and protective measures.
+            ```
     shodan:
       update:
         - cn: 新增检查漏洞的 cve 和 cpe 的子命令
           en: ADD new sumcmd cve and cpe for vulnerability checks
         - cn: 新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 shodan.io 收录的漏洞信息
           en: Add a new `ddgo|:` subcommand to search for vulnerabilities listed on shodan.io using DuckDuckGo.
-        - cn: 新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容)
-          en: |
-            Added `ddgoai|::` enhancer command, which uses DuckDuckGo and combines it with configured AI modules to summarize and organize search content.
     scoop:
       update:
         - cn: 新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 scoop 仓库收录的信息
           en: Add a new `ddgo|:` subcommand to search for vulnerabilities listed on scoop's github repo using DuckDuckGo.
-        - cn: 新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容)
-          en: Added `ddgoai|::` enhancer command, which uses DuckDuckGo and combines it with configured AI modules to summarize and organize search content.
     asdf:
       update:
         - cn: 新增 `ddgo|:` 增强子命令，使用 DuckDuckGo 搜索 asdf 仓库收录的信息
           en: Add a new `ddgo|:` subcommand to search for vulnerabilities listed on asdf's github repo using DuckDuckGo.
-        - cn: 新增 `ddgoai|::` 增强子命令，使用 DuckDuckGo 并结合已配置的 AI 模块进行汇总整理搜索内容)
-          en: Added `ddgoai|::` enhancer command, which uses DuckDuckGo and combines it with configured AI modules to summarize and organize search content.
+    mankier:
+      update:
+        - cn: |
+            新增了 mankier 模块，用户可以使用该模块获取 ManKier 中的手册页信息，以及解释命令
+            ```bash
+            # 解释 'jq -rs .' 命令中 各参数的 意义
+            x mankier -e jq -rs .
+
+            # 亦可
+            x mankier -e 'jq -rs .'
+
+
+            # 访问官网了解更多的用法：
+
+            https://cn.x-cmd.com/mod/osv/ddgo
+            ```
+          en: |
+            The mankier module has been added,
+            Users can use this module to retrieve manual page information from ManKier, as well as explain commands
+            ```sh
+            # Explain the meaning of each parameter in the 'jq -rs .' command
+            x mankier -e jq -rs .
+
+            # Also possible
+            x mankier -e 'jq -rs .'
+
+
+            # Visit the official website to learn more about usage:
+            https://cn.x-cmd.com/mod/osv/ddgo
+            ```
   blog: /blog/240603
   alpha: true
   beta: true
+  latest: true
 v0.3.8:
   sum: 58268710b7ebbef90b75d3684492497d2f5630ea2f150bef426c2d98367746b33fa182092a70bf87c1960a895cfb82fc990449ccc684fa5a4cdd1df33d0b9166
   date: 2024-05-25 08:34:08+0000
@@ -137,7 +224,6 @@ v0.3.8:
         - cn: 修复了 csv 数据 parse 错误的问题
           en: Fixed an issue of parsing csv data incorrectly
   blog: /blog/240526
-  latest: true
 v0.3.7:
   sum: 694dca40a3a9c124bbeece1555373b1dd5b8b6f1d10e785d95ceba409e5fff9fc8531dbc24225878fbe7a32abb43539140386be9421f9e98e61f7dd9810b3da8
   date: 2024-05-16 15:42:52+0000
