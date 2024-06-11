@@ -1,6 +1,6 @@
 v0.3.10:
-  sum: ab5b8a464a534be09671f3f369b2d1730b41fe0a51c60f80de278c6f0ff36b7abd6ebd1d2e267a201c3df646382c725194299dae8aa682ef42e4cba6716c9f31
-  date: 2024-06-11 02:24:45+0000
+  sum: 44365f7a99cafac41b048f77e93c99928f67e3b04237442cab8d4b3b0926af6339fc2b5be271b79edeaa77ebd71257e5e03955de8922c7403e56911dd0f0ceb9
+  date: 2024-06-11 03:40:38+0000
   change:
     co:
       update:
@@ -10,6 +10,10 @@ v0.3.10:
       update:
         - cn: x-cmd 新增了对非 posix shell（csh|fish|nushell|xonsh）环境的支持，可以作为二进制文件调用，但仍处于Beta功能阶段。
           en: x-cmd has added support for non-posix shell (csh|fish|nushell|xonsh) environments, it can be called as a binary file, but it is still a beta feature.
+    pkg:
+      update:
+        - cn: pkg 资源包版本由 v0.1.0 升级到 v0.1.1，主要是增加了 se 模块网站列表和跟进部分 pkg 软件版本（如 zig 0.13.0、xonsh 0.16.0 ）。
+          en: The pkg resource package version has been upgraded from v0.1.0 to v0.1.1, mainly adding a list of websites for the se module and following up on some pkg software versions (such as zig 0.13.0, xonsh 0.16.0).
   blog: null
   alpha: true
   beta: true
