@@ -1,16 +1,16 @@
 name: fabu-y7-advise-doc
 on:
   workflow_dispatch:
-    # inputs:
+    inputs:
     #   yy-repo:
     #     description: 'yy repo'
     #     required: false
     #   yy-commit:
     #     description: 'yy commit'
     #     required: false
-    update-mod-list:
-        description: 'update mod list'
-        required: false
+      update-mod-list:
+          description: 'update mod list'
+          required: false
   # schedule:
   #   - cron: '15 5,23 * * *'
 
