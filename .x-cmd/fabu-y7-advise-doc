@@ -15,11 +15,11 @@
 )
 
 (
-    \cd xx               || return 1
+    \cd xx/y7           || return 1
     commit_id="$( x git meta id )"
     x:info "get y7 commit id => $commit_id"
     [ -n "$commit_id" ] || return 1
-    \cd -                || return 1
+    \cd -               || return 1
 
     x rmrf x-cmd-version
     x:info "正在下载 x-cmd/x-cmd-version"
