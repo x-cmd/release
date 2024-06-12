@@ -1,3 +1,23 @@
+v0.3.10:
+  sum: 3b803cae6f25d97c5650e267d886661a159fc6c58e36fdd8d01fefc45227e8afb2cef217442db84156c62e01f1e53a386d44b8cd6d173982b929511909274c4e
+  date: 2024-06-11 14:43:10+0000
+  change:
+    co:
+      update:
+        - cn: 部分模块新增了 `--co|,` 子命令，用于启动 AI code copilot 辅助功能，用于命令生成。
+          en: Some modules have added the `--co|,` subcommand to enable AI code copilot assistant function, which is used for command generation.
+    csh|fish|nu|onsh:
+      update:
+        - cn: x-cmd 新增了对非 posix shell（csh|fish|nushell|xonsh）环境的支持，可以作为二进制文件调用，但仍处于Beta功能阶段。
+          en: x-cmd has added support for non-posix shell (csh|fish|nushell|xonsh) environments, it can be called as a binary file, but it is still a beta feature.
+    pkg:
+      update:
+        - cn: pkg 资源包版本由 v0.1.0 升级到 v0.1.1，主要是增加了 se 模块网站列表和跟进部分 pkg 软件版本（如 zig 0.13.0、xonsh 0.16.0 ）。
+          en: The pkg resource package version has been upgraded from v0.1.0 to v0.1.1, mainly adding a list of websites for the se module and following up on some pkg software versions (such as zig 0.13.0, xonsh 0.16.0).
+  blog: /blog/240611
+  alpha: true
+  beta: true
+  latest: true
 v0.3.9:
   sum: 9145ac65f1fd90acbf4f6b614319266927cf3d066fd20583fd69fdf3718531dccf48298197e8c6c508236a8690f1d458561c620f7e0b27132b265253d23fa9f4
   date: 2024-06-03 13:11:07+0000
@@ -189,9 +209,6 @@ v0.3.9:
             https://cn.x-cmd.com/mod/osv/ddgo
             ```
   blog: /blog/240603
-  alpha: true
-  beta: true
-  latest: true
 v0.3.8:
   sum: 58268710b7ebbef90b75d3684492497d2f5630ea2f150bef426c2d98367746b33fa182092a70bf87c1960a895cfb82fc990449ccc684fa5a4cdd1df33d0b9166
   date: 2024-05-25 08:34:08+0000
