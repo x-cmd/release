@@ -8,6 +8,9 @@ on:
     #   yy-commit:
     #     description: 'yy commit'
     #     required: false
+    update-mod-list:
+        description: 'update mod list'
+        required: false
   # schedule:
   #   - cron: '15 5,23 * * *'
 
@@ -23,8 +26,9 @@ jobs:
       git_user: l
       git_email: l@x-cmd.com
       CONCURRENCY: 10
-      INPUTS_YY_REPO: ${{ github.event.inputs.yy-repo }}
-      INPUTS_YY_COMMIT: ${{ github.event.inputs.yy-commit }}
+      # INPUTS_YY_REPO: ${{ github.event.inputs.yy-repo }}
+      # INPUTS_YY_COMMIT: ${{ github.event.inputs.yy-commit }}
+      INPUTS_UPDATE_MOD_LIST: ${{ github.event.inputs.update-mod-list }}
     steps:
       - name: main
         uses: x-cmd/action@main
