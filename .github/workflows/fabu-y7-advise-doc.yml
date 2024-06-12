@@ -1,0 +1,36 @@
+name: fabu-y7-advise-doc
+on:
+  workflow_dispatch:
+    # inputs:
+    #   yy-repo:
+    #     description: 'yy repo'
+    #     required: false
+    #   yy-commit:
+    #     description: 'yy commit'
+    #     required: false
+  # schedule:
+  #   - cron: '15 5,23 * * *'
+
+jobs:
+  release-worker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ___X_CMD_GHACTION_X: x2
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      QYWX_BOT_RELEASE_WEBHOOK: ${{ secrets.QYWX_BOT_RELEASE_WEBHOOK }}
+      ssh_key: ${{ secrets.SSH_PRIVATE_KEY_FOR_SYNC }}
+      git_user: l
+      git_email: l@x-cmd.com
+      CONCURRENCY: 10
+      INPUTS_YY_REPO: ${{ github.event.inputs.yy-repo }}
+      INPUTS_YY_COMMIT: ${{ github.event.inputs.yy-commit }}
+    steps:
+      - name: main
+        uses: x-cmd/action@main
+        with:
+          code: x ws fabu-y7-advise-doc
+          artifact_name: log-fabu-y7-advise-doc
+          artifact_path: ~/.x-cmd.root/local/log
+
+

@@ -1,0 +1,35 @@
+
+# x-cmd-advise/x-cmd-advise => x-cmd/advise
+
+(
+    x rmrf xx
+    x:info "正在下载 x-cmd/xx"
+    git clone git@github.com:x-cmd/xx
+
+    \cd xx || {
+        x:error "Cannnot cd to x-cmd/xx"
+        return 1
+    }
+
+    x ws fabu-yy 7 || return 1
+)
+
+(
+    \cd xx               || return 1
+    commit_id="$( x git meta id )"
+    x:info "get y7 commit id => $commit_id"
+    [ -n "$commit_id" ] || return 1
+    \cd -                || return 1
+
+    x rmrf x-cmd-version
+    x:info "正在下载 x-cmd/x-cmd-version"
+    git clone git@github.com:x-cmd/x-cmd-version
+
+    \cd x-cmd-version || {
+        x:error "Cannnot cd to x-cmd/x-cmd-version"
+        return 1
+    }
+
+    x ws advise 7 "$commit_id"
+)
+

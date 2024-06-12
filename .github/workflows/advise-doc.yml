@@ -1,4 +1,4 @@
-name: advise--doc
+name: advise-doc
 on:
   workflow_dispatch:
     inputs:
@@ -29,7 +29,7 @@ jobs:
       - name: main
         uses: x-cmd/action@main
         with:
-          code: x ws advise--doc
+          code: x ws advise-doc
           artifact_name: log-advise-doc
           artifact_path: ~/.x-cmd.root/local/log
 
