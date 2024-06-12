@@ -30,6 +30,6 @@
         return 1
     }
 
-    x ws advise 7 "$commit_id"
+    x ws advise y7 "$commit_id"
 )
 
