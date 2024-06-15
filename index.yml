@@ -1,3 +1,23 @@
+v0.3.11:
+  sum: b4771e75ae7c96f9bb13669b1b1deb75f4a26f93f867b052bd7e89b2e9868df1fa2575e89900fa0647167417925aceb3f62fa4ccce3d660490ed50a9d593c95b
+  date: 2024-06-15 13:22:28+0000
+  change:
+    co:
+      update:
+        - cn: 支持在 `--co|,` 子命令后使用 `--provider` 和 `--model` 选项，指定对应的 AI 提供商和模型，生成所需命令。
+          en: You can now use the `--provider` and `--model` options after the `--co|,` subcommand to specify the corresponding AI provider and model, generating the required command.
+    hub:
+      update:
+        - cn: 修复判断当前是否为交互环境
+          en: Fix the determination of whether the current environment is interactive.
+    elv:
+      update:
+        - cn: x-cmd 新增了对 elvish 环境的支持，可以作为二进制文件调用，但仍处于Beta功能阶段。
+          en: x-cmd has added support for elvish environments, it can be called as a binary file, but it is still a beta feature.
+  blog: null
+  alpha: true
+  beta: true
+  latest: true
 v0.3.10:
   sum: 3b803cae6f25d97c5650e267d886661a159fc6c58e36fdd8d01fefc45227e8afb2cef217442db84156c62e01f1e53a386d44b8cd6d173982b929511909274c4e
   date: 2024-06-11 14:43:10+0000
@@ -15,9 +35,6 @@ v0.3.10:
         - cn: pkg 资源包版本由 v0.1.0 升级到 v0.1.1，主要是增加了 se 模块网站列表和跟进部分 pkg 软件版本（如 zig 0.13.0、xonsh 0.16.0 ）。
           en: The pkg resource package version has been upgraded from v0.1.0 to v0.1.1, mainly adding a list of websites for the se module and following up on some pkg software versions (such as zig 0.13.0, xonsh 0.16.0).
   blog: /blog/240611
-  alpha: true
-  beta: true
-  latest: true
 v0.3.9:
   sum: 9145ac65f1fd90acbf4f6b614319266927cf3d066fd20583fd69fdf3718531dccf48298197e8c6c508236a8690f1d458561c620f7e0b27132b265253d23fa9f4
   date: 2024-06-03 13:11:07+0000
