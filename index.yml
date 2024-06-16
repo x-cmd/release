@@ -14,7 +14,7 @@ v0.3.11:
       update:
         - cn: x-cmd 新增了对 elvish 环境的支持，可以作为二进制文件调用，但仍处于Beta功能阶段。
           en: x-cmd has added support for elvish environments, it can be called as a binary file, but it is still a beta feature.
-  blog: null
+  blog: /blog/240615
   alpha: true
   beta: true
   latest: true
