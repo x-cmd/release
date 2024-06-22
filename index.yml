@@ -1,3 +1,52 @@
+v0.3.12:
+  sum: dc51f097964ddb277a2296483972a070a85e129c958518c6e11622764c3eecde952a49311b0252cb11cadc7267b715dcf5fe097ab3748970b9d5b5cfcc2319f8
+  date: 2024-06-22 16:09:43+0000
+  change:
+    fish:
+      bugfix:
+        - cn: |
+            修复了 fish setup 功能的部分问题。
+            修正了部分环境变量透传的错误。
+          en: |
+            Fixed issues with the fish setup functionality.
+            Corrected errors in the transmission of certain environment variables.
+    git:
+      update:
+        - cn: 新增了服务提供商的功能管理，包括配置短名和设定代理，适用于 Git 提供商（Bitbucket、Codeberg、GitHub、GitLab）。
+          en: Added functionality to manage service providers, including configuring short names and setting proxies, applicable to Git providers (Bitbucket, Codeberg, GitHub, GitLab).
+    ls:
+      bugfix:
+        - cn: 修复了 `ls app` 文件显示顺序的问题。
+          en: Fixed the file display order issue in `ls app`.
+    last:
+      update:
+        - cn: 新增了 last 模块，使用交互式 UI 来查看用户最近登录系统和注销的记录。
+          en: Added the last module, which uses an interactive UI to view records of users' recent logins and logouts.
+    ps:
+      update:
+        - cn: 在 app 中新增了更多的交互选择功能，使用户可以更方便地进行操作。
+          en: Expanded app functionality with more interactive selection options, providing users with enhanced ease of operation.
+    stat:
+      update:
+        - cn: 调整了 `x stat` 的输出，采用交互式 UI 来显示 `stat` 命令的结果。
+          en: The output of the `x stat` command has been adjusted to display the results of the `stat` command using an interactive user interface.
+    id:
+      update:
+        - cn: 调整了 `x id` 的显示效果。
+          en: Adjusted the display of 'x id'.
+    fjo:
+      update:
+        - cn: 增加了 forgejo 命令行工具
+          en: Add forgejo client
+    cb:
+      update:
+        - cn: 增加了 codeberg 命令行工具
+          en: Add codeberg client
+    tea:
+      update:
+        - cn: 增加了 gitea 命令行工具
+          en: Add gitea client
+  blog: null
 v0.3.11:
   sum: b4771e75ae7c96f9bb13669b1b1deb75f4a26f93f867b052bd7e89b2e9868df1fa2575e89900fa0647167417925aceb3f62fa4ccce3d660490ed50a9d593c95b
   date: 2024-06-15 13:22:28+0000
