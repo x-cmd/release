@@ -47,6 +47,9 @@ v0.3.12:
         - cn: 增加了 gitea 命令行工具
           en: Add gitea client
   blog: null
+  alpha: true
+  beta: true
+  latest: true
 v0.3.11:
   sum: b4771e75ae7c96f9bb13669b1b1deb75f4a26f93f867b052bd7e89b2e9868df1fa2575e89900fa0647167417925aceb3f62fa4ccce3d660490ed50a9d593c95b
   date: 2024-06-15 13:22:28+0000
@@ -64,9 +67,6 @@ v0.3.11:
         - cn: x-cmd 新增了对 elvish 环境的支持，可以作为二进制文件调用，但仍处于Beta功能阶段。
           en: x-cmd has added support for elvish environments, it can be called as a binary file, but it is still a beta feature.
   blog: /blog/240615
-  alpha: true
-  beta: true
-  latest: true
 v0.3.10:
   sum: 3b803cae6f25d97c5650e267d886661a159fc6c58e36fdd8d01fefc45227e8afb2cef217442db84156c62e01f1e53a386d44b8cd6d173982b929511909274c4e
   date: 2024-06-11 14:43:10+0000
