@@ -46,7 +46,7 @@ v0.3.12:
       update:
         - cn: 增加了 gitea 命令行工具
           en: Add gitea client
-  blog: null
+  blog: /blog/240622
   alpha: true
   beta: true
   latest: true
