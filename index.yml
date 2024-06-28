@@ -1,3 +1,39 @@
+v0.3.13:
+  sum: 1369a1f547f2b64e51485a311cd14e1c5b9d707f66e125a21bacc39a544f496ac704ae7f60d1ff4a25954c5b95749486b64e2d4396d9bc8d4d3a38bede1a7fce
+  date: 2024-06-28 12:23:25+0000
+  change:
+    boot:
+      update:
+        - cn: 更新了 `boot init` 功能和提示信息。
+          en: Updated `boot init` functionality and prompts.
+    lms:
+      update:
+        - cn: 新增了 `lms` 模块，用于在命令行使用 LM Studio。
+          en: Added `lms` module for using LM Studio via the command line.
+    docker:
+      update:
+        - cn: 为 `image`、`images`、`ps`、`container` 和 `network` 命令增添了交互式表格功能，使用户可以更加直观和便捷地查看和管理信息。
+          en: Added interactive table functionality to the `image`, `images`, `ps`, `container`, and `network` commands, allowing users to view and manage information more intuitively and conveniently.
+    fjo:
+      update:
+        - cn: 新增 `notification` 子命令，用于查看 forgejo 中的消息通知，以及把通知标记为已读。
+          en: Added a new `notification` subcommand to view forgejo message notifications and mark them as read.
+      bugfix:
+        - cn: 修复了 `repo edit` 参数与官网 API 不匹配的问题。
+          en: Fixed the issue where the parameters of `repo edit` did not match the official API.
+        - cn: 修复了 `repo info` 显示 UI 错误。
+          en: Fixed UI errors in `repo info` display.
+    gh:
+      update:
+        - cn: 新增 `notification` 子命令，用于查看 github 中的消息通知，以及把通知标记为已读。
+          en: Added a new `notification` subcommand to view GitHub message notifications and mark them as read.
+    gt:
+      update:
+        - cn: 新增 `notification` 子命令，用于查看 gitee 中的消息通知，以及把通知标记为已读。
+          en: Added a new `notification` subcommand to view Gitee message notifications and mark them as read.
+  blog: null
+  alpha: true
+  beta: true
 v0.3.12:
   sum: dc51f097964ddb277a2296483972a070a85e129c958518c6e11622764c3eecde952a49311b0252cb11cadc7267b715dcf5fe097ab3748970b9d5b5cfcc2319f8
   date: 2024-06-22 16:09:43+0000
@@ -47,8 +83,6 @@ v0.3.12:
         - cn: 增加了 gitea 命令行工具
           en: Add gitea client
   blog: /blog/240622
-  alpha: true
-  beta: true
   latest: true
 v0.3.11:
   sum: b4771e75ae7c96f9bb13669b1b1deb75f4a26f93f867b052bd7e89b2e9868df1fa2575e89900fa0647167417925aceb3f62fa4ccce3d660490ed50a9d593c95b
