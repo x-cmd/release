@@ -1,3 +1,23 @@
+v0.3.14:
+  sum: 1ad27c731c6c6bd873e600b72ed5077e6a22cad1eb65d9a23d94a9b5d3922982696f4a5ad36d2487e8479b6b3c12885e3ae2bdafc8f3093ea3dd6a22b33b399d
+  date: 2024-07-06 14:59:09+0000
+  change:
+    advise:
+      update:
+        - cn: 支持在 Bash 环境下进行自动补全时，提供命令的描述信息，帮助用户快速找到所需的命令或参数。
+          en: Added support for displaying command descriptions during auto-completion in the Bash environment, helping users quickly find the desired commands or parameters.
+    lsio:
+      update:
+        - cn: 新增了 `lsio` 模块，用于帮助用户更好地查询和使用 linuxserver.io 构建的 Docker 镜像。
+          en: Added `lsio` module to assist users in better querying and using Docker images built by linuxserver.io.
+    pixi:
+      update:
+        - cn: 新增了 `pixi` 模块。该模块是用 POSIX shell 实现的 pixi 命令增强工具，用于优化 pixi 命令的安装和使用体验。
+          en: Added `pixi` module. It is a pixi command enhancement tool implemented with POSIX shell, aimed at optimizing the installation and usage experience of pixi commands.
+  blog: null
+  alpha: true
+  beta: true
+  latest: true
 v0.3.13:
   sum: 6446d9f392c9fe23ec9a7e6e3c68cb5cba16a44ba914609fdd818ead2ccb6b2ec9c6c35dc91b18f488fb78c3528afbe9d7ccce2de355095df062b7d50f93eb0f
   date: 2024-06-29 07:58:49+0000
@@ -31,10 +51,7 @@ v0.3.13:
       update:
         - cn: 新增 `notification` 子命令，用于查看 gitee 中的消息通知，以及把通知标记为已读。
           en: Added a new `notification` subcommand to view Gitee message notifications and mark them as read.
-  blog: null
-  alpha: true
-  beta: true
-  latest: true
+  blog: /blog/240630
 v0.3.12:
   sum: dc51f097964ddb277a2296483972a070a85e129c958518c6e11622764c3eecde952a49311b0252cb11cadc7267b715dcf5fe097ab3748970b9d5b5cfcc2319f8
   date: 2024-06-22 16:09:43+0000
