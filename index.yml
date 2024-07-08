@@ -14,7 +14,31 @@ v0.3.14:
       update:
         - cn: 新增了 `pixi` 模块。该模块是用 POSIX shell 实现的 pixi 命令增强工具，用于优化 pixi 命令的安装和使用体验。
           en: Added `pixi` module. It is a pixi command enhancement tool implemented with POSIX shell, aimed at optimizing the installation and usage experience of pixi commands.
-  blog: null
+    fjo:
+      update:
+        - cn: 支持下载仓库中发行版本的附件资源。
+          en: Support download released attachment resources in the repository.
+    gh:
+      update:
+        - cn: 新增 `search` 子命令，用户可以通过该命令在终端中搜索 github 中的仓库。
+          en: Added a `search` subcommand, allowing users to search for repositories on GitHub from the terminal.
+        - cn: 支持下载仓库中发行版本的附件资源。
+          en: Support download released attachment resources in the repository.
+    zig:
+      update:
+        - cn: 新增 `pm` 子命令，用于管理 zig 包。
+          en: Added `pm` subcommand to manage zig packages.
+        - cn: 新增 `zon` 子命令，可将 busild.zig.zon 文件转为 JSON/YAML 格式输出。
+          en: Added `zon` subcommand to convert `busild.zig.zon` files to JSON/YAML format output.
+    cb:
+      update:
+        - cn: 支持下载仓库中发行版本的附件资源。
+          en: Support download released attachment resources in the repository.
+    ws:
+      break:
+        - cn: 移除了 `xws` 别名调用 `ws` 模块的功能，现在仅支持 `xw` 别名。
+          en: Removed `xws` alias for calling the `ws` module, now only `xw` alias is supported.
+  blog: /blog/240707
   alpha: true
   beta: true
   latest: true
