@@ -1,3 +1,31 @@
+v0.3.15:
+  sum: 0e26d4e62b816388e96003f73a744880429234ebc6017b58e8d1dd0eb596a218f6b408708c4c701d9184846ddf94ca6f6adfaaaaf29572bc2e603e0a4a717589
+  date: 2024-07-08 13:58:36+0000
+  change:
+    coin:
+      update:
+        - cn: 新增了 `coin` 模块，作为 CoinCap 平台信息查看器。
+          en: Added `coin` module, a CoinCap platform information viewer.
+    df:
+      update:
+        - cn: 新增了 `df` 模块，用于增强 `df` 命令的功能。
+          en: dded `df` module to enhance the `df` command functionality.
+    uptime:
+      update:
+        - cn: 新增了 `uptime` 模块，用于友好地显示系统运行时间和负载情况。
+          en: Added `uptime` module for user-friendly display of system uptime and load.
+    env:
+      update:
+        - cn: 在 `env` 模块的 app 中新增了按 `b` 键打开对应网页（x-cmd/pkg）的功能。
+          en: Added the functionality to open the corresponding webpage (x-cmd/pkg) by pressing `b` in the `env` module app.
+    fish|onsh|nu|elv:
+      update:
+        - cn: 更改了启动时加载到 `PATH` 变量的 `pkg` 路径。
+          en: Modified the `pkg` path loaded into the `PATH` variable during startup.
+  blog: null
+  alpha: true
+  beta: true
+  latest: true
 v0.3.14:
   sum: 1ad27c731c6c6bd873e600b72ed5077e6a22cad1eb65d9a23d94a9b5d3922982696f4a5ad36d2487e8479b6b3c12885e3ae2bdafc8f3093ea3dd6a22b33b399d
   date: 2024-07-06 14:59:09+0000
@@ -39,9 +67,6 @@ v0.3.14:
         - cn: 移除了 `xws` 别名调用 `ws` 模块的功能，现在仅支持 `xw` 别名。
           en: Removed `xws` alias for calling the `ws` module, now only `xw` alias is supported.
   blog: /blog/240707
-  alpha: true
-  beta: true
-  latest: true
 v0.3.13:
   sum: 6446d9f392c9fe23ec9a7e6e3c68cb5cba16a44ba914609fdd818ead2ccb6b2ec9c6c35dc91b18f488fb78c3528afbe9d7ccce2de355095df062b7d50f93eb0f
   date: 2024-06-29 07:58:49+0000
