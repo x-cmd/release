@@ -2,14 +2,22 @@ v0.3.15:
   sum: 0e26d4e62b816388e96003f73a744880429234ebc6017b58e8d1dd0eb596a218f6b408708c4c701d9184846ddf94ca6f6adfaaaaf29572bc2e603e0a4a717589
   date: 2024-07-08 13:58:36+0000
   change:
+    uname:
+      update:
+        - cn: 新增了 `uname` 模块，用于增强 `uname` 命令的功能。
+          en: dded `uname` module to enhance the `uname` command functionality.
+    go:
+      update:
+        - cn: 新增 `star` 子命令，用于管理 go 包。
+          en: Added `star` subcommand to manage go packages.
     coin:
       update:
         - cn: 新增了 `coin` 模块，作为 CoinCap 平台信息查看器。
           en: Added `coin` module, a CoinCap platform information viewer.
     df:
       update:
-        - cn: 新增了 `df` 模块，用于增强 `df` 命令的功能。
-          en: dded `df` module to enhance the `df` command functionality.
+        - cn: 新增了 `df` 模块，采用交互式 UI 来显示 `df` 命令的结果。
+          en: Added the `df` module, which uses an interactive UI to display the results of the `df` command.
     uptime:
       update:
         - cn: 新增了 `uptime` 模块，用于友好地显示系统运行时间和负载情况。
