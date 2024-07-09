@@ -8,8 +8,8 @@ v0.3.15:
           en: dded `uname` module to enhance the `uname` command functionality.
     go:
       update:
-        - cn: 新增 `star` 子命令，用于管理 go 包。
-          en: Added `star` subcommand to manage go packages.
+        - cn: 新增 `star` 子命令，用于查找常用的 go 库。
+          en: Added `star` subcommand to find common go libraries.
     coin:
       update:
         - cn: 新增了 `coin` 模块，作为 CoinCap 平台信息查看器。
