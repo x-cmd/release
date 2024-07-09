@@ -30,7 +30,7 @@ v0.3.15:
       update:
         - cn: 更改了启动时加载到 `PATH` 变量的 `pkg` 路径。
           en: Modified the `pkg` path loaded into the `PATH` variable during startup.
-  blog: null
+  blog: /blog/240709
   alpha: true
   beta: true
   latest: true
