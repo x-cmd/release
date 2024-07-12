@@ -1,3 +1,62 @@
+v0.4.0:
+  sum: c6757e8ae9427b7714c2679976c64626175eb0344f814758a0b5715ecc5f53a9e246c0f71b09586c44024f0268fde7f9796ca5d807dfd04c9451f59958ba0009
+  date: 2024-07-12 15:25:41+0000
+  change:
+    pixi:
+      update:
+        - cn: pixi activate/deactivate 标记文件存放路径由 `${___X_CMD_ROOT}/ctrl` 改为 `${___X_CMD_ROOT}/boot`。对于正在使用 `pixi` 的用户，我们建议您在更新 x-cmd 后需要重新运行 `x pixi --activate` 或  `x pixi --deactivate` 命令。
+          en: The path for storing tagged files for pixi activation/deactivation has been changed from `${___X_CMD_ROOT}/ctrl` to `${___X_CMD_ROOT}/boot`. For users currently using `pixi`, we recommend that you re-run the `x pixi --activate` or `x pixi --deactivate` command after updating x-cmd.
+    pkgx:
+      update:
+        - cn: 新增 `x pkgx` 模块。pkgx 是一个轻量的包管理工具，旨在简化软件包的安装、管理和依赖处理，目前已支持 1408 个软件包。而 `x pkgx` 模块是用 POSIX shell 实现的 pkgx 命令增强工具，用于优化 pkgx 命令的安装和使用体验。
+          en: Added the `x pkgx` module. pkgx is a lightweight package management tool designed to simplify software package installation, management, and dependency handling. It currently supports 1408 packages. The `x pkgx` module is a pkgx command enhancement tool implemented in POSIX shell, aiming to optimize the installation and usage experience of the pkgx command.
+    scorecard:
+      update:
+        - cn: 新增 `scorecard` 模块。该模块是为 OpenSSF scorecard 项目设计的，scorecard 项目用于自动化评估开源项目的安全性和最佳实践遵从情况。
+          en: Added a `scorecard` module. This module is designed for the OpenSSF scorecard project, which automates the assessment of security and best practice compliance for open source projects.
+    helpapp:
+      bugfix:
+        - cn: 修复了 Non-POSIX shell 找不到本地 `x-cmd/advise` 资源文件的问题 [x-cmd/x-cmd/issues/45](https://github.com/x-cmd/x-cmd/issues/45)。
+          en: Fixed the issue where Non-POSIX shells could not find the local `x-cmd/advise` resource files [x-cmd/x-cmd/issues/45](https://github.com/x-cmd/x-cmd/issues/45).
+    chat:
+      update:
+        - cn: 在 AI 回复过程中采用 `ui rotate`，不断给用户展示最新的进展生成的响应数据，最终渲染可视化内容，提供更友好的体验。
+          en: Implemented `ui rotate` during AI responses to continuously display the latest progress and generated response data to the user, ultimately rendering visual content for a more user-friendly experience.
+        - cn: 在 AI chat 的 REPL 功能模式下，新增了 `/l` 命令，用于查看和选择当前 session 的历史记录。但该功能仍处于 Beta 阶段。
+          en: In AI chat's REPL function mode, added the `/l` command to view and select the history of the current session. However, this feature is still in the Beta stage.
+    boot:
+      update:
+        - cn: |
+            新增了禁用 alias 功能，可以禁用 `[c | xx | xw | xd | xg | xp | co | coco | chat | writer]` 这些 alias。[x-cmd/x-cmd/issues/41](https://github.com/x-cmd/x-cmd/issues/41)
+            例如:
+            ```bash
+            x boot alias disable c
+            ```
+          en: |
+            Added functionality to disable aliases, allowing the disabling of `[c | xx | xw | xd | xg | xp | co | coco | chat | writer]` aliases. [x-cmd/x-cmd/issues/41](https://github.com/x-cmd/x-cmd/issues/41)
+            For example:
+            ```bash
+            x boot alias disable c
+            ```
+    env:
+      update:
+        - cn: 在 `env` 模块的 app 中，改为按 `o` 和 `b` 键都能打开对应网页（x-cmd/pkg）。
+          en: In the `env` module app, modified to allow both `o` and `b` keys to open the corresponding webpage (x-cmd/pkg).
+    gemini:
+      update:
+        - cn: 在使用 Gemini AI 请求时，采用 Stream 模式，并使用 `ui rotate` 显示响应进度。
+          en: When making requests with Gemini AI, use Stream mode and display response progress with `ui rotate`.
+    kill:
+      update:
+        - cn: 新增了 `kill` 模块，采用交互式 UI 来显示当前系统所有可用的信号。
+          en: Added a `kill` module, which uses an interactive UI to display all available signals on the current system.
+    top:
+      update:
+        - cn: 新增了 `top` 模块，使用 bottom 来查看进程的实时信息。
+          en: Added a `top` module, use `bottom` to view real-time process information.
+  blog: null
+  alpha: true
+  beta: true
 v0.3.15:
   sum: 0e26d4e62b816388e96003f73a744880429234ebc6017b58e8d1dd0eb596a218f6b408708c4c701d9184846ddf94ca6f6adfaaaaf29572bc2e603e0a4a717589
   date: 2024-07-08 13:58:36+0000
@@ -31,8 +90,6 @@ v0.3.15:
         - cn: 更改了启动时加载到 `PATH` 变量的 `pkg` 路径。
           en: Modified the `pkg` path loaded into the `PATH` variable during startup.
   blog: /blog/240709
-  alpha: true
-  beta: true
   latest: true
 v0.3.14:
   sum: 1ad27c731c6c6bd873e600b72ed5077e6a22cad1eb65d9a23d94a9b5d3922982696f4a5ad36d2487e8479b6b3c12885e3ae2bdafc8f3093ea3dd6a22b33b399d
