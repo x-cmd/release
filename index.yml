@@ -57,6 +57,7 @@ v0.4.0:
   blog: null
   alpha: true
   beta: true
+  latest: true
 v0.3.15:
   sum: 0e26d4e62b816388e96003f73a744880429234ebc6017b58e8d1dd0eb596a218f6b408708c4c701d9184846ddf94ca6f6adfaaaaf29572bc2e603e0a4a717589
   date: 2024-07-08 13:58:36+0000
@@ -90,7 +91,6 @@ v0.3.15:
         - cn: 更改了启动时加载到 `PATH` 变量的 `pkg` 路径。
           en: Modified the `pkg` path loaded into the `PATH` variable during startup.
   blog: /blog/240709
-  latest: true
 v0.3.14:
   sum: 1ad27c731c6c6bd873e600b72ed5077e6a22cad1eb65d9a23d94a9b5d3922982696f4a5ad36d2487e8479b6b3c12885e3ae2bdafc8f3093ea3dd6a22b33b399d
   date: 2024-07-06 14:59:09+0000
