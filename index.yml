@@ -1,3 +1,46 @@
+v0.4.1:
+  sum: 993574f4be7e5b33e00fff8585225489bb8242d2785e1a9d235f42b508c77055c63821195fbdec4452b9e6eb65937e04bf3409dd2d30a00b52cc4ae92ac5c061
+  date: 2024-07-19 12:43:00+0000
+  change:
+    chat:
+      update:
+        - cn: 优化了用户首次使用时的提示和 provider 选项判断。
+          en: Improved prompts and provider option validation for first-time users.
+    openai:
+      update:
+        - cn: x-cmd 提供了对 OpenAI 最新版模型 [GPT-4o mini](https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/) 的支持，用户可以使用 `@gpt4om` 直接请求 GPT-4o mini 模型。
+          en: x-cmd now supports OpenAI's latest model, [GPT-4o mini](https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/), allowing users to directly request the GPT-4o mini model using `@gpt4om`.
+    pick:
+      bugfix:
+        - cn: 修复了 `pick` 多选时宽度自适应的问题。
+          en: Fixed the width auto-adjustment issue for multi-selection in `pick`.
+    theme:
+      bugfix:
+        - cn: 修复了在 openSUSE Tumbleweed 上，在 vscode 终端使用部分主题时出现异常报错的问题。
+          en: Fixed the issue where certain themes caused abnormal errors when used in the vscode terminal on openSUSE Tumbleweed.
+    kev:
+      update:
+        - cn: 在交互模式下，新增了交互菜单以便在使用 app 选中漏洞项目后能进一步获取漏洞的详细信息。
+          en: In interactive mode, an interactive menu has been added so that after selecting a vulnerability item in the app, you can further obtain detailed information about the vulnerability.
+    df:
+      update:
+        - cn: |
+            调整了 `x df` 的输出，在 TUI 最后一列增加了挂载的权限、文件系统用户等属性。
+            用户只需运行 `x df`，即可同时查看 `df` 和 `mount` 的信息，不需要输入两次命令。
+          en: |
+            The output of `x df` has been adjusted, adding mount permissions, file system users, etc. to the last column of the TUI.
+            Users can now view both `df` and mount information by simply running `x df`, eliminating the need to enter two commands.
+    dns:
+      update:
+        - cn: 在 app 中新增了更多的交互选择功能，用户可以选择某一行，然后使用 shodan 来查询 IP 地址的 DNS 信息和测试 ip 的延迟。
+          en: The app has added more interactive options, allowing users to select a row and use shodan to query the DNS information of the IP address and test the latency of the IP.
+    ip:
+      update:
+        - cn: 输出增加颜色。
+          en: Output with increased color.
+  blog: null
+  alpha: true
+  beta: true
 v0.4.0:
   sum: c6757e8ae9427b7714c2679976c64626175eb0344f814758a0b5715ecc5f53a9e246c0f71b09586c44024f0268fde7f9796ca5d807dfd04c9451f59958ba0009
   date: 2024-07-12 15:25:41+0000
@@ -54,9 +97,7 @@ v0.4.0:
       update:
         - cn: 新增了 `top` 模块，使用 bottom 来查看进程的实时信息。
           en: Added a `top` module, use `bottom` to view real-time process information.
-  blog: null
-  alpha: true
-  beta: true
+  blog: /blog/240714
   latest: true
 v0.3.15:
   sum: 0e26d4e62b816388e96003f73a744880429234ebc6017b58e8d1dd0eb596a218f6b408708c4c701d9184846ddf94ca6f6adfaaaaf29572bc2e603e0a4a717589
