@@ -1,3 +1,22 @@
+v0.4.2:
+  sum: dc722741c1d3fee6019067c9c660734dc0794ec3edcf901d5167bf17de27308649bf63c6a1a2a6039b5a0bc50d54094409349110a78936b5b32920a74a611623
+  date: 2024-07-23 02:57:29+0000
+  change:
+    elv:
+      update:
+        - cn: '`x elv --setup` 新增了 `all`、`mod`、`rc` 子命令，可以选择不同程度地将 x-cmd 注入 elvish 环境，实现自由灵活的配置。'
+          en: Added `all`, `mod`, and `rc` subcommands to `x elv --setup`, allowing for different levels of x-cmd injection into the elvish environment, providing flexible and customizable configuration.
+    nu:
+      update:
+        - cn: 更新并调整了 `x nu --setup` 的代码。
+          en: Updated and adjusted the code for `x nu --setup`.
+    onsh:
+      update:
+        - cn: 更新并调整了 `x onsh --setup` 的代码。
+          en: Updated and adjusted the code for `x onsh --setup`.
+  blog: null
+  alpha: true
+  beta: true
 v0.4.1:
   sum: 993574f4be7e5b33e00fff8585225489bb8242d2785e1a9d235f42b508c77055c63821195fbdec4452b9e6eb65937e04bf3409dd2d30a00b52cc4ae92ac5c061
   date: 2024-07-19 12:43:00+0000
@@ -39,8 +58,6 @@ v0.4.1:
         - cn: 输出增加颜色。
           en: Output with increased color.
   blog: /blog/240720
-  alpha: true
-  beta: true
   latest: true
 v0.4.0:
   sum: c6757e8ae9427b7714c2679976c64626175eb0344f814758a0b5715ecc5f53a9e246c0f71b09586c44024f0268fde7f9796ca5d807dfd04c9451f59958ba0009
