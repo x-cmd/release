@@ -6,14 +6,6 @@ v0.4.2:
       update:
         - cn: '`x elv --setup` 新增了 `all`、`mod`、`rc` 子命令，可以选择不同程度地将 x-cmd 注入 elvish 环境，实现自由灵活的配置。'
           en: Added `all`, `mod`, and `rc` subcommands to `x elv --setup`, allowing for different levels of x-cmd injection into the elvish environment, providing flexible and customizable configuration.
-    nu:
-      update:
-        - cn: 更新并调整了 `x nu --setup` 的代码。
-          en: Updated and adjusted the code for `x nu --setup`.
-    onsh:
-      update:
-        - cn: 更新并调整了 `x onsh --setup` 的代码。
-          en: Updated and adjusted the code for `x onsh --setup`.
     gtb:
       update:
         - cn: '`x gtb` 使用 fzf 来显示 TUI 界面。'
