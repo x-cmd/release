@@ -10,7 +10,7 @@ v0.4.2:
       update:
         - cn: '`x gtb` 使用 fzf 来显示 TUI 界面。'
           en: '`x gtb` uses fzf to display the TUI interface.'
-  blog: null
+  blog: /blog/240725
   alpha: true
   beta: true
   latest: true
