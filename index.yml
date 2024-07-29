@@ -1,6 +1,6 @@
 v0.4.3:
-  sum: 2b5ab8cd01d8a89c5e6b8ef0ff2f41ac3b4a47277f39e92b79bc88ffe17c5503503b4c38038b4d8d66b25dc04550721c9e594364498f9aaaae9ad1ea8898dd04
-  date: 2024-07-26 15:17:17+0000
+  sum: 6a6a921e38877f489e008fe3b34ae6448e9b5dab60bcbae4868164aafeee4fd76a4b8af901497ae9a1d9324e0704635a9f81de33d1be7bdf025cd16272032cf9
+  date: 2024-07-29 12:19:11+0000
   change:
     jq|yq:
       update:
@@ -8,15 +8,16 @@ v0.4.3:
           en: Added `repl` subcommand. This command provides a way for users to read and explore JSON|YAML data interactively using fzf.
     ll:
       update:
-        - cn: 新增 `--fzf` 子命令。该命令借助 fzf 为用户提供了一种高效查找文件和目录的相关信息的方法，类似于文件管理器。
-          en: Added `--fzf` subcommand. This command uses fzf to provide users with an efficient way to find information about files and directories, similar to a file manager.
+        - cn: 新增 `--fzfapp` 子命令。该命令借助 fzf 为用户提供了一种高效查找文件和目录的相关信息的方法，类似于文件管理器。
+          en: Added `--fzfapp` subcommand. This command uses fzf to provide users with an efficient way to find information about files and directories, similar to a file manager.
     man:
       update:
-        - cn: '`x man` 使用 fzf 来显示 TUI 界面，用户可通过该命令查看 man 文档和 tldr。'
-          en: '`x man` uses fzf to display the TUI interface, which allows the user to view the man document and tldr.'
+        - cn: '`x man` 使用 fzf 列出当前系统上所有的 man 文档，为用户提供快速查找和预览 man 文档的方法，以及 man 文档的颜色高亮。'
+          en: '`x man` uses fzf to list all man pages on the current system, providing users with a quick way to find and preview man documents, as well as color highlighting for man documents.'
   blog: null
   alpha: true
   beta: true
+  latest: true
 v0.4.2:
   sum: dc722741c1d3fee6019067c9c660734dc0794ec3edcf901d5167bf17de27308649bf63c6a1a2a6039b5a0bc50d54094409349110a78936b5b32920a74a611623
   date: 2024-07-23 02:57:29+0000
@@ -30,7 +31,6 @@ v0.4.2:
         - cn: '`x gtb` 使用 fzf 来显示 TUI 界面。'
           en: '`x gtb` uses fzf to display the TUI interface.'
   blog: /blog/240725
-  latest: true
 v0.4.1:
   sum: 993574f4be7e5b33e00fff8585225489bb8242d2785e1a9d235f42b508c77055c63821195fbdec4452b9e6eb65937e04bf3409dd2d30a00b52cc4ae92ac5c061
   date: 2024-07-19 12:43:00+0000
