@@ -14,7 +14,7 @@ v0.4.3:
       update:
         - cn: '`x man` 使用 fzf 列出当前系统上所有的 man 文档，为用户提供快速查找和预览 man 文档的方法，以及 man 文档的颜色高亮。'
           en: '`x man` uses fzf to list all man pages on the current system, providing users with a quick way to find and preview man documents, as well as color highlighting for man documents.'
-  blog: null
+  blog: /blog/240729
   alpha: true
   beta: true
   latest: true
