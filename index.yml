@@ -1,3 +1,42 @@
+v0.4.4:
+  sum: c5984d97ed81b8281ab07c2f01fc4f066e4ba299f9810bc2455b59fc9ca57221788effae6fa0d48a54c7c818a55ca4fbd8223c45f0e4d6419c16ad97a3d39223
+  date: 2024-08-03 08:46:03+0000
+  change:
+    grep|rg|find:
+      update:
+        - cn: 新增 `--fzfapp` 子命令。该命令借助 fzf 为用户提供了一种交互使用 grep/rg/find 命令的方法。
+          en: Added the `--fzfapp` subcommand. This command uses fzf to provide an interactive way for users to use grep/rg/find commands.
+    pkg:
+      update:
+        - cn: 关于 `pkg` 项目的补全项增加了描述字段，以更友好地展示信息。
+          en: Added a description field to the completion items of the `pkg` project for more user-friendly display.
+    chat:
+      update:
+        - cn: 在 `repl` 交互式聊天模式下，改为使用 `fzf` 作为单行编辑器（支持历史记录），提高交互友好性。目前该功能处于 Beta 阶段。
+          en: In the `repl` interactive chat mode, switched to using `fzf` as the single-line editor with history support, enhancing user interaction. This feature is currently in the Beta stage.
+    openai|lms:
+      bugfix:
+        - cn: 修复了 `openai` 和 `lms` 响应数据的第一个令牌丢失的问题 [x-cmd/x-cmd/issues/42](https://github.com/x-cmd/x-cmd/issues/42#issuecomment-2257255426)。
+          en: Fixed the issue where the first token was missing in the response data from `openai` and `lms` [x-cmd/x-cmd/issues/42](https://github.com/x-cmd/x-cmd/issues/42#issuecomment-2257255426).
+    sd:
+      update:
+        - cn: 新增 sd 模块。该模块主要通过 fzf 以交互方式预览文本内容的更改，使用户能够动态查看表达式变更的效果，并展示文本内容中的上下文差异，同时增加了免安装直接使用的功能。
+          en: Added `sd` module. This module primarily utilizes fzf to interactively preview changes in text content, enabling users to dynamically view the effects of expression changes and display contextual differences in the text content. It also adds the functionality of direct use without installation.
+    sed:
+      update:
+        - cn: 新增 `--fzfapp` 子命令。该模块主要通过 fzf 以交互方式预览文本内容的更改，使用户能够动态查看表达式变更的效果，并展示文本内容中的上下文差异。
+          en: Added `--fzfapp` subcommand. This module primarily utilizes fzf to interactively preview changes in text content, enabling users to dynamically view the effects of expression changes and display contextual differences in the text content.
+    jina:
+      update:
+        - cn: |
+            新增 Jina Reranker v2 版本模型（jina-reranker-v2-base-multilingual），该模型是最先进的多语言文档和查询重排器，具有最佳的准确性和速度性能。
+            通过 `x jina reranker model set jina-reranker-v2-base-multilingual` 即可使用该重排器。
+          en: |
+            Introducing the Jina Reranker v2 model (jina-reranker-v2-base-multilingual), a state-of-the-art multilingual document and query reranker with optimal accuracy and speed performance.
+            You can use this reranker by running `x jina reranker model set jina-reranker-v2-base-multilingual`.
+  blog: null
+  alpha: true
+  beta: true
 v0.4.3:
   sum: 6a6a921e38877f489e008fe3b34ae6448e9b5dab60bcbae4868164aafeee4fd76a4b8af901497ae9a1d9324e0704635a9f81de33d1be7bdf025cd16272032cf9
   date: 2024-07-29 12:19:11+0000
@@ -15,8 +54,6 @@ v0.4.3:
         - cn: '`x man` 使用 fzf 列出当前系统上所有的 man 文档，为用户提供快速查找和预览 man 文档的方法，以及 man 文档的颜色高亮。'
           en: '`x man` uses fzf to list all man pages on the current system, providing users with a quick way to find and preview man documents, as well as color highlighting for man documents.'
   blog: /blog/240729
-  alpha: true
-  beta: true
   latest: true
 v0.4.2:
   sum: dc722741c1d3fee6019067c9c660734dc0794ec3edcf901d5167bf17de27308649bf63c6a1a2a6039b5a0bc50d54094409349110a78936b5b32920a74a611623
