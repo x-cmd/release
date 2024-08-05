@@ -24,7 +24,7 @@ v0.4.4:
           en: Added `sd` module. This module primarily utilizes fzf to interactively preview changes in text content, enabling users to dynamically view the effects of expression changes and display contextual differences in the text content. It also adds the functionality of direct use without installation.
     sed:
       update:
-        - cn: 新增 `--fzfapp` 子命令。该模块主要通过 fzf 以交互方式预览文本内容的更改，使用户能够动态查看表达式变更的效果，并展示文本内容中的上下文差异。
+        - cn: 新增 `--fzfapp` 子命令。该命令主要通过 fzf 以交互方式预览文本内容的更改，使用户能够动态查看表达式变更的效果，并展示文本内容中的上下文差异。
           en: Added `--fzfapp` subcommand. This module primarily utilizes fzf to interactively preview changes in text content, enabling users to dynamically view the effects of expression changes and display contextual differences in the text content.
     jina:
       update:
@@ -34,9 +34,10 @@ v0.4.4:
           en: |
             Introducing the Jina Reranker v2 model (jina-reranker-v2-base-multilingual), a state-of-the-art multilingual document and query reranker with optimal accuracy and speed performance.
             You can use this reranker by running `x jina reranker model set jina-reranker-v2-base-multilingual`.
-  blog: null
+  blog: /blog/240805
   alpha: true
   beta: true
+  latest: true
 v0.4.3:
   sum: 6a6a921e38877f489e008fe3b34ae6448e9b5dab60bcbae4868164aafeee4fd76a4b8af901497ae9a1d9324e0704635a9f81de33d1be7bdf025cd16272032cf9
   date: 2024-07-29 12:19:11+0000
@@ -54,7 +55,6 @@ v0.4.3:
         - cn: '`x man` 使用 fzf 列出当前系统上所有的 man 文档，为用户提供快速查找和预览 man 文档的方法，以及 man 文档的颜色高亮。'
           en: '`x man` uses fzf to list all man pages on the current system, providing users with a quick way to find and preview man documents, as well as color highlighting for man documents.'
   blog: /blog/240729
-  latest: true
 v0.4.2:
   sum: dc722741c1d3fee6019067c9c660734dc0794ec3edcf901d5167bf17de27308649bf63c6a1a2a6039b5a0bc50d54094409349110a78936b5b32920a74a611623
   date: 2024-07-23 02:57:29+0000
