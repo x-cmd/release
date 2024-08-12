@@ -16,11 +16,12 @@ v0.4.5:
           en: Added `ui rotate` animation when calculating directory hash values to display the process in real time.
     gtb:
       update:
-        - cn: 调整了 `fzf` 预览窗口中书籍文本的显示效果，通过识别文本中的特殊字符、作者名称、章节标题等信息，为其赋予不同的颜色。
-          en: Adjusted the display of book text in the `fzf` preview window by recognizing special characters, author names, chapter titles, and other information, applying different colors to enhance readability.
+        - cn: 调整了 `fzf` 预览窗口中书籍文本的显示效果，通过识别文本中的特殊字符、日期、章节标题等信息，为其赋予不同的颜色。
+          en: Adjusted the display of book text in the `fzf` preview window by recognizing special characters, date, chapter titles, and other information, applying different colors to enhance readability.
   blog: null
   alpha: true
   beta: true
+  latest: true
 v0.4.4:
   sum: 06c7f77e063943a430d0da429ac7a842a8ee17cb86132188a2f87c022946a3d89f98a5d33f22ad715198b9ddfb0099710492aa3ed1dc3baae76426d02cb9c6cd
   date: 2024-08-05 07:14:56+0000
@@ -58,7 +59,6 @@ v0.4.4:
             Introducing the Jina Reranker v2 model (jina-reranker-v2-base-multilingual), a state-of-the-art multilingual document and query reranker with optimal accuracy and speed performance.
             You can use this reranker by running `x jina reranker model set jina-reranker-v2-base-multilingual`.
   blog: /blog/240805
-  latest: true
 v0.4.3:
   sum: 6a6a921e38877f489e008fe3b34ae6448e9b5dab60bcbae4868164aafeee4fd76a4b8af901497ae9a1d9324e0704635a9f81de33d1be7bdf025cd16272032cf9
   date: 2024-07-29 12:19:11+0000
