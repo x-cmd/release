@@ -18,7 +18,7 @@ v0.4.5:
       update:
         - cn: 调整了 `fzf` 预览窗口中书籍文本的显示效果，通过识别文本中的特殊字符、日期、章节标题等信息，为其赋予不同的颜色。
           en: Adjusted the display of book text in the `fzf` preview window by recognizing special characters, date, chapter titles, and other information, applying different colors to enhance readability.
-  blog: null
+  blog: /blog/240812
   alpha: true
   beta: true
   latest: true
