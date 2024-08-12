@@ -1,3 +1,11 @@
+v0.4.6:
+  sum: c81efabfc32206a5da1e7ad8e3aa7504e956d352b788c929c98e15b5c5acaf9add86b2afa3ea80347388cdd60f3f22bcab577fb90dc20832a2b6ea2a1476db87
+  date: 2024-08-12 15:20:24+0000
+  change: null
+  blog: null
+  alpha: true
+  beta: true
+  latest: true
 v0.4.5:
   sum: 16ea2b60f54c633341889513eb1ec87f317320e9ba6cd267df48b6361cb5e9f1e31a21845b940cd52fe05a67c3b839b580029746033718b4d860d8dd288a9288
   date: 2024-08-09 12:21:42+0000
@@ -19,9 +27,6 @@ v0.4.5:
         - cn: 调整了 `fzf` 预览窗口中书籍文本的显示效果，通过识别文本中的特殊字符、日期、章节标题等信息，为其赋予不同的颜色。
           en: Adjusted the display of book text in the `fzf` preview window by recognizing special characters, date, chapter titles, and other information, applying different colors to enhance readability.
   blog: /blog/240812
-  alpha: true
-  beta: true
-  latest: true
 v0.4.4:
   sum: 06c7f77e063943a430d0da429ac7a842a8ee17cb86132188a2f87c022946a3d89f98a5d33f22ad715198b9ddfb0099710492aa3ed1dc3baae76426d02cb9c6cd
   date: 2024-08-05 07:14:56+0000
