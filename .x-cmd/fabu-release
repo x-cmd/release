@@ -9,8 +9,11 @@
     ___x_cmd_cmds_mkdir -p "$distfolder" "$sumfolder"
 
     # x gita git@github.com:x-cmd/x-cmd-version release "$distfolder" "$sumfolder"
+    x rmrf x-cmd-version
+    x:info "正在下载 x-cmd/x-cmd-version"
+    command git clone git@github.com:x-cmd/x-cmd-version    || return
+
     (
-        command git clone git@github.com:x-cmd/x-cmd-version
         ___x_cmd_cmds_cd x-cmd-version || {
             x:error "Cannot ___x_cmd_cmds_cd to release"
             exit 1
@@ -38,5 +41,13 @@
         command git push git@gitcode.net:x-cmd/release main
 
         x gh action workflow run -r x-cmd/xx oss-sync.yml
+    ) || return
+
+    (
+        ___x_cmd_cmds_cd x-cmd-version || {
+            x:error "Cannnot cd to x-cmd/x-cmd-version"
+            exit 1
+        }
+        x ws index pkg
     )
 )
