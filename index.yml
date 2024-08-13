@@ -1,8 +1,20 @@
 v0.4.6:
   sum: c81efabfc32206a5da1e7ad8e3aa7504e956d352b788c929c98e15b5c5acaf9add86b2afa3ea80347388cdd60f3f22bcab577fb90dc20832a2b6ea2a1476db87
   date: 2024-08-12 15:20:24+0000
-  change: null
-  blog: null
+  change:
+    cpe:
+      update:
+        - cn: |
+            新增 `cpe` 模块，支持使用软件名称或标题检索其 CPE 标识符。该模块提供 `x cpe la` 命令，用于列出所有已被识别/收录的软件和软件 CPE 标识符。
+            为用户能够快速地从庞杂的 CPE 数据库中获取所需信息，我们尝试用 fzf 为 `x cpe la` 命令提供了交互式 app，用户通过它可以很方便地搜索到与关键词匹配的软件和相关信息。
+          en: |
+            We've added a new `cpe` module that allows you to search for CPE identifiers using software names or titles. This module provides the `x cpe la` command, which lists all identified and collected software and their associated CPE identifiers.
+            To help users quickly find the information they need from the massive CPE database, we've built an interactive app using fzf for the `x cpe la` command. With this app, users can easily search for software and related information that matches their keywords.
+    cd:
+      bugfix:
+        - cn: 修复 0.4.5 版本导致 x uz 解压文件后默认进入指定文件夹目录问题。
+          en: The issue caused by version 0.4.5, where x uz decompresses files and automatically enters the specified folder directory, has been fixed.
+  blog: /blog/240813
   alpha: true
   beta: true
   latest: true
