@@ -5,24 +5,48 @@ v0.4.7:
     colr:
       update:
         - cn: |
-            新增 `x colr fz` 命令，`x colr` 命令在没有参数的情况下，默认调用 `x colr fz` 命令。
-            它采用 fzf 界面作为交互框架，用于帮助用户在 256-color 中快速查找颜色的编码和对应的近似颜色。
+            新增 `x colr fz` 命令， 它采用 fzf 界面作为交互框架，用于帮助用户在 256-color 中快速查找颜色的编码和对应的近似颜色。
+            详情: [colr 演示](https://x-cmd.com/mod/colr)， [colr `fz` 文档](https://www.x-cmd.com/mod/colr#x-colr-fz)
           en: |
-            A new command, `x colr fz`, has been added.  When the `x colr` command is used without any parameters, it will now default to calling the `x colr fz` command.
-            It utilizes the fzf interface as its interactive framework, assisting users in swiftly locating color codes and their corresponding approximate colors within a palette of 256-color.
+            A new command, `x colr fz`, has been added. It utilizes the fzf interface as its interactive framework, assisting users in swiftly locating color codes and their corresponding approximate colors within a palette of 256-color.
+            For more details: [colr Demo](https://x-cmd.com/mod/colr), [colr `fz` manual](https://www.x-cmd.com/mod/colr#x-colr-fz)
+        - cn: |
+            `x colr` 命令在没有参数的情况下，默认调用 `x colr fz` 命令。
+          en: When the `x colr` command is used without any parameters, it will now default to calling the `x colr fz` command.
     scoop:
       update:
         - cn: 结合 `fzf` 优化了 `scoop` 的显示效果，通过 `fzf` 进行交互式预览，方便用户查看软件包的详细信息。
-          en: Integrated `fzf` to enhance the display of `scoop`, allowing for interactive previews that make it easier for users to view detailed package information.行交互式预览，方便用户查看软件包的详细信息。
+          en: Integrated `fzf` to enhance the display of `scoop`, allowing for interactive previews that make it easier for users to view detailed package information.
         - cn: 更改并优化了 `ls`、`la`、`search` 子命令的功能，新增了 `qs` 子命令，使用 `scoop-search` 快速搜索可用的软件包。
           en: Modified and optimized the functionalities of the `ls`, `la`, and `search` subcommands, and added the `qs` subcommand for quick searching of available packages using `scoop-search`.
-    hok:
+    htop:
       update:
-        - cn: 新增了 `hok` 模块（`Hok` 是一个用 Rust 编写的 Scoop 命令行界面实现），并结合 `fzf` 优化了 `hok` 的交互体验。
-          en: Added the `hok` module (Hok is a Rust-based command-line interface for Scoop) and integrated `fzf` to enhance the interactive experience of `hok`.
+        - cn: |
+            新增了 `htop` 模块。该模块主要是为了帮助用户在没有 htop 的环境中，使用 pixi 快速安装并使用 htop（暂不支持 Windows）。
+            详情: [htop 演示](https://x-cmd.com/mod/htop)
+          en: |
+            Added `htop` module. This module is mainly designed to help users quickly install and use htop using pixi in an environment without htop (Windows is not supported yet).
+            For more details: [htop Demo](https://x-cmd.com/mod/htop)
+    btop:
+      update:
+        - cn: |
+            新增了 `btop` 模块。该模块主要是为了帮助用户在没有 btop 的环境中，使用 pkgx（Linux|macOS）/ scoop（Windows）安装并使用 btop。
+            详情: [btop 演示](https://x-cmd.com/mod/btop)
+          en: |
+            Added `btop` module. This module is designed to help users install and use btop in an environment without btop, using pkgx(Linux|macOS) / scoop(Windows).
+            For more details: [btop Demo](https://x-cmd.com/mod/btop)
+    ncdu:
+      update:
+        - cn: |
+            新增了 `ncdu` 模块（ncdu 是一个磁盘使用量分析器）。在确定当前环境中没有 ncdu 命令的情况下，`x ncdu` 会通过 x-cmd pkg 体系以一种不影响用户环境的方式下载安装 ncdu。
+            详情: [ncdu 演示](https://x-cmd.com/mod/ncdu)
+          en: |
+            Added `ncdu` module (ncdu is a disk usage analyzer). In the absence of the ncdu command in the current environment, `x ncdu` will download and install ncdu via the x-cmd pkg system in a way that does not affect the user environment.
+            For more details: [ncdu Demo](https://x-cmd.com/mod/ncdu)
   blog: null
   alpha: true
   beta: true
+  latest: true
 v0.4.6:
   sum: c81efabfc32206a5da1e7ad8e3aa7504e956d352b788c929c98e15b5c5acaf9add86b2afa3ea80347388cdd60f3f22bcab577fb90dc20832a2b6ea2a1476db87
   date: 2024-08-12 15:20:24+0000
@@ -40,7 +64,6 @@ v0.4.6:
         - cn: 修复 0.4.5 版本导致 x uz 解压文件后默认进入指定文件夹目录问题。
           en: The issue caused by version 0.4.5, where x uz decompresses files and automatically enters the specified folder directory, has been fixed.
   blog: /blog/240813
-  latest: true
 v0.4.5:
   sum: 16ea2b60f54c633341889513eb1ec87f317320e9ba6cd267df48b6361cb5e9f1e31a21845b940cd52fe05a67c3b839b580029746033718b4d860d8dd288a9288
   date: 2024-08-09 12:21:42+0000
