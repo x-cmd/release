@@ -43,7 +43,7 @@ v0.4.7:
           en: |
             Added `ncdu` module (ncdu is a disk usage analyzer). In the absence of the ncdu command in the current environment, `x ncdu` will download and install ncdu via the x-cmd pkg system in a way that does not affect the user environment.
             For more details: [ncdu Demo](https://x-cmd.com/mod/ncdu)
-  blog: null
+  blog: /blog/240822
   name: v0.4.7 - btop htop scoop colr
   alpha: true
   beta: true
