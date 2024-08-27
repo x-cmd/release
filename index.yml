@@ -22,6 +22,30 @@ v0.4.8:
             `x brew` 命令在没有参数的情况下，默认调用 `x brew fz` 命令。
           en: |
             When you run the command `x brew` without any arguments, it automatically executes the command `x brew fz`
+    ff:
+      update:
+        - cn: |
+            新增了 `ff` 模块。该模块优先使用环境中的 ffmpeg。
+            若当前环境没有安装 ffmpeg ，模块将使用 pixi 模块来快速安装，并以不影响当前环境的方式调用 ffmpeg、ffplay和ffprobe。
+            详情: [ff 演示](https://x-cmd.com/mod/ff)
+          en: |
+            Added `ff` module. This module prioritizes the use of the ffmpeg in the environment.
+            If the current environment does not have the ffmpeg, the module will use the pixi module to quickly install and call ffmpeg, ffplay, and ffprobe in a way that does not affect the current environment
+            For more details: [ff Demo](https://x-cmd.com/mod/ff)
+    ffmpeg:
+      update:
+        - cn: |
+            新增了 `ffmpeg` 模块。
+            - 用户可以通过 merge 命令快速将字幕嵌入到视频中。
+            - 优先使用环境中的 ffmpeg 命令，若当前环境没有，则通过 pixi 模块安装并以不影响当前环境的方式调用 ffmpeg。
+            - 增加搜索 ffmpeg.org 官网功能。
+            详情: [ffmpeg 演示](https://x-cmd.com/mod/ffmpeg)
+          en: |
+            Added `ffmpeg` module.
+            Users can quickly embed subtitles into videos via the merge command.
+            Priority is given to the ffmpeg command in the environment, and if it is not available in the current environment, it is installed through the pixi module and invoked in a way that does not affect the current environment.
+            Added the function of searching ffmpeg.org official website.
+            For more details: [ffmpeg Demo](https://x-cmd.com/mod/ffmpeg)
   blog: null
   name: v0.4.8 - apt brew
   alpha: true
