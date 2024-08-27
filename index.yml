@@ -1,3 +1,31 @@
+v0.4.8:
+  sum: ef541449e7f1dc7e65bdb0be06df4411167d3a9a78fa9dfdb200b0bfc4ef9d0b0a00637948c8826f857d36af3e5134e1f229f608f1b13b24425730a2ccfb20f1
+  date: 2024-08-27 06:26:06+0000
+  change:
+    apt:
+      update:
+        - cn: |
+            新增 `x apt fz` 命令，它采用 fzf 作为交互框架，能帮用户从所有可安装软件中快速查找到所需的软件和预览软件的基本信息。
+            详情: [apt 演示](https://x-cmd.com/mod/apt)， [apt `fz` 文档](https://www.x-cmd.com/mod/apt#x-apt-fz)
+          en: |
+            A new command, `x apt fz`, has been added. It leverages fzf as its interactive framework, enabling users to swiftly locate desired software from the vast pool of installable applications and preview their basic information.
+            For more details: [apt Demo](https://x-cmd.com/mod/apt), [apt `fz` manual](https://www.x-cmd.com/mod/apt#x-apt-fz)
+    brew:
+      update:
+        - cn: |
+            新增 `x brew fz` 命令，它采用 fzf 界面作为交互框架，能帮用户从所有可安装软件中快速查找到所需的软件和预览软件的基本信息。
+            详情: [brew 演示](https://x-cmd.com/mod/brew)， [brew `fz` 文档](https://www.x-cmd.com/mod/brew#x-brew-fz)
+          en: |
+            A new command, `x brew fz`, has been added. It leverages fzf as its interactive framework, enabling users to swiftly locate desired software from the vast pool of installable applications and preview their basic information.
+            For more details: [brew Demo](https://x-cmd.com/mod/brew), [brew `fz` manual](https://www.x-cmd.com/mod/brew#x-brew-fz)
+        - cn: |
+            `x brew` 命令在没有参数的情况下，默认调用 `x brew fz` 命令。
+          en: |
+            When you run the command `x brew` without any arguments, it automatically executes the command `x brew fz`
+  blog: null
+  name: v0.4.8 - apt brew
+  alpha: true
+  beta: true
 v0.4.7:
   sum: 90b81dd5f173404e5588f1e4dc3e0c922dfa2b387dfa0e128842fa9ba4d4b6ea9c45e07f24c3265bb3998ba5426d2adf6f33bf55c5abd6e588c003d7c0683164
   date: 2024-08-20 00:07:02+0000
@@ -45,8 +73,6 @@ v0.4.7:
             For more details: [ncdu Demo](https://x-cmd.com/mod/ncdu)
   blog: /blog/240822
   name: v0.4.7 - btop htop scoop colr
-  alpha: true
-  beta: true
   latest: true
 v0.4.6:
   sum: c81efabfc32206a5da1e7ad8e3aa7504e956d352b788c929c98e15b5c5acaf9add86b2afa3ea80347388cdd60f3f22bcab577fb90dc20832a2b6ea2a1476db87
