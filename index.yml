@@ -1,3 +1,48 @@
+v0.4.9:
+  sum: df939bc2198b5d667fde7eae2791f896689a54d658fa6665feb20a5db9053337bea963039589362f6f8d5641057ee249d87c30e8d85b4eaeba169450d50c73b0
+  date: 2024-09-02 13:12:32+0000
+  change:
+    gm:
+      update:
+        - cn: |
+            新增了 `gm` 模块。该模块优先使用环境中的 GraphicsMagick。
+            若当前环境没有安装 GraphicsMagick，将自动下载并以不影响当前环境的方式调用 GraphicsMagick。
+          en: |
+            Added `gm` module. This module prioritizes the use of the GraphicsMagick in the environment.
+            If the current environment does not have the install GraphicsMagick, the module will automatically downloaded and invoke GraphicsMagick in a way that does not affect the current environment.
+    pandoc:
+      update:
+        - cn: |
+            新增了 `pandoc` 模块。
+            该模块优先使用当前环境中的 pandoc 命令，但在当前环境中没有 pandoc 命令的情况下，x pandoc 会通过 x-cmd pkg ，自动下载并以不影响当前环境的方式调用 pandoc。
+          en: |
+            Added `pandoc` module.
+            This module prioritizes using the pandoc command in the current environment.
+            However, if no pandoc command is found in the current environment, x pandoc will automatically download and invoke pandoc through x-cmd pkg in a way that doesn't affect the current environment.
+    install:
+      update:
+        - cn: |
+            新增 `x install --fzf` 命令，它采用 fzf 界面作为交互框架，能帮用户从所有可安装软件中快速查找到所需的软件和预览软件的基本信息。详情: [install 演示](https://www.x-cmd.com/mod/install)
+          en: |
+            A new command, `x install --fzf`, has been added. It leverages fzf as its interactive framework, enabling users to swiftly locate desired software from the vast pool of installable applications and preview their basic information.For more details: [install Demo](https://www.x-cmd.com/mod/install)
+        - cn: |
+            `x install` 命令在没有参数的情况下，默认调用 `x install --fzf` 命令。
+          en: |
+            When you run the command `x install` without any arguments, it automatically executes the command `x install --fzf`
+    tldr:
+      update:
+        - cn: |
+            新增 `x tldr --fzf` 命令，它采用 fzf 界面作为交互框架，能帮用户搜索并查看各种命令的 tldr。详情: [tldr 演示](https://www.x-cmd.com/mod/tldr)
+          en: |
+            Introducing the new `x tldr --fzf` command! This command uses the fzf interface for interaction, allowing you to search and view tldr entries for various commands. For a detailed demonstration, check out the [tldr demo](https://www.x-cmd.com/mod/tldr).
+    nu:
+      bugfix:
+        - cn: 修复了 nushell v0.97.1 版本注入 x-cmd 出现异常报错的问题 [x-cmd/x-cmd/issues/73](https://github.com/x-cmd/x-cmd/issues/73)。
+          en: The issue where an error occurred when injecting x-cmd in the nushell v0.97.1 version has been fixed [x-cmd/x-cmd/issues/73](https://github.com/x-cmd/x-cmd/issues/73).
+  blog: null
+  name: v0.4.9
+  alpha: true
+  beta: true
 v0.4.8:
   sum: ef541449e7f1dc7e65bdb0be06df4411167d3a9a78fa9dfdb200b0bfc4ef9d0b0a00637948c8826f857d36af3e5134e1f229f608f1b13b24425730a2ccfb20f1
   date: 2024-08-27 06:26:06+0000
@@ -29,11 +74,9 @@ v0.4.8:
             若当前环境没有安装 ffmpeg 命令，将使用 pixi 模块来快速安装，并以不影响当前环境的方式调用 ffmpeg。
           en: |
             Added `ffmpeg` module. This module prioritizes the use of the ffmpeg in the environment.
-            If the current environment does not have the ffmpeg command, the module will use the pixi module to quickly install and call ffmpeg in a way that does not affect the current environment.
+            If the current environment does not have the ffmpeg command, the module will use the pixi module to quickly install and invoke ffmpeg in a way that does not affect the current environment.
   blog: /blog/240828
   name: v0.4.8 - apt brew ffmpeg
-  alpha: true
-  beta: true
   latest: true
 v0.4.7:
   sum: 90b81dd5f173404e5588f1e4dc3e0c922dfa2b387dfa0e128842fa9ba4d4b6ea9c45e07f24c3265bb3998ba5426d2adf6f33bf55c5abd6e588c003d7c0683164
