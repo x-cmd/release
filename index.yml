@@ -39,10 +39,11 @@ v0.4.9:
       bugfix:
         - cn: 修复了 nushell v0.97.1 版本注入 x-cmd 出现异常报错的问题 [x-cmd/x-cmd/issues/73](https://github.com/x-cmd/x-cmd/issues/73)。
           en: The issue where an error occurred when injecting x-cmd in the nushell v0.97.1 version has been fixed [x-cmd/x-cmd/issues/73](https://github.com/x-cmd/x-cmd/issues/73).
-  blog: null
+  blog: /blog/240904
   name: v0.4.9
   alpha: true
   beta: true
+  latest: true
 v0.4.8:
   sum: ef541449e7f1dc7e65bdb0be06df4411167d3a9a78fa9dfdb200b0bfc4ef9d0b0a00637948c8826f857d36af3e5134e1f229f608f1b13b24425730a2ccfb20f1
   date: 2024-08-27 06:26:06+0000
@@ -77,7 +78,6 @@ v0.4.8:
             If the current environment does not have the ffmpeg command, the module will use the pixi module to quickly install and invoke ffmpeg in a way that does not affect the current environment.
   blog: /blog/240828
   name: v0.4.8 - apt brew ffmpeg
-  latest: true
 v0.4.7:
   sum: 90b81dd5f173404e5588f1e4dc3e0c922dfa2b387dfa0e128842fa9ba4d4b6ea9c45e07f24c3265bb3998ba5426d2adf6f33bf55c5abd6e588c003d7c0683164
   date: 2024-08-20 00:07:02+0000
