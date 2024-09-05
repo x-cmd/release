@@ -5,18 +5,18 @@ v0.4.9:
     gm:
       update:
         - cn: |
-            新增了 `gm` 模块。该模块优先使用环境中的 GraphicsMagick。
+            新增了 `gm` 模块（gm 是 GraphicsMagick 的命令，用于图像处理）。该模块优先使用环境中的 GraphicsMagick。
             若当前环境没有安装 GraphicsMagick，将自动下载并以不影响当前环境的方式调用 GraphicsMagick。
           en: |
-            Added `gm` module. This module prioritizes the use of the GraphicsMagick in the environment.
+            Added `gm` module(gm is a command of GraphicsMagick and is used for image processing). This module prioritizes the use of the GraphicsMagick in the environment.
             If the current environment does not have the install GraphicsMagick, the module will automatically downloaded and invoke GraphicsMagick in a way that does not affect the current environment.
     pandoc:
       update:
         - cn: |
-            新增了 `pandoc` 模块。
+            新增了 `pandoc` 模块（pandoc 是一个开源的文档转换工具）。
             该模块优先使用当前环境中的 pandoc 命令，但在当前环境中没有 pandoc 命令的情况下，x pandoc 会通过 x-cmd pkg ，自动下载并以不影响当前环境的方式调用 pandoc。
           en: |
-            Added `pandoc` module.
+            Added `pandoc` module(pandoc is an open-source document conversion tool).
             This module prioritizes using the pandoc command in the current environment.
             However, if no pandoc command is found in the current environment, x pandoc will automatically download and invoke pandoc through x-cmd pkg in a way that doesn't affect the current environment.
     install:
