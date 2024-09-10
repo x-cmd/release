@@ -1,3 +1,51 @@
+v0.4.10:
+  sum: c7d765961ce18be028f3095c5df96b294323f46b2fe58001a4722cd418f8baddbc5ef0a10e553cbfd7815ff99ab5fdeb052f29552998d64373144f9d8bfa6c88
+  date: 2024-09-10 11:33:50+0000
+  change:
+    gh:
+      update:
+        - cn: |
+            新增了 `gh model` 功能，用于请求使用 [Github Models](https://docs.github.com/en/github-models) AI。该功能目前处于公开测试阶段，功能和界面可能会有所调整。
+            要请求访问权限，请加入候补名单。详情链接：[https://github.com/marketplace/models/waitlist/join](https://github.com/marketplace/models/waitlist/join)。
+          en: |
+            Added the `gh model` feature for requesting access to [Github Models](https://docs.github.com/en/github-models) AI. This feature is currently in public beta, and functionality may change.
+            To request access, join the waitlist at: [https://github.com/marketplace/models/waitlist/join](https://github.com/marketplace/models/waitlist/join).
+        - cn: 为 `org` 和 `release` 等子命令添加了更多的 TLDR。
+          en: More TLDR were added for subcommands like `org` and `release`.
+    brew:
+      bugfix:
+        - cn: '[issue#74](https://github.com/x-cmd/x-cmd/issues/74) 修复了 `x brew mirror unset` 命令无法恢复 homebrew-core 下载源配置的问题。'
+          en: '[issue#74](https://github.com/x-cmd/x-cmd/issues/74) Fixed the issue where the `x brew mirror unset` command could not restore the homebrew-core download source configuration.'
+      update:
+        - cn: 调整了 `x brew mirror set` 命令的实现方法，改用 [Homebrew 的环境文件](https://docs.brew.sh/Manpage#environment)（$HOMEBREW_PREFIX/etc/homebrew/brew.env）设置下载源。
+          en: Adjusted the implementation of the `x brew mirror set` command, using the [Homebrew environment file](https://docs.brew.sh/Manpage#environment) ($HOMEBREW_PREFIX/etc/homebrew/brew.env) to set the download source.
+    spf:
+      update:
+        - cn: |
+            新增了 `x spf` 模块。它是基于 superfile 并为提升 superfile 使用体验而设计的增强模块。
+            而 [superfile](https://github.com/x-cmd/superfile) 是一款非常漂亮且现代化的终端文件管理器。
+          en: |
+            A new `x spf` module has been added. It's built upon superfile and designed as an enhanced module to improve the user experience of superfile.
+            And [superfile](https://github.com/x-cmd/superfile) is a truly gorgeous and modern terminal file manager.
+    df:
+      bugfix:
+        - cn: 修复了在 MacOS 中使用非系统自带的 `df` 命令时，`x df` 无法启动的问题 [x-cmd/x-cmd/issues/78](https://github.com/x-cmd/x-cmd/issues/78)。
+          en: Fixed an issue where `x df` would not start when using non-system-included `df` commands in MacOS [x-cmd/x-cmd/issues/78](https://github.com/x-cmd/x-cmd/issues/78).
+    gt|cb:
+      update:
+        - cn: 为 `org` 和 `repo release` 等子命令添加了更多的 TLDR。
+          en: More TLDR were added for subcommands like `org` and `repo release`.
+    advise:
+      bugfix:
+        - cn: 修复了在 `zsh` 环境中进行命令补全时与用户自定义的 `compadd` 函数发生冲突的问题。[discussions#76](https://github.com/x-cmd/x-cmd/discussions/76)
+          en: Fixed the issue where command completion in the `zsh` environment conflicted with user-defined `compadd` functions. [discussions#76](https://github.com/x-cmd/x-cmd/discussions/76)
+      update:
+        - cn: 增加了对必要命令的判断逻辑，确保依赖环境的正确性。
+          en: Added logic to check for required commands, ensuring the correctness of the dependency environment.
+  blog: null
+  name: v0.4.10
+  alpha: true
+  beta: true
 v0.4.9:
   sum: df939bc2198b5d667fde7eae2791f896689a54d658fa6665feb20a5db9053337bea963039589362f6f8d5641057ee249d87c30e8d85b4eaeba169450d50c73b0
   date: 2024-09-02 13:12:32+0000
@@ -41,8 +89,6 @@ v0.4.9:
           en: The issue where an error occurred when injecting x-cmd in the nushell v0.97.1 version has been fixed [x-cmd/x-cmd/issues/73](https://github.com/x-cmd/x-cmd/issues/73).
   blog: /blog/240904
   name: v0.4.9
-  alpha: true
-  beta: true
   latest: true
 v0.4.8:
   sum: ef541449e7f1dc7e65bdb0be06df4411167d3a9a78fa9dfdb200b0bfc4ef9d0b0a00637948c8826f857d36af3e5134e1f229f608f1b13b24425730a2ccfb20f1
