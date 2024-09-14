@@ -1,3 +1,59 @@
+v0.4.11:
+  sum: 914fcf6e5a8a307e43747c0aaa16e59b51275c1ed47281324439d8d7178d29ff6b6a1e1cf16005fe61296d01fbc00656645624d6b6da1f045e57e31ab44705fb
+  date: 2024-09-14 08:06:20+0000
+  change:
+    mac:
+      update:
+        - cn: 新增 mac 模块，用于集成 MacOS 用户需要的各种实用功能，以便用户能远程连接或者编写自动化脚本管理 MacOS 系统。
+          en: We've added a new Mac module designed to integrate a variety of useful features for MacOS users.  This module will allow users to remotely connect to and automate their MacOS systems.
+        - cn: mac 模块当前提供查看系统信息、系统内存使用情况、查看电池信息、桌面锁屏、音量管理等 6 项功能，更多功能还在开发测试阶段。
+          en: The Mac module currently offers six features, including viewing system information, system memory usage, battery information, desktop locking, and volume management. More features are still under development and testing.
+    openai:
+      update:
+        - cn: |
+            新增了对 OpenAI `o1` 系列模型的支持，该系列模型在复杂推理、数学和代码问题上有显著提升。
+            用户可以通过 `@gpto1` 和 `@gpto1m` 分别直接请求使用 `o1-preview` 和 `o1-mini` AI 模型。
+            不过，目前 API 仅限于 OpenAI Tier 5 级别的用户使用。
+
+            示例：
+            ```sh
+            @gpto1 "how many r’s in strawberry?"
+            ```
+          en: |
+            Added support for OpenAI's `o1` series models, which show significant improvements in complex reasoning, math, and coding problems.
+            Users can request the `o1-preview` and `o1-mini` AI models via `@gpto1` and `@gpto1m`, respectively.
+            However, the API is currently available only to OpenAI Tier 5 users.
+
+            Example:
+            ```sh
+            @gpto1 "how many r’s in strawberry?"
+            ```
+    gh:
+      update:
+        - cn: |
+            新增了 `@gh` alias，用户可以通过 `@gh` 直接请求使用 GitHub Models。
+            该功能目前处于公开测试阶段，功能可能会有所调整。要请求访问权限，请加入候补名单。详情链接：[https://github.com/marketplace/models/waitlist/join](https://github.com/marketplace/models/waitlist/join)。
+
+            示例：
+            ```sh
+            @gh "What is the history of the Great Wall?"
+            ```
+          en: |
+            Added the `@gh` alias, allowing users to directly request GitHub Models using `@gh`.
+            This feature is currently in public beta, and functionality may change. To request access, join the waitlist at: [https://github.com/marketplace/models/waitlist/join](https://github.com/marketplace/models/waitlist/join).
+
+            Example:
+            ```sh
+            @gh "What is the history of the Great Wall?"
+            ```
+    jina:
+      update:
+        - cn: 为 `embed`、`reranker` 和 reader 等子命令添加了更多的 TLDR。
+          en: More TLDR were added for subcommands like `embed`, `reranker` and `reader`.
+  blog: null
+  name: v0.4.11
+  alpha: true
+  beta: true
 v0.4.10:
   sum: c7d765961ce18be028f3095c5df96b294323f46b2fe58001a4722cd418f8baddbc5ef0a10e553cbfd7815ff99ab5fdeb052f29552998d64373144f9d8bfa6c88
   date: 2024-09-10 11:33:50+0000
@@ -42,8 +98,6 @@ v0.4.10:
           en: Added logic to check for required commands, ensuring the correctness of the dependency environment.
   blog: /blog/240912
   name: v0.4.10
-  alpha: true
-  beta: true
   latest: true
 v0.4.9:
   sum: df939bc2198b5d667fde7eae2791f896689a54d658fa6665feb20a5db9053337bea963039589362f6f8d5641057ee249d87c30e8d85b4eaeba169450d50c73b0
