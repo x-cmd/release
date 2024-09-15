@@ -54,6 +54,7 @@ v0.4.11:
   name: v0.4.11
   alpha: true
   beta: true
+  latest: true
 v0.4.10:
   sum: c7d765961ce18be028f3095c5df96b294323f46b2fe58001a4722cd418f8baddbc5ef0a10e553cbfd7815ff99ab5fdeb052f29552998d64373144f9d8bfa6c88
   date: 2024-09-10 11:33:50+0000
@@ -98,7 +99,6 @@ v0.4.10:
           en: Added logic to check for required commands, ensuring the correctness of the dependency environment.
   blog: /blog/240912
   name: v0.4.10
-  latest: true
 v0.4.9:
   sum: df939bc2198b5d667fde7eae2791f896689a54d658fa6665feb20a5db9053337bea963039589362f6f8d5641057ee249d87c30e8d85b4eaeba169450d50c73b0
   date: 2024-09-02 13:12:32+0000
