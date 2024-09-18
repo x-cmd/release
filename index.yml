@@ -50,7 +50,7 @@ v0.4.11:
       update:
         - cn: 为 `embed`、`reranker` 和 reader 等子命令添加了更多的 TLDR。
           en: More TLDR were added for subcommands like `embed`, `reranker` and `reader`.
-  blog: null
+  blog: /blog/240916
   name: v0.4.11
   alpha: true
   beta: true
