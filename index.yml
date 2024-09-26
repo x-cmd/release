@@ -1,3 +1,72 @@
+v0.4.12:
+  sum: 31f2820ba09c9ac46bce23581a7770d05e984f6e1d89ddd23e693178c9076b8448f1e16d4564ffa0f31daf730481960ba68b321e8b5021a2d8abd610505538ed
+  date: 2024-09-26 09:54:37+0000
+  change:
+    mac:
+      update:
+        - cn: 新增 `sleep`、`restart`、`logout`、`shutdown` 命令，功能分别为电脑睡眠、重启、注销、关机。
+          en: New commands `sleep,` `restart,` `logout,` and `shutdown` have been added, allowing you to put your computer to sleep, restart it, log out, or shut it down, respectively.
+        - cn: 新增 `wifi` 命令，提供查看 wifi 状态、启用或禁用 wifi、扫描 wifi 接口和可用 wifi、连接指定 wifi 等功能。
+          en: A new `wifi` command has been added, providing functions to view wifi status, enable or disable wifi, scan wifi interfaces and available wifi networks, and connect to a specific wifi network.
+    starship:
+      update:
+        - cn: |
+            新增了 `starship` 模块，这是为 `starship` 设计的增强模块。
+            `starship` 是一个用 Rust 实现的命令行提示工具，适用于任何 shell，具备最小、速度极快且可无限定制的特点！
+            有关入门指南的详细说明，请查看 [https://starship.rs](https://starship.rs) 上的文档。
+
+            示例：
+            ```sh
+            # 全局使用 gruvbox-rainbow 主题
+            x starship use gruvbox-rainbow
+
+            # 取消全局使用的主题
+            x starship unuse
+
+            # 在当前会话尝试使用 pastel-powerline 主题
+            x starship try pastel-powerline
+
+            # 交互式预览 starship 主题
+            x starship fz
+            ```
+          en: |
+            Added the `starship` module, an enhancement module designed for `starship`.
+            `Starship` is a command-line prompt tool implemented in Rust, suitable for any shell, offering minimal, ultra-fast, and infinitely customizable prompts!
+            For detailed setup instructions, please refer to the documentation at [https://starship.rs](https://starship.rs).
+
+            Example:
+            ```sh
+            # Use the gruvbox-rainbow theme globally
+            x starship use gruvbox-rainbow
+
+            # Cancel the theme that is currently used globally
+            x starship unuse
+
+            # Try to use the pastel-powerline theme in this current Shell
+            x starship try pastel-powerline
+
+            # Interactive preview of starship themes
+            x starship fz
+            ```
+    docker:
+      update:
+        - cn: 新增 'daemon' 命令，该命令通过修改 `/etc/docker/daemon.json` 文件来配置 Docker daemon，为用户配置 docker 镜像源和网络代理提供了一种便捷的方式。
+          en: |
+            A new "daemon" command has been added.
+            which allows you to configure the Docker daemon by modifying the `/etc/docker/daemon.json` file.
+            This provides a convenient way for users to quickly configure docker mirror and network proxy.
+        - cn: 新增 'mirror' 命令，该命令可以设置拉取镜像的默认镜像源，并从该镜像源或者指定镜像源拉取镜像，同时重命名镜像。
+          en: |
+            A new "mirror" command has been added.
+            This command lets you set a default mirror for pull image and pull images from either this default mirror or a specified mirror. Also rename the image.
+    smart:
+      bugfix:
+        - cn: 修复了 `x smart --app` 在 zsh 上无法正确显示的问题 [x-cmd/x-cmd/issues/86](https://github.com/x-cmd/x-cmd/issues/86)。
+          en: The issue where the `x smart --app` command didn't display properly on zsh has been fixed [x-cmd/x-cmd/issues/86](https://github.com/x-cmd/x-cmd/issues/86).
+  blog: null
+  name: v0.4.12
+  alpha: true
+  beta: true
 v0.4.11:
   sum: 914fcf6e5a8a307e43747c0aaa16e59b51275c1ed47281324439d8d7178d29ff6b6a1e1cf16005fe61296d01fbc00656645624d6b6da1f045e57e31ab44705fb
   date: 2024-09-14 08:06:20+0000
@@ -52,8 +121,6 @@ v0.4.11:
           en: More TLDR were added for subcommands like `embed`, `reranker` and `reader`.
   blog: /blog/240916
   name: v0.4.11
-  alpha: true
-  beta: true
   latest: true
 v0.4.10:
   sum: c7d765961ce18be028f3095c5df96b294323f46b2fe58001a4722cd418f8baddbc5ef0a10e553cbfd7815ff99ab5fdeb052f29552998d64373144f9d8bfa6c88
