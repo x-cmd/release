@@ -1,13 +1,59 @@
 v0.4.12:
-  sum: 31f2820ba09c9ac46bce23581a7770d05e984f6e1d89ddd23e693178c9076b8448f1e16d4564ffa0f31daf730481960ba68b321e8b5021a2d8abd610505538ed
-  date: 2024-09-26 09:54:37+0000
+  sum: a107f3bc51a9cc470bcb9c5d8d61a6d43c3abdd1330f595e42902d2e0df938f83a7970d4dee6e7728326d25b7712f64dddfb86de5e327696137cd377efc596c5
+  date: 2024-10-17 12:12:10+0000
   change:
     mac:
       update:
-        - cn: 新增 `sleep`、`restart`、`logout`、`shutdown` 命令，功能分别为电脑睡眠、重启、注销、关机。
-          en: New commands `sleep,` `restart,` `logout,` and `shutdown` have been added, allowing you to put your computer to sleep, restart it, log out, or shut it down, respectively.
-        - cn: 新增 `wifi` 命令，提供查看 wifi 状态、启用或禁用 wifi、扫描 wifi 接口和可用 wifi、连接指定 wifi 等功能。
-          en: A new `wifi` command has been added, providing functions to view wifi status, enable or disable wifi, scan wifi interfaces and available wifi networks, and connect to a specific wifi network.
+        - cn: |
+            新增 `sleep`、`restart`、`logout`、`shutdown` 命令，功能分别为电脑睡眠、重启、注销、关机。
+
+            示例：
+            ```sh
+            # 进入睡眠模式
+            x mac sleep
+
+            # 重启系统
+            x starship restart
+            ```
+          en: |
+            New commands `sleep,` `restart,` `logout,` and `shutdown` have been added, allowing you to put your computer to sleep, restart it, log out, or shut it down, respectively.
+
+            Example:
+            ```sh
+            # Entering sleep mode
+            x mac sleep
+
+            # Rebooting the system
+            x starship restart
+            ```
+        - cn: |
+            新增 `wifi` 命令，提供查看 wifi 状态、启用或禁用 wifi、扫描 wifi 接口和可用 wifi、连接指定 wifi 等功能。
+
+            示例：
+            ```sh
+            # 查看 wifi 的状态
+            x mac wifi status
+
+            # 启用 wifi
+            x mac wifi enable
+
+            # 连接指定 wifi
+            x mac wifi connect <wifi name> <password>
+            ```
+          en: |
+            A new `wifi` command has been added, providing functions to view wifi status, enable or disable wifi, scan wifi interfaces and available wifi networks, and connect to a specific wifi network.
+
+            Example:
+            ```sh
+            # Check the status of the Wi-Fi
+            x mac wifi status
+
+            # Turn on Wi-Fi
+            x mac wifi enable
+
+            # Connect to the designated Wi-Fi network
+            x mac wifi connect <wifi name> <password>
+            ```
     starship:
       update:
         - cn: |
@@ -48,6 +94,60 @@ v0.4.12:
             # Interactive preview of starship themes
             x starship fz
             ```
+    ohmyposh:
+      update:
+        - cn: |
+            新增了 `ohmyposh` 模块，这是为 `oh-my-posh` 设计的增强模块。
+            `oh-my-posh` 是一个用 Go 实现的跨 Shell 的命令行提示主题引擎，允许在任何地方使用相同的配置，以提供一致的体验。
+            有关入门指南的详细说明，请查看 [https://ohmyposh.dev](https://ohmyposh.dev) 上的文档。
+
+            `ohmyposh` 模块是一个为 oh-my-posh 设计的增强模块，帮助用户下载主题资源包，使主题更改变得更加容易。
+            该模块还包含一个主题预览功能，允许用户在命令行中直接预览不同主题，简化了主题选择和更换的过程。
+
+            示例：
+            ```sh
+            # 全局使用 M365Princess 主题
+            x ohmyposh use M365Princess
+
+            # 取消全局使用的主题
+            x ohmyposh unuse
+
+            # 在当前会话尝试使用 half-life 主题
+            x ohmyposh try half-life
+
+            # 交互式预览 oh-my-posh 主题
+            x ohmyposh fz
+            ```
+          en: |
+            Added the `ohmyposh` module, an enhancement module designed for `oh-my-posh`.
+            `oh-my-posh` is a cross-shell command-line prompt theme engine implemented in Go, allowing users to maintain the same configuration anywhere for a consistent experience.
+            For detailed documentation and getting started guide, please visit https://ohmyposh.dev.
+
+            The `ohmyposh` module is an enhancement designed for oh-my-posh, helping users download theme resource packs, making it easier to change themes.
+            It also includes a theme preview feature, allowing users to directly preview different themes in the command line before applying them, simplifying the theme selection and switching process.
+
+            Example:
+            ```sh
+            # Use the M365Princess theme globally
+            x ohmyposh use M365Princess
+
+            # Cancel the theme that is currently used globally
+            x ohmyposh unuse
+
+            # Try to use the half-life theme in this current Shell
+            x ohmyposh try half-life
+
+            # Interactive preview of oh-my-posh themes
+            x ohmyposh fz
+            ```
+    theme:
+      update:
+        - cn: |
+            更新并调整了 `theme` 模块的部分代码，优化了 `use`、`try`、`unuse`、`untry` 子命令的功能。
+            新增了高级功能 `--vendor` 选项，可以为不同终端指定不同厂商（如 `x-cmd theme`、`starship`、`oh-my-posh`）提供的命令行提示主题。
+          en: |
+            Updated and refactored parts of the `theme` module's code, optimizing the functionalities of the `use`, `try`, `unuse`, and `untry` subcommands.
+            Introduced the advanced `--vendor` option, allowing users to specify different command-line prompt themes from various vendors (`x-cmd theme`, `starship`, `oh-my-posh`) for different terminals.
     docker:
       update:
         - cn: 新增 'daemon' 命令，该命令通过修改 `/etc/docker/daemon.json` 文件来配置 Docker daemon，为用户配置 docker 镜像源和网络代理提供了一种便捷的方式。
@@ -63,8 +163,38 @@ v0.4.12:
       bugfix:
         - cn: 修复了 `x smart --app` 在 zsh 上无法正确显示的问题 [x-cmd/x-cmd/issues/86](https://github.com/x-cmd/x-cmd/issues/86)。
           en: The issue where the `x smart --app` command didn't display properly on zsh has been fixed [x-cmd/x-cmd/issues/86](https://github.com/x-cmd/x-cmd/issues/86).
+    ascii:
+      update:
+        - cn: |
+            新增 'cfont'、'map'、'imagec' 等命令。通过这部分命令可以快速将文字、图片转为 ASCII 艺术字画。其中 `x ascii map` 可以用于在终端查看世界地图。
+            'cfont'、'map' 命令基于 'npm:cfonts'、'npm:mapscii' 两个包进行封装，x-cmd 通过 deno run 来启动它们。
+            x-cmd 通过 deno 参数严格控制二进制运行的权限，常规赋予权限为只能读文件和环境变量读取。其余权限无需要则不予授权，如需要某些特定权限也将控制到最小(例如: map 需要写入的权限，x-cmd 则将写入权限范围控制在 "$HOME/.mapscii" 目录下)，这样可以最大限度保护用户数据安全，防止滥用和木马等行为。
+          en: |
+            Added commands ‘cfont’, ‘map’, and ‘imagec’. These commands enable quick conversion of text and images into ASCII art. The x ascii map command can be used to view a world map in the terminal.
+            The ‘cfont’ and ‘map’ commands are wrapped around the ‘npm:cfonts’ and ‘npm:mapscii’ packages, with x-cmd using deno run to execute them.
+            x-cmd strictly controls the binary execution permissions through Deno parameters. The typical permissions granted include read-only access to files and reading environment variables. Any additional permissions are only granted if necessary and are minimized. For example, if ‘map’ requires write permissions, x-cmd restricts the write access to the “$HOME/.mapscii” directory. This approach maximizes user data security and helps prevent misuse or malicious behavior.
+    deno:
+      bugfix:
+        - cn: 修复 deno 参数个数大于 9 时，在 bash 环境下出现的变量错误问题。
+          en: Fixed the issue in the bash environment where an error occurs when the number of Deno parameters exceeds 9.
+    ping:
+      update:
+        - cn: |
+            新增 ping 模块。该模块支持包括热图、条形图、详细模式、CSV 和 TSV 在内的五种 ping 数据输出方式。
+          en: |
+            A new ping module has been added.
+            This module supports five different ways to output ping data, including heatmaps, bar charts, detailed mode, CSV, and TSV.
+    tping:
+      update:
+        - cn: |
+            新增 tping 模块。该模块基于 Telnet 协议，使用 curl 实现本地计算机到目标主机和端口的简单明文 TCP 连接。
+            该模块支持包括热图、条形图、详细模式、CSV 和 TSV 在内的五种输出方式。
+          en: |
+            A new "tping" module has been added.
+            This module leverages the Telnet protocol and utilizes curl to establish a straightforward, plain-text TCP connection from your local machine to the target host and port.
+            The module supports five output formats, including heatmaps, bar charts, detailed mode, CSV, and TSV.
   blog: null
-  name: v0.4.12
+  name: v0.4.12 - starship ohmyposh theme ping
   alpha: true
   beta: true
 v0.4.11:
