@@ -13,7 +13,7 @@ v0.4.12:
             x mac sleep
 
             # 重启系统
-            x starship restart
+            x mac restart
             ```
           en: |
             New commands `sleep,` `restart,` `logout,` and `shutdown` have been added, allowing you to put your computer to sleep, restart it, log out, or shut it down, respectively.
@@ -24,7 +24,7 @@ v0.4.12:
             x mac sleep
 
             # Rebooting the system
-            x starship restart
+            x mac restart
             ```
         - cn: |
             新增 `wifi` 命令，提供查看 wifi 状态、启用或禁用 wifi、扫描 wifi 接口和可用 wifi、连接指定 wifi 等功能。
