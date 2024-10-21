@@ -1,3 +1,33 @@
+v0.4.13:
+  sum: 61adb9fc6f6167e1380729bc24b0fbfd9d936db29ac649bab3be7b2dae519b2cddd2d5a0a7ae5bb3ad4a5a1935113a95eec1bea6de393cc1f59e4db209a7fc0f
+  date: 2024-10-21 12:50:52+0000
+  change:
+    advise:
+      update:
+        - cn: |
+            新增支持多种模式进行命令补全加载，默认使用自动模式。
+            - `auto`: 自动加载（默认）。在加载 `x-cmd/advise` 和 `bash/zsh-completion` 之前，会检测当前环境是否已加载 `bash/zsh-completion` 和 `caraspace`，避免被 `x-cmd` 补全功能覆盖。
+            - `all`: 全部加载，加载 `x-cmd` 相关的命令补全，以及 `x-cmd/advise` 和 `bash/zsh-completion` 的命令补全。
+            - `x`: 仅加载 `x-cmd` 相关命令的补全，不加载 `x-cmd/advise` 和 `bash/zsh-completion` 的命令补全。
+            - `never`: 禁用所有 `x-cmd` 的命令补全功能。
+          en: |
+            Added support for multiple modes of command completion loading, with auto mode as the default.
+            - `auto`: Automatic loading (default). Before loading `x-cmd/advise` and `bash/zsh-completion`, it checks if `bash/zsh-completion` and `caraspace` are already loaded to avoid overwriting by `x-cmd` completions.
+            - `all`: Loads all completions, including `x-cmd` commands, as well as `x-cmd/advise` and `bash/zsh-completion`.
+            - `x`: Only loads `x-cmd` command completions without loading `x-cmd/advise` and `bash/zsh-completion`.
+            - `never`: Disables all `x-cmd` command completion functionalities.
+    ping:
+      update:
+        - cn: 调整 '--csv' 和 '--tsv' 参数在非交互模式下的输出。
+          en: Adjust the output of '--csv' and '--tsv' parameters in non-interactive mode.
+      bugfix:
+        - cn: 修复了在 macOS 中存在 mawk 时，'x ping' 仍使用 '/usr/bin/awk' 而出现的参数不匹配的问题。
+          en: Fixed the issue where 'x ping' still used '/usr/bin/awk' when mawk was present in macOS, resulting in parameter mismatch.
+  blog: null
+  name: v0.4.13
+  alpha: true
+  beta: true
+  latest: true
 v0.4.12:
   sum: a107f3bc51a9cc470bcb9c5d8d61a6d43c3abdd1330f595e42902d2e0df938f83a7970d4dee6e7728326d25b7712f64dddfb86de5e327696137cd377efc596c5
   date: 2024-10-17 12:12:10+0000
@@ -195,8 +225,6 @@ v0.4.12:
             The module supports five output formats, including heatmaps, bar charts, detailed mode, CSV, and TSV.
   blog: null
   name: v0.4.12 - starship ohmyposh theme ping
-  alpha: true
-  beta: true
 v0.4.11:
   sum: 914fcf6e5a8a307e43747c0aaa16e59b51275c1ed47281324439d8d7178d29ff6b6a1e1cf16005fe61296d01fbc00656645624d6b6da1f045e57e31ab44705fb
   date: 2024-09-14 08:06:20+0000
@@ -251,7 +279,6 @@ v0.4.11:
           en: More TLDR were added for subcommands like `embed`, `reranker` and `reader`.
   blog: /blog/240916
   name: v0.4.11
-  latest: true
 v0.4.10:
   sum: c7d765961ce18be028f3095c5df96b294323f46b2fe58001a4722cd418f8baddbc5ef0a10e553cbfd7815ff99ab5fdeb052f29552998d64373144f9d8bfa6c88
   date: 2024-09-10 11:33:50+0000
