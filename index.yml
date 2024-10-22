@@ -23,7 +23,53 @@ v0.4.13:
       bugfix:
         - cn: 修复了在 macOS 中存在 mawk 时，'x ping' 仍使用 '/usr/bin/awk' 而出现的参数不匹配的问题。
           en: Fixed the issue where 'x ping' still used '/usr/bin/awk' when mawk was present in macOS, resulting in parameter mismatch.
-  blog: null
+    mac:
+      update:
+        - cn: |
+            新增 disk 命令，包含查看磁盘列表、磁盘信息和系统支持的文件系统功能。
+
+            示例：
+            ```sh
+            # 显示磁盘列表
+            x mac disk ls
+
+            # 查看指定磁盘的信息
+            x mac disk info /dev/disk0
+            ```
+          en: |
+            A new "disk" command has been added, which includes the ability to view a list of disks, disk information, and the file system capabilities supported by the system.
+
+            Example:
+            ```sh
+            # Show me the list of disks
+            x mac disk ls
+
+            # Check the information of the specified disk
+            x mac disk info /dev/disk0
+            ```
+        - cn: |
+            新增 trash 和 dock 命令，分别用于管理废纸篓和程序坞。
+
+            示例：
+            ```sh
+            # 清空废纸篓
+            x mac trash empty
+
+            # 隐藏程序坞
+            x mac dock autohide enable
+            ```
+          en: |
+            New "trash" and "dock" commands have been added, allowing you to manage the trash bin and the dock, respectively.
+
+            Example:
+            ```sh
+            # Empty the trash can
+            x mac trash empty
+
+            # Hide the Dock
+            x mac dock autohide enable
+            ```
+  blog: /blog/241022
   name: v0.4.13
   alpha: true
   beta: true
@@ -223,7 +269,7 @@ v0.4.12:
             A new "tping" module has been added.
             This module leverages the Telnet protocol and utilizes curl to establish a straightforward, plain-text TCP connection from your local machine to the target host and port.
             The module supports five output formats, including heatmaps, bar charts, detailed mode, CSV, and TSV.
-  blog: null
+  blog: /blog/241021
   name: v0.4.12 - starship ohmyposh theme ping
 v0.4.11:
   sum: 914fcf6e5a8a307e43747c0aaa16e59b51275c1ed47281324439d8d7178d29ff6b6a1e1cf16005fe61296d01fbc00656645624d6b6da1f045e57e31ab44705fb
