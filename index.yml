@@ -1,3 +1,183 @@
+v0.4.14:
+  sum: cbad4ec4ff0dc8d2f9e4aa7e7fee51770b255f6aa77a2a89b49b8710584d59c043ca053f5c5326e69e060fa641f3f0f648e3487e9d9819aa891367a1b1ce4def
+  date: 2024-11-21 09:14:05+0000
+  change:
+    webtop:
+      update:
+        - cn: |
+            新增 webtop 模块，它是基于 docker 命令为 linuxserver/webtop 镜像提供高级管理功能的封装模块，旨在简化用户使用和管理 linuxserver/webtop。
+            linuxserver/webtop 是一系列基于 linux 系统的 docker 镜像，由 linuxserver.io 社区构建和维护，能让用户通过浏览器流畅地使用容器的桌面环境。
+            更多请参考文档：https://cn.x-cmd.com/mod/webtop
+          en: |
+            A new webtop module has been added, which is a wrapper module built on docker commands for the linuxserver/webtop image. It provides advanced management functionality, aiming to simplify user interaction and management of linuxserver/webtop.
+            linuxserver/webtop is a series of Linux-based Docker images built and maintained by the linuxserver.io community, enabling users to seamlessly access the container's desktop environment through a browser.
+            更多请参考文档：https://x-cmd.com/mod/webtop
+        - cn: 交互式环境默认设置了一个别名 alias xwt='x webtop'
+          en: The interactive environment has a default alias set as `alias xwt='x webtop'`
+        - cn: |
+            示例：
+            ```sh
+            # 从 webtop 镜像中创建一个 ubuntu-kde 桌面系统容器
+            x webtop run ubuntu-kde
+
+            # 列出所有 webtop 容器
+            x webtop ps
+
+            # 用浏览器打开 webtop 容器的桌面环境
+            x webtop open
+            ```
+          en: |
+            Example:
+            ```sh
+            # Create an ubuntu-kde desktop system container from a webtop image
+            x webtop run ubuntu-kde
+
+            # List all the webtop containers
+            x webtop ps
+
+            # Open the desktop environment of the webtop container in your browser
+            x webtop open
+            ```
+    mac:
+      update:
+        - cn: |
+            新增 `wallpaper` 和 `launchpad` 命令，分别用于设置桌面壁纸和调整启动台布局。
+
+            示例：
+            ```sh
+            # 更换当前桌面的壁纸为 "$HOME/xcmd.png" 图片
+            x mac wallpaper set "$HOME/xcmd.png"
+
+            # 将启动台布局更改为 5 行 6 列
+            x mac launchpad layout 5 6
+            ```
+          en: |
+            New `wallpaper` and `launchpad` commands have been added, allowing you to set your desktop background and adjust the Launchpad layout, respectively.
+
+            Example:
+            ```sh
+            # Change the current desktop wallpaper to the image "$HOME/xcmd.png"
+            x mac wallpaper set "$HOME/xcmd.png"
+
+            # The Launchpad layout would be changed to 5 rows and 6 columns
+            x mac launchpad layout 5 6
+            ```
+    pwsh:
+      update:
+        - cn: |
+            新增了对 PowerShell 环境的支持。用户现在可以在 PowerShell 中通过 Git Bash 调用 `x-cmd` 工具集。
+            使用 `x pwsh --setup` 命令可以将 `x-cmd` 工具注入 PowerShell，增强其功能和用户体验，目前处于 Beta 阶段。
+        - en: |
+            Added support for the PowerShell environment. Users can now invoke the `x-cmd` toolkit in PowerShell via Git Bash.
+            Using the `x pwsh --setup` command allows users to inject `x-cmd` tools into PowerShell, enhancing functionality and user experience. This feature is currently in Beta.
+    elv|fish|nu|onsh|tcsh:
+      update:
+        - cn: 优化了 Non-POSIX Shell 环境（elvish、fish、nushell、xonsh、tcsh）加载 `x-cmd` 工具集时的启动延迟。
+          en: Optimized the startup latency when loading the `x-cmd` toolkit in Non-POSIX shell environments (elvish, fish, nushell, xonsh, tcsh).
+    ascii:
+      update:
+        - cn: |
+            新增 'firework' 命令。用于模拟 ASCII 艺术烟花，该命令会通过 pkg 下载并运行 firework-rs，无需安装，且不影响环境和系统依赖。
+          en: |
+            Added 'firework' command. This command simulates ASCII art fireworks. It downloads and runs `firework-rs` via pkg, eliminating the need for installation and ensuring no impact on your environment or system dependencies.
+    endlessh:
+      update:
+        - cn: |
+            新增 endlessh 模块，它是基于 Docker 为 endlessh-go 提供快速启动和管理功能的封装模块。
+            endlessh-go 是一个基于 Go 语言实现的蜜罐工具，它继承了 endlessh 的强大特性，并在此基础上进行了扩展，为用户提供更直观的攻击源可视化功能。
+            有关 endlessh-go 的详细说明，请查看 [github](https://github.com/shizunge/endlessh-go) 上的文档。
+
+            示例：
+            ```sh
+            # 使用默认配置创建并运行 endlessh 容器
+            x endlessh run
+
+            # 使用 ssh 连接到运行在 2222 端口的 endlessh 容器
+            x endlessh test
+
+            # 查看 endlessh 容器的运行日志
+            x endlessh log
+            ```
+          en: |
+            Added the `endlessh` module, which is a Docker-based wrapper for `endlessh-go` that provides quick startup and management capabilities.
+            `endlessh-go` is a honeypot tool written in Go that inherits the powerful features of `endlessh` and expands upon them, offering users a more intuitive visualization of attack sources.
+            For detailed information about `endlessh-go`, please refer to the documentation on [github](https://github.com/shizunge/endlessh-go).
+
+            examples:
+
+            # Create and run an endlessh container using the default configuration
+            x endlessh run
+
+            # Connect to the endlessh container running on port 2222 using ssh
+            x endlessh test
+
+            # View the running logs of the endlessh container
+            x endlessh log
+            ```
+    cowrie:
+      update:
+        - cn: |
+            新增 cowrie 模块，它是基于 docker 为 cowrie 提供快速启动和管理功能的封装模块，帮助用户轻松搭建并测试自己的蜜罐环境。
+            cowrie 是一个开源的交互式蜜罐项目。它能模拟真实的 SSH 和 Telnet 服务环境，允许攻击者在蜜罐中自由活动，并记录其所有行为，以便后续分析攻击者的攻击模式和收集恶意代码。
+            有关 cowrie 的详细说明，请查看 [github](https://github.com/cowrie/cowrie) 上的文档。
+
+            示例：
+            ```sh
+            # 使用默认配置创建并运行 cowrie 容器
+            x cowrie run
+
+            # 使用 ssh 连接到运行在 2223 端口的 cowrie 容器
+            x cowrie test
+
+            # 查看 cowrie 容器的运行日志
+            x cowrie log
+            ```
+          en: |
+            Added the `cowrie` module, which is a Docker-based wrapper that provides quick startup and management capabilities for cowrie. This module helps users easily set up and test their own honeypot environments
+            cowrie is an open-source interactive honeypot project. It simulates real SSH and Telnet service environments, allowing attackers to freely operate within the honeypot. All their actions are recorded, enabling subsequent analysis of their attack patterns and collection of malicious code.
+            For detailed information about cowrie, please refer to the documentation on [github](https://github.com/cowrie/cowrie).
+
+            examples:
+
+            # Create and run an cowrie container using the default configuration
+            x cowrie run
+
+            # Connect to the cowrie container running on port 2222 using ssh
+            x cowrie test
+
+            # View the running logs of the cowrie container
+            x cowrie log
+            ```
+    mosh:
+      update:
+        - cn: |
+            新增了 `mosh` 模块。该模块优先使用本地 mosh 命令，若无，将通过 pixi 下载并运行，无需安装，不影响环境和系统依赖（windowns 暂不支持）。
+            有关 mosh 的详细说明，请查看[官网](https://mosh.org/) 。
+          en: |
+            Added `mosh` module. This module prioritizes using the local mosh command. If it's not available, it will download and run via pixi, requiring no installation and impacting neither your environment nor system dependencies (Windows is not yet supported).
+            For a detailed explanation of mosh, please visit the [official website](https://mosh.org/).
+    node:
+      update:
+        - cn: |
+            node 模块默认版本切换至最新 LTS 版本 v22.11.0
+          en: |
+            node module default version switched to the latest LTS version v22.11.0
+    btop:
+      update:
+        - cn: 在 Linux 和 macOS 环境中，使用 pixi 替代 pkgx 来下载和运行 btop。
+          en: In Linux and macOS environments, use pixi instead of pkgx to download and run btop.
+    pkg:
+      bugfix:
+        - cn: x-cmd pkg 默认使用 github 作为国外下载源，npm 作为国内下载源
+          en: By default, x-cmd pkg utilizes GitHub as the international download source, while npm serves as the domestic download source.
+    apt:
+      bugfix:
+        - cn: '[issue/93](https://github.com/x-cmd/x-cmd/issues/93) 修复了 apt install 补全包名失效的问题。'
+          en: '[issue/93](https://github.com/x-cmd/x-cmd/issues/93) The issue with the apt install package name autocomplete not working has been fixed.'
+  blog: null
+  name: webtop pwsh
+  alpha: true
+  beta: true
 v0.4.13:
   sum: 61adb9fc6f6167e1380729bc24b0fbfd9d936db29ac649bab3be7b2dae519b2cddd2d5a0a7ae5bb3ad4a5a1935113a95eec1bea6de393cc1f59e4db209a7fc0f
   date: 2024-10-21 12:50:52+0000
@@ -71,8 +251,6 @@ v0.4.13:
             ```
   blog: /blog/241022
   name: v0.4.13
-  alpha: true
-  beta: true
   latest: true
 v0.4.12:
   sum: a107f3bc51a9cc470bcb9c5d8d61a6d43c3abdd1330f595e42902d2e0df938f83a7970d4dee6e7728326d25b7712f64dddfb86de5e327696137cd377efc596c5
