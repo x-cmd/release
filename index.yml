@@ -185,9 +185,10 @@ v0.4.14:
         - cn: 修复了 `x jina reader` 没有携带 apikey 作为 token 而出现的请求失败问题 [x-cmd/x-cmd/issues/114](https://github.com/x-cmd/x-cmd/issues/114)。
           en: Fixed the request failure issue when `x jina reader` did not carry the apikey as the token [x-cmd/x-cmd/issues/114](https://github.com/x-cmd/x-cmd/issues/114).
   blog: null
-  name: webtop pwsh
+  name: v0.4.14 - webtop pwsh
   alpha: true
   beta: true
+  latest: true
 v0.4.13:
   sum: 61adb9fc6f6167e1380729bc24b0fbfd9d936db29ac649bab3be7b2dae519b2cddd2d5a0a7ae5bb3ad4a5a1935113a95eec1bea6de393cc1f59e4db209a7fc0f
   date: 2024-10-21 12:50:52+0000
@@ -261,7 +262,6 @@ v0.4.13:
             ```
   blog: /blog/241022
   name: v0.4.13
-  latest: true
 v0.4.12:
   sum: a107f3bc51a9cc470bcb9c5d8d61a6d43c3abdd1330f595e42902d2e0df938f83a7970d4dee6e7728326d25b7712f64dddfb86de5e327696137cd377efc596c5
   date: 2024-10-17 12:12:10+0000
