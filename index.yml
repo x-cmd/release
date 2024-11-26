@@ -188,7 +188,7 @@ v0.4.14:
       bugfix:
         - cn: 新增了对 NixOS 环境的支持，修复了在 NixOS 环境中部分命令无法找到的问题，并解决了缺乏 `awk` 的依赖问题。用户现在可以在 NixOS 环境中正常使用 `x-cmd` 。
           en: Added support for the NixOS environment, fixing issues where certain commands could not be found and addressing the lack of `awk` dependency. Users can now seamlessly use the `x-cmd` toolkit in the NixOS environment.
-  blog: null
+  blog: /blog/241126
   name: v0.4.14 - webtop pwsh
   alpha: true
   beta: true
