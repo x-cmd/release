@@ -1,3 +1,69 @@
+v0.4.15:
+  sum: 869db38e4bd7178085fe97fb39ae378ec3a29257b5a9649a357f299ed268365cbd3bd2b798bbdfe3b7a782aa7d0f1b8f174706c05dd89d152608628f94419615
+  date: 2024-12-03 12:16:13+0000
+  change:
+    mirror:
+      update:
+        - cn: '`x mirror npm` 支持为 npm 配置华为云和腾讯云镜像源'
+          en: '`x mirror npm` supports configuring Huawei Cloud and Tencent Cloud mirror sources for npm.'
+    env|pkg:
+      update:
+        - cn: |
+            `pkg` 和 `env` 模块新增了 `upgrade` 功能，用于升级全局环境中已安装的软件包版本，默认升级到 "default" 版本。
+            同时，`x env upgrade` 等同于执行 `x env use --upgrade`。
+
+            示例：
+            ```sh
+            # 将全局环境中设置的所有包升级到 default 版本
+            x env upgrade --all
+
+            # 将全局环境中设置的 jq、yq 和 fzf 软件包升级到 default 版本
+            x env upgrade jq yq fzf
+            ```
+          en: |
+            Added the `upgrade` feature to the `pkg` and `env` modules for updating the versions of globally installed packages, with the default upgrade target set to "default" version.
+            Additionally, `x env upgrade` is equivalent to `x env use --upgrade`.
+
+            Example:
+            ```sh
+            # Upgrade all packages used in the global environment to the default version
+            x env upgrade --all
+
+            # Upgrade the jq, yq, and fzf packages used in the global environment to the default version
+            x env upgrade jq yq fzf
+            ```
+        - cn: |
+            改进了 `x env gc` 功能，使得在交互式环境下每个软件包仅需一次交互选择，简化流程，提升用户体验。
+            同时新增了 `x env cleanup` 命令作为 `x env gc` 的别名。
+          en: |
+            Improved the `x env gc` functionality, ensuring that each package requires only one interactive selection in an interactive environment, streamlining the process and enhancing user experience.
+            Additionally, added the `x pkg cleanup` alias for `x env gc`.
+        - cn: |
+            `x env ls` 命令在交互式选中并回车后，新增了多个选项，允许用户对选中的内容进行进一步操作。
+            这些改进使得用户可以更加方便地管理软件包，提升了用户体验。
+          en: |
+            The `x env ls` command now includes additional options after interactive selection and pressing Enter, allowing users to perform further actions on the selected items.
+            These improvements make it easier for users to manage packages, enhancing the overall user experience.
+    pb:
+      update:
+        - cn: pb 模块新增了 wayland 剪贴板的支持，集成了 `wl-copy` 和 `wl-paste` 命令，允许用户更方便地在 Wayland 环境下进行复制粘贴 [x-cmd/x-cmd/issues/119](https://github.com/x-cmd/x-cmd/issues/119)。
+          en: The pb module has added support for the Wayland clipboard, integrating the `wl-copy` and `wl-paste` commands, allowing users to more easily perform copy and paste operations in a Wayland environment [x-cmd/x-cmd/issues/119](https://github.com/x-cmd/x-cmd/issues/119).
+    theme|starship|ohmyposh:
+      update:
+        - cn: 当前非 POSIX Shell 环境暂不支持使用 `theme`、`starship` 和 `oh-my-posh` 模块，以上三个模块已新增相应的判断和拦截逻辑。
+          en: The `theme`, `starship`, and `oh-my-posh` modules are currently not supported in non-POSIX shell environments. Added corresponding checks and interception logic for these modules.
+    chat:
+      update:
+        - cn: 交互式终端中使用 AI Chat 功能时，不再使用 `less` 命令，以确保结果直接可见，提升用户体验。
+          en: When using the AI Chat feature in an interactive terminal, the `less` command is no longer used to ensure results are directly visible, enhancing user-friendliness.
+    man:
+      bugfix:
+        - cn: 修复 `x man` 无法在 fish shell 中预览 man 文档的问题 [x-cmd/x-cmd/issues/128](https://github.com/x-cmd/x-cmd/issues/128)。
+          en: Fixed the issue that `x man` could not preview the Man document in the fish shell [x-cmd/x-cmd/issues/128](https://github.com/x-cmd/x-cmd/issues/128).
+  blog: null
+  name: v0.4.15
+  alpha: true
+  beta: true
 v0.4.14:
   sum: a702524dbdc70e1983370cc8a8d1ad035c130b3cabf09348a46c4e07581d7ccc945d65a9d1f017f3fc21be8488a7c1cff8ac05ee5eafb3d8f17c2565f044a8e5
   date: 2024-11-21 09:50:37+0000
@@ -190,8 +256,6 @@ v0.4.14:
           en: Added support for the NixOS environment, fixing issues where certain commands could not be found and addressing the lack of `awk` dependency. Users can now seamlessly use the `x-cmd` toolkit in the NixOS environment.
   blog: /blog/241126
   name: v0.4.14 - webtop pwsh
-  alpha: true
-  beta: true
   latest: true
 v0.4.13:
   sum: 61adb9fc6f6167e1380729bc24b0fbfd9d936db29ac649bab3be7b2dae519b2cddd2d5a0a7ae5bb3ad4a5a1935113a95eec1bea6de393cc1f59e4db209a7fc0f
