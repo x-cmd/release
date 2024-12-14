@@ -1,3 +1,27 @@
+v0.5.0:
+  sum: 7b4368f25bdb7e37f6ebd4620dbe3aa3eed29f668baa7beede167bcf87ea8a29539e168cfd82b06385b5d1ebe89e86efaa99217d623f424d76f5fad71a4d53d2
+  date: 2024-12-14 08:18:04+0000
+  change:
+    winget|scoop:
+      update:
+        - cn: 不再隐式使用中国区的第三方镜像，优化了 `winget` 模块代码，并与 `scoop` 模块统一了接口，改为使用 `fzf` 进行交互式选择，进一步提升用户体验。
+          en: Optimized the `winget` module code and unified its interface with the `scoop` module, switching to `fzf` for interactive selection to enhance user experience.
+    brew:
+      update:
+        - cn: 不再隐式使用中国区的第三方镜像，优化了 `brew` 模块 `ls` 功能的代码，提高了获取可安装软件列表的速度。
+          en: Optimized the code for the `ls` function in the `brew` module, improving the speed of fetching the list of installable software.
+    zuz:
+      update:
+        - cn: 增加 lha/lhz 的解压支持；压缩需要 lhasa 或者 lha 包的支持。
+          en: Add support for extracting LHA/LHZ files; compression requires support from the Lhasa or LHA package.
+    gemini:
+      update:
+        - cn: Gemini AI 新增支持 `gemini-2.0-flash-exp` 模型，这是最新版本的多模态模型 Gemini 2.0（实验版）。
+          en: Added support for the `gemini-2.0-flash-exp` model in Gemini AI, which is the latest version of the multimodal model Gemini 2.0 (experimental).
+  blog: null
+  name: v0.5.0
+  alpha: true
+  beta: true
 v0.4.15:
   sum: 869db38e4bd7178085fe97fb39ae378ec3a29257b5a9649a357f299ed268365cbd3bd2b798bbdfe3b7a782aa7d0f1b8f174706c05dd89d152608628f94419615
   date: 2024-12-03 12:16:13+0000
@@ -62,8 +86,6 @@ v0.4.15:
           en: '`x mirror npm` supports configuring Huawei Cloud and Tencent Cloud mirror sources for npm. ([#155](https://github.com/x-cmd/x-cmd/issues/115))'
   blog: /blog/241206
   name: v0.4.15
-  alpha: true
-  beta: true
   latest: true
 v0.4.14:
   sum: a702524dbdc70e1983370cc8a8d1ad035c130b3cabf09348a46c4e07581d7ccc945d65a9d1f017f3fc21be8488a7c1cff8ac05ee5eafb3d8f17c2565f044a8e5
