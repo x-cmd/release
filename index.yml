@@ -1,3 +1,45 @@
+v0.5.1:
+  sum: 10d0e3feef24eb24469e72c897a47e049d50612868ccf6388c33c2bc90d0bfaa857f7fb167326389b3e2c22404add6331eaa02bb5eafc12c0f09028f5672e24c
+  date: 2024-12-31 09:28:56+0000
+  change:
+    advise:
+      update:
+        - cn: 由于语法限制，x-cmd 的命令补全功能暂不支持 zsh 5.0 及以下版本。已新增对 zsh 环境的版本检测，避免低版本引发语法错误。
+          en: x-cmd's command completion functionality is not supported for zsh versions 5.0 and below due to syntax limitations. Added version detection for zsh environments to prevent syntax errors on lower versions.
+    winget:
+      update:
+        - cn: 优化了 winget 模块的镜像源设置与取消功能，并修复了 `ls` 和 `la` 子命令的相关问题。
+          en: Enhanced the mirror setup and removal functionality in the winget module and fixed issues related to the `ls` and `la` subcommands.
+    pixi:
+      update:
+        - cn: 新增 `x pixi use` 和 `x pixi unuse` 命令。它们分别是对 `pixi global install` 和 `pixi global uninstall` 命令的封装，用于帮用户快速在全局环境中软件软件工具。
+          en: New commands `x pixi use` and `x pixi unuse` have been added. They are wrappers for the `pixi global install` and `pixi global uninstall` commands, designed to help users quickly manage software tools in the global environment.
+        - cn: |
+            示例：
+            ```sh
+            # 在用户环境中安装 fish 和 jq，等同于 `pixi global install fish jq`
+            x pixi use fish jq
+
+            # 查看在用户环境中安装的软件包及其依赖
+            x pixi use ls
+            ```
+          en: |
+            examples:
+            ```sh
+            # Install fish shell and jq in the user environment. Equivalent to `pixi global install fish jq`
+            x pixi use fish jq
+
+            # List the packages and dependency in the user environment
+            x pixi use ls
+            ```
+    df|arp:
+      update:
+        - cn: 增加了 `--auto`（默认输出模式）、`--tsv` 和 `--raw` 三种输出格式参数。
+          en: The three output format parameters `--auto` (default output mode), `--tsv`, and `--raw` have been added.
+  blog: null
+  name: v0.5.1
+  alpha: true
+  beta: true
 v0.5.0:
   sum: 7b4368f25bdb7e37f6ebd4620dbe3aa3eed29f668baa7beede167bcf87ea8a29539e168cfd82b06385b5d1ebe89e86efaa99217d623f424d76f5fad71a4d53d2
   date: 2024-12-14 08:18:04+0000
@@ -20,8 +62,6 @@ v0.5.0:
           en: Added support for the `gemini-2.0-flash-exp` model in Gemini AI, which is the latest version of the multimodal model Gemini 2.0 (experimental).
   blog: null
   name: v0.5.0
-  alpha: true
-  beta: true
 v0.4.15:
   sum: 869db38e4bd7178085fe97fb39ae378ec3a29257b5a9649a357f299ed268365cbd3bd2b798bbdfe3b7a782aa7d0f1b8f174706c05dd89d152608628f94419615
   date: 2024-12-03 12:16:13+0000
