@@ -40,6 +40,7 @@ v0.5.1:
   name: v0.5.1
   alpha: true
   beta: true
+  latest: true
 v0.5.0:
   sum: 7b4368f25bdb7e37f6ebd4620dbe3aa3eed29f668baa7beede167bcf87ea8a29539e168cfd82b06385b5d1ebe89e86efaa99217d623f424d76f5fad71a4d53d2
   date: 2024-12-14 08:18:04+0000
@@ -126,7 +127,6 @@ v0.4.15:
           en: '`x mirror npm` supports configuring Huawei Cloud and Tencent Cloud mirror sources for npm. ([#155](https://github.com/x-cmd/x-cmd/issues/115))'
   blog: /blog/241206
   name: v0.4.15
-  latest: true
 v0.4.14:
   sum: a702524dbdc70e1983370cc8a8d1ad035c130b3cabf09348a46c4e07581d7ccc945d65a9d1f017f3fc21be8488a7c1cff8ac05ee5eafb3d8f17c2565f044a8e5
   date: 2024-11-21 09:50:37+0000
