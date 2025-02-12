@@ -30,7 +30,7 @@ v0.5.2:
       update:
         - cn: 更新 x-cmd 内部函数引用。
           en: Update x-cmd internal function references.
-  blog: null
+  blog: /blog/250211
   name: v0.5.2
   alpha: true
   beta: true
