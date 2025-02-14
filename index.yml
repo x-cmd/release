@@ -1,3 +1,39 @@
+v0.5.3:
+  sum: 172b59f00c217702f037edf6c16f11c593dea0b29aca2d8fa2613b952d5c1b95d03dfd3634c2adc66e3cb612b20aa3761c98e1eba4a0cddbd41624674c7b31cf
+  date: 2025-02-14 10:23:02+0000
+  change:
+    deepseek:
+      update:
+        - cn: |
+            新增 `deepseek` 模块，用户可通过 `@deepseek` 直接请求使用 [DeepSeek AI 模型](https://www.deepseek.com)。
+            目前支持两种模型：`deepseek-chat`（调用 DeepSeek-V3）和 `deepseek-reasoner`（调用 DeepSeek-R1）。
+
+            示例：
+            ```sh
+            @deepseek "What is the history of the Great Wall?"
+            @deepseek --model deepseek-reasoner "How many Rs are there in the word strawberry?"
+            ```
+          en: |
+            Added the `deepseek` module, allowing users to request [DeepSeek AI models](https://www.deepseek.com) directly via `@deepseek`.
+            Currently, two models are supported: `deepseek-chat` (powered by DeepSeek-V3) and `deepseek-reasoner` (powered by DeepSeek-R1).
+
+            Example:
+            ```sh
+            @deepseek "What is the history of the Great Wall?"
+            @deepseek --model deepseek-reasoner "How many Rs are there in the word strawberry?"
+            ```
+    dingtalk|feishu:
+      update:
+        - cn: 新增 `init`、`--cfg` 和 `--cur` 命令来管理群机器人的 webhook url。
+          en: Added `init`, `--cfg`, and `--cur` commands to manage the webhook URL of group bot.
+    x-cmd:
+      update:
+        - cn: 新增 `x hi` 功能，用于输出 IPv4 地址和 HTTP 信息。更多详细信息，请访问：[x-cmd.com/hi](https://x-cmd.com/hi)
+          en: 'Added the `x hi`` feature to output IPv4 address and HTTP information. For more details, visit: [x-cmd.com/hi](https://x-cmd.com/hi)'
+  blog: null
+  name: v0.5.3
+  alpha: true
+  beta: true
 v0.5.2:
   sum: 68d0343d06bba658eace049fdc5e0297324a4708cf1f4050e449b65ad48e7e7009812cc77f8167dbec5bd3d3fd6952552f737336f3739e8b8004ca18e29804d8
   date: 2025-02-08 09:30:13+0000
@@ -32,8 +68,7 @@ v0.5.2:
           en: Update x-cmd internal function references.
   blog: /blog/250211
   name: v0.5.2
-  alpha: true
-  beta: true
+  latest: true
 v0.5.1:
   sum: 78ff30ee1eb2bc678fdffcab68c733daa51272cb8bd908f99b783b45cc6b5374732b7980be874bdbf86aeed537c0fafb3bf700907e91da294de311653f760b77
   date: 2024-12-31 10:01:38+0000
@@ -74,7 +109,6 @@ v0.5.1:
           en: The three output format parameters `--auto` (default output mode), `--tsv`, and `--raw` have been added.
   blog: /blog/250107
   name: v0.5.1
-  latest: true
 v0.5.0:
   sum: 7b4368f25bdb7e37f6ebd4620dbe3aa3eed29f668baa7beede167bcf87ea8a29539e168cfd82b06385b5d1ebe89e86efaa99217d623f424d76f5fad71a4d53d2
   date: 2024-12-14 08:18:04+0000
