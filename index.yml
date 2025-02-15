@@ -32,7 +32,6 @@ v0.5.2:
           en: Update x-cmd internal function references.
   blog: /blog/250211
   name: v0.5.2
-  latest: true
 v0.5.1:
   sum: 78ff30ee1eb2bc678fdffcab68c733daa51272cb8bd908f99b783b45cc6b5374732b7980be874bdbf86aeed537c0fafb3bf700907e91da294de311653f760b77
   date: 2024-12-31 10:01:38+0000
