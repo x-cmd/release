@@ -30,7 +30,7 @@ v0.5.3:
       update:
         - cn: 新增 `x hi` 功能，用于输出 IPv4 地址和 HTTP 信息。更多详细信息，请访问：[x-cmd.com/hi](https://x-cmd.com/hi)
           en: 'Added the `x hi` feature to output IPv4 address and HTTP information. For more details, visit: [x-cmd.com/hi](https://x-cmd.com/hi)'
-  blog: null
+  blog: /blog/250217
   name: v0.5.3
   alpha: true
   beta: true
