@@ -1,3 +1,35 @@
+v0.5.4:
+  sum: cdbc7116ee45159f576064ac842c5abbaf5e2fcfe682c7f0bd3bed3e2c3985ebd50b3dd9201a39ef120393f1687faea6e5ec8a487ac0eecb347d299941503012
+  date: 2025-02-21 09:11:48+0000
+  change:
+    deepseek:
+      update:
+        - cn: 更改了使用 [DeepSeek AI 模型](https://www.deepseek.com) 的 alias，废弃了 `@deepseek`，改为使用 `@ds` 和 `@dsr1` alias，分别对应调用 DeepSeek-V3 和 DeepSeek-R1 模型，简化了使用方式。
+          en: Changed the alias for using [DeepSeek AI models](https://www.deepseek.com), deprecating `@deepseek` in favor of `@ds` and `@dsr1`, which correspond to the DeepSeek-V3 and DeepSeek-R1 models, respectively, simplifying the usage.
+    grok:
+      update:
+        - cn: |
+            新增了 `grok` 模块，用户可以通过 `@grok` 轻松请求使用 [xAI](https://docs.x.ai/docs) 的 grok 模型。
+            当前该功能模块仍处于公开实验阶段，如有问题，欢迎在 [issue](https://github.com/x-cmd/x-cmd/issues) 提交反馈。
+          en: |
+            Added the `grok` module, allowing users to easily request the use of the grok model from [xAI](https://docs.x.ai/docs) via `@grok`.
+            This feature is still in the public experimental stage, and users are encouraged to report any issues via the [issue](https://github.com/x-cmd/x-cmd/issues).
+    gh:
+      bugfix:
+        - cn: 修复了 `gh model`（别名为 @gh）功能使用 [Github Models](https://docs.github.com/en/github-models) 时，无法请求使用部分 AI 模型的问题。
+          en: Fixed an issue with the `gh model` (alias `@gh`) functionality, where some AI models from [Github Models](https://docs.github.com/en/github-models) could not be requested.
+    pkg:
+      bugfix:
+        - cn: 修复了加载 `x-cmd` 后，在某些情况下 `PATH` 变量未能正确添加 X sphere 目录路径的问题。
+          en: Fixed an issue where the X sphere directory path was not properly added to the `PATH` variable in some cases after loading `x-cmd`.
+    version:
+      bugfix:
+        - cn: 修复了打包 `x-cmd allinone` 版本包时，版本信息未更新为当前最新版本的问题。
+          en: Fixed an issue when packaging the `x-cmd allinone` version, where the version information was not updated to the latest.
+  blog: null
+  name: v0.5.4
+  alpha: true
+  beta: true
 v0.5.3:
   sum: 172b59f00c217702f037edf6c16f11c593dea0b29aca2d8fa2613b952d5c1b95d03dfd3634c2adc66e3cb612b20aa3761c98e1eba4a0cddbd41624674c7b31cf
   date: 2025-02-15 17:05:27+0800
@@ -32,8 +64,6 @@ v0.5.3:
           en: 'Added the `x hi` feature to output IPv4 address and HTTP information. For more details, visit: [x-cmd.com/hi](https://x-cmd.com/hi)'
   blog: /blog/250217
   name: v0.5.3
-  alpha: true
-  beta: true
   latest: true
 v0.5.2:
   sum: 68d0343d06bba658eace049fdc5e0297324a4708cf1f4050e449b65ad48e7e7009812cc77f8167dbec5bd3d3fd6952552f737336f3739e8b8004ca18e29804d8
