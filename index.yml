@@ -26,7 +26,7 @@ v0.5.4:
       bugfix:
         - cn: 修复了打包 `x-cmd allinone` 版本包时，版本信息未更新为当前最新版本的问题。
           en: Fixed an issue when packaging the `x-cmd allinone` version, where the version information was not updated to the latest.
-  blog: null
+  blog: /blog/250223
   name: v0.5.4
   alpha: true
   beta: true
