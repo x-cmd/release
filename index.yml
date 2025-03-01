@@ -1,3 +1,47 @@
+v0.5.5:
+  sum: 369a6a4b6a9dc64f24a847a88fd05fc6f33df2bc0bde209759aaf5f3e7766d709bb1c1ea08b667892e59b6ba76feaa611202e0b57d0fc9aef5ab79b565d7c6a6
+  date: 2025-03-01 07:56:38+0000
+  change:
+    x-cmd:
+      update:
+        - cn: 新增了 `bin/x-cmd` 文件，用户可以直接通过 `bin` 目录下的 `x-cmd` 文件进行调用，为之后构建其他系统包做准备。
+          en: Added a `bin/x-cmd` file, allowing users to directly call the `x-cmd` file from the `bin` directory, preparing for the future creation of other system packages.
+    openai:
+      update:
+        - cn: |
+            openai 新增了对 [GPT-4.5 模型](https://openai.com/index/introducing-gpt-4-5/) 的支持，这是 OpenAI 迄今为止规模最大、功能最强大的 GPT 模型。
+
+            示例：
+            ```sh
+            @gpt --model gpt-4.5-preview "What was the first language?"
+            ```
+          en: |
+            OpenAI has added support for the [GPT-4.5 model](https://openai.com/index/introducing-gpt-4-5/), which is the largest and most capable GPT model from OpenAI.
+
+            Example:
+            ```sh
+            @gpt --model gpt-4.5-preview "What was the first language?"
+            ```
+    hn:
+      update:
+        - cn: 优化了 `hn` 模块的代码，新增了配置管理功能，提升了模块的灵活性和可定制性。
+          en: Optimized the `hn` module code and added configuration management functionality, enhancing the module's flexibility and customizability.
+    facl:
+      update:
+        - cn: 新增 facl 模块。用于获取文件访问控制列表。
+          en: Added the `facl` module.  It is used to retrieve file access control lists (ACLs).
+    discord:
+      update:
+        - cn: 新增 `init`、`--cfg` 和 `--cur` 命令来管理群机器人的 webhook url。
+          en: Added `init`, `--cfg`, and `--cur` commands to manage the webhook URL of group bot.
+    zuz:
+      update:
+        - cn: 新增查看支持压缩或解压格式功能。
+          en: Added the function of viewing supported compressed or decompressed formats.
+  blog: null
+  name: v0.5.5
+  alpha: true
+  beta: true
 v0.5.4:
   sum: cdbc7116ee45159f576064ac842c5abbaf5e2fcfe682c7f0bd3bed3e2c3985ebd50b3dd9201a39ef120393f1687faea6e5ec8a487ac0eecb347d299941503012
   date: 2025-02-21 09:11:48+0000
@@ -28,8 +72,6 @@ v0.5.4:
           en: Fixed an issue when packaging the `x-cmd allinone` version, where the version information was not updated to the latest.
   blog: /blog/250223
   name: v0.5.4
-  alpha: true
-  beta: true
   latest: true
 v0.5.3:
   sum: 172b59f00c217702f037edf6c16f11c593dea0b29aca2d8fa2613b952d5c1b95d03dfd3634c2adc66e3cb612b20aa3761c98e1eba4a0cddbd41624674c7b31cf
