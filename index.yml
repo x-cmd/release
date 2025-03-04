@@ -28,8 +28,8 @@ v0.5.5:
           en: Optimized the `hn` module code and added configuration management functionality, enhancing the module's flexibility and customizability.
     facl:
       update:
-        - cn: 新增 facl 模块。用于获取文件访问控制列表。
-          en: Added the `facl` module.  It is used to retrieve file access control lists (ACLs).
+        - cn: 新增 facl 模块。该模块提供更直观的方式来显示文件的访问控制列表 (ACL)。
+          en: Added the `facl` module.  This module provides a more intuitive way to display a file's Access Control List (ACL).
     discord:
       update:
         - cn: 新增 `init`、`--cfg` 和 `--cur` 命令来管理群机器人的 webhook url。
@@ -42,6 +42,7 @@ v0.5.5:
   name: v0.5.5
   alpha: true
   beta: true
+  latest: true
 v0.5.4:
   sum: cdbc7116ee45159f576064ac842c5abbaf5e2fcfe682c7f0bd3bed3e2c3985ebd50b3dd9201a39ef120393f1687faea6e5ec8a487ac0eecb347d299941503012
   date: 2025-02-21 09:11:48+0000
@@ -72,7 +73,6 @@ v0.5.4:
           en: Fixed an issue when packaging the `x-cmd allinone` version, where the version information was not updated to the latest.
   blog: /blog/250223
   name: v0.5.4
-  latest: true
 v0.5.3:
   sum: 172b59f00c217702f037edf6c16f11c593dea0b29aca2d8fa2613b952d5c1b95d03dfd3634c2adc66e3cb612b20aa3761c98e1eba4a0cddbd41624674c7b31cf
   date: 2025-02-15 17:05:27+0800
