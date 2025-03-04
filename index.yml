@@ -38,7 +38,7 @@ v0.5.5:
       update:
         - cn: 新增查看支持压缩或解压格式功能。
           en: Added the function of viewing supported compressed or decompressed formats.
-  blog: null
+  blog: /blog/250305
   name: v0.5.5
   alpha: true
   beta: true
