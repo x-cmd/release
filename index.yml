@@ -1,3 +1,33 @@
+v0.5.6:
+  sum: b4cc02f12a5f72faa5290792dff41b4a3fef163438d17bd184c78ed8a75660579ca314caf5695dcbfa58fbfe17d8c736229504a4ddbebeb05168a866cbe3bff2
+  date: 2025-03-08 08:14:48+0000
+  change:
+    advise:
+      bugfix:
+        - cn: 修复了在 elv、nu、onsh、fish、tcsh 环境中使用 `advise` 补全时，部分函数找不到的问题。[x-cmd/x-cmd/issues/186](https://github.com/x-cmd/x-cmd/issues/186)
+          en: Fixed an issue where some functions were not found when using `advise` completion in elv, nu, onsh, fish, and tcsh environments. [x-cmd/x-cmd/issues/186](https://github.com/x-cmd/x-cmd/issues/186)
+    mac:
+      bugfix:
+        - cn: 修复了 `battery` 功能潜在的问题。([#187](https://github.com/x-cmd/x-cmd/issues/187))
+          en: Fixed a potential issue with the `battery` feature. ([#187](https://github.com/x-cmd/x-cmd/issues/187))
+        - cn: 调整了 `wifi` 功能中扫描 WiFi 和获取 WiFi 端口的实现方法。([#188](https://github.com/x-cmd/x-cmd/issues/188), [#189](https://github.com/x-cmd/x-cmd/issues/189))
+          en: Adjusted the implementation of WiFi scanning and retrieving WiFi ports in the `wifi` feature. ([#188](https://github.com/x-cmd/x-cmd/issues/188), [#189](https://github.com/x-cmd/x-cmd/issues/189))
+    jina:
+      bugfix:
+        - cn: 修复了 `x jina search` 没有携带 apikey 作为 token 而出现的请求失败问题 [x-cmd/x-cmd/issues/164](https://github.com/x-cmd/x-cmd/issues/164)。
+          en: Fixed the request failure issue when `x jina search` did not carry the apikey as the token [x-cmd/x-cmd/issues/164](https://github.com/x-cmd/x-cmd/issues/164).
+    tui:
+      bugfix:
+        - cn: 修复了 TUI 表单编辑时输入框宽度显示异常的问题。
+          en: Fixed the issue where the input field width was displayed incorrectly in the TUI form editor.
+    pkg:
+      update:
+        - cn: 优化并修复了 `pkg gc recycle` 功能的提示警告日志，使信息更清晰准确。[x-cmd/x-cmd/issues/141](https://github.com/x-cmd/x-cmd/issues/141)
+          en: Improved and fixed the warning logs for the `pkg gc recycle` feature, making the messages clearer and more accurate. [x-cmd/x-cmd/issues/141](https://github.com/x-cmd/x-cmd/issues/141)
+  blog: null
+  name: v0.5.6
+  alpha: true
+  beta: true
 v0.5.5:
   sum: 369a6a4b6a9dc64f24a847a88fd05fc6f33df2bc0bde209759aaf5f3e7766d709bb1c1ea08b667892e59b6ba76feaa611202e0b57d0fc9aef5ab79b565d7c6a6
   date: 2025-03-01 07:56:38+0000
@@ -40,8 +70,6 @@ v0.5.5:
           en: Added the function of viewing supported compressed or decompressed formats.
   blog: /blog/250305
   name: v0.5.5
-  alpha: true
-  beta: true
   latest: true
 v0.5.4:
   sum: cdbc7116ee45159f576064ac842c5abbaf5e2fcfe682c7f0bd3bed3e2c3985ebd50b3dd9201a39ef120393f1687faea6e5ec8a487ac0eecb347d299941503012
