@@ -24,7 +24,7 @@ v0.5.6:
       update:
         - cn: 优化并修复了 `pkg gc recycle` 功能的提示警告日志，使信息更清晰准确。[x-cmd/x-cmd/issues/141](https://github.com/x-cmd/x-cmd/issues/141)
           en: Improved and fixed the warning logs for the `pkg gc recycle` feature, making the messages clearer and more accurate. [x-cmd/x-cmd/issues/141](https://github.com/x-cmd/x-cmd/issues/141)
-  blog: null
+  blog: /blog/250312
   name: v0.5.6
   alpha: true
   beta: true
