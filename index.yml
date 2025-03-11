@@ -28,6 +28,7 @@ v0.5.6:
   name: v0.5.6
   alpha: true
   beta: true
+  latest: true
 v0.5.5:
   sum: 369a6a4b6a9dc64f24a847a88fd05fc6f33df2bc0bde209759aaf5f3e7766d709bb1c1ea08b667892e59b6ba76feaa611202e0b57d0fc9aef5ab79b565d7c6a6
   date: 2025-03-01 07:56:38+0000
@@ -70,7 +71,6 @@ v0.5.5:
           en: Added the function of viewing supported compressed or decompressed formats.
   blog: /blog/250305
   name: v0.5.5
-  latest: true
 v0.5.4:
   sum: cdbc7116ee45159f576064ac842c5abbaf5e2fcfe682c7f0bd3bed3e2c3985ebd50b3dd9201a39ef120393f1687faea6e5ec8a487ac0eecb347d299941503012
   date: 2025-02-21 09:11:48+0000
