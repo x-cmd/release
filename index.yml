@@ -1,3 +1,59 @@
+v0.5.7:
+  sum: 0bdbf21d546ab904e3a124905d493080052c79b544b52f8b4dc7191c45bcc22809c507742821bd21af39cad3c7c82b2cbd4b02f5c335035642162422031cbb84
+  date: 2025-03-14 11:26:23+0000
+  change:
+    ohmyposh|starship:
+      update:
+        - cn: |
+            `ohmyposh` 和 `starship` 模块新增支持在 Non-POSIX shell（如 `fish`、`PowerShell`）环境下使用。
+            **注意**：在 `fish` 环境中使用该功能，需要先执行 `x fish --setup`，以更新 `x-cmd` 在 `fish` 中的启动脚本。`PowerShell` 也同样需要执行 `x pwsh --setup` 进行环境注入调整。
+
+            示例：
+            ```sh
+            # 设置在 PowerShell 环境使用 'montys' 主题
+            x ohmyposh use --shell powershell montys
+
+            # 设置在 Fish shell 环境使用 'gruvbox-rainbow' 主题
+            x starship use --shell fish gruvbox-rainbow
+            ```
+          en: |
+            Added support for using the `ohmyposh` and `starship` modules in Non-POSIX shell environments such as `fish` and `PowerShell`.
+            **Note**: To use this feature in `fish`, you need to run `x fish --setup` to update the `x-cmd` startup script for `fish`. Similarly, in `PowerShell`, you need to run `x pwsh --setup` to adjust the environment injection.
+
+            Example:
+            ```sh
+            # Set the 'montys' theme in the PowerShell environment
+            x ohmyposh use --shell powershell montys
+
+            # Set the 'gruvbox-rainbow' theme in the Fish shell environment
+            x starship use --shell fish gruvbox-rainbow
+            ```
+    cd:
+      bugfix:
+        - cn: 修复了在 Non-POSIX shell 环境下 `x cd -` 功能无法使用的问题。[x-cmd/x-cmd/issues/193](https://github.com/x-cmd/x-cmd/issues/193)
+          en: Fixed the issue where the `x cd -` function was not working in Non-POSIX shell environments. [x-cmd/x-cmd/issues/193](https://github.com/x-cmd/x-cmd/issues/193)
+    dos2unix:
+      update:
+        - cn: |
+            新增 dos2unix 模块。该模块用于转换文本文件行尾格式，支持 DOS、Unix 和 macOS 之间的相互转换。
+
+            示例：
+            ```sh
+            # 将 DOS 样式的文件行尾（CRLF）更改为 Unix 样式（LF）
+            x dos2unix /path/to/file
+            ```
+          en: |
+            Added the `dos2unix` module. This module is used to convert the end-of-line (EOL) format of text files, supporting mutual conversion between DOS, Unix, and macOS.
+
+            Example:
+            ```sh
+            # Convert DOS-style line endings (CRLF) to Unix-style line endings (LF)
+            x dos2unix /path/to/file
+            ```
+  blog: null
+  name: v0.5.7
+  alpha: true
+  beta: true
 v0.5.6:
   sum: b4cc02f12a5f72faa5290792dff41b4a3fef163438d17bd184c78ed8a75660579ca314caf5695dcbfa58fbfe17d8c736229504a4ddbebeb05168a866cbe3bff2
   date: 2025-03-08 08:14:48+0000
@@ -26,8 +82,6 @@ v0.5.6:
           en: Improved and fixed the warning logs for the `pkg gc recycle` feature, making the messages clearer and more accurate. [x-cmd/x-cmd/issues/141](https://github.com/x-cmd/x-cmd/issues/141)
   blog: /blog/250312
   name: v0.5.6
-  alpha: true
-  beta: true
   latest: true
 v0.5.5:
   sum: 369a6a4b6a9dc64f24a847a88fd05fc6f33df2bc0bde209759aaf5f3e7766d709bb1c1ea08b667892e59b6ba76feaa611202e0b57d0fc9aef5ab79b565d7c6a6
