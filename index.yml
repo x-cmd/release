@@ -1,3 +1,138 @@
+v0.5.8:
+  sum: ac89a9100c4545fb7690247fd95bc299342362b910b08602bb0cd319d81a98f4acccf4088952a3ce95101eb310bcfaab31ef05cf7856458155b95ad6fd531575
+  date: 2025-03-22 07:43:19+0000
+  change:
+    cd:
+      bugfix:
+        - cn: |
+            修复了 `cd` 模块在非 POSIX shell 环境下无法切换目录并执行本地 shell 命令的问题。[x-cmd/x-cmd/issues/151](https://github.com/x-cmd/x-cmd/issues/151)。
+          en: |
+            Fixed an issue where the `cd` module failed to change directories and execute local shell commands in Non-POSIX shell environments. [x-cmd/x-cmd/issues/151](https://github.com/x-cmd/x-cmd/issues/151).
+    ohmyposh|starship:
+      update:
+        - cn: |
+            `ohmyposh` 和 `starship` 模块新增支持在 elvish、xonsh 和 nushell 环境中使用。
+            现在，用户可以在更多非 POSIX shell 环境下享受一致的命令行主题体验，提升了跨平台使用的灵活性与便捷性。
+          en: |
+            The `ohmyposh` and `starship` modules now support usage in elvish, xonsh, and nushell environments.
+            Users can enjoy a consistent command-line theme experience across more Non-POSIX shell environments, enhancing flexibility and convenience for cross-platform usage.
+        - cn: |
+            `ohmyposh` 和 `starship` 模块新增了 **feature** 管理功能，当前支持管理 `zshplugin` 相关特性。
+            在 Zsh 环境下使用 `ohmyposh` 或 `starship` 模块加载命令行主题时，将自动加载默认的 Zsh 插件（语法高亮与历史命令补全），带来更流畅的终端体验。
+          en: |
+            Added **feature** management functionality to the `ohmyposh` and `starship` modules, currently supporting `zshplugin` management.
+            When loading command-line themes using `ohmyposh` or `starship` in a Zsh environment, default Zsh plugins (syntax highlighting and history completion) will be automatically loaded, enhancing the terminal experience.
+    pkg|env:
+      update:
+        - cn: |
+            `env` 模块的 `gc` 和 `upgrade` 命令新增了 `--force` 选项，允许用户跳过交互式提示，直接执行回收机制，更加高效便捷。
+
+            示例：
+            ```sh
+            # 更新后强制回收旧版本的 yq 软件
+            x env upgrade --force yq
+
+            # 强制回收 jq 软件
+            x env gc --force jq
+            ```
+          en: |
+            Added `--force` option to the `gc` and `upgrade` commands in the `env` module, enabling users to skip interactive prompts and  directly execute the garbage collection process for a more efficient experience.
+
+            Example:
+            ```sh
+            # Update and forcefully remove the old version of yq software
+            x env upgrade --force yq
+
+            # Forcefully remove the jq software
+            x env gc --force jq
+            ```
+    mac:
+      update:
+        - cn: |
+            新增 `tidsudo` 子命令，支持在 macOS 上使用触控 ID 进行 `sudo` 认证。
+            通过此功能，用户可以在不输入密码的情况下执行 `sudo` 命令，提高安全性和使用便捷性。
+
+            示例：
+            ```sh
+            x mac tidsudo enable
+            x mac tidsudo disable
+            ```
+          en: |
+            Added the `tidsudo` subcommand, enabling Touch ID authentication for `sudo` commands on macOS.
+            With this feature, users can execute `sudo` commands without entering a password, enhancing both security and convenience.
+
+            Example:
+            ```sh
+            x mac tidsudo enable
+            x mac tidsudo disable
+            ```
+        - cn: |
+            新增 `appid` 命令，可用于查询 `/Applications` 目录下已安装应用的 App ID。
+            该命令有助于开发者或高级用户查找 macOS 应用的唯一标识符，便于脚本编写或自动化管理。
+
+            示例：
+            ```sh
+            x mac appid ls
+            x mac appid get Docker.app
+            ```
+          en: |
+            Added the `appid` command to retrieve the App ID of installed applications in the `/Applications` directory.
+            This command is useful for developers or advanced users who need to find the unique identifier of a macOS application for scripting or automation purposes.
+
+            Example:
+            ```sh
+            x mac appid ls
+            x mac appid get Docker.app
+            ```
+        - cn: |
+            新增 `sshd` 命令，用于管理 OpenSSH 服务器 (`sshd`)，支持查询状态、启动、停止和重启等操作。
+            该命令适用于需要远程访问 macOS 的用户，提供更便捷的 SSH 服务器管理方式。
+
+            示例：
+            ```sh
+            x mac sshd status
+            x mac sshd start
+            ```
+          en: |
+            Added the `sshd` command for managing the OpenSSH server (`sshd`), supporting operations such as checking status, starting, stopping, and restarting the service.
+            This command is particularly useful for users who require remote access to their macOS system, providing an easier way to manage the SSH server.
+
+            Example:
+            ```sh
+            x mac sshd status
+            x mac sshd start
+            ```
+    dos2unix:
+      update:
+        - cn: |
+            优化了 dos2unix 模块的使用体验。
+            现在你可以直接使用 `x unix2dos`、`x unix2mac`、`x dos2unix`、`x dos2mac`、`x mac2unix` 和 `x mac2dos` 来转换文件行尾样式。
+
+            示例：
+            ```sh
+            # 将 DOS 样式的文件行尾（CRLF）更改为 Unix 样式（LF）
+            x dos2unix /path/to/file
+
+            # 将 Unix 样式的文件行尾（LF）更改为 DOS 样式（CRLF）
+            x unix2doc /path/to/file
+            ```
+          en: |
+            The user experience of the `dos2unix` module has been optimized.
+            You can now directly use `x unix2dos`, `x unix2mac`, `x dos2unix`, `x dos2mac`, `x mac2unix`, and `x mac2dos` to convert file line endings.
+
+            Example:
+
+            ```sh
+            # Change DOS-style line endings (CRLF) to Unix-style (LF)
+            x dos2unix /path/to/file
+
+            # Change Unix-style line endings (LF) to DOS-style (CRLF)
+            x unix2dos /path/to/file
+            ```
+  blog: null
+  name: v0.5.8
+  alpha: true
+  beta: true
 v0.5.7:
   sum: 0bdbf21d546ab904e3a124905d493080052c79b544b52f8b4dc7191c45bcc22809c507742821bd21af39cad3c7c82b2cbd4b02f5c335035642162422031cbb84
   date: 2025-03-14 11:26:23+0000
@@ -52,8 +187,6 @@ v0.5.7:
             ```
   blog: null
   name: v0.5.7
-  alpha: true
-  beta: true
 v0.5.6:
   sum: b4cc02f12a5f72faa5290792dff41b4a3fef163438d17bd184c78ed8a75660579ca314caf5695dcbfa58fbfe17d8c736229504a4ddbebeb05168a866cbe3bff2
   date: 2025-03-08 08:14:48+0000
