@@ -1,3 +1,177 @@
+v0.5.9:
+  sum: f79782c818a66438e81a1072c371eba91805f4532e3c58fcf593be8bd474a5863fab0f1216baa1609ebb3d87a7f174685519a8f239084363a6fb34a419b7645c
+  date: 2025-03-28 11:09:00+0000
+  change:
+    mac:
+      update:
+        - cn: |
+            新增 alias 命令，用于为 `x mac` 设定自定义别名。
+            该功能适用于希望加快操作速度或减少输入成本的用户。通过设置一个简短的别名，如 `m` 或 `mcli`，可以在执行 `x mac` 相关命令时省略冗长的输入，尤其适用于高频操作场景。
+
+            示例：
+            ```sh
+            # 启用别名功能，不提供参数，则默认为 m，以后可以使用 m 代替 x mac
+            x mac alias enable
+
+            # 启用别名功能，设为 mcli，以后可以使用 mcli 代替 x mac
+            x mac alias enable mcli
+
+            # 关闭别名功能，恢复默认行为
+            x mac alias disable
+            ```
+          en: |
+            Added the `alias` command, allowing users to define custom shortcuts for `x mac`.
+            This feature is useful for users who frequently execute `x mac` commands and want to speed up their workflow or reduce keystrokes. By setting a short and memorable alias like `m` or `mcli`, users can execute commands more efficiently.
+
+            Example:
+            ```sh
+            # Enable alias functionality; defaults to 'm' if no argument is provided
+            x mac alias enable
+
+            # Enable alias functionality and set it to 'mcli'
+            x mac alias enable mcli
+
+            # Disable alias functionality and restore default behavior
+            x mac alias disable
+            ```
+        - cn: |
+            新增 fw 命令，用于管理 macOS 自带的防火墙，包括查看状态、启用防火墙以及管理受控应用程序等。
+            该命令适用于希望更精细控制 macOS 防火墙规则的用户，帮助您快速查看并调整安全策略，防止未经授权的网络访问。
+
+            示例：
+            ```sh
+            # 显示防火墙的当前状态和配置信息
+            x mac fw info
+
+            # 启用防火墙，提升系统安全性
+            x mac fw enable
+
+            # 将 Raycast 应用添加到防火墙规则中
+            x mac fw app add /Applications/Raycast.app
+            ```
+          en: |
+            Added the `fw` command for managing macOS' built-in firewall, including checking status, enabling the firewall, and managing allowed applications.
+            This command is useful for users who want finer control over firewall rules, allowing them to quickly review and adjust security settings to prevent unauthorized network access.
+
+            Example:
+            ```sh
+            # Display the current firewall status and configuration
+            x mac fw info
+
+            # Enable the firewall to enhance system security
+            x mac fw enable
+
+            # Add the Raycast application to the firewall rules
+            x mac fw app add /Applications/Raycast.app
+            ```
+        - cn: |
+            新增 ntp 命令，用于管理 macOS 的网络时间同步（Network Time Protocol, NTP）。
+            用户可以使用此命令快速启用或禁用系统的时间同步功能，并手动指定 NTP 服务器，确保系统时间的准确性，尤其适用于对时间同步有严格要求的环境。
+
+            示例：
+            ```sh
+            # 启用网络时间同步，使系统自动同步时间
+            x mac ntp enable
+
+            # 指定 NTP 服务器，例如 Apple 提供的亚洲地区时间服务器
+            x mac ntp set time.asia.apple.com
+            ```
+          en: |
+            Added the `ntp` command for managing macOS' Network Time Protocol (NTP) settings.
+            This command allows users to quickly enable or disable automatic time synchronization and manually set an NTP server to ensure accurate system time, particularly useful in environments where precise timekeeping is essential.
+
+            Example:
+            ```sh
+            # Enable network time synchronization to automatically sync system time
+            x mac ntp enable
+
+            # Set a specific NTP server, such as Apple's Asia-based time server
+            x mac ntp set time.asia.apple.com
+            ```
+        - cn: |
+            新增 vpn 命令，用于管理 macOS 的 VPN 连接，包括列出可用 VPN、启动和停止 VPN 连接等操作。
+            适用于需要频繁切换 VPN 连接的用户，提供更便捷的命令行方式来管理网络访问。
+
+            示例：
+            ```sh
+            # 列出所有可用的 VPN 连接
+            x mac vpn ls
+
+            # 启动指定 VPN 连接，例如 "MyVPN"
+            x mac vpn start MyVPN
+
+            # 停止指定 VPN 连接
+            x mac vpn stop MyVPN
+            ```
+          en: |
+            Added the `vpn` command for managing macOS VPN connections, including listing available VPNs, starting, and stopping VPN connections.
+            This is useful for users who frequently switch VPNs and prefer a command-line interface for managing network access.
+
+            Example:
+            ```sh
+            # List all available VPN connections
+            x mac vpn ls
+
+            # Start a specific VPN connection, e.g., "MyVPN"
+            x mac vpn start MyVPN
+
+            # Stop a specific VPN connection
+            x mac vpn stop MyVPN
+            ```
+        - cn: |
+            新增 airdrop 命令，用于管理 macOS 的 AirDrop 功能，包括查看当前可见性状态以及调整可见性范围。
+            该命令适用于希望更灵活控制 AirDrop 共享范围的用户，可快速调整为仅限联系人或开放给所有人。
+
+            示例：
+            ```sh
+            # 查看当前 AirDrop 的可见性状态
+            x mac airdrop status
+
+            # 设置 AirDrop 仅允许联系人可见
+            x mac airdrop set contacts
+            ```
+          en: |
+            Added the `airdrop` command for managing macOS' AirDrop functionality, including checking its visibility status and adjusting its discoverability settings.
+            This command is useful for users who want more flexible control over AirDrop sharing, allowing them to quickly set visibility to "Contacts Only" or "Everyone."
+
+            Example:
+            ```sh
+            # Check the current AirDrop visibility status
+            x mac airdrop status
+
+            # Set AirDrop to be visible only to contacts
+            x mac airdrop set contacts
+            ```
+        - cn: |
+            新增 lang 和 name 命令，用于快速获取 macOS 设备的系统语言设置和主机名称。
+
+            示例：
+            ```sh
+            # 查看当前系统语言设置
+            x mac lang
+
+            # 查看当前设备主机名
+            x mac name
+            ```
+          en: |
+            Added the `lang` and `name` commands for quickly retrieving macOS system language settings and hostname.
+
+            Example:
+            ```sh
+            # Display the current system language setting
+            x mac lang
+
+            # Display the current device hostname
+            x mac name
+            ```
+    tui:
+      bugfix:
+        - cn: 修复了 `x-cmd` TUI 应用退出后，子进程未能立即关闭而导致长时间停顿的问题，提升了应用的响应速度和用户体验。
+          en: Fixed an issue where `x-cmd` TUI apps did not immediately terminate child processes upon exit, causing long delays. This improves responsiveness and enhances the user experience.
+  blog: null
+  name: v0.5.9
+  alpha: true
+  beta: true
 v0.5.8:
   sum: ac89a9100c4545fb7690247fd95bc299342362b910b08602bb0cd319d81a98f4acccf4088952a3ce95101eb310bcfaab31ef05cf7856458155b95ad6fd531575
   date: 2025-03-22 07:43:19+0000
@@ -131,8 +305,6 @@ v0.5.8:
             ```
   blog: null
   name: v0.5.8
-  alpha: true
-  beta: true
 v0.5.7:
   sum: 0bdbf21d546ab904e3a124905d493080052c79b544b52f8b4dc7191c45bcc22809c507742821bd21af39cad3c7c82b2cbd4b02f5c335035642162422031cbb84
   date: 2025-03-14 11:26:23+0000
