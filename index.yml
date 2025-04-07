@@ -1,3 +1,43 @@
+v0.5.10:
+  sum: e1c775a4d0c665c06bf9e04e659d84449813d267bd492c5162b6930afeb7d65cdd88116c172331e64e2a8a2950e837dab66128b1b6b2e6af99f9efde9a5a323d
+  date: 2025-04-07 08:22:20+0000
+  change:
+    uninstall:
+      update:
+        - cn: |
+            新增 `uninstall` 模块，提供跨平台的软件卸载能力，使用户能够快速查询并移除已安装的软件。
+            该模块支持多种系统包管理器（如 `apt`、`brew`、`dnf` 等）以及第三方包管理器，简化了卸载流程，并可交互式选择需要删除的软件。
+
+            示例：
+            ```sh
+            # 使用交互式 APP 列出已安装软件，并进行卸载
+            x uninstall
+
+            # 卸载 brew 安装的 bat
+            x uninstall rm brew bat
+
+            # 卸载 x-cmd
+            x uninstall self
+            ```
+          en: |
+            Added the `uninstall` module, providing cross-platform software uninstallation capabilities. Users can quickly search for and remove installed software.
+            This module supports multiple system package managers (such as `apt`, `brew`, `dnf`, etc.) as well as third-party package managers, simplifying the uninstallation process with an interactive selection option.
+
+            Examples:
+            ```sh
+            # List installed software interactively and uninstall selected applications
+            x uninstall
+
+            # Uninstall `bat` installed via brew
+            x uninstall rm brew bat
+
+            # Uninstall x-cmd itself
+            x uninstall self
+            ```
+  blog: null
+  name: v0.5.10
+  alpha: true
+  beta: true
 v0.5.9:
   sum: f79782c818a66438e81a1072c371eba91805f4532e3c58fcf593be8bd474a5863fab0f1216baa1609ebb3d87a7f174685519a8f239084363a6fb34a419b7645c
   date: 2025-03-28 11:09:00+0000
@@ -170,8 +210,6 @@ v0.5.9:
           en: Fixed an issue where `x-cmd` TUI apps did not immediately terminate child processes upon exit, causing long delays. This improves responsiveness and enhances the user experience.
   blog: null
   name: v0.5.9
-  alpha: true
-  beta: true
 v0.5.8:
   sum: ac89a9100c4545fb7690247fd95bc299342362b910b08602bb0cd319d81a98f4acccf4088952a3ce95101eb310bcfaab31ef05cf7856458155b95ad6fd531575
   date: 2025-03-22 07:43:19+0000
