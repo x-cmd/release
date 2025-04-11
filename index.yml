@@ -38,6 +38,7 @@ v0.5.10:
   name: v0.5.10
   alpha: true
   beta: true
+  latest: true
 v0.5.9:
   sum: f79782c818a66438e81a1072c371eba91805f4532e3c58fcf593be8bd474a5863fab0f1216baa1609ebb3d87a7f174685519a8f239084363a6fb34a419b7645c
   date: 2025-03-28 11:09:00+0000
@@ -425,7 +426,6 @@ v0.5.6:
           en: Improved and fixed the warning logs for the `pkg gc recycle` feature, making the messages clearer and more accurate. [x-cmd/x-cmd/issues/141](https://github.com/x-cmd/x-cmd/issues/141)
   blog: /blog/250312
   name: v0.5.6
-  latest: true
 v0.5.5:
   sum: 369a6a4b6a9dc64f24a847a88fd05fc6f33df2bc0bde209759aaf5f3e7766d709bb1c1ea08b667892e59b6ba76feaa611202e0b57d0fc9aef5ab79b565d7c6a6
   date: 2025-03-01 07:56:38+0000
