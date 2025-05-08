@@ -31,6 +31,33 @@ v0.5.11:
       update:
         - cn: 去除对 `___X_CMD_HELP_LANGUAGE` 变量的支持，改为使用 `___X_CMD_LANG` 变量来控制命令补全和帮助文档的显示语言（`zh` 或 `en`）。
           en: Removed support for the `___X_CMD_HELP_LANGUAGE` variable, now replaced by the `___X_CMD_LANG` variable to control the language of completions and help documentation (`zh` or `en`).
+    ping:
+      update:
+        - cn: |
+            调整 x ping 默认参数为 bing.com，旨在提供一个稳定、响应速度快且公开可访问的默认测试目标，让用户无需额外输入即可快速检测与外部网络的连接状态。
+            如果您有更好的推荐，欢迎在 issue 中提出！
+
+            ```sh
+            x ping -> x ping bing.com
+            x ping -m -> x ping -m bing.com
+            ```
+          en: |
+            Adjust the default parameters of x ping to bing.com, aiming to provide a stable, fast-response, and publicly accessible default test target, allowing users to quickly check their connection status to external networks without additional input.
+            If you have better recommendations, feel free to suggest them in the issue!
+
+            ```sh
+            x ping -> x ping bing.com
+            x ping -m -> x ping -m bing.com
+            ```
+      bugfix:
+        - cn: |
+            修复了 x ping 模块在某些使用 inetutils-ping (因其不支持 -O 选项) 的系统上无法正常运行的问题。[x-cmd/x-cmd/issues/220](https://github.com/x-cmd/x-cmd/issues/220)。
+            现在，x ping 模块可以识别 inetutils-ping，并针对 inetutils-ping 做了兼容性处理。
+          en: |
+            Fixed an issue where x ping was not working correctly on some systems using inetutils-ping due to its lack of support for the -O option. [x-cmd/x-cmd/issues/220](https://github.com/x-cmd/x-cmd/issues/220).
+            Now, the x ping module can recognize inetutils-ping and has implemented compatibility handling for inetutils-ping.
+        - cn: 修复了 Windows 下 IPv6 输出的可视化失败问题。[x-cmd/x-cmd/issues/226](https://github.com/x-cmd/x-cmd/issues/226)。
+          en: Fixed a visualization failure for IPv6 output on Windows. [x-cmd/x-cmd/issues/226](https://github.com/x-cmd/x-cmd/issues/226).
   blog: null
   name: v0.5.11
   alpha: true
