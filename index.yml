@@ -1,3 +1,40 @@
+v0.5.11:
+  sum: 5570aa50dce64168fb6079a65ae473d0eae49d618cfc8f4c744194c70341fc677583d66866b60d84df2eb966d28c194bad0369e48b83b88153c5adef2bcca4ae
+  date: 2025-05-08 08:30:46+0000
+  change:
+    openai:
+      update:
+        - cn: OpenAI 模块新增对 `gpt-4.1`、`gpt-4.1-mini` 和 `gpt-4.1-nano` 模型的支持，用户可根据需求选择不同规格的模型，获得更灵活的调用体验。
+          en: Added support for `gpt-4.1`, `gpt-4.1-mini`, and `gpt-4.1-nano` models in the OpenAI module, allowing users to choose from various model sizes for more flexible usage.
+    gemini:
+      update:
+        - cn: Gemini 模块新增对 `gemini-2.5-flash-preview-04-17` 模型的支持，提供更先进的多模态处理能力，适用于更复杂的任务场景。
+          en: Added support for the `gemini-2.5-flash-preview-04-17` model in the Gemini module, offering enhanced multimodal capabilities for more complex tasks.
+    mac:
+      update:
+        - cn: |
+            `x mac` 命令的 alias 功能其内部实现已切换为 `shortcut` 模块，以便统一管理快捷方式配置。
+            如果你此前为 `x mac` 设置过别名（alias），需要重新手动设置一次，旧的配置将不再生效。
+          en: |
+            The alias functionality for the `x mac` command is now powered by the `shortcut` module, enabling unified management of shortcuts.
+            If you previously set up an alias for `x mac`, you'll need to recreate it manually, as older configurations are no longer supported.
+    asdf:
+      update:
+        - cn: |
+            asdf 模块现已支持使用 Go 重写的 asdf 版本，即 0.16.0 及以上版本。
+            相较于此前的 Bash 实现（如 0.15.0 及更早版本），新版本内部结构发生了较大变动，推荐用户阅读官方迁移指南以确保平稳升级：https://asdf-vm.com/guide/upgrading-to-v0-16.html
+          en: |
+            The asdf module now supports versions of asdf rewritten in Go (v0.16.0 and above).
+            Compared to the previous Bash-based implementation (such as v0.15.0 and earlier), the new version introduces significant structural changes.
+            Users are encouraged to read the official upgrade guide to ensure a smooth transition: https://asdf-vm.com/guide/upgrading-to-v0-16.html
+    advise|help:
+      update:
+        - cn: 去除对 `___X_CMD_HELP_LANGUAGE` 变量的支持，改为使用 `___X_CMD_LANG` 变量来控制命令补全和帮助文档的显示语言（`zh` 或 `en`）。
+          en: Removed support for the `___X_CMD_HELP_LANGUAGE` variable, now replaced by the `___X_CMD_LANG` variable to control the language of completions and help documentation (`zh` or `en`).
+  blog: null
+  name: v0.5.11
+  alpha: true
+  beta: true
 v0.5.10:
   sum: e1c775a4d0c665c06bf9e04e659d84449813d267bd492c5162b6930afeb7d65cdd88116c172331e64e2a8a2950e837dab66128b1b6b2e6af99f9efde9a5a323d
   date: 2025-04-07 08:22:20+0000
@@ -36,8 +73,6 @@ v0.5.10:
             ```
   blog: null
   name: v0.5.10
-  alpha: true
-  beta: true
   latest: true
 v0.5.9:
   sum: f79782c818a66438e81a1072c371eba91805f4532e3c58fcf593be8bd474a5863fab0f1216baa1609ebb3d87a7f174685519a8f239084363a6fb34a419b7645c
