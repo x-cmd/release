@@ -1,3 +1,21 @@
+v0.5.12:
+  sum: 4f44bb94d7662635b9b1844b26e3df5bb55c8e3cd49b829c982f97a39fe8e9982ce1e835cec0d0a7783afa32b0cba29c9f3ceea7cc8c1229be53a4eadd9b29b1
+  date: 2025-05-12 12:26:09+0000
+  change:
+    pwsh:
+      bugfix:
+        - cn: 修复了 PowerShell 与 Git Bash 之间关于 UTF-8 编码的问题。详见 [#230](https://github.com/x-cmd/x-cmd/issues/230)。
+          en: Fixed UTF-8 encoding issues between PowerShell and Git Bash. See [x-cmd/x-cmd#230](https://github.com/x-cmd/x-cmd/issues/230).
+        - cn: 在使用 `Test-Path` 命令之前新增对空字符串的判断，避免报错。详见 [#231](https://github.com/x-cmd/x-cmd/issues/231)。
+          en: Added empty string check before using `Test-Path` in PowerShell to prevent errors. See [x-cmd/x-cmd#231](https://github.com/x-cmd/x-cmd/issues/231).
+    root:
+      update:
+        - cn: root 模块新增 `repoint` 功能，用于管理 x-cmd 根目录的实际指向，当前为实验版本。
+          en: Added `repoint` feature to the root module for managing the actual target of the x-cmd root directory. Currently experimental.
+  blog: null
+  name: v0.5.12
+  alpha: true
+  beta: true
 v0.5.11:
   sum: 1774609f5a4c9faad69eb55e0e33379b08fa2412c128cabdbedb681c9055b799d35dfd8837860ea9c65c51b40422cc4cb874973b224377c9a92dba9b041feb9f
   date: 2025-05-08 09:09:19+0000
@@ -60,8 +78,6 @@ v0.5.11:
           en: Fixed a visualization failure for IPv6 output on Windows. [x-cmd/x-cmd/issues/226](https://github.com/x-cmd/x-cmd/issues/226).
   blog: null
   name: v0.5.11
-  alpha: true
-  beta: true
 v0.5.10:
   sum: e1c775a4d0c665c06bf9e04e659d84449813d267bd492c5162b6930afeb7d65cdd88116c172331e64e2a8a2950e837dab66128b1b6b2e6af99f9efde9a5a323d
   date: 2025-04-07 08:22:20+0000
