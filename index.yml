@@ -1,3 +1,16 @@
+v0.5.13:
+  sum: 5148408003ebbf7cc660035da2c7c7638e20ed67e6a85805cacf691eb732c5bb28f7eccd2a9d421ae48e88da970714aec074ca5e72abe0fa6557a16c9411fc36
+  date: 2025-05-18 12:51:31+0000
+  change:
+    root:
+      bugfix:
+        - cn: 删除导致安装失败的软链 lib/a.
+          en: remove the symblink in lib/a.
+  blog: null
+  name: v0.5.13
+  alpha: true
+  beta: true
+  latest: true
 v0.5.12:
   sum: 4f44bb94d7662635b9b1844b26e3df5bb55c8e3cd49b829c982f97a39fe8e9982ce1e835cec0d0a7783afa32b0cba29c9f3ceea7cc8c1229be53a4eadd9b29b1
   date: 2025-05-12 12:26:09+0000
@@ -14,9 +27,6 @@ v0.5.12:
           en: Added `repoint` feature to the root module for managing the actual target of the x-cmd root directory. Currently experimental.
   blog: null
   name: v0.5.12
-  alpha: true
-  beta: true
-  latest: true
 v0.5.11:
   sum: 1774609f5a4c9faad69eb55e0e33379b08fa2412c128cabdbedb681c9055b799d35dfd8837860ea9c65c51b40422cc4cb874973b224377c9a92dba9b041feb9f
   date: 2025-05-08 09:09:19+0000
