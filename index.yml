@@ -4,8 +4,6 @@ v0.5.14:
   change:
     x-cmd:
       update:
-        - cn: 增加 `x update`
-          en: Add `x update`
         - cn: 解决 'cannot find the batch label' -> [x-cmd/x-cmd#239](https://github.com/x-cmd/x-cmd/issues/239)
           en: Solve 'cannot find the batch label' -> [x-cmd/x-cmd#239](https://github.com/x-cmd/x-cmd/issues/239)
     ip:
