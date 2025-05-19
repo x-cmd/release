@@ -1,3 +1,25 @@
+v0.5.14:
+  sum: 6e004e0720f5be1b2aba0285e73a8f8e4ec6827432a7f6830405911679a514f7caadff4b6c4b5642d4b05dbb35dccb121e02e6a112fe95f6d89daffce6297c0d
+  date: 2025-05-19 10:04:59+0000
+  change:
+    x-cmd:
+      update:
+        - cn: 增加 `x update`
+          en: Add `x update`
+        - cn: 解决 'cannot find the batch label' -> [x-cmd/x-cmd#239](https://github.com/x-cmd/x-cmd/issues/239)
+          en: Solve 'cannot find the batch label' -> [x-cmd/x-cmd#239](https://github.com/x-cmd/x-cmd/issues/239)
+    ip:
+      update:
+        - cn: 增加端口发现功能 -> x ip tps
+          en: open port scan -> x ip tps
+    advise:
+      update:
+        - cn: 新增 `addon` 命令，支持使用其他外部工具进行命令补全，目前仅支持 [carapace-bin](https://github.com/carapace-sh/carapace-bin)，属于实验性功能。
+          en: Added `addon` command to support command completion using external tools. Currently supports only [carapace-bin](https://github.com/carapace-sh/carapace-bin). Experimental feature.
+  blog: null
+  name: v0.5.14
+  alpha: true
+  beta: true
 v0.5.13:
   sum: 5148408003ebbf7cc660035da2c7c7638e20ed67e6a85805cacf691eb732c5bb28f7eccd2a9d421ae48e88da970714aec074ca5e72abe0fa6557a16c9411fc36
   date: 2025-05-18 12:51:31+0000
@@ -8,8 +30,6 @@ v0.5.13:
           en: remove the symblink in lib/a.
   blog: null
   name: v0.5.13
-  alpha: true
-  beta: true
   latest: true
 v0.5.12:
   sum: 4f44bb94d7662635b9b1844b26e3df5bb55c8e3cd49b829c982f97a39fe8e9982ce1e835cec0d0a7783afa32b0cba29c9f3ceea7cc8c1229be53a4eadd9b29b1
