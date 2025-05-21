@@ -18,6 +18,7 @@ v0.5.14:
   name: v0.5.14
   alpha: true
   beta: true
+  latest: true
 v0.5.13:
   sum: 5148408003ebbf7cc660035da2c7c7638e20ed67e6a85805cacf691eb732c5bb28f7eccd2a9d421ae48e88da970714aec074ca5e72abe0fa6557a16c9411fc36
   date: 2025-05-18 12:51:31+0000
@@ -28,7 +29,6 @@ v0.5.13:
           en: remove the symblink in lib/a.
   blog: null
   name: v0.5.13
-  latest: true
 v0.5.12:
   sum: 4f44bb94d7662635b9b1844b26e3df5bb55c8e3cd49b829c982f97a39fe8e9982ce1e835cec0d0a7783afa32b0cba29c9f3ceea7cc8c1229be53a4eadd9b29b1
   date: 2025-05-12 12:26:09+0000
