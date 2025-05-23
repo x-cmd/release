@@ -1,3 +1,44 @@
+v0.5.15:
+  sum: 94d2c1c04b5265208749a89217f293e0bdbb63ce8418be594fcee2281e01a270e1540114d0692cd0d52d367d3709731c875d1a15a0454c99090df5cd7cb02a74
+  date: 2025-05-23 12:36:22+0000
+  change:
+    x-cmd:
+      update:
+        - cn: 新增 `x update` 功能，用于一键更新 x-cmd 的元数据（如 pkg、install、theme 等），便于保持组件信息的最新状态。
+          en: Added `x update` command to update x-cmd metadata (such as pkg, install, theme), making it easier to keep components up to date.
+        - cn: 删除过时的 `~/.x-cmd.root/bin/x`，并将其全局替换为 `~/.x.cmd.root/bin/x-cmd`，以确保路径的一致性。[x-cmd/x-cmd/issues/243](https://github.com/x-cmd/x-cmd/issues/243)。
+          en: Removed the outdated `~/.x-cmd.root/bin/x` and globally replaced it with `~/.x.cmd.root/bin/x-cmd` to ensure path consistency. [x-cmd/x-cmd/issues/243](https://github.com/x-cmd/x-cmd/issues/243).
+    qywx:
+      update:
+        - cn: |
+            qywx 模块新增发送文件消息的功能，支持通过企业微信发送本地文件。[x-cmd/x-cmd/issues/240](https://github.com/x-cmd/x-cmd/issues/240)。
+
+            示例：
+            ```sh
+            x qywx send --file /path/to/file.txt
+            ```
+          en: |
+            Added file message sending feature to the qywx module, allowing users to send local files via WeCom. [x-cmd/x-cmd/issues/240](https://github.com/x-cmd/x-cmd/issues/240).
+
+            Example:
+            ```sh
+            x qywx send --file /path/to/file.txt
+            ```
+    grok:
+      update:
+        - cn: 新增对 grok-3 模型的支持。
+          en: Added support for grok-3 model.
+      bugfix:
+        - cn: 修复 grok 使用时默认 seed 设置错误的问题。
+          en: Fixed incorrect default seed issue when using grok.
+    termux:
+      update:
+        - cn: 新增 termux 模块，在 termux app 基础上集成了对 Android 系统功能（如短信、电池、语音、浏览器等）的封装支持，并提供 Proot 容器化多发行版管理能力。用户通过 termux 模块可以便捷地管理安卓功能、调用系统接口。
+          en: Added the termux module, which builds upon the Termux app to provide integrated support for various Android system functions—such as SMS, battery status, text-to-speech, and browser access—along with Proot-based containerized management of multiple Linux distributions. With the termux module, users can easily manage Android features and invoke system-level APIs.
+  blog: null
+  name: v0.5.15
+  alpha: true
+  beta: true
 v0.5.14:
   sum: 6e004e0720f5be1b2aba0285e73a8f8e4ec6827432a7f6830405911679a514f7caadff4b6c4b5642d4b05dbb35dccb121e02e6a112fe95f6d89daffce6297c0d
   date: 2025-05-19 10:04:59+0000
@@ -16,8 +57,6 @@ v0.5.14:
           en: Added `addon` command to support command completion using external tools. Currently supports only [carapace-bin](https://github.com/carapace-sh/carapace-bin). Experimental feature.
   blog: null
   name: v0.5.14
-  alpha: true
-  beta: true
   latest: true
 v0.5.13:
   sum: 5148408003ebbf7cc660035da2c7c7638e20ed67e6a85805cacf691eb732c5bb28f7eccd2a9d421ae48e88da970714aec074ca5e72abe0fa6557a16c9411fc36
