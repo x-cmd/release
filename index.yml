@@ -1,3 +1,29 @@
+v0.6.0:
+  sum: e75d043f5c4e54db55a9e6bfaef59e200fac8199070e13ae8765a2b4685bad98cbca83862050a4993d3afb6c29357f9adc1821e6cedb2ef0f2ea90621e82d2d9
+  date: 2025-06-14 13:17:09+0000
+  change:
+    snap:
+      update:
+        - cn: |
+            新增 snap 模块，用于指定运行某个软件包。如果本地未安装，将自动下载该软件包。
+            支持根据不同环境切换包管理器：默认使用 x-cmd 的 pkg 模块，在 termux 环境下则使用原生的 pkg 包管理器。
+            当前为测试实验版本，仅在 x-cmd 内部模块使用。
+          en: |
+            Added the snap module to run a specified package. If the package is not available locally, it will be automatically downloaded.
+            Supports switching package managers based on the environment: uses x-cmd's pkg module by default, and falls back to the native pkg manager in termux.
+            Currently an experimental feature, used only within internal x-cmd modules.
+    ll|fzf|jq|yq|top:
+      update:
+        - cn: 更新了 `ll`、`fzf`、`jq`、`yq`、`top` 模块，内部集成调用 `snap` 模块自动下载所需的外部工具，即使在 termux 环境中也可正常使用。
+          en: Updated `ll`, `fzf`, `jq`, `yq` and `top` modules to internally use the `snap` module for downloading required external tools, ensuring compatibility even in the termux environment.
+    advise:
+      bugfix:
+        - cn: 修复 advise 模块中 `___x_cmd_advise___is_completion_loaded` 函数的语法错误问题。该函数用于判断当前环境下相关命令是否已加载补全功能。[#249](https://github.com/x-cmd/x-cmd/issues/249)。
+          en: Fixed a syntax error in the `___x_cmd_advise___is_completion_loaded` function of the advise module. This function checks whether command completions are loaded in the current environment. [#249](https://github.com/x-cmd/x-cmd/issues/249).
+  blog: null
+  name: v0.6.0
+  alpha: true
+  beta: true
 v0.5.15:
   sum: 94d2c1c04b5265208749a89217f293e0bdbb63ce8418be594fcee2281e01a270e1540114d0692cd0d52d367d3709731c875d1a15a0454c99090df5cd7cb02a74
   date: 2025-05-23 12:36:22+0000
@@ -37,8 +63,6 @@ v0.5.15:
           en: Added the termux module, which builds upon the Termux app to provide integrated support for various Android system functions—such as SMS, battery status, text-to-speech, and browser access—along with Proot-based containerized management of multiple Linux distributions. With the termux module, users can easily manage Android features and invoke system-level APIs.
   blog: null
   name: v0.5.15
-  alpha: true
-  beta: true
 v0.5.14:
   sum: 6e004e0720f5be1b2aba0285e73a8f8e4ec6827432a7f6830405911679a514f7caadff4b6c4b5642d4b05dbb35dccb121e02e6a112fe95f6d89daffce6297c0d
   date: 2025-05-19 10:04:59+0000
