@@ -1,3 +1,52 @@
+v0.6.1:
+  sum: c6091bfa6b3f4baa30a4e34e7c4b77e36489579cd842d50095373484e229bc73cb46999c274d2b8ae122b56ab459e384d6c2abbb9fcc2340a66563caa2b329b4
+  date: 2025-06-20 14:16:38+0000
+  change:
+    csv:
+      update:
+        - cn: 将 csv 模块调整为外部模块。
+          en: Converted the csv module into an external module.
+      bugfix:
+        - cn: 修复了 csv 模块中 `static_tab` 功能在每行结尾输出多余的不可见字符和空格的问题，提升输出内容的整洁性。
+          en: Fixed an issue in the csv module where the `static_tab` feature added invisible characters and extra spaces at the end of each line, improving output clarity.
+    gcal:
+      update:
+        - cn: |
+            新增 `gcal` 模块，为 GNU gcal 命令提供了封装，便于用户进行配置与行为自定义，以进一步增强其实用功能。
+
+            示例：
+            ```sh
+            # 启动交互式配置，设置国家代码和日历格式
+            x gcal --init
+
+            # 打印本月日历
+            x gcal
+
+            # 打印 2025 年的日历
+            x gcal 2025
+            ```
+        - en: |
+            Added the `gcal` module, which wraps GNU gcal to simplify user configuration and behavior customization, further enhancing its practical functionality.
+
+            Examples:
+            ```sh
+            # Launch interactive setup to configure country code and calendar format
+            x gcal --init
+
+            # Print the current month's calendar
+            x gcal
+
+            # Print the calendar for the year 2025
+            x gcal 2025
+            ```
+    ccal:
+      update:
+        - cn: 新增 `ccal` 模块，可在终端中查看公历与农历信息。该模块目前仍在测试阶段，功能尚未完全完善。
+          en: Added `ccal` module for viewing both Gregorian and Lunar calendars in the terminal. The module is still under development and currently in testing phase.
+  blog: null
+  name: v0.6.1
+  alpha: true
+  beta: true
 v0.6.0:
   sum: e75d043f5c4e54db55a9e6bfaef59e200fac8199070e13ae8765a2b4685bad98cbca83862050a4993d3afb6c29357f9adc1821e6cedb2ef0f2ea90621e82d2d9
   date: 2025-06-14 13:17:09+0000
@@ -22,8 +71,6 @@ v0.6.0:
           en: Fixed a syntax error in the `___x_cmd_advise___is_completion_loaded` function of the advise module. This function checks whether command completions are loaded in the current environment. [#249](https://github.com/x-cmd/x-cmd/issues/249).
   blog: null
   name: v0.6.0
-  alpha: true
-  beta: true
 v0.5.15:
   sum: 94d2c1c04b5265208749a89217f293e0bdbb63ce8418be594fcee2281e01a270e1540114d0692cd0d52d367d3709731c875d1a15a0454c99090df5cd7cb02a74
   date: 2025-05-23 12:36:22+0000
