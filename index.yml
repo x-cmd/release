@@ -25,7 +25,7 @@ v0.6.1:
             # 打印 2025 年的日历
             x gcal 2025
             ```
-        - en: |
+          en: |
             Added the `gcal` module, which wraps GNU gcal to simplify user configuration and behavior customization, further enhancing its practical functionality.
 
             Examples:
