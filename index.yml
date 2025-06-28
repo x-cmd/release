@@ -1,3 +1,138 @@
+v0.6.2:
+  sum: 3e5eac95c778a5161f21f581c63f90bec5f09621028dac4b2f849422ce59e6a8083aed01cbf3f9ce0b0223c3c3ed90c42df0d470a358f0f65957c239176c4d67
+  date: 2025-06-28 04:07:39+0000
+  change:
+    mac:
+      update:
+        - cn: |
+            新增 `re` 子命令，为 Apple 自带的提醒事项（Reminders）提供命令行操作支持，让你无需打开应用也能快速添加、更新和完成待办事项。
+            适用于希望通过终端管理提醒的用户，特别适合将提醒功能集成到自动化脚本、每日启动任务或 GTD 工作流中。
+
+            示例：
+            ```sh
+            # 添加一个提醒事项 “Buy milk”，时间为 2025 年 6 月 25 日 18:00
+            x mac re add "Buy milk" "2025-06-25" "18:00"
+
+            # 将名称为 “Buy milk” 的提醒事项标记为已完成
+            x mac re comp "Buy milk"
+
+            # 将提醒事项 “Buy milk” 修改为 “Buy milk,egg”，时间改为 2025 年 6 月 25 日 19:00
+            x mac re update "Buy milk" "Buy milk,egg" "2025-06-25 19:00"
+            ```
+          en: |
+            Added the `re` subcommand, which brings CLI access to Apple Reminders. You can now manage your to-do items directly from the terminal — ideal for automation, scripting, or fast keyboard-driven workflows.
+            Great for users who want to integrate reminders into GTD systems, startup routines, or terminal-based productivity flows.
+
+            Examples:
+            ```sh
+            # Add a reminder titled "Buy milk" for June 25, 2025 at 18:00
+            x mac re add "Buy milk" "2025-06-25" "18:00"
+
+            # Mark the reminder "Buy milk" as completed
+            x mac re comp "Buy milk"
+
+            # Update the reminder "Buy milk" to "Buy milk,egg" with new time 2025-06-25 19:00
+            x mac re update "Buy milk" "Buy milk,egg" "2025-06-25 19:00"
+            ```
+        - cn: |
+            新增 `note` 子命令，为 Apple 备忘录（Notes）引入命令行接口。你可以从终端快速添加、打开或删除备忘录，无需手动操作界面。
+            非常适合喜欢键盘操作的用户，或者希望将备忘录写入自动化流程、每日记录、剪贴板管理等场景中。
+
+            示例：
+            ```sh
+            # 添加一个名为 note1 的备忘录
+            x mac note add note1
+
+            # 打开名为 note1 的备忘录
+            x mac note open note1
+
+            # 删除名为 note1 的备忘录
+            x mac note rm note1
+            ```
+          en: |
+            Introduced the `note` subcommand, providing a CLI interface to Apple Notes. You can now create, open, or delete notes directly from the terminal — a perfect fit for automation or keyboard-centric workflows.
+            This is especially useful for those who want to quickly jot down ideas, automate daily logs, or manage personal notes without leaving the shell.
+
+            Examples:
+            ```sh
+            # Add a note titled note1
+            x mac note add note1
+
+            # Open the note named note1
+            x mac note open note1
+
+            # Remove the note named note1
+            x mac note rm note1
+            ```
+    xgo:
+      update:
+        - cn: 新增 xgo 模块，对 gop 进行基础封装，增强 gop 使用体验
+          en: Added xgo module to provide basic encapsulation for gop and enhance gop usage experience
+    solo:
+      update:
+        - cn: 增加对 gop 语言运行时支持
+          en: Added support for gop language runtime
+    retry:
+      update:
+        - cn: |
+            修改 `retry` 模块的默认参数
+            1. `-i|--interval <num>` 默认间隔为 5 秒(s)
+            2. `-m|--max <num>` 默认为无限尝试
+          en: |
+            Modify the default parameters of the `retry` module
+            1. `-i|--interval <num>` Default interval is 5 seconds(s)
+            2. `-m|--max <num>` Defaults to unlimited attempts
+    ccal:
+      update:
+        - cn: |
+            优化了 ccal 模块的使用体验，目前 `x ccal` 默认以交互的方式查看日历表，并在 TUI 中增加更详细的日历信息，以及更多的快捷键支持。
+
+            示例：
+            ```sh
+            # 交互式查看日历，等同于 'x ccal fz'
+            x ccal
+
+            # 查看今天的日历，包括农历、值星、宜忌等详细信息
+            x ccal info
+            ```
+          en: |
+            The user experience of the ccal module has been optimized.
+            By default, x ccal now displays the calendar interactively, and the TUI includes more detailed calendar information and enhanced shortcut key support.
+
+            Examples:
+            ```sh
+            # Interactively view the calendar, equivalent to 'x ccal fz'
+            x ccal
+
+            # View today's calendar, including detailed information such as the lunar calendar, ruling star, auspicious/inauspicious activities, etc
+            x ccal info
+            ```
+        - cn: |
+            新增 `init`、`--cfg` 命令，用于管理日历中星期的命名、黄历宜忌是否显示等配置。
+
+            示例：
+            ```sh
+            # 使用交互模式初始化配置
+            x ccal init
+
+            # 将日历中的星期命名方式修改为"礼拜"
+            x ccal --cfg wdtitle=libai
+            ```
+          en: |
+            Added `init` and `--cfg` commands to manage configurations such as naming of days of the week in the calendar and whether to display auspicious/inauspicious activities from the Chinese Almanac.
+
+            Examples:
+            ```sh
+            # Initialize the configuration using interactive mode
+            x ccal init
+
+            # Modify the naming convention for weekdays in the calendar to "libai"
+            x ccal --cfg wdtitle=libai
+            ```
+  blog: null
+  name: v0.6.2
+  alpha: true
+  beta: true
 v0.6.1:
   sum: c6091bfa6b3f4baa30a4e34e7c4b77e36489579cd842d50095373484e229bc73cb46999c274d2b8ae122b56ab459e384d6c2abbb9fcc2340a66563caa2b329b4
   date: 2025-06-20 14:16:38+0000
@@ -45,8 +180,6 @@ v0.6.1:
           en: Added `ccal` module for viewing both Gregorian and Lunar calendars in the terminal. The module is still under development and currently in testing phase.
   blog: null
   name: v0.6.1
-  alpha: true
-  beta: true
 v0.6.0:
   sum: e75d043f5c4e54db55a9e6bfaef59e200fac8199070e13ae8765a2b4685bad98cbca83862050a4993d3afb6c29357f9adc1821e6cedb2ef0f2ea90621e82d2d9
   date: 2025-06-14 13:17:09+0000
