@@ -1,69 +1,36 @@
+v0.6.3:
+  sum: 2bee7a2e1986d848ac45401174365c3699e198f3686e2236b3d02523696af150b02d17610b69b0d4ae112c690d4f5ef737090b86348ccf8d34e03b462191887e
+  date: 2025-07-04 11:54:45+0000
+  change:
+    ccal:
+      update:
+        - cn: 目前 `x ccal` 会在启动时预加载数据，避免进入交互式界面时，数据为空的情况，同时将数据包体积从 2M 优化至 950k。
+          en: Currently, `x ccal` preloads data on startup to avoid displaying empty data when entering the interactive interface. At the same time, the data package size has been optimized from 2MB to 950k.
+      bugfix:
+        - cn: 修复了在 bash 环境中，以交互模式启动 `x ccal` 时，出现 "integer expression expected" 的问题。
+          en: Fixed an issue where "integer expression expected" error occurred when launching `x ccal` in interactive mode within a bash environment.
+    mac:
+      update:
+        - cn: 优化了 `re` 和 `note` 子命令中的 `ls` 功能输出，现在能以结构化格式展示每条提醒事项或备忘录的详细信息，包括标题、内容、时间、优先级等。更易于在终端查看与后续脚本处理。
+          en: Improved the output of the `ls` subcommand for both `re` and `note`. The listing now displays structured and detailed information for each reminder or note, including title, content, time, priority, and more—making it easier to read in the terminal or parse in automation scripts.
+    termux:
+      update:
+        - cn: 提供 proot-distro 中国区镜像加速方案，修复 `pp` 子命令正则匹配过滤信息异常问题。
+          en: Provide a mirror acceleration solution for proot-distro in the China region, fix the regex matching filter information anomaly issue in the `pp` subcommand.
+  blog: null
+  name: v0.6.3
+  alpha: true
+  beta: true
 v0.6.2:
   sum: 3e5eac95c778a5161f21f581c63f90bec5f09621028dac4b2f849422ce59e6a8083aed01cbf3f9ce0b0223c3c3ed90c42df0d470a358f0f65957c239176c4d67
   date: 2025-06-28 04:07:39+0000
   change:
     mac:
       update:
-        - cn: |
-            新增 `re` 子命令，为 Apple 自带的提醒事项（Reminders）提供命令行操作支持，让你无需打开应用也能快速添加、更新和完成待办事项。
-            适用于希望通过终端管理提醒的用户，特别适合将提醒功能集成到自动化脚本、每日启动任务或 GTD 工作流中。
-
-            示例：
-            ```sh
-            # 添加一个提醒事项 “Buy milk”，时间为 2025 年 6 月 25 日 18:00
-            x mac re add "Buy milk" "2025-06-25" "18:00"
-
-            # 将名称为 “Buy milk” 的提醒事项标记为已完成
-            x mac re comp "Buy milk"
-
-            # 将提醒事项 “Buy milk” 修改为 “Buy milk,egg”，时间改为 2025 年 6 月 25 日 19:00
-            x mac re update "Buy milk" "Buy milk,egg" "2025-06-25 19:00"
-            ```
-          en: |
-            Added the `re` subcommand, which brings CLI access to Apple Reminders. You can now manage your to-do items directly from the terminal — ideal for automation, scripting, or fast keyboard-driven workflows.
-            Great for users who want to integrate reminders into GTD systems, startup routines, or terminal-based productivity flows.
-
-            Examples:
-            ```sh
-            # Add a reminder titled "Buy milk" for June 25, 2025 at 18:00
-            x mac re add "Buy milk" "2025-06-25" "18:00"
-
-            # Mark the reminder "Buy milk" as completed
-            x mac re comp "Buy milk"
-
-            # Update the reminder "Buy milk" to "Buy milk,egg" with new time 2025-06-25 19:00
-            x mac re update "Buy milk" "Buy milk,egg" "2025-06-25 19:00"
-            ```
-        - cn: |
-            新增 `note` 子命令，为 Apple 备忘录（Notes）引入命令行接口。你可以从终端快速添加、打开或删除备忘录，无需手动操作界面。
-            非常适合喜欢键盘操作的用户，或者希望将备忘录写入自动化流程、每日记录、剪贴板管理等场景中。
-
-            示例：
-            ```sh
-            # 添加一个名为 note1 的备忘录
-            x mac note add note1
-
-            # 打开名为 note1 的备忘录
-            x mac note open note1
-
-            # 删除名为 note1 的备忘录
-            x mac note rm note1
-            ```
-          en: |
-            Introduced the `note` subcommand, providing a CLI interface to Apple Notes. You can now create, open, or delete notes directly from the terminal — a perfect fit for automation or keyboard-centric workflows.
-            This is especially useful for those who want to quickly jot down ideas, automate daily logs, or manage personal notes without leaving the shell.
-
-            Examples:
-            ```sh
-            # Add a note titled note1
-            x mac note add note1
-
-            # Open the note named note1
-            x mac note open note1
-
-            # Remove the note named note1
-            x mac note rm note1
-            ```
+        - cn: 新增 `re` 子命令，为 Apple 自带的提醒事项（Reminders）提供命令行操作支持。你可以通过终端快速添加、完成、更新提醒事项，适用于自动化任务与无鼠标工作流。目前该功能仍处于测试阶段，部分功能可能不稳定或尚未实现完整。
+          en: Added the `re` subcommand, which brings command-line control to Apple Reminders. You can add, complete, and update reminders directly from the terminal — ideal for automation scripts and keyboard-driven workflows. This feature is currently in testing and may be incomplete or unstable.
+        - cn: 新增 `note` 子命令，为 Apple 备忘录（Notes）引入命令行接口。你可以在终端中添加、打开、删除备忘录，适用于简洁笔记记录与快捷访问。目前该功能仍处于测试阶段，部分操作可能存在限制。
+          en: Added the `note` subcommand, which introduces a command-line interface for Apple Notes. You can create, open, and delete notes directly from the terminal — useful for minimal note-taking and quick access. This feature is currently experimental and may have limited functionality.
     xgo:
       update:
         - cn: 新增 xgo 模块，对 gop 进行基础封装，增强 gop 使用体验
@@ -131,8 +98,6 @@ v0.6.2:
             ```
   blog: null
   name: v0.6.2
-  alpha: true
-  beta: true
 v0.6.1:
   sum: c6091bfa6b3f4baa30a4e34e7c4b77e36489579cd842d50095373484e229bc73cb46999c274d2b8ae122b56ab459e384d6c2abbb9fcc2340a66563caa2b329b4
   date: 2025-06-20 14:16:38+0000
@@ -348,7 +313,7 @@ v0.5.11:
             Now, the x ping module can recognize inetutils-ping and has implemented compatibility handling for inetutils-ping.
         - cn: 修复了 Windows 下 IPv6 输出的可视化失败问题。[x-cmd/x-cmd/issues/226](https://github.com/x-cmd/x-cmd/issues/226)。
           en: Fixed a visualization failure for IPv6 output on Windows. [x-cmd/x-cmd/issues/226](https://github.com/x-cmd/x-cmd/issues/226).
-  blog: null
+  blog: /blog/250509
   name: v0.5.11
 v0.5.10:
   sum: e1c775a4d0c665c06bf9e04e659d84449813d267bd492c5162b6930afeb7d65cdd88116c172331e64e2a8a2950e837dab66128b1b6b2e6af99f9efde9a5a323d
@@ -386,7 +351,7 @@ v0.5.10:
             # Uninstall x-cmd itself
             x uninstall self
             ```
-  blog: null
+  blog: /blog/250408
   name: v0.5.10
 v0.5.9:
   sum: f79782c818a66438e81a1072c371eba91805f4532e3c58fcf593be8bd474a5863fab0f1216baa1609ebb3d87a7f174685519a8f239084363a6fb34a419b7645c
@@ -745,7 +710,7 @@ v0.5.7:
             # Convert DOS-style line endings (CRLF) to Unix-style line endings (LF)
             x dos2unix /path/to/file
             ```
-  blog: null
+  blog: /blog/250316
   name: v0.5.7
 v0.5.6:
   sum: b4cc02f12a5f72faa5290792dff41b4a3fef163438d17bd184c78ed8a75660579ca314caf5695dcbfa58fbfe17d8c736229504a4ddbebeb05168a866cbe3bff2
