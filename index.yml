@@ -25,6 +25,7 @@ v0.6.3:
   name: v0.6.3
   alpha: true
   beta: true
+  latest: true
 v0.6.2:
   sum: 3e5eac95c778a5161f21f581c63f90bec5f09621028dac4b2f849422ce59e6a8083aed01cbf3f9ce0b0223c3c3ed90c42df0d470a358f0f65957c239176c4d67
   date: 2025-06-28 04:07:39+0000
@@ -230,7 +231,6 @@ v0.5.14:
           en: Added `addon` command to support command completion using external tools. Currently supports only [carapace-bin](https://github.com/carapace-sh/carapace-bin). Experimental feature.
   blog: null
   name: v0.5.14
-  latest: true
 v0.5.13:
   sum: 5148408003ebbf7cc660035da2c7c7638e20ed67e6a85805cacf691eb732c5bb28f7eccd2a9d421ae48e88da970714aec074ca5e72abe0fa6557a16c9411fc36
   date: 2025-05-18 12:51:31+0000
