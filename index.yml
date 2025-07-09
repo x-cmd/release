@@ -21,7 +21,7 @@ v0.6.3:
       update:
         - cn: 更改了 x-cmd help 文档的默认颜色配置，使帮助信息在终端中显示更加清晰易读。
           en: Updated the default color scheme of x-cmd help documentation to improve readability in the terminal.
-  blog: null
+  blog: /blog/250710
   name: v0.6.3
   alpha: true
   beta: true
