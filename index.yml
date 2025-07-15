@@ -1,3 +1,33 @@
+v0.6.4:
+  sum: fbaf9bb45e259663f451b67aba42c33e4f7b4fdbb584185bf70a36ab09ee6fdc823b12c87a462ee461253fc181d2a37b805322e11cbb60ce0605788ceefb8fb0
+  date: 2025-07-15 13:39:57+0000
+  change:
+    tldr:
+      update:
+        - cn: 新增 `fz` 子命令，功能等同于 `--fzf` 和 `--fz`，用于通过 fzf 交互式界面查看命令的 tldr 文档，提升使用便捷性。
+          en: Added `fz` subcommand, equivalent to `--fzf` and `--fz`, to display tldr documentation of commands using an interactive fzf interface for improved usability.
+        - cn: 更改了 tldr 的 TUI 导航栏样式，从原来的四栏布局改为两栏布局，打开后可直接查看文档内容，提升使用效率和阅读体验。
+          en: Updated the TUI navigation layout of tldr from a four-column to a two-column design, allowing immediate access to documentation upon launch for a more efficient and user-friendly experience.
+        - cn: 同步升级了 tldr 文档数据，使用 `x tldr --update` 命令即可获取最新文档内容。
+          en: Updated and synchronized the tldr documentation data. Run `x tldr --update` to fetch the latest content.
+    help:
+      update:
+        - cn: 优化并更改了 x-cmd help 的显示样式，使帮助文档结构更清晰，信息更易于查阅。
+          en: Improved and redesigned the display style of x-cmd help output, making the documentation structure clearer and easier to navigate.
+    ccal:
+      update:
+        - cn: 优化了 `x ccal` 在显示全部日期时的排序，所有日期按升序显示，从而提高用户体验。
+          en: The sorting of dates in `x ccal` when displaying all dates has been optimized. All dates will now be displayed in ascending order, improving the user experience.
+    docker:
+      update:
+        - cn: 新增 `lz` 子命令，可通过 lazydocker 图形界面管理容器、镜像与网络等资源
+          en: Added `lz` subcommand for managing containers, images, networks, and more via the lazydocker TUI
+        - cn: 新增 `fz` 子命令，提供基于 fzf 的交互式界面以快速浏览和操作容器与镜像
+          en: Added `fz` subcommand providing an fzf-based interactive interface for browsing and managing containers and images
+  blog: null
+  name: v0.6.4
+  alpha: true
+  beta: true
 v0.6.3:
   sum: 2bee7a2e1986d848ac45401174365c3699e198f3686e2236b3d02523696af150b02d17610b69b0d4ae112c690d4f5ef737090b86348ccf8d34e03b462191887e
   date: 2025-07-04 11:54:45+0000
@@ -23,8 +53,6 @@ v0.6.3:
           en: Updated the default color scheme of x-cmd help documentation to improve readability in the terminal.
   blog: /blog/250710
   name: v0.6.3
-  alpha: true
-  beta: true
   latest: true
 v0.6.2:
   sum: 3e5eac95c778a5161f21f581c63f90bec5f09621028dac4b2f849422ce59e6a8083aed01cbf3f9ce0b0223c3c3ed90c42df0d470a358f0f65957c239176c4d67
