@@ -24,10 +24,8 @@ v0.6.4:
           en: Added `lz` subcommand for managing containers, images, networks, and more via the lazydocker TUI
         - cn: 新增 `fz` 子命令，提供基于 fzf 的交互式界面以快速浏览和操作容器与镜像
           en: Added `fz` subcommand providing an fzf-based interactive interface for browsing and managing containers and images
-  blog: null
+  blog: /blog/250717
   name: v0.6.4
-  alpha: true
-  beta: true
 v0.6.3:
   sum: 2bee7a2e1986d848ac45401174365c3699e198f3686e2236b3d02523696af150b02d17610b69b0d4ae112c690d4f5ef737090b86348ccf8d34e03b462191887e
   date: 2025-07-04 11:54:45+0000
