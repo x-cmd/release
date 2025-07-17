@@ -16,8 +16,8 @@ v0.6.4:
           en: Improved and redesigned the display style of x-cmd help output, making the documentation structure clearer and easier to navigate.
     ccal:
       update:
-        - cn: 优化了 `x ccal` 在显示全部日期时的排序，所有日期按升序显示，从而提高用户体验。
-          en: The sorting of dates in `x ccal` when displaying all dates has been optimized. All dates will now be displayed in ascending order, improving the user experience.
+        - cn: 引入了新的键盘快捷键，现在你可以通过 `Tab`/`Shift+Tab` 在不同视图间快速切换，`Alt + 方向键` (`↑` `↓` `←` `→`) 快速移动日期，让交互变得更流畅。
+          en: New keyboard shortcuts have been introduced, now you can quickly switch between different views using `Tab` / `Shift + Tab`, and navigate dates with `Alt + Arrow Keys` (`↑` `↓` `←` `→`), making interactions smoother than ever.
     docker:
       update:
         - cn: 新增 `lz` 子命令，可通过 lazydocker 图形界面管理容器、镜像与网络等资源
@@ -26,6 +26,8 @@ v0.6.4:
           en: Added `fz` subcommand providing an fzf-based interactive interface for browsing and managing containers and images
   blog: /blog/250717
   name: v0.6.4
+  alpha: true
+  beta: true
 v0.6.3:
   sum: 2bee7a2e1986d848ac45401174365c3699e198f3686e2236b3d02523696af150b02d17610b69b0d4ae112c690d4f5ef737090b86348ccf8d34e03b462191887e
   date: 2025-07-04 11:54:45+0000
