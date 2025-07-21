@@ -1,3 +1,19 @@
+v0.6.5:
+  sum: b839fc452e508de9e96aeaa6dc9750f035a30e3cfcdca53d29e950c6155379a96d6bee4d175ec4fafd54354bfa151d9312bd383fcba0116db684ef45ad780938
+  date: 2025-07-21 11:24:34+0000
+  change:
+    extmeta:
+      update:
+        - cn: 将 extmeta 扩展元数据文件目录改为使用单个 `extmeta.tar` 文件，便于打包、传输和管理。
+          en: Changed the extmeta extended metadata directory to a single `extmeta.tar` file for easier packaging, transfer, and management.
+    writer:
+      bugfix:
+        - cn: 修复了上个版本中找不到 `___x_cmd_writer___sendalias` 函数的问题，确保相关功能可正常调用。
+          en: Fixed an issue in the previous release where the `___x_cmd_writer___sendalias` function was missing, ensuring proper functionality.
+  blog: null
+  name: v0.6.5
+  alpha: true
+  beta: true
 v0.6.4:
   sum: fbaf9bb45e259663f451b67aba42c33e4f7b4fdbb584185bf70a36ab09ee6fdc823b12c87a462ee461253fc181d2a37b805322e11cbb60ce0605788ceefb8fb0
   date: 2025-07-15 13:39:57+0000
@@ -26,8 +42,6 @@ v0.6.4:
           en: Added `fz` subcommand providing an fzf-based interactive interface for browsing and managing containers and images
   blog: /blog/250717
   name: v0.6.4
-  alpha: true
-  beta: true
 v0.6.3:
   sum: 2bee7a2e1986d848ac45401174365c3699e198f3686e2236b3d02523696af150b02d17610b69b0d4ae112c690d4f5ef737090b86348ccf8d34e03b462191887e
   date: 2025-07-04 11:54:45+0000
