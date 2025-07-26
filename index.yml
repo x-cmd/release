@@ -1,3 +1,55 @@
+v0.6.6:
+  sum: 1453b5c719433a28e002a3030a1146f41b6175bdc486a7312a41c3c6bdcbdd565ab62feef6a907ec0a09c5b7404daa47df0aa086c43baa4d21bde5796cf2d53c
+  date: 2025-07-26 13:41:24+0000
+  change:
+    docker:
+      update:
+        - cn: 新增 `ecpull` 功能，可通过 Amazon ECR 拉取常用的基础镜像（如 alpine、ubuntu 等）
+          en: Added `ecpull` feature to pull commonly used base images (e.g., alpine, ubuntu) from Amazon ECR
+    buse:
+      update:
+        - cn: |
+            新增 `buse` 模块，为浏览器控制提供自然语言交互封装，支持使用简洁命令进行自动化操作和脚本化任务执行。
+
+            示例：
+            ```sh
+            # 启动交互式终端，以自然语言控制浏览器
+            x buse
+
+            # 直接执行一个浏览器任务：搜索 OpenAI 并截图
+            x buse -p "Search for OpenAI and take a screenshot"
+            ```
+          en: |
+            Added the `buse` module, which provides a natural language interface for browser control. Supports streamlined automation and scripting through simple commands.
+
+            Example:
+            ```sh
+            # Start an interactive shell to control the browser with natural language
+            x buse
+
+            # Run a one-shot browser task: search for OpenAI and take a screenshot
+            x buse -p "Search for OpenAI and take a screenshot"
+            ```
+    chat:
+      update:
+        - cn: 改进了 AI chat 的交互模式，在默认交互模式下，请求完成后会自动进入 REPL，方便用户继续对话。
+          en: Improved the interactive mode of AI chat—after a request, it now automatically enters REPL by default, making it easier to continue the conversation.
+    gh:
+      update:
+        - cn: 修正了 `x gh model` 的数据处理格式，确保数据结构更准确。
+          en: Fixed the data processing format of `x gh model` to ensure more accurate data structures.
+    openai:
+      update:
+        - cn: 新增 `x openai model` 子命令，方便查看和获取 OpenAI 支持的模型信息。
+          en: Added `x openai model` subcommand for convenient access to OpenAI model information.
+    tldr:
+      update:
+        - cn: 更改 tldr 渲染样式，去除加粗效果，提升终端显示的清晰度。
+          en: Changed tldr rendering style to remove bold formatting for clearer terminal display.
+  blog: null
+  name: v0.6.6
+  alpha: true
+  beta: true
 v0.6.5:
   sum: b839fc452e508de9e96aeaa6dc9750f035a30e3cfcdca53d29e950c6155379a96d6bee4d175ec4fafd54354bfa151d9312bd383fcba0116db684ef45ad780938
   date: 2025-07-21 11:24:34+0000
@@ -12,8 +64,7 @@ v0.6.5:
           en: Fixed an issue in the previous release where the `___x_cmd_writer___sendalias` function was missing, ensuring proper functionality.
   blog: null
   name: v0.6.5
-  alpha: true
-  beta: true
+  latest: true
 v0.6.4:
   sum: fbaf9bb45e259663f451b67aba42c33e4f7b4fdbb584185bf70a36ab09ee6fdc823b12c87a462ee461253fc181d2a37b805322e11cbb60ce0605788ceefb8fb0
   date: 2025-07-15 13:39:57+0000
@@ -67,7 +118,6 @@ v0.6.3:
           en: Updated the default color scheme of x-cmd help documentation to improve readability in the terminal.
   blog: /blog/250710
   name: v0.6.3
-  latest: true
 v0.6.2:
   sum: 3e5eac95c778a5161f21f581c63f90bec5f09621028dac4b2f849422ce59e6a8083aed01cbf3f9ce0b0223c3c3ed90c42df0d470a358f0f65957c239176c4d67
   date: 2025-06-28 04:07:39+0000
