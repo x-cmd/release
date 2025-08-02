@@ -1,3 +1,49 @@
+v0.6.7:
+  sum: 9388355a15f8c6c1756c1fded5c75a5c9eddc8eb10baa699de8afa6dda5892a4d38e482e749d96f278042880a46230a105e8504b9e6b4a0753c93072a1b89b53
+  date: 2025-08-02 06:50:14+0000
+  change:
+    crush:
+      update:
+        - cn: |
+            新增 `crush` 模块，这是由 Charm 团队使用 Go 开发的 AI 辅助命令行工具，旨在通过自然语言提升终端的交互效率。支持多轮对话、结构化输出、历史记录管理等特性。
+
+            示例：
+            ```sh
+            # 启动 crush 聊天终端，以自然语言执行命令或查询
+            x crush
+
+            # 向 crush 提问一个系统相关的问题
+            x crush -p "如何查看系统的环境变量？"
+
+            # 使用 crush 生成并执行一段 Go 代码
+            x crush -p "写一个输出 Hello, Crush 的 Go 程序"
+            ```
+          en: |
+            Added the `crush` module, an AI-assisted CLI interface developed in Go by the Charm team. It enhances terminal interactions with natural language, supports multi-turn chat, structured output, and session history.
+
+            Example:
+            ```sh
+            # Launch the crush terminal for natural language interactions
+            x crush
+
+            # Ask crush a system-related question
+            x crush -p "How do I view environment variables on my system?"
+
+            # Use crush to generate and run a Go program
+            x crush -p "Write a Go program that prints 'Hello, Crush'"
+            ```
+    llmf:
+      update:
+        - cn: llmf 模块内部关于模型请求的处理逻辑，已改为调用 openai 模块，统一底层实现。
+          en: The llmf module's internal model request handling has been refactored to use the openai module, unifying the underlying implementation.
+    chat:
+      bugfix:
+        - cn: 修复了在 chat 交互模式下，请求发生错误时未能立即退出的问题。
+          en: Fixed an issue where chat interactive mode did not exit immediately upon request failure.
+  blog: null
+  name: v0.6.7
+  alpha: true
+  beta: true
 v0.6.6:
   sum: 1453b5c719433a28e002a3030a1146f41b6175bdc486a7312a41c3c6bdcbdd565ab62feef6a907ec0a09c5b7404daa47df0aa086c43baa4d21bde5796cf2d53c
   date: 2025-07-26 13:41:24+0000
@@ -48,8 +94,7 @@ v0.6.6:
           en: Changed tldr rendering style to remove bold formatting for clearer terminal display.
   blog: null
   name: v0.6.6
-  alpha: true
-  beta: true
+  latest: true
 v0.6.5:
   sum: b839fc452e508de9e96aeaa6dc9750f035a30e3cfcdca53d29e950c6155379a96d6bee4d175ec4fafd54354bfa151d9312bd383fcba0116db684ef45ad780938
   date: 2025-07-21 11:24:34+0000
@@ -64,7 +109,6 @@ v0.6.5:
           en: Fixed an issue in the previous release where the `___x_cmd_writer___sendalias` function was missing, ensuring proper functionality.
   blog: null
   name: v0.6.5
-  latest: true
 v0.6.4:
   sum: fbaf9bb45e259663f451b67aba42c33e4f7b4fdbb584185bf70a36ab09ee6fdc823b12c87a462ee461253fc181d2a37b805322e11cbb60ce0605788ceefb8fb0
   date: 2025-07-15 13:39:57+0000
