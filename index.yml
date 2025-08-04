@@ -13,10 +13,10 @@ v0.6.7:
             x crush
 
             # 向 crush 提问一个系统相关的问题
-            x crush -p "如何查看系统的环境变量？"
+            x crush run "如何查看系统的环境变量？"
 
             # 使用 crush 生成并执行一段 Go 代码
-            x crush -p "写一个输出 Hello, Crush 的 Go 程序"
+            x crush run "写一个输出 Hello, Crush 的 Go 程序"
             ```
           en: |
             Added the `crush` module, an AI-assisted CLI interface developed in Go by the Charm team. It enhances terminal interactions with natural language, supports multi-turn chat, structured output, and session history.
@@ -27,10 +27,10 @@ v0.6.7:
             x crush
 
             # Ask crush a system-related question
-            x crush -p "How do I view environment variables on my system?"
+            x crush run "How do I view environment variables on my system?"
 
             # Use crush to generate and run a Go program
-            x crush -p "Write a Go program that prints 'Hello, Crush'"
+            x crush run "Write a Go program that prints 'Hello, Crush'"
             ```
     llmf:
       update:
@@ -40,7 +40,7 @@ v0.6.7:
       bugfix:
         - cn: 修复了在 chat 交互模式下，请求发生错误时未能立即退出的问题。
           en: Fixed an issue where chat interactive mode did not exit immediately upon request failure.
-  blog: null
+  blog: /blog/250805
   name: v0.6.7
   alpha: true
   beta: true
@@ -92,7 +92,7 @@ v0.6.6:
       update:
         - cn: 更改 tldr 渲染样式，去除加粗效果，提升终端显示的清晰度。
           en: Changed tldr rendering style to remove bold formatting for clearer terminal display.
-  blog: null
+  blog: /blog/250805
   name: v0.6.6
   latest: true
 v0.6.5:
