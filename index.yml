@@ -44,6 +44,7 @@ v0.6.7:
   name: v0.6.7
   alpha: true
   beta: true
+  latest: true
 v0.6.6:
   sum: 1453b5c719433a28e002a3030a1146f41b6175bdc486a7312a41c3c6bdcbdd565ab62feef6a907ec0a09c5b7404daa47df0aa086c43baa4d21bde5796cf2d53c
   date: 2025-07-26 13:41:24+0000
@@ -94,7 +95,6 @@ v0.6.6:
           en: Changed tldr rendering style to remove bold formatting for clearer terminal display.
   blog: /blog/250805
   name: v0.6.6
-  latest: true
 v0.6.5:
   sum: b839fc452e508de9e96aeaa6dc9750f035a30e3cfcdca53d29e950c6155379a96d6bee4d175ec4fafd54354bfa151d9312bd383fcba0116db684ef45ad780938
   date: 2025-07-21 11:24:34+0000
