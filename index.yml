@@ -1,3 +1,105 @@
+v0.6.8:
+  sum: 89a769c0ab238b4df20301c54c3c0f7d6405e41fab3151e6f190abca35987f2e9b9bb90a91b68ffd57fa4424c2a16c0aa36edc95d133d553130a93cfabfd8e9d
+  date: 2025-08-08 09:15:00+0000
+  change:
+    openai:
+      update:
+        - cn: |
+            `openai` 模块新增支持 GPT-5 系列模型。
+
+            示例:
+            ```sh
+            # 获取模型的信息
+            x openai model ls
+
+            # 使用 GPT-5 模型进行对话
+            @gpt --model gpt-5 teach me the basics of chess
+
+            # 让 GPT-5 nano 模型生成旅行攻略
+            @gpt --model gpt-5-nano "Please provide a three-day travel itinerary for Zhongshan"
+            ```
+          en: |
+            `openai` module now supports GPT-5 series models.
+
+            Example:
+            ```sh
+            # Get information about available models
+            x openai model ls
+
+            # Use GPT-5 model for conversation
+            @gpt --model gpt-5 teach me the basics of chess
+
+            # Generate a travel itinerary with GPT-5 nano model
+            @gpt --model gpt-5-nano "Please provide a three-day travel itinerary for Zhongshan"
+            ```
+    siliconflow:
+      update:
+        - cn: |
+            新增 `siliconflow` 模块，可在命令行中调用[硅基流动](https://www.siliconflow.cn) API 模型。
+
+            示例:
+            ```sh
+            # 使用交互模式初始化配置
+            x siliconflow init
+
+            # 模型查看与管理
+            x siliconflow model ls
+
+            # 测试使用 SiliconCloud API 模型
+            @siliconflow "what is the history of the Great Wall?"
+            ```
+          en: |
+            Added `siliconflow` module to use [SiliconCloud](https://www.siliconflow.cn) API models from the command line.
+
+            Example:
+            ```sh
+            # Initialize configuration in interactive mode
+            x siliconflow init
+
+            # List and manage models
+            x siliconflow model ls
+
+            # Test using SiliconCloud API model
+            @siliconflow "what is the history of the Great Wall?"
+            ```
+    openrouter:
+      update:
+        - cn: |
+            新增 `openrouter` 模块，可在命令行中调用 [OpenRouter](https://openrouter.ai) API 模型。
+
+            示例:
+            ```sh
+            # 使用交互模式初始化配置
+            x openrouter init
+
+            # 模型查看与管理
+            x openrouter model ls
+
+            # 测试使用 OpenRouter API 模型
+            @openrouter "what is the history of the Great Wall?"
+            ```
+          en: |
+            Added `openrouter` module to use [OpenRouter](https://openrouter.ai) API models from the command line.
+
+            Example:
+            ```sh
+            # Initialize configuration in interactive mode
+            x openrouter init
+
+            # List and manage models
+            x openrouter list
+
+            # Test using OpenRouter API model
+            @openrouter "what is the history of the Great Wall?"
+            ```
+    ollama:
+      bugfix:
+        - cn: 修复了 `@ollama` 响应因格式处理问题而无法使用的错误。
+          en: Fixed an issue where `@ollama` responses could not be used due to formatting errors.
+  blog: null
+  name: v0.6.8
+  alpha: true
+  beta: true
 v0.6.7:
   sum: 380aec4513a3d455c79765bc30cf82775565c0fb484252d8676f6fc3135431a47e19677776b9e2472caeee1dde26a926e08610cdcc7f75592d6fdbb64a5b8fd1
   date: 2025-08-02 07:10:36+0000
@@ -42,8 +144,6 @@ v0.6.7:
           en: Fixed an issue where chat interactive mode did not exit immediately upon request failure.
   blog: /blog/250805
   name: v0.6.7
-  alpha: true
-  beta: true
   latest: true
 v0.6.6:
   sum: 1453b5c719433a28e002a3030a1146f41b6175bdc486a7312a41c3c6bdcbdd565ab62feef6a907ec0a09c5b7404daa47df0aa086c43baa4d21bde5796cf2d53c
