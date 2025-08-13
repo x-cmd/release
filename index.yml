@@ -102,7 +102,7 @@ v0.6.9:
       bugfix:
         - cn: 修复了 TUI 组件在启用 “Backspace sends ^H (Enable it)” 时无法正常工作的 Bug。[x-cmd/x-cmd#285](https://github.com/x-cmd/x-cmd/issues/285)
           en: Fixed a bug where the TUI component could not work properly when “Backspace sends ^H (Enable it)” was enabled. [x-cmd/x-cmd#285](https://github.com/x-cmd/x-cmd/issues/285)
-  blog: null
+  blog: /blog/250813
   name: v0.6.9
   alpha: true
   beta: true
@@ -202,9 +202,9 @@ v0.6.8:
             ```
     ollama:
       bugfix:
-        - cn: 修复了 `@ollama` 响应因格式处理问题而无法使用的错误。
-          en: Fixed an issue where `@ollama` responses could not be used due to formatting errors.
-  blog: null
+        - cn: 修复了 ollama 模块响应因格式处理问题而无法使用的错误。
+          en: Fixed an issue where ollama module responses could not be used due to formatting errors.
+  blog: /blog/250813
   name: v0.6.8
 v0.6.7:
   sum: 380aec4513a3d455c79765bc30cf82775565c0fb484252d8676f6fc3135431a47e19677776b9e2472caeee1dde26a926e08610cdcc7f75592d6fdbb64a5b8fd1
