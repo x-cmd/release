@@ -1,3 +1,111 @@
+v0.6.9:
+  sum: 47417463b9502ad533f87da26d0aa5cd3717684576d79fc7410c260c7fd6a14cbd8ca615fb15b56920d65dbf9f2e0c0770f94729c16b509a1bc37c50fe059898
+  date: 2025-08-13 03:40:41+0000
+  change:
+    font:
+      update:
+        - cn: |
+            新增 `font` 模块 - 字体工具集，包含 Nerd Fonts 字体安装
+            ```sh
+            # 进入 fzf 交互选择 Nerd Fonts 字体安装
+            x font
+            # 安装 "FiraCode Nerd Font" 字体
+            x font nerd install FiraCode
+            ```
+          en: |
+            Add `font` module - a font toolkit that includes Nerd Fonts installation
+            ```sh
+            # Using fzf interactive selection to install Nerd Fonts
+            x font
+            # Install "FiraCode Nerd Font" font
+            x font nerd install FiraCode
+            ```
+    zhipu:
+      update:
+        - cn: |
+            新增 zhipu 模块，可在命令行中调用[智谱](https://bigmodel.cn) AI 模型。
+
+            示例：
+            ```sh
+            # 初始化配置
+            x zhipu init
+
+            # 使用智谱 GLM 模型
+            @glm "What is the history of the Great Wall?"
+            ```
+          en: |
+            Added zhipu module, allowing you to call [Zhipu](https://bigmodel.cn) AI models from the command line.
+
+            Example:
+            ```sh
+            # Initialize configuration
+            x zhipu init
+
+            # Use Zhipu GLM model
+            @glm "What is the history of the Great Wall?"
+            ```
+    deepseek|moonshoot:
+      update:
+        - cn: |
+            deepseek 和 moonshot 模块新增支持用户自定义 API 调用的 endpoint，方便灵活配置不同的服务地址。
+
+            示例：
+            ```sh
+            # 交互式配置 deepseek 模块的配置文件
+            x deepseek init
+            ```
+          en: |
+            Added support for custom API call endpoints in deepseek and moonshot modules, allowing flexible configuration of different service URLs.
+
+            Example:
+            ```sh
+            # Interactively configure the deepseek module's config file
+            x deepseek init
+            ```
+    siliconflow|openrouter:
+      update:
+        - cn: |
+            修复了配置完成后未生成激活 alias 的问题，并更新调整了 siliconflow 和 openrouter 的 alias。
+
+            示例：
+            ```sh
+            # 交互式初始化配置
+            x siliconflow init
+
+            # 测试使用 SiliconCloud API 模型
+            @sili "what is the history of the Great Wall?"
+
+            # 交互式初始化配置
+            x openrouter init
+
+            # 测试使用 OpenRouter API 模型
+            @or "what is the history of the Great Wall?"
+            ```
+          en: |
+            Fixed the issue where aliases were not activated after configuration, and updated the aliases for siliconflow and openrouter.
+
+            Example:
+            ```sh
+            # Interactive configuration initialization
+            x siliconflow init
+
+            # Test using SiliconCloud API model
+            @sili "what is the history of the Great Wall?"
+
+            # Interactive configuration initialization
+            x openrouter init
+
+            # Test using OpenRouter API model
+            @or "what is the history of the Great Wall?"
+            ```
+    tui:
+      bugfix:
+        - cn: 修复了 TUI 组件在启用 “Backspace sends ^H (Enable it)” 时无法正常工作的 Bug。[x-cmd/x-cmd#285](https://github.com/x-cmd/x-cmd/issues/285)
+          en: Fixed a bug where the TUI component could not work properly when “Backspace sends ^H (Enable it)” was enabled. [x-cmd/x-cmd#285](https://github.com/x-cmd/x-cmd/issues/285)
+  blog: null
+  name: v0.6.9
+  alpha: true
+  beta: true
 v0.6.8:
   sum: 89a769c0ab238b4df20301c54c3c0f7d6405e41fab3151e6f190abca35987f2e9b9bb90a91b68ffd57fa4424c2a16c0aa36edc95d133d553130a93cfabfd8e9d
   date: 2025-08-08 09:15:00+0000
@@ -98,8 +206,6 @@ v0.6.8:
           en: Fixed an issue where `@ollama` responses could not be used due to formatting errors.
   blog: null
   name: v0.6.8
-  alpha: true
-  beta: true
 v0.6.7:
   sum: 380aec4513a3d455c79765bc30cf82775565c0fb484252d8676f6fc3135431a47e19677776b9e2472caeee1dde26a926e08610cdcc7f75592d6fdbb64a5b8fd1
   date: 2025-08-02 07:10:36+0000
