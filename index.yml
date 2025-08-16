@@ -1,3 +1,73 @@
+v0.6.10:
+  sum: 04b1d1b72e4a5dce13112d7a0ce4da7d8b46df549a71ecfea5479e046004de707eac3ba2e8b5690cff752ba44244c7ffbd377fd172a986adc3954d95b810e5dd
+  date: 2025-08-16 07:52:32+0000
+  change:
+    nets:
+      update:
+        - cn: |
+            新增 `nets` 模块，一个为 netstat 命令设计的增强模块，旨在提供更直观的方式来显示网络统计信息。
+
+            示例：
+            ```sh
+            # 启动交互模式，选择要查看的表，等同于 'x nets view'
+            x nets
+
+            # 更新所有表的数据
+            x nets update
+
+            # 查看 internet 表（TCP/UDP 连接）的信息
+            x nets view internet
+            ```
+          en: |
+            Added the `nets` module, an enhancement module designed for the `netstat` command, aimed at providing a more intuitive way to display network statistics.
+
+            Example:
+            ```sh
+            # Start interactive mode, select the table to view, equivalent to 'x nets view'
+            x nets
+
+            # Update data for all tables
+            x nets update
+
+            # View information for the 'internet' table (TCP/UDP connections)
+            x nets view internet
+            ```
+    ps:
+      update:
+        - cn: 新增 `fz` 子命令，用于通过 fzf 交互式界面查看进程，便于用户浏览与搜索。
+          en: Added `fz` subcommand, allowing users to view processes interactively via the `fzf` interface, which makes browsing and searching easier.
+    elv:
+      bugfix:
+        - cn: |
+            修复了 elv 模块的 `--setup` 功能，解决了因未更新使用 shortcut 配置文件的代码而导致短名无法使用的问题。[#287](https://github.com/x-cmd/x-cmd/issues/287#issuecomment-3186511398)。
+            示例：
+            ```sh
+            # 更新 elvish 环境关于 x-cmd 的启动文件
+            x elv --setup
+            ```
+          en: |
+            Fixed the `--setup` function in the elv module, resolving an issue where short names could not be used due to the shortcut config file not being updated. [#287](https://github.com/x-cmd/x-cmd/issues/287#issuecomment-3186511398).
+            Examples:
+            ```sh
+            # Update the elvish environment setup file for x-cmd
+            x elv --setup
+            ```
+    yq:
+      bugfix:
+        - cn: 修复了 yq 模块在本地 yq 低版本下的不兼容问题。当检测到低版本 yq 时，x-cmd 将默认使用 yq v4 版本。[#287](https://github.com/x-cmd/x-cmd/issues/287#issuecomment-3187998703)。
+          en: Fixed incompatibility issues in the yq module when a low local yq version is detected. x-cmd will default to using yq v4 in this case. [#287](https://github.com/x-cmd/x-cmd/issues/287#issuecomment-3187998703).
+    font:
+      bugfix:
+        - cn: 修复 Windows Git Bash 使用 `x font ls` fzf 预览信息窗口无法显示
+          en: Fix the fzf preview window not displaying in Windows Git Bash when using `x font ls`
+    theme:
+      break:
+        - cn: '`x theme font` 将使用 `font` 模块进行下载安装'
+          en: '`x theme font` will use the `font` module to install'
+  blog: null
+  name: v0.6.10
+  alpha: true
+  beta: true
 v0.6.9:
   sum: 47417463b9502ad533f87da26d0aa5cd3717684576d79fc7410c260c7fd6a14cbd8ca615fb15b56920d65dbf9f2e0c0770f94729c16b509a1bc37c50fe059898
   date: 2025-08-13 03:40:41+0000
@@ -9,6 +79,7 @@ v0.6.9:
             ```sh
             # 进入 fzf 交互选择 Nerd Fonts 字体安装
             x font
+
             # 安装 "FiraCode Nerd Font" 字体
             x font nerd install FiraCode
             ```
@@ -17,6 +88,7 @@ v0.6.9:
             ```sh
             # Using fzf interactive selection to install Nerd Fonts
             x font
+
             # Install "FiraCode Nerd Font" font
             x font nerd install FiraCode
             ```
@@ -104,8 +176,6 @@ v0.6.9:
           en: Fixed a bug where the TUI component could not work properly when “Backspace sends ^H (Enable it)” was enabled. [x-cmd/x-cmd#285](https://github.com/x-cmd/x-cmd/issues/285)
   blog: /blog/250813
   name: v0.6.9
-  alpha: true
-  beta: true
 v0.6.8:
   sum: 89a769c0ab238b4df20301c54c3c0f7d6405e41fab3151e6f190abca35987f2e9b9bb90a91b68ffd57fa4424c2a16c0aa36edc95d133d553130a93cfabfd8e9d
   date: 2025-08-08 09:15:00+0000
