@@ -68,6 +68,7 @@ v0.6.10:
   name: v0.6.10
   alpha: true
   beta: true
+  latest: true
 v0.6.9:
   sum: 47417463b9502ad533f87da26d0aa5cd3717684576d79fc7410c260c7fd6a14cbd8ca615fb15b56920d65dbf9f2e0c0770f94729c16b509a1bc37c50fe059898
   date: 2025-08-13 03:40:41+0000
@@ -320,7 +321,6 @@ v0.6.7:
           en: Fixed an issue where chat interactive mode did not exit immediately upon request failure.
   blog: /blog/250805
   name: v0.6.7
-  latest: true
 v0.6.6:
   sum: 1453b5c719433a28e002a3030a1146f41b6175bdc486a7312a41c3c6bdcbdd565ab62feef6a907ec0a09c5b7404daa47df0aa086c43baa4d21bde5796cf2d53c
   date: 2025-07-26 13:41:24+0000
