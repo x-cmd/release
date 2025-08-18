@@ -64,7 +64,7 @@ v0.6.10:
       break:
         - cn: '`x theme font` 将使用 `font` 模块进行下载安装'
           en: '`x theme font` will use the `font` module to install'
-  blog: null
+  blog: /blog/250819
   name: v0.6.10
   alpha: true
   beta: true
