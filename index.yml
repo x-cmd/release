@@ -1,3 +1,131 @@
+v0.6.11:
+  sum: 171190a5c9867ef102536e13360819b145ea1c0df406ca733516133f8f8c97c21378445fc1391070a80bf7915c13d8ca372eb5b1becf1ec2e923195d056da86b
+  date: 2025-08-30 08:26:34+0000
+  change:
+    price:
+      update:
+        - cn: 在 AI chat 的 REPL 模式下，新增自动计算本次 LLM API 请求费用的功能。
+          en: Added automatic cost calculation for each LLM API request in AI chat REPL mode.
+    chat:
+      update:
+        - cn: 在 AI chat 的 REPL 模式下，新增历史自动压缩合并功能，默认超过 10 条消息时会自动压缩一次，目前处于测试阶段。
+          en: Added automatic history compression and merging in AI chat REPL mode. By default, the history is compressed after every 10 messages. This feature is currently in testing.
+    lsof:
+      update:
+        - cn: |
+            新增 lsof 模块。一个为 lsof 命令设计的增强模块，旨在提供更直观的方式来显示开的文件和相应的进程信息。
+
+            示例：
+            ```sh
+            # 以 TUI 方式显示打开的文件
+            x lsof
+
+            # 使用 fzf 交互式搜索和查看打开的文件
+            x lsof fz
+            ```
+          en: |
+            Added the `lsof` module. An enhanced module designed for the `lsof` command, aiming to provide a more intuitive way to display open files and their corresponding process information.
+
+            Examples:
+            ```sh
+            # Display open files in TUI mode
+            x lsof
+
+            # Use fzf to interactively search and view open files
+            x lsof fz
+            ```
+    sysctl:
+      update:
+        - cn: 新增 sysctl 模块，支持在终端中快速、交互式地访问和查询 sysctl 数据，让用户能够更直观地浏览和定位系统内核参数。
+          en: Added the `sysctl` module, which supports quick and interactive access and querying of sysctl data in the terminal, allowing users to more intuitively browse and locate system kernel parameters.
+    sb:
+      update:
+        - cn: |
+            新增 `sb` 模块。旨在受限环境中安全运行命令，类似 Deno、Docker 的最小权限沙箱。
+            在 macOS 上，使用 `m sb` 运行；在 Linux 上，使用 `x pldg` 运行。
+
+            示例：
+            ```sh
+            # 阻止 curl 访问
+            x sb airrun curl https://x-cmd.com || echo "Successfully stop curl from Internet"
+
+            # 阻止文件系统写入。命令 `touch /tmp/test.txt` 应该失败
+            x sb editrun touch /tmp/test.txt
+            ```
+          en: |
+            Added the `sb` module. It is designed to securely run commands in restricted environments, similar to Deno's or Docker's least-privilege sandboxes.
+            On macOS, use `m sb` to run; on Linux, use `x pldg` to run.
+
+            Examples:
+            ```sh
+            # Block curl from accessing the internet
+            x sb airrun curl https://x-cmd.com || echo "Successfully stop curl from Internet"
+
+            # Block filesystem writes. The command `touch /tmp/test.txt` should fail
+            x sb editrun touch /tmp/test.txt
+            ```
+    mac:
+      update:
+        - cn: |
+            新增 `sb` 子命令。对 macOS 的 sandbox-exec 进行封装; 用户现在可以采用 `-0|-1|-3|-5|-9` 进行基本权限的设置, 并增删权限。
+
+            示例：
+            ```sh
+            # 规则集 9 默认允许所有权限。要阻止 curl 访问, 您需要指定 --no-net
+            m sb -9 --no-net curl --head https://x-cmd.com || echo "Successfully stop curl from Internet"
+
+            # 允许读取特定文件 `/etc/hosts`。命令 `cat /etc/hosts` 应该成功
+            m sb -0 -a r:/etc/hosts cat /etc/hosts
+            ```
+          en: |
+            Added the `sb` subcommand. It encapsulates macOS's `sandbox-exec`; users can now set basic permissions using `-0|-1|-3|-5|-9` and add or remove permissions.
+
+            Examples:
+            ```sh
+            # Ruleset 9 allows all permissions by default. To block curl access, you need to specify --no-net
+            m sb -9 --no-net curl --head https://x-cmd.com || echo "Successfully stop curl from Internet"
+
+            # Allow reading a specific file `/etc/hosts`. The command `cat /etc/hosts` should succeed
+            m sb -0 -a r:/etc/hosts cat /etc/hosts
+            ```
+        - cn: 新增 `sysctl` 子命令。该命令会调用 sysctl 模块。
+          en: Added the `sysctl` subcommand. This command invokes the `sysctl` module.
+    pldg:
+      update:
+        - cn: |
+            新增 `pldg` 模块。对 cosmo pledge 命令进行简化封装; 用户现在可以采用 `-0|-1|-3|-5|-9` 进行基本权限的设置, 并增删权限。
+
+            示例：
+            ```sh
+            # 规则集 9 默认允许所有权限。要阻止 curl 访问, 您需要指定 --no-net
+            x pldg -9 --nonet curl --head https://x-cmd.com || echo "Successfully stop curl from Internet"
+
+            # 规则集 3 提供了运行非交互式命令行工具（如 ls）的基本运行权限, 但用户仍需要对目录进行授权
+            x pldg -3 -v r:/home ls ~
+            ```
+          en: |
+            Added the `pldg` module. It provides a simplified wrapper for the cosmo `pledge` command; users can now set basic permissions using `-0|-1|-3|-5|-9` and add or remove permissions.
+
+            Examples:
+            ```sh
+            # Ruleset 9 allows all permissions by default. To block curl access, you need to specify --nonet
+            x pldg -9 --nonet curl --head https://x-cmd.com || echo "Successfully stop curl from Internet"
+
+            # Ruleset 3 provides basic execution permissions for non-interactive command-line tools (like ls), but users still need to authorize directories
+            x pldg -3 -v r:/home ls ~
+            ```
+    ccal:
+      bugfix:
+        - cn: 修复了 `CTRL-p` 在 bash 上出现表达式报错问题。[x-cmd/x-cmd#297](https://github.com/x-cmd/x-cmd/issues/297)
+          en: Fixed an issue where `CTRL-p` caused an expression error in bash. [x-cmd/x-cmd#297](https://github.com/x-cmd/x-cmd/issues/297)
+    tui:
+      bugfix:
+        - cn: 修复了 TUI 在 macOS + mawk 环境下处理 CJK 字符时会卡住的问题。
+          en: Fixed an issue where TUI would freeze when handling CJK characters in macOS + mawk environment.
+  blog: null
+  name: v0.6.11
+  alpha: true
+  beta: true
 v0.6.10:
   sum: 04b1d1b72e4a5dce13112d7a0ce4da7d8b46df549a71ecfea5479e046004de707eac3ba2e8b5690cff752ba44244c7ffbd377fd172a986adc3954d95b810e5dd
   date: 2025-08-16 07:52:32+0000
@@ -66,8 +194,6 @@ v0.6.10:
           en: '`x theme font` will use the `font` module to install'
   blog: /blog/250819
   name: v0.6.10
-  alpha: true
-  beta: true
   latest: true
 v0.6.9:
   sum: 47417463b9502ad533f87da26d0aa5cd3717684576d79fc7410c260c7fd6a14cbd8ca615fb15b56920d65dbf9f2e0c0770f94729c16b509a1bc37c50fe059898
