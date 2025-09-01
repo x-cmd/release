@@ -122,7 +122,7 @@ v0.6.11:
       bugfix:
         - cn: 修复了 TUI 在 macOS + mawk 环境下处理 CJK 字符时会卡住的问题。
           en: Fixed an issue where TUI would freeze when handling CJK characters in macOS + mawk environment.
-  blog: null
+  blog: /blog/250901
   name: v0.6.11
   alpha: true
   beta: true
