@@ -124,8 +124,6 @@ v0.6.11:
           en: Fixed an issue where TUI would freeze when handling CJK characters in macOS + mawk environment.
   blog: /blog/250901
   name: v0.6.11
-  alpha: true
-  beta: true
 v0.6.10:
   sum: 04b1d1b72e4a5dce13112d7a0ce4da7d8b46df549a71ecfea5479e046004de707eac3ba2e8b5690cff752ba44244c7ffbd377fd172a986adc3954d95b810e5dd
   date: 2025-08-16 07:52:32+0000
