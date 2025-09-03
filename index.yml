@@ -1,3 +1,31 @@
+v0.6.12:
+  sum: 8b4e472a46498e83d577c3bf8a82c1163db4309463db8195f0f62c0f6a12be267fd64fab95deb1834687b175156412a64adff5dd0c193a8c0968cf5463b5ec58
+  date: 2025-09-03 09:51:49+0000
+  change:
+    chat:
+      update:
+        - cn: 在 AI chat 的 REPL 模式下，新增自动计算本次 LLM 请求耗时的功能。
+          en: Added automatic calculation of execution time for each LLM request in AI chat REPL mode.
+        - cn: 在 AI chat 的 REPL 模式下，优化了 LLM API 请求费用的计算功能，支持根据用户当前环境转换为对应的国际货币符号显示。
+          en: Improved cost calculation for LLM API requests in AI chat REPL mode, with support for conversion to the international currency symbol of the user’s current environment.
+        - cn: |
+            新增了 `--stream` 和 `--no-stream` 两个 flag，用于控制 LLM 是否使用流式响应，当前默认启用流式响应。
+
+            示例：
+            ```sh
+            @ --no-stream "How does AI work?"
+            ```
+          en: |
+            Added `--stream` and `--no-stream` flags to control whether the LLM uses streaming responses, with streaming enabled by default.
+
+            Example:
+            ```sh
+            @ --no-stream "How does AI work?"
+            ```
+  blog: null
+  name: v0.6.12
+  alpha: true
+  beta: true
 v0.6.11:
   sum: 171190a5c9867ef102536e13360819b145ea1c0df406ca733516133f8f8c97c21378445fc1391070a80bf7915c13d8ca372eb5b1becf1ec2e923195d056da86b
   date: 2025-08-30 08:26:34+0000
