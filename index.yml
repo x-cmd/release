@@ -22,7 +22,7 @@ v0.6.12:
             ```sh
             @ --no-stream "How does AI work?"
             ```
-  blog: null
+  blog: /blog/250904
   name: v0.6.12
   alpha: true
   beta: true
