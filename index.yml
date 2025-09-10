@@ -1,3 +1,72 @@
+v0.6.13:
+  sum: c9805c8c2bb6b92f65f20aa0021600062c7d5131cb88150d6b37606736638b7aca8f9bbea0f9fa67883b62215396ffd02a54d4dff2f6e30c3ca36798271fbfb3
+  date: 2025-09-10 09:23:23+0000
+  change:
+    docker:
+      update:
+        - cn: 在 x docker snap 功能的镜像中，使用 x-cmd pkg 体系替代系统包管理器（如 apt），以提供满足 gemini-cli、codex 等工具需求的 Node 版本。([#307](https://github.com/x-cmd/x-cmd/issues/307))
+          en: In the x docker snap image, replace the system package manager (e.g., apt) with the x-cmd pkg system to provide a Node version compatible with tools such as gemini-cli and codex.([#307](https://github.com/x-cmd/x-cmd/issues/307))
+    aur:
+      update:
+        - cn: |
+            新增 aur 模块。一个为 Arch Linux 用户设计的 AUR 辅助工具，结合 fzf 提供了一个流畅的交互式 UI，让用户可以直观地筛选和选择软件包。
+            提供了查看热门软件包排行 (top) 和分析包受欢迎程度 (stat) 的功能，帮助用户快速定位 AUR 中高质量和流行的应用。
+
+            示例：
+            ```sh
+            # 使用 fzf 交互式搜索和查看软件包列表，等同于 'x aur fz'
+            x aur
+
+            # 查看 AUR 中最受欢迎的前 200 个应用
+            x aur top 200
+            ```
+          en: |
+            Added the `aur` module. an AUR helper tool designed for Arch Linux users. It combines with fzf to provide a smooth interactive UI, allowing users to intuitively filter and select packages.
+            Additionally, it offers features to view popular package rankings (top) and analyze package popularity (stat), helping users quickly locate high-quality and popular applications in the AUR.
+
+            示例：
+            ```sh
+            # Interactively search and view package lists using fzf, equivalent to 'x aur fz'
+            x aur
+
+            # View the top 200 most popular applications in AUR
+            x aur top 200
+            ```
+    paru:
+      update:
+        - cn: |
+            新增 paru 模块。一个为 paru 命令设计的增强模块，它通过集成 `fzf` 这一强大的交互式模糊搜索工具，极大地简化了软件包的查找、选择和安装流程。
+            将 `paru` 的常用功能封装成更直观的子命令，如 `ls`（列出已安装的包）和 `info`（查看包的详细信息），从而为用户提供一个更高效、更友好的包管理体验。
+
+            示例：
+            ```sh
+            # 使用 fzf 作为交互式 UI 来选择需要安装的应用
+            x paru fz
+
+            # 查看 'x-cmd' 包的详细信息
+            x paru info x-cmd
+            ```
+          en: |
+            Added the `paru` module. an enhancement tool for the `paru` AUR helper, designed for Arch Linux users.
+            It greatly simplifies the process of finding, selecting, and installing packages by integrating `fzf`, a powerful interactive fuzzy search tool.
+            It encapsulates `paru`'s common functionalities into more intuitive subcommands, such as `ls` (to list installed packages) and `info` (to view detailed package information), thereby providing users with a more efficient and user-friendly package management experience.
+
+            示例：
+            ```sh
+            # Using fzf as an interactive UI to select the applications you want to install
+            x paru fz
+
+            # View the details of the 'x-cmd' package
+            x paru info x-cmd
+            ```
+    awk:
+      bugfix:
+        - cn: 修复了在新版 mawk（1.3.4 20250131）处理 UTF-8 字符时导致内存占用 100% 并卡死的问题。详见 [x-cmd/x-cmd#308](https://github.com/x-cmd/x-cmd/issues/308)。
+          en: Fixed an issue in the new mawk (1.3.4 20250131) where handling UTF-8 characters caused 100% memory usage and freezing. See [x-cmd/x-cmd#308](https://github.com/x-cmd/x-cmd/issues/308).
+  blog: null
+  name: v0.6.13
+  alpha: true
+  beta: true
 v0.6.12:
   sum: 8b4e472a46498e83d577c3bf8a82c1163db4309463db8195f0f62c0f6a12be267fd64fab95deb1834687b175156412a64adff5dd0c193a8c0968cf5463b5ec58
   date: 2025-09-03 09:51:49+0000
@@ -24,8 +93,6 @@ v0.6.12:
             ```
   blog: /blog/250904
   name: v0.6.12
-  alpha: true
-  beta: true
 v0.6.11:
   sum: 171190a5c9867ef102536e13360819b145ea1c0df406ca733516133f8f8c97c21378445fc1391070a80bf7915c13d8ca372eb5b1becf1ec2e923195d056da86b
   date: 2025-08-30 08:26:34+0000
