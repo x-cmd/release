@@ -63,7 +63,7 @@ v0.6.13:
       bugfix:
         - cn: 修复了在新版 mawk（1.3.4 20250131）处理 UTF-8 字符时导致内存占用 100% 并卡死的问题。详见 [x-cmd/x-cmd#308](https://github.com/x-cmd/x-cmd/issues/308)。
           en: Fixed an issue in the new mawk (1.3.4 20250131) where handling UTF-8 characters caused 100% memory usage and freezing. See [x-cmd/x-cmd#308](https://github.com/x-cmd/x-cmd/issues/308).
-  blog: null
+  blog: /blog/250912
   name: v0.6.13
   alpha: true
   beta: true
