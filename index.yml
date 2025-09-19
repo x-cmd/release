@@ -1,3 +1,58 @@
+v0.6.14:
+  sum: 1ea60111702f86ee9f88f13942a6fb71c4007ff8d528fd49787cea62636d02ecc53cdca63e702ab9366aa104a7d761eca8e37dc414936e1dbe9db52a44bba1c0
+  date: 2025-09-19 08:45:28+0000
+  change:
+    codex:
+      update:
+        - cn: 补充了 codex 的 advise，优化了子命令和参数的提示内容，让用户在命令行中获得更完整、更直观的补全体验。
+          en: Added codex advise, improving the suggestions for subcommands and options to provide a more complete and intuitive autocompletion experience in the CLI.
+    yay:
+      update:
+        - cn: |
+            新增 yay 模块。一个为 yay 命令设计的增强模块，它通过集成 `fzf` 这一强大的交互式模糊搜索工具，极大地简化了软件包的查找、选择和安装流程。
+            将 `yay` 的常用功能封装成更直观的子命令，如 `ls`（列出已安装的包）和 `info`（查看包的详细信息），从而为用户提供一个更高效、更友好的包管理体验。
+
+            示例：
+            ```sh
+            # 使用 fzf 作为交互式 UI 来选择需要安装的应用
+            x yay fz
+
+            # 查看 'x-cmd' 包的详细信息
+            x yay info x-cmd
+            ```
+          en: |
+            Added the `yay` module. an enhancement tool for the `yay` AUR helper, designed for Arch Linux users.
+            It greatly simplifies the process of finding, selecting, and installing packages by integrating `fzf`, a powerful interactive fuzzy search tool.
+            It encapsulates `yay`'s common functionalities into more intuitive subcommands, such as `ls` (to list installed packages) and `info` (to view detailed package information), thereby providing users with a more efficient and user-friendly package management experience.
+
+            示例：
+            ```sh
+            # Using fzf as an interactive UI to select the applications you want to install
+            x yay fz
+
+            # View the details of the 'x-cmd' package
+            x yay info x-cmd
+            ```
+    chat:
+      update:
+        - cn: '`x chat --init` 初始化配置功能新增选项，允许用户设置是否使用流式响应，默认值为 false。'
+          en: The `x chat --init` configuration setup now includes an option to enable or disable streaming responses, defaulting to false.
+        - cn: 优化了 LLM 请求对话的历史存储格式，使得对话记录更紧凑、结构化，并提升了检索和压缩效率。
+          en: Optimized the storage format for LLM request conversation history, making records more compact and structured while improving retrieval and compression efficiency.
+        - cn: 调整优化了 LLM prompt 的各个组成部分结构，使提示语更清晰、模块化，便于管理和扩展。
+          en: Adjusted and optimized the structure of each component in LLM prompts, making them clearer, more modular, and easier to manage and extend.
+    openai:
+      update:
+        - cn: openai 模块将默认模型由 `gpt-5-nano` 更改为 `gpt-5-mini`。
+          en: The OpenAI module changed the default model from `gpt-5-nano` to `gpt-5-mini`.
+    cb:
+      bugfix:
+        - cn: 修复了 `x cb repo cl` 没有携带 owner 而出现的克隆失败问题。[#310](https://github.com/x-cmd/x-cmd/issues/310)
+          en: Fixed a clone failure issue where `x cb repo cl` entries/objects were missing owner information. [#310](https://github.com/x-cmd/x-cmd/issues/310)
+  blog: null
+  name: v0.6.14
+  alpha: true
+  beta: true
 v0.6.13:
   sum: c9805c8c2bb6b92f65f20aa0021600062c7d5131cb88150d6b37606736638b7aca8f9bbea0f9fa67883b62215396ffd02a54d4dff2f6e30c3ca36798271fbfb3
   date: 2025-09-13 02:28:36+0000
@@ -69,8 +124,6 @@ v0.6.13:
           en: Fixed run error when `x node` is used with options [#ICX09J](https://gitee.com/x-cmd/x-cmd/issues/ICX09J)
   blog: /blog/250912
   name: v0.6.13
-  alpha: true
-  beta: true
   latest: true
 v0.6.12:
   sum: 8b4e472a46498e83d577c3bf8a82c1163db4309463db8195f0f62c0f6a12be267fd64fab95deb1834687b175156412a64adff5dd0c193a8c0968cf5463b5ec58
