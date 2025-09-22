@@ -49,10 +49,11 @@ v0.6.14:
       bugfix:
         - cn: 修复了 `x cb repo cl` 没有携带 owner 而出现的克隆失败问题。[#310](https://github.com/x-cmd/x-cmd/issues/310)
           en: Fixed a clone failure issue where `x cb repo cl` entries/objects were missing owner information. [#310](https://github.com/x-cmd/x-cmd/issues/310)
-  blog: null
+  blog: /blog/250922
   name: v0.6.14
   alpha: true
   beta: true
+  latest: true
 v0.6.13:
   sum: c9805c8c2bb6b92f65f20aa0021600062c7d5131cb88150d6b37606736638b7aca8f9bbea0f9fa67883b62215396ffd02a54d4dff2f6e30c3ca36798271fbfb3
   date: 2025-09-13 02:28:36+0000
@@ -124,7 +125,6 @@ v0.6.13:
           en: Fixed run error when `x node` is used with options [#ICX09J](https://gitee.com/x-cmd/x-cmd/issues/ICX09J)
   blog: /blog/250912
   name: v0.6.13
-  latest: true
 v0.6.12:
   sum: 8b4e472a46498e83d577c3bf8a82c1163db4309463db8195f0f62c0f6a12be267fd64fab95deb1834687b175156412a64adff5dd0c193a8c0968cf5463b5ec58
   date: 2025-09-13 02:27:50+0000
