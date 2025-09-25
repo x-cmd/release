@@ -42,7 +42,7 @@ v0.6.15:
             # Update the specified file via the update command
             x hub file update <hub file path>
             ```
-  blog: null
+  blog: /blog/250925
   name: v0.6.15
   alpha: true
   beta: true
