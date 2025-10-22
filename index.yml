@@ -1,3 +1,79 @@
+v0.7.1:
+  sum: e37a02b013d7206d459afa5d31b453ba8af15db55073defc745d9f27acf5f65e5ce846a12684d4a5f308bdfa1785b0b3699be7f7ee488c0204fcf80a36d556b4
+  date: 2025-10-22 12:14:08+0000
+  change:
+    claude:
+      update:
+        - cn: |
+            新增 `use` 命令，用于快速启动 claude-code 并选择指定提供商的模型（如 DeepSeek 或 kimi k2）。
+            支持通过 `x deepseek --cfg apikey="your key"` 或环境变量配置 API key，方便开发者自由切换不同模型环境，实现灵活的多模型接入体验。
+          en: |
+            Added the `use` command, allowing users to quickly launch claude-code with a specific model provider (such as DeepSeek or kimi k2).
+            Supports API key configuration via `x deepseek --cfg apikey="your key"` or environment variables, enabling developers to easily switch between different model environments for a more flexible multi-model setup.
+        - cn: 新增 `skill` 命令，用于管理 Claude Skills。支持列出可用技能模板、查看用户和项目技能、添加或删除技能，帮助用户更高效地组织和扩展 claude-code 的能力。
+          en: Added the `skill` command for managing Claude Skills.Supports listing available skill templates, viewing user and project skills,and adding or removing skills to help users efficiently organize and extend the capabilities of claude-code.
+        - cn: 新增 `router` 命令，用于通过 claude-code-router 为 claude-code 提供多模型支持。该命令可启动、停止或重启路由服务，并支持在终端或浏览器中直接选择、配置和管理模型。
+          en: Added the `router` command, which provides multi-model support for claude-code through the claude-code-router. This command allows users to start, stop, or restart the routing service, and to select, configure, and manage models directly from the terminal or web interface.
+    codex:
+      update:
+        - cn: |
+            新增 `skill` 命令，引入 skill 机制，用于管理用户级 Codex 中的技能功能，实现类似 Claude-Code 的 skill 能力。
+
+            示例：
+            ```sh
+            # 激活所有技能
+            x codex skill add all
+
+            # 将 skill 机制注入到用户级 Codex 环境
+            x codex skill setup
+            ```
+          en: |
+            Added the `skill` command introducing a skill mechanism for managing user-level Codex skills, similar to Claude-Code skill capabilities.
+
+            Example:
+            ```sh
+            # Activate all skills
+            x codex skill add all
+
+            # Inject the skill mechanism into the user-level Codex environment
+            x codex skill setup
+            ```
+    gemini:
+      update:
+        - cn: |
+            新增 `skill` 命令，引入 skill 机制，用于管理用户级 Gimini Cli 中的技能功能，实现类似 Claude-Code 的 skill 能力。
+
+            示例：
+            ```sh
+            # 激活所有技能
+            x gemini cli skill add all
+
+            # 将 skill 机制注入到用户级 Gimini Cli 环境
+            x gemini cli skill setup
+            ```
+          en: |
+            Added the `skill` command introducing a skill mechanism for managing user-level Gimini Cli skills, similar to Claude-Code skill capabilities.
+
+            Example:
+            ```sh
+            # Activate all skills
+            x gemini cli skill add all
+
+            # Inject the skill mechanism into the user-level Gimini Cli environment
+            x gemini cli skill setup
+            ```
+    uptime:
+      bugfix:
+        - cn: 修复了 `uptime` 数据显示异常的问题，现已正确显示系统运行时间。
+          en: Fixed an issue with incorrect `uptime` data display; system uptime is now shown correctly.
+    whisper:
+      bugfix:
+        - cn: 修复了无法进行 AI 语音识别的问题，现已可正常使用语音转文本功能。
+          en: Fixed an issue where AI speech recognition was not working; voice-to-text now functions properly.
+  blog: null
+  name: v0.7.1
+  alpha: true
+  beta: true
 v0.7.0:
   sum: b095b5be725a12b37c509c22d27542d7571029fbaee7ede6d49aed1427b6a0a556070b38349592a7f4177272a037621975f7311908cffb0e5d55213b5a4dfa04
   date: 2025-09-30 07:16:13+0000
@@ -15,8 +91,7 @@ v0.7.0:
           en: Fixed an issue where LLM model pricing data was not updated correctly.
   blog: null
   name: v0.7.0
-  alpha: true
-  beta: true
+  latest: true
 v0.6.15:
   sum: dc8836f418cf5c0fa106c11ce906a663c928b38f8e26172770c2e3184ffe7101e63d8294173560a1ce2fd4e7f6be0ede0286a2b648045824837d2791dc7eb728
   date: 2025-09-24 08:45:23+0000
@@ -116,7 +191,6 @@ v0.6.14:
           en: Fixed a clone failure issue where `x cb repo cl` entries/objects were missing owner information. [#310](https://github.com/x-cmd/x-cmd/issues/310)
   blog: /blog/250922
   name: v0.6.14
-  latest: true
 v0.6.13:
   sum: c9805c8c2bb6b92f65f20aa0021600062c7d5131cb88150d6b37606736638b7aca8f9bbea0f9fa67883b62215396ffd02a54d4dff2f6e30c3ca36798271fbfb3
   date: 2025-09-13 02:28:36+0000
