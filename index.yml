@@ -40,6 +40,30 @@ v0.7.2:
             Added the `openspec` module. Designed to help users quickly install and get started.
             OpenSpec is a lightweight, spec-driven framework that aims to streamline collaboration between human developers and AI coding assistants through a standardized development process.
             It supports over a dozen mainstream AI tools, including Claude Code, Codex, and Cursor. It runs without requiring any API keys and has no dependency on any MCPs.
+    claude:
+      update:
+        - cn: |
+            新增 `deepseek`、`zhipu`、`sili`、`kimi` 命令，用于快速启动 claude-code 并自动选择对应提供商的模型（如 DeepSeek 或 Kimi K2），取代原有的 `use` 命令。
+
+            示例：
+            ```bash
+            # 配置 DeepSeek API Key，并启动 claude-code 接入 DeepSeek 模型
+            x deepseek --cfg apikey="your_api_key"
+            x claude ds
+            ```
+
+            上述命令会自动完成模型初始化与连接，让你更高效地在不同 AI 提供商间切换与测试。
+          en: |
+            Added new commands — `deepseek`, `zhipu`, `sili`, and `kimi` — to quickly launch claude-code and automatically connect to the corresponding provider models (such as DeepSeek or Kimi K2), replacing the old `use` command.
+
+            Example:
+            ```bash
+            # Configure DeepSeek API Key and start claude-code with DeepSeek model
+            x deepseek --cfg apikey="your_api_key"
+            x claude ds
+            ```
+
+            The above commands automatically initialize and connect to the chosen model, enabling seamless testing and collaboration across multiple AI providers.
   blog: null
   name: v0.7.2
   alpha: true
