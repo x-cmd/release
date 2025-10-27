@@ -64,7 +64,7 @@ v0.7.2:
             ```
 
             The above commands automatically initialize and connect to the chosen model, enabling seamless testing and collaboration across multiple AI providers.
-  blog: null
+  blog: /blog/251027
   name: v0.7.2
   alpha: true
   beta: true
