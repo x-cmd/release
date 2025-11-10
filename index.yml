@@ -42,6 +42,7 @@ v0.7.3:
   name: v0.7.3
   alpha: true
   beta: true
+  latest: true
 v0.7.2:
   sum: 016db3c88148ebb7e2e08271938fb91ae78835cc8d2ad55d9e2814232105cd3b33eb60fb0e71f85c19030caf006cd58826cbac37a66d1b008630a8534af2b6b3
   date: 2025-10-25 14:04:33+0000
@@ -110,7 +111,6 @@ v0.7.2:
             The above commands automatically initialize and connect to the chosen model, enabling seamless testing and collaboration across multiple AI providers.
   blog: /blog/251027
   name: v0.7.2
-  latest: true
 v0.7.1:
   sum: e37a02b013d7206d459afa5d31b453ba8af15db55073defc745d9f27acf5f65e5ce846a12684d4a5f308bdfa1785b0b3699be7f7ee488c0204fcf80a36d556b4
   date: 2025-10-22 12:14:08+0000
