@@ -38,7 +38,7 @@ v0.7.3:
           en: Added `/export` command in chat REPL mode to export the entire conversation, making it easier for users to back up, analyze, or reuse their chat history.
         - cn: chat 的 REPL 模式新增 session 历史 fzf 交互功能，用户可通过交互式界面方便地查看、选择并继续之前的对话会话历史。
           en: Added session history fzf interaction in chat REPL mode, allowing users to easily browse, select, and resume previous chat sessions through an interactive interface.
-  blog: null
+  blog: /blog/251111
   name: v0.7.3
   alpha: true
   beta: true
