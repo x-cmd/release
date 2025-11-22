@@ -1,3 +1,51 @@
+v0.7.4:
+  sum: d4e2d9ee2d86d590b9dfe195dc919c9d1015c3e32b3198cf9270631ed0ed6d5442745063ba266c2d6ae03dadb5bbac6fbfa446e67eb96172dc17bf45325cba0a
+  date: 2025-11-22 08:46:45+0000
+  change:
+    claude/codex/gemini:
+      update:
+        - cn: |
+            skill 命令新增了 `add` 和 `rm` 两个子命令，用于在项目或全局环境中更方便地添加或移除技能。
+            其中，`add` 默认操作当前项目环境的 skill；如果使用 `use` 命令，则等同于执行 `add -g`，即将技能添加到全局环境中。
+
+            示例：
+            ```sh
+            # 在当前项目环境添加技能
+            x claude skill add anthropics/canvas-design
+
+            # 从当前项目环境移除技能
+            x claude skill rm anthropics/canvas-design
+
+            # 全局添加技能（use 命令等价于 add -g）
+            x claude skill use anthropics/canvas-design
+            ```
+          en: |
+            The `skill` command now includes two new subcommands: `add` and `rm`, making it easier to add or remove skills in either the project environment or the global environment.
+            By default, `add` applies to the current project environment. If you use the `use` command, it works exactly like `add -g`, adding the skill to the global environment.
+
+            Examples:
+            ```sh
+            # Add a skill to the current project environment
+            x claude skill add anthropics/canvas-design
+
+            # Remove a skill from the current project environment
+            x claude skill rm anthropics/canvas-design
+
+            # Add a skill globally (the `use` command is equivalent to `add -g`)
+            x claude skill use anthropics/canvas-design
+            ```
+    chat:
+      update:
+        - cn: |
+            修复了 chat 的 REPL 模式下出现的一系列问题（例如历史上下文数据过大、文本中出现不可见字符等），
+            并新增支持引入使用 AGENTS.md 文件以提升历史处理的稳定性与可维护性。
+          en: |
+            Fixed several issues in the chat REPL mode (such as oversized history context and invisible characters in data),
+            and added support for using the AGENTS.md file to improve stability and maintainability of history handling.
+  blog: null
+  name: v0.7.4
+  alpha: true
+  beta: true
 v0.7.3:
   sum: 53ebccd5b2c929f62cae7d34036cbf54f0874657c6b48b25d1787f1b510e5847df882d13d93dcbc199bbe84e7167330b8648688e10a57c1ce1696ce42be84a67
   date: 2025-11-08 08:43:56+0000
@@ -40,8 +88,6 @@ v0.7.3:
           en: Added session history fzf interaction in chat REPL mode, allowing users to easily browse, select, and resume previous chat sessions through an interactive interface.
   blog: /blog/251111
   name: v0.7.3
-  alpha: true
-  beta: true
   latest: true
 v0.7.2:
   sum: 016db3c88148ebb7e2e08271938fb91ae78835cc8d2ad55d9e2814232105cd3b33eb60fb0e71f85c19030caf006cd58826cbac37a66d1b008630a8534af2b6b3
