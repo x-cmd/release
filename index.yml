@@ -1,3 +1,43 @@
+v0.7.5:
+  sum: bfa8caf91e1612a084cdc153e7be18ca6cb522afe37b21dafa3d795e7d24dd0c2451b3816c070c6fca3957f5862d77eaaca124d081f5682209af44c93557f0bd
+  date: 2025-11-28 12:39:32+0000
+  change:
+    claude/codex/gemini:
+      update:
+        - cn: |
+            `skill` 命令新增了 `info` 子命令，用于查看指定 Skill 的索引信息，包括名称、作者、描述及许可信息。
+            示例：
+            ```sh
+            # 查看 anthropics/frontend-design Skill 的索引信息
+            x claude skill info anthropics/frontend-design
+            ```
+          en: |
+            The `skill` command now includes an `info` subcommand to view the index information of a specified Skill, including its name, author, description, and license.
+            Example:
+            ```sh
+            # View index information of the anthropics/frontend-design Skill
+            x claude skill info anthropics/frontend-design
+            ```
+    chat:
+      update:
+        - cn: |
+            在 chat 的 REPL 模式下新增了 `/init` 和 `/status` 两个命令。
+            `/init` 可用于初始化当前项目的上下文文件（默认生成或更新 AGENTS.md），
+            `/status` 则用于查看当前会话的对话信息状态，方便用户随时了解上下文情况。
+          en: |
+            Added two new commands in chat REPL mode: `/init` and `/status`.
+            `/init` initializes the context file for the current project (AGENTS.md by default),
+            while `/status` displays the current conversation state, making it easier to inspect and manage session context.
+    gemini:
+      update:
+        - cn: |
+            在 Gemini 模块中，`gg` 命令现支持通过 X-CMD hub 调用，执行 Google 搜索功能。
+          en: |
+            The `gg` command in the Gemini module now supports invocation via X-CMD hub to perform Google searches.
+  blog: null
+  name: v0.7.5
+  alpha: true
+  beta: true
 v0.7.4:
   sum: d4e2d9ee2d86d590b9dfe195dc919c9d1015c3e32b3198cf9270631ed0ed6d5442745063ba266c2d6ae03dadb5bbac6fbfa446e67eb96172dc17bf45325cba0a
   date: 2025-11-22 08:46:45+0000
@@ -42,10 +82,46 @@ v0.7.4:
           en: |
             Fixed several issues in the chat REPL mode (such as oversized history context and invisible characters in data),
             and added support for using the AGENTS.md file to improve stability and maintainability of history handling.
-  blog: null
+    openai:
+      update:
+        - cn: |
+            openai 模块新增对 [GPT-5.1](https://openai.com/index/gpt-5-1/) 模型 的支持。GPT-5.1 是 OpenAI 更智能、对话体验更自然的新一代模型。
+            用户现在可以在命令行中直接调用该模型进行更高质量的问答与推理。
+
+            示例：
+            ```sh
+            @gpt --model gpt-5.1 "explain BABIP and wRC+"
+            ```
+          en: |
+            Added support for the [GPT-5.1](https://openai.com/index/gpt-5-1/) model in the openai module. GPT-5.1 offers more intelligence
+            and more natural conversational abilities. Users can now invoke the model directly from the
+            command line for higher-quality Q&A and reasoning.
+
+            Example:
+            ```sh
+            @gpt --model gpt-5.1 "explain BABIP and wRC+"
+            ```
+    gemini:
+      update:
+        - cn: |
+            Gemini AI 模块新增对 [Gemini 3](https://aistudio.google.com/models/gemini-3) 模型的支持。Gemini 3 具备最先进的推理能力、出色的视觉理解以及卓越的代码生成能力，可显著加速处理复杂真实场景的软件开发任务。
+
+            示例：
+            ```sh
+            @gemini --model gemini-3-pro-preview "Explain how AI works in a few words"
+            ```
+          en: |
+            Added support for the [Gemini 3](https://aistudio.google.com/models/gemini-3) model in the Gemini AI module. Gemini 3 delivers
+            state-of-the-art reasoning, advanced vision capabilities, and exceptional coding performance,
+            enabling faster development for complex real-world software tasks.
+
+            Example:
+            ```sh
+            @gemini --model gemini-3-pro-preview "Explain how AI works in a few words"
+            ```
+  blog: /blog/251124
   name: v0.7.4
-  alpha: true
-  beta: true
+  latest: true
 v0.7.3:
   sum: 53ebccd5b2c929f62cae7d34036cbf54f0874657c6b48b25d1787f1b510e5847df882d13d93dcbc199bbe84e7167330b8648688e10a57c1ce1696ce42be84a67
   date: 2025-11-08 08:43:56+0000
@@ -88,7 +164,6 @@ v0.7.3:
           en: Added session history fzf interaction in chat REPL mode, allowing users to easily browse, select, and resume previous chat sessions through an interactive interface.
   blog: /blog/251111
   name: v0.7.3
-  latest: true
 v0.7.2:
   sum: 016db3c88148ebb7e2e08271938fb91ae78835cc8d2ad55d9e2814232105cd3b33eb60fb0e71f85c19030caf006cd58826cbac37a66d1b008630a8534af2b6b3
   date: 2025-10-25 14:04:33+0000
