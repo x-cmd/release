@@ -34,7 +34,7 @@ v0.7.5:
             在 Gemini 模块中，`gg` 命令现支持通过 X-CMD hub 调用，执行 Google 搜索功能。
           en: |
             The `gg` command in the Gemini module now supports invocation via X-CMD hub to perform Google searches.
-  blog: null
+  blog: /blog/251129
   name: v0.7.5
   alpha: true
   beta: true
