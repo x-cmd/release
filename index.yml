@@ -1,8 +1,40 @@
+v0.7.6:
+  sum: a984913987f8721870ca39aa0521dc76d694606d990cf491a46b484ec44af747cf2db9591723454ba435f180ce6eae6419b60903bad1bb2f6b6403bdc7b78f26
+  date: 2025-12-11 09:48:09+0000
+  change:
+    awk|advise:
+      bugfix:
+        - cn: |
+            修复了 advise 模块在执行补全时强制设置 `LC_ALL` 为 UTF 语言导致的问题。
+            现在会根据系统是否支持对应语言进行判断后再设置，避免因不支持的 locale 引发错误。
+            详见：[x-cmd/x-cmd#340](https://github.com/x-cmd/x-cmd/issues/340)
+          en: |
+            Fixed an issue in the advise module where `LC_ALL` was forcibly set to a UTF locale during completion.
+            The module now checks whether the locale is supported before applying it, preventing errors caused by unsupported locales.
+            See: [x-cmd/x-cmd#340](https://github.com/x-cmd/x-cmd/issues/340)
+    chat:
+      update:
+        - cn: |
+            在 chat 的 REPL 模式下新增支持用户自定义斜杠命令（slash command）。
+            只需在项目环境的 `.x-cmd/commands` 目录，或用户环境的 `$___X_CMD_ROOT/commands` 目录中放置对应的 Markdown 文件，即可定义自有 slash command。
+            当前仍处于内测阶段，欢迎试用反馈。
+          en: |
+            Added support for user-defined slash commands in the chat REPL mode.
+            You can create custom slash commands by placing Markdown files in either the project-level `.x-cmd/commands` directory or the user-level `$___X_CMD_ROOT/commands` directory.
+            This feature is currently in closed beta.
+    claude:
+      update:
+        - cn: router 命令的 `setup` 子命令新增了 `--proxy` 选项，用于在生成配置文件时指定代理服务器地址。
+          en: Added a new `--proxy` option to the `setup` subcommand of the `router` command.
+  blog: null
+  name: v0.7.6
+  alpha: true
+  beta: true
 v0.7.5:
   sum: bfa8caf91e1612a084cdc153e7be18ca6cb522afe37b21dafa3d795e7d24dd0c2451b3816c070c6fca3957f5862d77eaaca124d081f5682209af44c93557f0bd
   date: 2025-11-28 12:39:32+0000
   change:
-    claude/codex/gemini:
+    claude|codex|gemini:
       update:
         - cn: |
             `skill` 命令新增了 `info` 子命令，用于查看指定 Skill 的索引信息，包括名称、作者、描述及许可信息。
@@ -36,13 +68,12 @@ v0.7.5:
             The `gg` command in the Gemini module now supports invocation via X-CMD hub to perform Google searches.
   blog: /blog/251130
   name: v0.7.5
-  alpha: true
-  beta: true
+  latest: true
 v0.7.4:
   sum: d4e2d9ee2d86d590b9dfe195dc919c9d1015c3e32b3198cf9270631ed0ed6d5442745063ba266c2d6ae03dadb5bbac6fbfa446e67eb96172dc17bf45325cba0a
   date: 2025-11-22 08:46:45+0000
   change:
-    claude/codex/gemini:
+    claude|codex|gemini:
       update:
         - cn: |
             skill 命令新增了 `add` 和 `rm` 两个子命令，用于在项目或全局环境中更方便地添加或移除技能。
@@ -121,7 +152,6 @@ v0.7.4:
             ```
   blog: /blog/251124
   name: v0.7.4
-  latest: true
 v0.7.3:
   sum: 53ebccd5b2c929f62cae7d34036cbf54f0874657c6b48b25d1787f1b510e5847df882d13d93dcbc199bbe84e7167330b8648688e10a57c1ce1696ce42be84a67
   date: 2025-11-08 08:43:56+0000
