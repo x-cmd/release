@@ -1,3 +1,42 @@
+v0.7.7:
+  sum: 345311b8b1dbf1ae7b2f8706fbe787fdcded9b7cf89c34ad2fb41d6d096899f236539b49590ee83a616f2d557da2c68c2e858da1ad25d58ba95a62bff5a6875e
+  date: 2025-12-20 08:06:01+0000
+  change:
+    ccal:
+      update:
+        - cn: 更新了 2026 年的日历数据。现在用户可以通过 `x ccal` 准确查询 2026 年的农历、节气、传统节日、干支纪年、黄历宜忌以及六曜等详细信息。
+          en: The 2026 calendar data has been updated. Users can now accurately query detailed 2026 information via the 'x ccal' module, including the Chinese lunar calendar, solar terms, traditional holidays, sexagenary cycle,Chinese Almanac.
+    chat:
+      update:
+        - cn: AI 请求新增支持引用 PDF 文件内容
+          en: AI requests now support PDF files as input.
+        - cn: |
+            x-cmd agent 的 `shcmd` function-call 功能新增支持超时处理选项，
+            可为命令执行设置时间上限，避免长时间阻塞或异常卡住，提升 agent 执行过程的可控性与稳定性。
+          en: |
+            The `shcmd` function-call in x-cmd agent now supports timeout handling options,
+            allowing users to set execution time limits to prevent long-running or stuck commands,
+            improving control and reliability of agent execution.
+      bugfix:
+        - cn: |
+            修复了在 AI 请求中引用文件时，因文件内容包含颜色控制字符而导致解析错误的问题。
+            现在会正确处理并过滤相关颜色字符，避免影响请求与响应结果。
+          en: |
+            Fixed an issue where AI requests could fail when referenced files contained color control characters.
+            These characters are now properly handled and filtered to ensure correct request processing.
+    pkg:
+      bugfix:
+        - cn: |
+            修复了 pkg snap 在获取对应可执行文件路径时，可能出现找不到路径的问题，
+            确保已下载的软件包能够被正确定位并正常执行，提升 snap 功能的稳定性与可靠性。
+          en: |
+            Fixed an issue where pkg snap could fail to locate the correct executable path,
+            ensuring downloaded packages can be properly resolved and executed,
+            and improving the overall stability and reliability of the snap feature.
+  blog: null
+  name: v0.7.7
+  alpha: true
+  beta: true
 v0.7.6:
   sum: a984913987f8721870ca39aa0521dc76d694606d990cf491a46b484ec44af747cf2db9591723454ba435f180ce6eae6419b60903bad1bb2f6b6403bdc7b78f26
   date: 2025-12-11 09:48:09+0000
@@ -28,8 +67,7 @@ v0.7.6:
           en: Added a new `--proxy` option to the `setup` subcommand of the `router` command.
   blog: /blog/251213
   name: v0.7.6
-  alpha: true
-  beta: true
+  latest: true
 v0.7.5:
   sum: bfa8caf91e1612a084cdc153e7be18ca6cb522afe37b21dafa3d795e7d24dd0c2451b3816c070c6fca3957f5862d77eaaca124d081f5682209af44c93557f0bd
   date: 2025-11-28 12:39:32+0000
@@ -68,7 +106,6 @@ v0.7.5:
             The `gg` command in the Gemini module now supports invocation via X-CMD hub to perform Google searches.
   blog: /blog/251130
   name: v0.7.5
-  latest: true
 v0.7.4:
   sum: d4e2d9ee2d86d590b9dfe195dc919c9d1015c3e32b3198cf9270631ed0ed6d5442745063ba266c2d6ae03dadb5bbac6fbfa446e67eb96172dc17bf45325cba0a
   date: 2025-11-22 08:46:45+0000
