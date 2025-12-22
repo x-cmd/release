@@ -33,7 +33,7 @@ v0.7.7:
             Fixed an issue where pkg snap could fail to locate the correct executable path,
             ensuring downloaded packages can be properly resolved and executed,
             and improving the overall stability and reliability of the snap feature.
-  blog: null
+  blog: /blog/251222
   name: v0.7.7
   alpha: true
   beta: true
