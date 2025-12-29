@@ -1,3 +1,57 @@
+v0.7.8:
+  sum: 819012952bc0128210f2cdee84ef9c283ec5cf6247dc1a517981fa1c26aba2a542d1e7d37bec04356f41ee03390f67800c5fd24e40471b16402ea94e4a450006
+  date: 2025-12-29 11:52:35+0000
+  change:
+    nu:
+      bugfix:
+        - cn: |
+            修复了 Nushell 启动警告。我们更新了 `x-cmd` 在 Nushell 中的启动代码，移除了已废弃的语法，解决了与 `get --ignore-errors` 标志以及 `default` 命令中闭包的惰性求值相关的警告。
+            详见：[x-cmd/x-cmd#343](https://github.com/x-cmd/x-cmd/issues/343)
+          en: |
+            Addressed Nushell startup warnings.
+            The `x-cmd` bootcode for Nushell was updated to remove deprecated syntax, resolving warnings related to `get --ignore-errors` and the lazy evaluation of closures passed to `default`.
+            See: [x-cmd/x-cmd#343](https://github.com/x-cmd/x-cmd/issues/343)
+    tping:
+      update:
+        - cn: |
+            支持在输出结果中显示时间戳，便于排查和追踪网络延迟发生的时间点。
+            详见：[x-cmd/x-cmd#341](https://github.com/x-cmd/x-cmd/issues/341)
+          en: |
+            Added timestamp support to the output results to facilitate troubleshooting and tracking of network latency.
+            See: [x-cmd/x-cmd#341](https://github.com/x-cmd/x-cmd/issues/341)
+    sudo:
+      update:
+        - cn: 新增对 `x sudo <command>` 的智能补全支持，使在 sudo 场景下也能正常补全由 x-cmd 管理的命令与参数。[#347](https://github.com/x-cmd/x-cmd/issues/347)
+          en: Improve shell completion for `x sudo <command>` to better support x-cmd managed tools. [#347](https://github.com/x-cmd/x-cmd/issues/347)
+    claude:
+      update:
+        - cn: |
+            新增 stl（statusline）子命令，用于设定 Claude Code 终端界面的状态栏。该功能内置并支持 70+ 款精选主题，可快速为 Claude Code 启用统一、美观且信息密集的状态栏样式，显著提升终端交互体验与演示效果。
+            示例：
+            ```sh
+            # 设定 Claude Code 状态栏使用 el 主题（默认主题）
+            x claude stl setup
+
+            # 初始化状态栏并指定 ice 主题
+            x claude stl setup --theme ice
+            ```
+          en: |
+            Added the stl (statusline) subcommand for configuring the Claude Code terminal statusline.
+
+            This feature comes with 70+ built-in curated themes, enabling users to quickly apply a consistent, visually polished, and information-rich statusline to Claude Code, significantly improving both day-to-day terminal usage and live demo experiences.
+
+            Examples:
+            ```sh
+            # Set up the Claude Code statusline using the default "el" theme
+            x claude stl setup
+
+            # Initialize the statusline with the "ice" theme
+            x claude stl setup --theme ice
+            ```
+  blog: null
+  name: v0.7.8
+  alpha: true
+  beta: true
 v0.7.7:
   sum: 345311b8b1dbf1ae7b2f8706fbe787fdcded9b7cf89c34ad2fb41d6d096899f236539b49590ee83a616f2d557da2c68c2e858da1ad25d58ba95a62bff5a6875e
   date: 2025-12-20 08:06:01+0000
@@ -35,8 +89,6 @@ v0.7.7:
             and improving the overall stability and reliability of the snap feature.
   blog: /blog/251222
   name: v0.7.7
-  alpha: true
-  beta: true
 v0.7.6:
   sum: a984913987f8721870ca39aa0521dc76d694606d990cf491a46b484ec44af747cf2db9591723454ba435f180ce6eae6419b60903bad1bb2f6b6403bdc7b78f26
   date: 2025-12-11 09:48:09+0000
