@@ -1,4 +1,4 @@
-name: index-update
+name: update-x-cmd-version-release
 on:
   workflow_dispatch:
     inputs:
