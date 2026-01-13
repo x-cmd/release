@@ -1,3 +1,43 @@
+v0.7.11:
+  sum: c66dc6858125787888e03af4de39a173599e5f764213270f70871e6a257098eff2e1a0ebb870f58006f487416e405c2ba78abd3c84815a353fa7919cd9250333
+  date: 2026-01-13 03:23:01+0000
+  change:
+    tldr:
+      update:
+        - cn: |
+            优化了 tldr 模块在使用 `--fz` 参数时的显示效果与交互体验。
+            现在通过 fzf 进行 tldr 文档的搜索与展示，新增了单行高亮显示， 并支持在数据展示方式与窗格样式之间灵活切换，使查阅文档更加直观、高效。
+
+            示例：
+            ```sh
+            # 采用 fzf 搜索和显示当前系统的 TLDR
+            x tldr --fz
+
+            # 等同于 `x tldr --fz`
+            x tlfz
+
+            # 采用 fzf 搜索和显示所有系统的 TLDR
+            x tlfz -a
+            ```
+          en: |
+            Improved the display and interaction of the tldr module when using the `--fz` option.
+            TLDR pages are now searched and displayed via fzf, with added single-line highlighting and support for switching between different data views and pane layouts, making documentation browsing clearer and more efficient.
+
+            Examples:
+            ```sh
+            # Search and display TLDR pages for the current system using fzf
+            x tldr --fz
+
+            # Equivalent to `x tldr --fz`
+            x tlfz
+
+            # Search and display TLDR pages for all systems using fzf
+            x tlfz -a
+            ```
+  blog: null
+  name: v0.7.11
+  alpha: true
+  beta: true
 v0.7.10:
   sum: 7f03f2908dd62348bab98635b820008407bea7847936d50b38b3dd8590a8e8774614103e6eba7e8a733115894ced2c15da5877b423a22ea572fc4c32e9a28aea
   date: 2026-01-10 08:21:37+0000
@@ -52,8 +92,7 @@ v0.7.10:
             ```
   blog: /blog/260112
   name: v0.7.10
-  alpha: true
-  beta: true
+  latest: true
 v0.7.9:
   sum: 92aff167549e7055feb4d04fe580a991937067900322f6dde6a0098ec47763b6a192dc5a2f3c8c5b46ec2aa969bf48fc36be52d5cc86736ae40b8288f99f9ff6
   date: 2026-01-06 09:51:00+0000
@@ -119,7 +158,6 @@ v0.7.9:
             See: [x-cmd/x-cmd#343](https://github.com/x-cmd/x-cmd/issues/343)
   blog: /blog/260107
   name: v0.7.9
-  latest: true
 v0.7.8:
   sum: 819012952bc0128210f2cdee84ef9c283ec5cf6247dc1a517981fa1c26aba2a542d1e7d37bec04356f41ee03390f67800c5fd24e40471b16402ea94e4a450006
   date: 2025-12-29 11:52:35+0000
