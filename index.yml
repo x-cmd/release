@@ -1,3 +1,125 @@
+v0.7.12:
+  sum: db47a010a907e9a784f3c393aea8ad1303390db7190b9794c203c451e3ef60735afaaf635e399753df1fabc574e32eb97b0802359fd577b571535ea494202242
+  date: 2026-01-19 03:24:15+0000
+  change:
+    mac:
+      update:
+        - cn: |
+            新增 `proxy` 子命令，用于快速查看、开启或关闭 macOS 当前网络接口的代理配置。
+            该命令是对 `x mac wifi proxy` 的简化封装，在保持原有能力不变的前提下，提供更直观、更易记的入口，方便在脚本或交互式环境中使用。
+
+            示例：
+            ```sh
+            # 查看当前 Wi-Fi 的代理配置
+            m proxy
+
+            # 启用 Wi-Fi 网络代理并设置代理为 127.0.0.1:8080
+            m proxy enable 8080
+
+            # 禁用 Wi-Fi 网络代理
+            m proxy disable
+            ```
+          en: |
+            Added the `proxy` subcommand for quickly viewing, enabling, or disabling
+            proxy settings of the current macOS network interface.
+            This command is a simplified wrapper around `x mac wifi proxy`,
+            providing a more intuitive and easier-to-remember entry point
+            while preserving the same functionality.
+
+            Examples:
+            ```sh
+            # Show current Wi-Fi proxy settings
+            m proxy
+
+            # Enable Wi-Fi proxy and set it to 127.0.0.1:8080
+            m proxy enable 8080
+
+            # Disable Wi-Fi proxy
+            m proxy disable
+            ```
+    brew:
+      update:
+        - cn: |
+            搜索功能中新增对 Homebrew Cask 软件的支持，默认搜索结果将同时包含 formulae 与 casks。
+            同时，`la` 子命令新增 `--formulae` 与 `--casks` 选项，可用于显式指定只列出公式软件或仅列出 Cask 应用，以满足不同使用场景下对命令行工具与 GUI 应用的区分需求。
+
+            示例：
+            ```sh
+            # 交互式搜索所有可安装的软件（等同于 x brew la）
+            x brew
+
+            # 仅搜索 Homebrew Cask 软件
+            x brew la --casks
+            ```
+          en: |
+            Added support for Homebrew Cask packages in search.
+            By default, search results now include both formulae and casks.
+            The `la` subcommand also adds the `--formulae` and `--casks` options,
+            allowing users to explicitly list only formulae or only cask applications.
+
+            Examples:
+            ```sh
+            # Interactive search for all available packages (same as x brew la)
+            x brew
+
+            # Search Homebrew Cask packages only
+            x brew la --casks
+            ```
+    claude|codex|gemini:
+      update:
+        - cn: |
+            `skill` 命令新增批量操作支持，可在一次命令中同时添加多个 skill，减少重复输入与多次执行命令的开销，适合在初始化环境或快速同步配置时使用。
+
+            示例：
+            ```sh
+            # 一次性添加多个 skill
+            x claude skill add anthropics/frontend-design anthropics/docx
+            ```
+          en: |
+            The `skill` command now supports batch operations,allowing multiple skills to be added in a single invocation.
+            This reduces repetitive input and command executions,and is especially useful when bootstrapping environments or quickly synchronizing skill configurations.
+
+            Example:
+            ```sh
+            # Add multiple skills at once
+            x claude skill add anthropics/frontend-design anthropics/docx
+            ```
+    cosmo:
+      update:
+        - cn: |
+            更新 cosmo 系列的应用程序（用 Cosmopolitan C Library 编译的软件工具）至最新版本，新增了包括 file、pdfdetach、pdfimages、which 在内的 13 个应用程序，确保用户在不同操作系统上都能获得一致的体验。
+            关于 cosmo 模块，请使用 `x cosmo -h` 查看。
+
+            示例：
+            ```sh
+            # 使用 cosmo 的 file 工具
+            x cosmo file
+            ```
+          en: |
+            Updated cosmo series applications to the latest version, adding 13 new tools including file, pdfdetach, pdfimages, and which to ensure a seamless, consistent experience across different operating systems.
+            For more details on the cosmo module, please use `x cosmo -h`.
+
+            Examples:
+            ```sh
+            # Using Cosmo's file tool.
+            x cosmo file
+            ```
+    tldr:
+      update:
+        - cn: |
+            优化了 tldr 模块在使用 fzf 时的单行高亮显示效果，高亮更加清晰醒目，提升了搜索结果的可读性与定位效率。
+          en: |
+            Enhanced the single-line highlight effect when using fzf in the tldr module.
+            The highlight is now more prominent, improving readability and making results easier to spot.
+      bugfix:
+        - cn: 修复了 tldr 模块在使用 fzf 时，首次加载并生成数据过程中可能出现卡住的问题。
+          en: Fixed a potential freeze issue when the tldr module generates data on first load with fzf.
+        - cn: 修复了 tldr 模块在 bash 环境下可能出现的语法报错问题。
+          en: Fixed a syntax error issue in the tldr module when running under bash.
+  blog: null
+  name: v0.7.12
+  alpha: true
+  beta: true
 v0.7.11:
   sum: c66dc6858125787888e03af4de39a173599e5f764213270f70871e6a257098eff2e1a0ebb870f58006f487416e405c2ba78abd3c84815a353fa7919cd9250333
   date: 2026-01-13 03:23:01+0000
@@ -36,8 +158,6 @@ v0.7.11:
             ```
   blog: null
   name: v0.7.11
-  alpha: true
-  beta: true
 v0.7.10:
   sum: 7f03f2908dd62348bab98635b820008407bea7847936d50b38b3dd8590a8e8774614103e6eba7e8a733115894ced2c15da5877b423a22ea572fc4c32e9a28aea
   date: 2026-01-10 08:21:37+0000
