@@ -62,10 +62,6 @@ v0.7.13:
             # Send a system notification
             x notify "x-cmd v0.7.13 released" "x-cmd"
             ```
-    host:
-      update:
-        - cn: 修复 ed 命令无法正常添加 hosts 记录的问题。[#357](https://github.com/x-cmd/x-cmd/issues/357)
-          en: Fixed an issue that prevented the `ed` command from correctly adding hosts entries. [#357](https://github.com/x-cmd/x-cmd/issues/357)
     skill:
       update:
         - cn: |
@@ -97,6 +93,10 @@ v0.7.13:
           en: |
             Fixed an issue where `c -r` (`--relm`) and its subcommands failed to run correctly in Nushell.
             See: [x-cmd/x-cmd#355](https://github.com/x-cmd/x-cmd/issues/355)
+    host:
+      bugfix:
+        - cn: 修复 ed 命令无法正常添加 hosts 记录的问题。[#357](https://github.com/x-cmd/x-cmd/issues/357)
+          en: Fixed an issue that prevented the `ed` command from correctly adding hosts entries. [#357](https://github.com/x-cmd/x-cmd/issues/357)
   blog: null
   name: v0.7.13
   alpha: true
