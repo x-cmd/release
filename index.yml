@@ -1,3 +1,106 @@
+v0.7.13:
+  sum: dfafb8ae12dc2a4f4e40bc9d4a5af2066d265728d5dece7de10ded6e31aa958ffcdb7a83e560fbbfddbcdbfd87a95a302cf263cedab4f7097d1b9007017743fb
+  date: 2026-01-24 09:05:18+0000
+  change:
+    claude:
+      update:
+        - cn: |
+            新增 session（sess）子命令，用于高效管理本地 Claude Code 的历史会话数据。
+
+            该命令提供基于 FZF 的交互式会话浏览与预览能力，可按时间、项目快速回溯历史上下文，并支持一键恢复（resume）、查看详情及安全删除无用或敏感会话数据。
+            同时新增会话清理功能，支持 dry-run 预演与批量删除，帮助用户在不误删重要记录的前提下，保持本地会话环境整洁，提升 resume 使用体验。
+
+            示例：
+            ```sh
+            # 以 FZF 交互方式浏览并管理历史会话
+            x claude sess
+
+            # 列出所有项目下的历史会话
+            x claude sess ls -a
+
+            # 预演将要删除的会话
+            x claude sess rm --dry-run <session_id>
+
+            # 批量删除指定会话
+            x claude sess rm <session_id_1> <session_id_2>
+            ```
+          en: |
+            Added the session (`sess`) subcommand for efficiently managing local Claude Code session history.
+
+            This command introduces an FZF-powered interactive interface for browsing and previewing past sessions, making it easy to review when a session occurred, which project it belongs to, and what was discussed. Common actions such as resuming a session, viewing full details, and deleting unnecessary or sensitive sessions are available directly from the interactive menu.
+            Session cleanup capabilities are also included, with support for dry-run previews and batch deletion. This helps users keep their local session history clean and manageable while avoiding accidental data loss and improving the overall resume workflow.
+
+            Examples:
+            ```sh
+            # Browse and manage session history interactively with FZF
+            x claude sess
+
+            # List session history across all projects
+            x claude sess ls -a
+
+            # Preview sessions that would be deleted
+            x claude sess rm --dry-run <session_id>
+
+            # Batch delete specified sessions
+            x claude sess rm <session_id_1> <session_id_2>
+            ```
+    notify:
+      update:
+        - cn: |
+            优化了 Windows 系统发送桌面通知时的输出，屏蔽了 PowerShell 的版权信息、更新提示等冗余输出。
+
+            示例：
+            ```sh
+            # 发送一条系统通知
+            x notify "x-cmd v0.7.13 released" "x-cmd"
+            ```
+          en: |
+            Optimized the output for Windows desktop notifications by suppressing redundant PowerShell banners, update prompts, and interactive noise.
+
+            Example:
+            ```sh
+            # Send a system notification
+            x notify "x-cmd v0.7.13 released" "x-cmd"
+            ```
+    host:
+      update:
+        - cn: 修复 ed 命令无法正常添加 hosts 记录的问题。[#357](https://github.com/x-cmd/x-cmd/issues/357)
+          en: Fixed an issue that prevented the `ed` command from correctly adding hosts entries. [#357](https://github.com/x-cmd/x-cmd/issues/357)
+    skill:
+      update:
+        - cn: |
+            新增 `skill suggest` 功能，可根据当前用户项目的上下文文件（如 `CLAUDE.md`）
+            自动生成对应的 skill 推荐列表，帮助用户快速发现适合当前项目的技能组合。
+            该功能目前处于测试阶段。
+
+            示例：
+            ```sh
+            # 根据当前项目的上下文文件生成推荐的 skill 列表
+            x skill suggest
+            ```
+          en: |
+            Added the `skill suggest` feature, which generates a recommended skill list
+            based on the current project’s context file (such as `CLAUDE.md`),
+            helping users quickly identify relevant skills for their project.
+            This feature is currently in testing.
+
+            Example:
+            ```sh
+            # Generate a recommended skill list from the current project context
+            x skill suggest
+            ```
+    nu:
+      bugfix:
+        - cn: |
+            修复了 `c -r` (`--relm`) 及其子命令在 Nushell 中无法正常运行的问题。
+            详见：[x-cmd/x-cmd#355](https://github.com/x-cmd/x-cmd/issues/355)
+          en: |
+            Fixed an issue where `c -r` (`--relm`) and its subcommands failed to run correctly in Nushell.
+            See: [x-cmd/x-cmd#355](https://github.com/x-cmd/x-cmd/issues/355)
+  blog: null
+  name: v0.7.13
+  alpha: true
+  beta: true
 v0.7.12:
   sum: db47a010a907e9a784f3c393aea8ad1303390db7190b9794c203c451e3ef60735afaaf635e399753df1fabc574e32eb97b0802359fd577b571535ea494202242
   date: 2026-01-19 03:24:15+0000
@@ -118,8 +221,7 @@ v0.7.12:
           en: Fixed a syntax error issue in the tldr module when running under bash.
   blog: /blog/260119
   name: v0.7.12
-  alpha: true
-  beta: true
+  latest: true
 v0.7.11:
   sum: c66dc6858125787888e03af4de39a173599e5f764213270f70871e6a257098eff2e1a0ebb870f58006f487416e405c2ba78abd3c84815a353fa7919cd9250333
   date: 2026-01-13 03:23:01+0000
@@ -212,7 +314,6 @@ v0.7.10:
             ```
   blog: /blog/260112
   name: v0.7.10
-  latest: true
 v0.7.9:
   sum: 92aff167549e7055feb4d04fe580a991937067900322f6dde6a0098ec47763b6a192dc5a2f3c8c5b46ec2aa969bf48fc36be52d5cc86736ae40b8288f99f9ff6
   date: 2026-01-06 09:51:00+0000
