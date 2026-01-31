@@ -72,7 +72,7 @@ v0.7.14:
             # Import session data from backup.tar.gz to current project
             x claude sess import backup.tar.gz
             ```
-  blog: null
+  blog: /blog/260131
   name: v0.7.14
   alpha: true
   beta: true
