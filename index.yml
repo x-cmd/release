@@ -1,3 +1,175 @@
+v0.8.0:
+  sum: 83c75c718857ad3f2334563b0f68cd0914bdac9257a71f67c9bb7cbfb6cd415d6e04567643c0c027e2712efbd06fd39ffbaf914495ff96e52978373e34d854db
+  date: 2026-02-06 13:19:22+0000
+  change:
+    kimi:
+      update:
+        - cn: |
+            新增 kimi 模块，这是为 kimi-cli 打造的命令行增强模块。
+            该模块提供了一站式的安装、升级、卸载管理功能，并优化了配置与使用流程，帮助开发者更高效地在终端使用 Kimi 的编程能力。
+
+            示例：
+            ```bash
+            # 使用 Kimi Code，如果本地没有安装 kimi，该命令会自动采用 `uv` 进行 kimi 安装
+            x kimi
+
+            # 升级 kimi-cli 到最新版本
+            x kimi --upgrade
+            ```
+          en: |
+            Added `kimi` module, a command-line enhancement wrapper built for `kimi-cli`.
+            It provides one-stop management for installation, upgrades, and uninstallation, while optimizing the configuration and usage workflow to help developers efficiently use Kimi's coding capabilities in the terminal.
+
+            Examples:
+            ```bash
+            # Using Kimi Code, if Kimi is not installed locally, this command will automatically use `uv` to install Kimi.
+            x kimi
+
+            # Upgrade kimi-cli to the latest version
+            x kimi --upgrade
+            ```
+    claude:
+      update:
+        - cn: |
+            新增 attribution|attr 子命令，用于管理 AI 生成内容的署名配置。
+            支持快速设置 Git 提交时的 Co-Authored-By 署名信息，以及查看或移除当前配置。
+
+            示例：
+            ```bash
+            # 设置默认的 AI 署名信息
+            x claude attr use
+
+            # 将默认署名设置为指定的 Co-Authored-By 消息
+            x claude attr use --msg "Co-Authored-By: deepseek <noreply@x-cmd.com>"
+            ```
+          en: |
+            Added `attribution|attr` subcommand to manage attribution configurations for AI-generated content.
+            Supports quickly setting `Co-Authored-By` signatures for Git commits, as well as viewing or removing current configurations.
+
+            Examples:
+            ```bash
+            # Set default AI attribution message
+            x claude attr use
+
+            # Set the default attribution to the specified Co-Authored-By message
+            x claude attr use --msg "Co-Authored-By: deepseek <noreply@x-cmd.com>"
+            ```
+        - cn: |
+            新增 mt 子命令，用于让 claude-code 接入摩尔线程 (Moore Threads) 模型服务。
+
+            示例：
+            ```bash
+            # 启动 claude-code 并接入摩尔线程模型
+            x claude mt
+            ```
+          en: |
+            Added a new `mt` subcommand to enable **Claude Code** to connect with the **Moore Threads** model service.
+
+            Example:
+            ```bash
+            # Start Claude Code with Moore Threads model integration
+            x claude mt
+            ```
+        - cn: |
+            新增 `create` 子命令，用于在当前项目中初始化并创建 Claude Code 相关的插件、技能与钩子，
+            帮助用户快速搭建和配置项目所需的 Claude Code 扩展能力。
+            当前仍处于内测阶段，欢迎试用反馈。
+          en: |
+            Added the `create` subcommand to initialize and create Claude Code plugins, skills,
+            and hooks in the current project, enabling quick setup of Claude Code extensions.
+            This feature is currently in closed beta.
+    doubao:
+      update:
+        - cn: |
+            新增 `doubao` 模块，通过火山方舟平台接入豆包大模型，
+            支持在本地工具链中直接使用 Doubao 进行对话与任务处理。
+
+            示例：
+            ```sh
+            # 交互式配置 doubao 模块的初始化配置
+            x doubao init
+
+            # 测试使用 Doubao 模型
+            @doubao "Give me an example of recursion in Python"
+            ```
+          en: |
+            Added the `doubao` module, integrating the Doubao large language model
+            via the Volcano Engine Ark platform.
+            This allows using the Doubao model directly within the local toolchain
+            for conversations and task execution.
+
+            Example:
+            ```sh
+            # Interactively initialize and configure the doubao module
+            x doubao init
+
+            # Test using the Doubao model
+            @doubao "Give me an example of recursion in Python"
+            ```
+    gg:
+      update:
+        - cn: |
+            新增 `gg` 模块，调用 Gemini AI 的 Google Search 工具进行谷歌搜索，
+            支持以自然语言快速获取和整理搜索结果。
+
+            示例：
+            ```sh
+            # 搜索 x-cmd 的介绍
+            x gg "关于 x-cmd?"
+            ```
+          en: |
+            Added the `gg` module, which performs Google searches via
+            the Gemini AI Google Search tool.
+            It enables fast, natural-language queries with structured results.
+
+            Example:
+            ```sh
+            # Search for an introduction to x-cmd
+            x gg "What is x-cmd?"
+            ```
+    gram:
+      update:
+        - cn: |
+            为 `x gram stop 2` 新增了「网络隔离」能力，可一键熔断所有 HTTP/HTTPS 连接进程，防止恶意智能体通过网络“摇人”或上传你的本地隐私。
+          en: |
+            Added a new **network isolation** capability to `x gram stop 2`, allowing all HTTP/HTTPS connection processes to be instantly severed with one command.
+            This prevents malicious agents from reaching out over the network or uploading your local private data without permission.
+    zhipu:
+      update:
+        - cn: |
+            新增对 `glm-4.7` 与 `glm-4.6` 模型的支持，
+            用户可在 AI 请求中选择最新的 GLM 系列模型，
+            提供更强的推理能力和更稳定的生成效果。
+
+            示例：
+            ```sh
+            @glm --model glm-4.7 "作为一名营销专家，请为我的产品创作一个吸引人的口号"
+            ```
+          en: |
+            Added support for `glm-4.7` and `glm-4.6` models,
+            allowing users to select the latest GLM series models in AI requests,
+            offering stronger reasoning capabilities and more stable generation.
+
+            Example:
+            ```sh
+            @glm --model glm-4.7 "As a marketing expert, create a catchy slogan for my product"
+            ```
+    chat:
+      bugfix:
+        - cn: |
+            修复了 x-cmd agent 中部分 Unicode 字符导致的请求 JSON 语法错误问题，
+          en: |
+            Fixed JSON syntax issues in x-cmd agent caused by certain Unicode characters,
+    zuz:
+      bugfix:
+        - cn: |
+            用 $PWD 代替 pwd 命令，增强 zuz 模块稳定性。特别感谢 polymerase60053 针对该问题提交的 issue : https://github.com/x-cmd/x-cmd/issues/370#issuecomment-3838483987
+          en: |
+            Replace the pwd command with $PWD to enhance the stability of the zuz module. Special thanks to polymerase60053 for submitting the issue regarding this matter: https://github.com/x-cmd/x-cmd/issues/370#issuecomment-3838483987
+  blog: null
+  name: v0.8.0
+  alpha: true
+  beta: true
 v0.7.15:
   sum: ed38d1842e6d4cdb7e1e0bab8273b046aa4ad8e8f2af77f610b21c730e2b6a2704fc743ed23150aec50268654db717ce9aa8aed92a2a0e0c7d5ebd0591596657
   date: 2026-02-01 16:14:59+0000
@@ -72,8 +244,6 @@ v0.7.15:
             I have no intention of fueling anxiety about artificial intelligence, nor do I seek to provoke heated debate. However, at this very moment when community media is widely praising the remarkable success of OpenClaw, I still hope that these concerns and perspectives of mine—even if they may seem overly cautious—can reach a wider audience and contribute to an open and serious discussion.
   blog: /blog/260201
   name: v0.7.15
-  alpha: true
-  beta: true
   latest: true
 v0.7.14:
   sum: 6a1605c84f5d8d6a4bb31587440a510ebbc29d144a45ea713c68a2d1af8c728bd9d389c4f01822d34e58d7ce15e608ebbdaed6868a984d5c2fead695d6bcc25c
