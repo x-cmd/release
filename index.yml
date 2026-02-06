@@ -86,7 +86,7 @@ v0.8.0:
 
             示例：
             ```sh
-            # 交互式配置 doubao 模块的初始化配置
+            # 交互式初始化和配置 doubao 模块
             x doubao init
 
             # 测试使用 Doubao 模型
@@ -157,9 +157,9 @@ v0.8.0:
     chat:
       bugfix:
         - cn: |
-            修复了 x-cmd agent 中部分 Unicode 字符导致的请求 JSON 语法错误问题，
+            修复了 x-cmd agent 中部分 Unicode 字符导致的请求 JSON 语法错误问题。
           en: |
-            Fixed JSON syntax issues in x-cmd agent caused by certain Unicode characters,
+            Fixed JSON syntax issues in x-cmd agent caused by certain Unicode characters.
     zuz:
       bugfix:
         - cn: |
