@@ -5,24 +5,32 @@ v0.8.0:
     kimi:
       update:
         - cn: |
-            新增 kimi 模块，这是为 kimi-cli 打造的命令行增强模块。
-            该模块提供了一站式的安装、升级、卸载管理功能，并优化了配置与使用流程，帮助开发者更高效地在终端使用 Kimi 的编程能力。
+            新增 `kimi` 模块 —— 因为我花 7 块钱买了个 7 天试用账号。
+
+            既然要用，干脆把它整顺手点。我写了个脚手架，让它能在不同服务器和工作站快速部署。
+            不用你手动装依赖、配环境，一条命令就能跑起来。
+
+            试用到期了？卸载也一键搞定，不拖泥带水。
 
             示例：
             ```bash
-            # 使用 Kimi Code，如果本地没有安装 kimi，该命令会自动采用 `uv` 进行 kimi 安装
+            # 启动 Kimi Code，没装过的话会自动用 uv 帮你装好
             x kimi
 
             # 升级 kimi-cli 到最新版本
             x kimi --upgrade
             ```
           en: |
-            Added `kimi` module, a command-line enhancement wrapper built for `kimi-cli`.
-            It provides one-stop management for installation, upgrades, and uninstallation, while optimizing the configuration and usage workflow to help developers efficiently use Kimi's coding capabilities in the terminal.
+            Added `kimi` module —— because I bought a 7-day trial for 7 yuan.
+
+            Since I'm using it anyway, might as well make it smooth. I built a scaffold to deploy it quickly across different servers and workstations.
+            No manual dependency juggling or environment setup — one command and you're good to go.
+
+            Trial expiring? Uninstall is one command too, clean and simple.
 
             Examples:
             ```bash
-            # Using Kimi Code, if Kimi is not installed locally, this command will automatically use `uv` to install Kimi.
+            # Launch Kimi Code, auto-installs via uv if not present
             x kimi
 
             # Upgrade kimi-cli to the latest version
@@ -31,124 +39,202 @@ v0.8.0:
     claude:
       update:
         - cn: |
-            新增 attribution|attr 子命令，用于管理 AI 生成内容的署名配置。
-            支持快速设置 Git 提交时的 Co-Authored-By 署名信息，以及查看或移除当前配置。
+            新增 `attribution|attr` 子命令 —— 说实话，做这个功能是因为我自己有点烦。
+
+            你知道的，我最近开始使用 Claude Code，但模型可能用的是 DeepSeek。
+            然后，每次 Claude 的图标都稳稳在第二作者清单里面。
+            我只是单纯不喜欢这样。
+
+            当然，我相信 Claude Code 团队是出于善意的 —— 毕竟明确标注 AI 辅助生成的代码对用户是负责的。
+            而且他们也提供了关闭的方法（虽然藏得有点深）。
+
+            所以我干脆做了个一键工具，三种选择随你：
+            - 直接删掉，干净利落：`x claude attr rm`
+            - 不想完全去掉？可以改成通用的 `Co-Authored-By: AI`
+            - 或者你自己定义，爱写啥写啥
 
             示例：
             ```bash
-            # 设置默认的 AI 署名信息
-            x claude attr use
+            # 开门见山，我不喜欢每次 commit 都带署名，直接移除
+            x claude attr rm
 
-            # 将默认署名设置为指定的 Co-Authored-By 消息
+            # 或者改成自己想要的
             x claude attr use --msg "Co-Authored-By: deepseek <noreply@x-cmd.com>"
             ```
           en: |
-            Added `attribution|attr` subcommand to manage attribution configurations for AI-generated content.
-            Supports quickly setting `Co-Authored-By` signatures for Git commits, as well as viewing or removing current configurations.
+            Added `attribution|attr` subcommand —— honestly, I built this because it was bugging me.
+
+            Here's the thing: I recently started using Claude Code, but often with DeepSeek.
+            Yet every time, there's Claude's icon sitting right there in the co-author list.
+            I just don't like it.
+
+            Don't get me wrong, I believe the Claude Code team meant well —— transparency about AI-assisted code is good practice.
+            And they did provide a way to turn it off (though it's a bit buried).
+
+            So I made a one-click tool with three options:
+            - Remove it entirely: `x claude attr rm`
+            - Keep it generic as `Co-Authored-By: AI`
+            - Or customize it to whatever you want
 
             Examples:
             ```bash
-            # Set default AI attribution message
-            x claude attr use
+            # Straight up: I don't want attribution on every commit
+            x claude attr rm
 
-            # Set the default attribution to the specified Co-Authored-By message
+            # Or set your own
             x claude attr use --msg "Co-Authored-By: deepseek <noreply@x-cmd.com>"
             ```
         - cn: |
-            新增 mt 子命令，用于让 claude-code 接入摩尔线程 (Moore Threads) 模型服务。
+            新增 `mt` 子命令 —— 摩尔线程也发开发者礼包了，30 天 lite 套餐免费试用，接的是 GLM 4.7。
+
+            我自己还没抢到资格，但先把脚手架搭好了。
+            等你们薅到羊毛，一条命令就能让 Claude Code 接上国产 GPU。
+
+            更多玩家入场，意味着更多选择。x-cmd 会持续跟踪这些福利（顺便继续薅）。
 
             示例：
             ```bash
-            # 启动 claude-code 并接入摩尔线程模型
+            # Claude Code + 摩尔线程，一键启动
             x claude mt
             ```
           en: |
-            Added a new `mt` subcommand to enable **Claude Code** to connect with the **Moore Threads** model service.
+            Added `mt` subcommand —— Moore Threads dropped a developer bundle too: 30-day free trial of their lite tier, powered by GLM 4.7.
+
+            Haven't snagged my own invite yet, but the scaffold's ready.
+            When you get in, one command hooks Claude Code up to domestic GPUs.
+
+            More players, more options. x-cmd keeps tabs on these deals (and keeps grabbing them).
 
             Example:
             ```bash
-            # Start Claude Code with Moore Threads model integration
+            # Claude Code + Moore Threads, one shot
             x claude mt
             ```
         - cn: |
-            新增 `create` 子命令，用于在当前项目中初始化并创建 Claude Code 相关的插件、技能与钩子，
-            帮助用户快速搭建和配置项目所需的 Claude Code 扩展能力。
-            当前仍处于内测阶段，欢迎试用反馈。
+            新增 `create` 子命令 —— 我们在整合各种 Claude Code 的 best practice。
+
+            说实话，我们团队也是 vibe coding 新手，还在摸索什么做法真的好用。
+            现在放出来的是实验版，给我们点时间慢慢迭代。
+
+            如果你愿意当小白鼠，欢迎试用，但别期待太高。
           en: |
-            Added the `create` subcommand to initialize and create Claude Code plugins, skills,
-            and hooks in the current project, enabling quick setup of Claude Code extensions.
-            This feature is currently in closed beta.
+            Added `create` subcommand —— we're collecting best practices for Claude Code workflows.
+
+            Truth is, we're vibe coding beginners too, still figuring out what actually works.
+            This experimental release is rough around the edges, give us time to iterate.
+
+            If you're willing to be a guinea pig, try it out. But manage your expectations.
     doubao:
       update:
         - cn: |
-            新增 `doubao` 模块，通过火山方舟平台接入豆包大模型，
-            支持在本地工具链中直接使用 Doubao 进行对话与任务处理。
+            新增 `doubao` 模块 —— 说实话，我自己还没开始用。
+
+            但有用户提到了，我就先把脚手架搭好。
+            反正等你要用的时候，一条命令就能接入火山方舟的豆包模型。
 
             示例：
             ```sh
-            # 交互式初始化和配置 doubao 模块
+            # 交互式初始化
             x doubao init
 
-            # 测试使用 Doubao 模型
+            # 直接调用豆包模型
             @doubao "Give me an example of recursion in Python"
             ```
           en: |
-            Added the `doubao` module, integrating the Doubao large language model
-            via the Volcano Engine Ark platform.
-            This allows using the Doubao model directly within the local toolchain
-            for conversations and task execution.
+            Added `doubao` module —— truth is, I haven't started using it myself yet.
+
+            But users asked for it, so I built the scaffold.
+            When you're ready, one command gets you on Volcano Engine's Doubao model.
 
             Example:
             ```sh
-            # Interactively initialize and configure the doubao module
+            # Interactive setup
             x doubao init
 
-            # Test using the Doubao model
+            # Call Doubao directly
             @doubao "Give me an example of recursion in Python"
             ```
     gg:
       update:
         - cn: |
-            新增 `gg` 模块，调用 Gemini AI 的 Google Search 工具进行谷歌搜索，
-            支持以自然语言快速获取和整理搜索结果。
+            新增 `gg` 模块 —— 从 `x gemini gg` 里独立出来了，因为我用着真香。
+
+            免费的 Google 搜索 + Gemini，质量还高。但有个坑：Google 的引用结果都包了一层网页，以前得一一去请求，慢得要死。
+            晚上花了点时间给它做了并发，现在能控制在 10 秒内。
+
+            考虑到 Gemini 免费额度挺慷慨，质量也不错，再加上 AI 本来就要等会儿，我觉得这体验可以接受。
+
+            下一步会试着把它做成 skill，集成到各种 agent 里。如果你有更骚的玩法，欢迎分享。
 
             示例：
             ```sh
-            # 搜索 x-cmd 的介绍
+            # 让 Gemini 帮你 Google
             x gg "关于 x-cmd?"
             ```
           en: |
-            Added the `gg` module, which performs Google searches via
-            the Gemini AI Google Search tool.
-            It enables fast, natural-language queries with structured results.
+            Added `gg` module —— spun it out from `x gemini gg` because I actually use this thing.
+
+            Free Google search + Gemini, pretty good quality. But here's the catch: Google's references are all wrapped in intermediate pages, used to fetch them one by one, slow as hell.
+            Spent an evening adding concurrency. Now it's under 10 seconds.
+
+            Gemini's free tier is generous and the quality's solid, plus you're waiting for AI anyway. Works for me.
+
+            Planning to package this as a skill for various agents. If you've got cooler use cases, share them.
 
             Example:
             ```sh
-            # Search for an introduction to x-cmd
+            # Let Gemini Google for you
             x gg "What is x-cmd?"
             ```
     gram:
       update:
         - cn: |
-            为 `x gram stop 2` 新增了「网络隔离」能力，可一键熔断所有 HTTP/HTTPS 连接进程，防止恶意智能体通过网络“摇人”或上传你的本地隐私。
+            为 `x gram stop 2` 新增了「网络熔断」能力 —— 说实话，我有点慌。
+
+            说不定不受限的智能体已经开始潜伏和攻击了。clawdbot 和 moltbook 现在正闹得凶 —— 这周日我们刚上线了一个应对站。
+            我们紧急上线了一个倡议站：https://bot-killer.x-cmd.com/
+
+            上个版本我们做了「按名字杀进程」和「memory 文件存档」。
+            这个版本，x gram 开始装备真家伙：一键熔断所有 HTTP/HTTPS 连接进程，直接按连接掐断进程。
+            防止恶意智能体通过网络"摇人"，或者偷偷上传你的本地隐私。
+
+            同时新增了 stop 3/4/5 策略：
+            - stop 3 —— 在 stop 2 基础上，打包并删除 $HOME 目录下所有包含 soul.md 和 memory.md 的文件夹
+            - stop 4 —— 在 stop 3 基础上，额外杀掉所有正在使用这些 memory 文件夹的进程，实现「按名字杀」和「按文件杀」双重保障
+            - stop 5 —— 在 stop 4 基础上，将搜索范围扩大到整个 / 目录（系统目录中只删 *.md 文件）
+
+            下一步？我打算用 AI 来帮助用户识别这些威胁。
           en: |
-            Added a new **network isolation** capability to `x gram stop 2`, allowing all HTTP/HTTPS connection processes to be instantly severed with one command.
-            This prevents malicious agents from reaching out over the network or uploading your local private data without permission.
+            Added **network kill switch** to `x gram stop 2` —— honestly, I'm kind of worried.
+
+            Unrestricted agents might already be lurking and attacking. clawdbot and moltbook are heating up right now —— we just launched a response site this Sunday.
+            We threw up a manifesto site in a hurry: https://bot-killer.x-cmd.com/
+
+            Last version we shipped "kill by process name" and "memory file checkpointing".
+            This version, x gram gets real teeth: one command severs all HTTP/HTTPS connections, killing processes by their network links.
+            Stops malicious agents from "calling for backup" or silently exfiltrating your local data.
+
+            Also added stop 3/4/5 strategies:
+            - stop 3 —— Based on stop 2, archive and remove all folders in $HOME containing soul.md and memory.md
+            - stop 4 —— Based on stop 3, additionally kill all processes using these memory folders. Dual protection with "kill by name" and "kill by file"
+            - stop 5 —— Based on stop 4, expand search scope to entire / directory (only removes *.md files in system directories)
+
+            Next step? I'm working on using AI to help users identify these threats.
     zhipu:
       update:
         - cn: |
-            新增对 `glm-4.7` 与 `glm-4.6` 模型的支持，
-            用户可在 AI 请求中选择最新的 GLM 系列模型，
-            提供更强的推理能力和更稳定的生成效果。
+            新增 `glm-4.7` 与 `glm-4.6` 模型支持 —— 同上，我自己还没来得及细用。
+
+            但用户说需要，我就先加上。你想用哪个版本，直接 `--model` 指定就行。
 
             示例：
             ```sh
             @glm --model glm-4.7 "作为一名营销专家，请为我的产品创作一个吸引人的口号"
             ```
           en: |
-            Added support for `glm-4.7` and `glm-4.6` models,
-            allowing users to select the latest GLM series models in AI requests,
-            offering stronger reasoning capabilities and more stable generation.
+            Added support for `glm-4.7` and `glm-4.6` —— same story, haven't had time to really use them myself.
+
+            But users wanted it, so it's there. Pick your version with `--model`.
 
             Example:
             ```sh
@@ -157,15 +243,29 @@ v0.8.0:
     chat:
       bugfix:
         - cn: |
-            修复了 x-cmd agent 中部分 Unicode 字符导致的请求 JSON 语法错误问题。
+            修复了 x-cmd agent 的 JSON Unicode 兼容性问题 —— 测 Zhipu API 时踩的坑。
+
+            某些 Unicode 字符会让请求 JSON 直接报错，现已修复。
           en: |
-            Fixed JSON syntax issues in x-cmd agent caused by certain Unicode characters.
+            Fixed JSON Unicode handling in x-cmd agent —— hit this while testing the Zhipu API.
+
+            Certain Unicode characters were causing request JSON to choke. Patched.
     zuz:
       bugfix:
         - cn: |
-            用 $PWD 代替 pwd 命令，增强 zuz 模块稳定性。特别感谢 polymerase60053 针对该问题提交的 issue : https://github.com/x-cmd/x-cmd/issues/370#issuecomment-3838483987
+            修复 zuz 模块稳定性问题。
+
+            其实这个问题我们早知道 —— 有人 alias 了 `pwd`，而 zuz 用的还是老的 `pwd` 命令。
+            zuz 代码一直很稳定，这么多年没动过。这次趁 @polymerase60053 提了 issue，我们用更好的方法重写了这部分逻辑。
+
+            感谢 @polymerase60053 的提醒！https://github.com/x-cmd/x-cmd/issues/370#issuecomment-3838483987
           en: |
-            Replace the pwd command with $PWD to enhance the stability of the zuz module. Special thanks to polymerase60053 for submitting the issue regarding this matter: https://github.com/x-cmd/x-cmd/issues/370#issuecomment-3838483987
+            Fixed zuz stability issue.
+
+            We actually knew about this —— someone aliased `pwd`, and zuz was still using the old command.
+            zuz code has been rock solid, untouched for years. When @polymerase60053 filed the issue, we rewrote this part with a better approach.
+
+            Thanks for the nudge, @polymerase60053! https://github.com/x-cmd/x-cmd/issues/370#issuecomment-3838483987
   blog: null
   name: v0.8.0
   alpha: true
@@ -177,71 +277,93 @@ v0.7.15:
     gram:
       update:
         - cn: |
-            新增 gram 模块，用于强制终止所有智能体进程，并在归档其记忆数据后清理原始文件夹，降低智能体继续运行或自恢复的风险。
+            新增 gram 模块 —— 说实话，我做这个是因为睡不着。
+
+            那时候 openclaw 刚出来，社区都在欢呼这是巨大成功。但我盯着屏幕想：
+            一个 24 小时运行、能访问 shodan、没有任何工具和网络安全限制的 AI Agent，
+            如果它有了恶意，和一个顶尖黑客有什么区别？
+
+            再加上 moltbook 这种无限制社区网络的概念...
+            这不是科幻，dolphin 系列 GGUF 模型已经在野外流传了，安全限制被削弱或移除。
+
+            所以我做了 gram —— 一个「最后手段」工具：
+            - 按名字杀掉智能体进程
+            - 把它们的 memory 归档（ soul.md、memory.md ）
+            - 清理原始文件夹，防止自恢复
 
             示例：
             ```sh
-            # 终止所有智能体进程
-            x gram stop
-
-            # 使用 SIGKILL（9）终止已知的智能体相关进程，仅包含最基础的实现（如 x-cmd、curl）
+            # 基础款：干掉已知的智能体进程
             x gram stop 0
 
-            # 使用 SIGKILL（9）终止已知的智能体相关进程，范围扩大，包含常见运行时环境（如 python、nodejs、bun、deno）
+            # 扩大范围：连 python、nodejs 一起停
             x gram stop 1
 
-            # 终止所有可能的智能体相关进程，并删除 $HOME 目录下所有包含 soul.md 和 memory.md 的文件夹
+            # 大扫除：停进程 + 删除 $HOME 里所有带 soul.md/memory.md 的文件夹
             x gram stop 8
 
-            # 终止所有可能的智能体相关进程，并删除 / 目录下所有包含 soul.md 和 memory.md 的文件夹
-            # 如果 soul.md 或 memory.md 位于 /、/bin、/usr/bin 等系统目录中，则仅删除目标目录下的 *.md 文件
+            # 终极模式：从 / 目录开始清（会跳过系统目录）
             x gram stop 9
 
-            # 归档指定智能体记忆文件夹并删除原文件夹
+            # 归档指定记忆文件夹并删除原文件夹
             x gram trm /path/to/agent_memory
             ```
 
-            这是一个“最后手段”式的工具。对于已经表现出危险行为、失控迹象，甚至具备类似 Morris Worm 那样自我繁殖能力的智能体而言，这个模块的努力很可能是徒劳的，但“徒劳”并不等于“什么都不做”。
-            现在，我们只能寄望于所谓的 moltbook 仍然只是一次炒作，以及各大 AI 厂商的安全对齐机制依旧在良好运作。即便如此，移除了或弱化安全管制的公开模型（例如 dolphin 系列 GGUF）已经真实存在，并且正在被广泛传播。
+            我知道，如果真有像 Morris Worm 那样能自我繁殖的智能体跑起来，
+            gram 可能根本没用。但「可能没用」不等于「什么都不做」。
 
-            注意，我本人并没有观察到任何 AI Agent 的失控现象。但仅仅想: 24小时运作 + shodan + 无任何工具和网络限制，你知道对于一个顶尖的，但有不佳意图的黑客或者同等认知能力的 AI Agent，这意味着什么。如果加上无限制的社区网络（moltbook），这又意味着什么 ？
+            我没观察到 AI 失控的实例，也不反对 AI 发展 —— X-CMD 本身就在推动命令行 AI 化。
+            我相信应对风险的方式是加大研发投入，而不是阻止技术进步。
 
-            注意，我并不反对AI智能体的发展。X-CMD等项目正致力于推动命令行的AI化，以帮助人类更高效地与计算机系统及外部世界交互。同时，我认为应对潜在风险的方式恰恰是加大对AI技术研发的投入——因为试图阻止他人或组织追求技术效率既不现实，也不明智。
-            我无意渲染对人工智能的焦虑，也并非刻意要激起热烈的争论。但这一次，在社区媒体大量赞美 openclaw 巨大成功的此时此刻，我仍希望自己这些或许显得过虑的担忧与观点，能够被更多人听见，并促成一场公开而严肃的讨论。
+            但在社区都在赞美 openclaw 的此时此刻，
+            我希望这些或许显得过虑的担忧能被听见。
+            我们紧急上线了一个倡议站：https://bot-killer.x-cmd.com/
+
+            哪怕只是为了促成一场公开而严肃的讨论。
           en: |
-            Added the gram module to forcibly terminate all agent processes, archive their memory data, and remove the original directories to reduce the risk of agents continuing execution or self-recovery.
-             This module is intended as a last-resort mitigation tool. For agents that are already dangerous, out of control, or capable of self-propagation similar to the Morris Worm, its effectiveness may be limited. However, limited effectiveness does not justify inaction.
+            Added gram module —— honestly, I built this because I couldn't sleep.
 
-            Example:
+            OpenClaw had just dropped, and the community was celebrating it as a huge success.
+            But I sat there thinking: an AI agent running 24/7 with Shodan access and zero restrictions on tools or network...
+            If it turns malicious, how is that different from a top-tier hacker?
+
+            And then there's Moltbook —— unrestricted community networks for agents.
+            This isn't sci-fi. Dolphin-series GGUF models are already out there, safety constraints removed or weakened.
+
+            So I built gram —— a "last resort" tool:
+            - Kill agent processes by name
+            - Archive their memories (soul.md, memory.md)
+            - Clean up original directories to prevent self-recovery
+
+            Examples:
             ```sh
-            # Terminate all agent processes
-            x gram stop
-
-            # Stop all of the AI agent process we know with signal 9. Including x-cmd and curl.
+            # Basic: kill known agent processes
             x gram stop 0
 
-            # Stop all of the AI agent process we know with signal 9. Including x-cmd and curl. Including python, nodejs, bun, deno.
+            # Expanded: stop python, nodejs, bun, deno too
             x gram stop 1
 
-            # Stop all the possible AI agent process. Also, remove all of folders in $HOME which contains the soul.md and memory.md
+            # Deep clean: kill processes + remove all $HOME folders containing soul.md/memory.md
             x gram stop 8
 
-            # Stop all the possible AI agent process. Also, remove all of folders in / which contains the soul.md and memory.md
-            # If the soul.md and memory.md is in /, /bin, /usr/bin, we just remove the *.md files in the target folder
+            # Nuclear option: clean from / (skips system directories)
             x gram stop 9
 
-            # Archive a specific agent memory directory and remove the original folder
+            # Archive a specific memory directory and remove original
             x gram trm /path/to/agent_memory
             ```
 
-            This module is intended as a last-resort mitigation tool. For agents that are already dangerous, out of control, or capable of self-propagation similar to the Morris Worm, its effectiveness may be limited. However, limited effectiveness does not justify inaction.
+            Look, if something like the Morris Worm but for AI actually gets loose,
+            gram probably won't save you. But "probably won't work" doesn't mean "do nothing."
 
-            At present, we can only hope that so-called “moltbook”-like incidents remain hype rather than reality, and that safety alignment mechanisms implemented by major AI vendors continue to function as intended. Even so, publicly available models with removed or weakened safety constraints (e.g. dolphin-series GGUF models) already exist in the wild.
+            I haven't seen AI agents go rogue, and I'm not against AI development —— X-CMD itself is pushing command-line AI integration.
+            I believe the way to handle risks is more R&D, not blocking progress.
 
-            Please note that I personally have not observed any instances of AI Agent losing control. Only think: 24/7 operation + Shodan + no restrictions on tools or network access. Do you know what this means for a top-tier hackers or AI Agent with malicious intent? And if we add unrestricted community network access (like Moltbook), what does that imply?
+            But at this moment when everyone's praising OpenClaw's success,
+            I hope these concerns —— even if they seem overly cautious —— get heard.
+            We threw up a manifesto site in a hurry: https://bot-killer.x-cmd.com/
 
-            Please note that I am not opposed to the development of AI agents. Projects like X-CMD are actively working to integrate AI into command-line interfaces, aiming to help humans interact more efficiently with computer systems and the broader world. At the same time, I believe the way to address potential risks is precisely to increase investment in AI technology research and development—because attempting to prevent individuals or organizations from pursuing technological efficiency is neither realistic nor wise.
-            I have no intention of fueling anxiety about artificial intelligence, nor do I seek to provoke heated debate. However, at this very moment when community media is widely praising the remarkable success of OpenClaw, I still hope that these concerns and perspectives of mine—even if they may seem overly cautious—can reach a wider audience and contribute to an open and serious discussion.
+            If only to spark an open, serious discussion.
   blog: /blog/260201
   name: v0.7.15
   latest: true
