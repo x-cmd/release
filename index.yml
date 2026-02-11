@@ -1,3 +1,134 @@
+v0.8.1:
+  sum: 44d546e1194840622d1cef1d10b7541e1be26797b2f5488cf67bab64958519769eed07b2d6faf0197f91a4932f56f9fd8a9a01e33962f0a04eaa6f4a4b02b8b3
+  date: 2026-02-11 10:17:55+0000
+  change:
+    mthreads:
+      update:
+        - cn: |
+            新增 `mthreads` 模块 —— 我是来薅那 30 天免费的，后来还买了套餐。
+
+            摩尔线程接的是 GLM 4.7，用国产 GPU，我想试试看。
+            但上线有点急，部分 request 会返回 502，现在还不能投产。
+            正在跟对方客服工程师聊，加油。
+
+            如果你想尝鲜：
+            ```bash
+            # 交互式配置 API 密钥
+            x mthreads init
+
+            # 启动 Claude Code，尝试摩尔线程算力
+            x claude mt
+            ```
+          en: |
+            Added `mthreads` module —— came for the 30-day free trial, ended up buying a package.
+
+            Moore Threads runs GLM 4.7 on domestic GPUs, wanted to see how it goes.
+            But we shipped a bit rushed — some requests return 502, not production-ready yet.
+            Talking to their support engineers. Fingers crossed.
+
+            If you want to tinker:
+            ```bash
+            # Interactive API key setup
+            x mthreads init
+
+            # Launch Claude Code, try Moore Threads backend
+            x claude mt
+            ```
+    minimax:
+      update:
+        - cn: |
+            新增 `minimax` 模块 —— 好奇他们现在到什么地步了，所以先用起来看看。
+
+            MiniMax 在国内挺有特色，最近用户也问得挺多。
+            响应速度还不错，现在我主要用它，顺手还加了个 `cpstatus` 命令查 code plan 消耗 —— 他家按 5 小时窗口计费。
+
+            ```bash
+            # 交互式初始化
+            x minimax init
+
+            # 查当前消耗（5 小时窗口）
+            x minimax cpstatus
+
+            # 启动 Claude Code，直接切 MiniMax
+            x claude mm
+            ```
+
+            如果你也有 MiniMax 账号，欢迎试试。
+          en: |
+            Added `minimax` module —— users asked for it, I'm already using it.
+
+            MiniMax has solid response times and decent features for the domestic market.
+            It's my main backend now. Threw in a `cpstatus` command to check code plan usage — they bill on a 5-hour window.
+
+            ```bash
+            # Interactive setup
+            x minimax init
+
+            # Check current usage (5-hour window)
+            x minimax cpstatus
+
+            # Launch Claude Code with MiniMax
+            x claude mm
+            ```
+
+            If you've got MiniMax credits, give it a spin.
+    claude:
+      update:
+        - cn: |
+            新增 `mt` 和 `mm` 子命令 —— 纯粹是因为懒。
+
+            之前手动切 backend 太烦了，环境变量、API 密钥、模型参数... 记不住。
+            现在 `x claude mm` 直接进 MiniMax，`x claude mt` 切摩尔线程。
+            配置都是复用 `x mthreads init` 和 `x minimax init` 里存好的。
+
+            虽然我主要用 MiniMax 了，但留着方便，万一想换呢。
+            ```bash
+            # MiniMax，一键启动
+            x claude mm
+
+            # 摩尔线程，一键切换
+            x claude mt
+            ```
+          en: |
+            Added `mt` and `mm` subcommands —— purely because I'm lazy.
+
+            Switching backends manually was annoying. Env vars, API keys, model params... can't remember all that.
+            Now `x claude mm` jumps straight to MiniMax, `x claude mt` for Moore Threads.
+            Configs are reused from `x mthreads init` and `x minimax init`.
+
+            I'm mostly on MiniMax these days, but good to have options.
+            ```bash
+            # MiniMax, one shot
+            x claude mm
+
+            # Moore Threads, same thing
+            x claude mt
+            ```
+    nu:
+      bugfix:
+        - cn: |
+            修复 Nushell 0.110.0 兼容性问题。
+
+            Nushell 大版本经常有 breaking change，我们也见怪不怪了。
+            这次他们将 `$nu.home-path` 变成了 `$nu.home-dir`。
+            @Cattle0Horse 在微信群一提，我们就立了 issue。
+
+            感谢 @Cattle0Horse 的提醒！
+            详见：https://github.com/x-cmd/x-cmd/issues/371
+          en: |
+            Fixed Nushell 0.110.0 compatibility.
+
+            Nushell majors always ship breaking changes — we're used to it by now.
+            This time they changed $nu.home-path to $nu.home-dir.
+            @Cattle0Horse mentioned it in the WeChat group, we filed the issue right away.
+
+            Thanks for the heads-up, @Cattle0Horse!
+            See: https://github.com/x-cmd/x-cmd/issues/371
+  blog: /blog/260211
+  name: v0.8.1
+  alpha: true
+  beta: true
+  latest: true
 v0.8.0:
   sum: 83c75c718857ad3f2334563b0f68cd0914bdac9257a71f67c9bb7cbfb6cd415d6e04567643c0c027e2712efbd06fd39ffbaf914495ff96e52978373e34d854db
   date: 2026-02-06 13:19:22+0000
@@ -266,10 +397,8 @@ v0.8.0:
             zuz code has been rock solid, untouched for years. When @polymerase60053 filed the issue, we rewrote this part with a better approach.
 
             Thanks for the nudge, @polymerase60053! https://github.com/x-cmd/x-cmd/issues/370#issuecomment-3838483987
-  blog: null
+  blog: /blog/260207
   name: v0.8.0
-  alpha: true
-  beta: true
 v0.7.15:
   sum: ed38d1842e6d4cdb7e1e0bab8273b046aa4ad8e8f2af77f610b21c730e2b6a2704fc743ed23150aec50268654db717ce9aa8aed92a2a0e0c7d5ebd0591596657
   date: 2026-02-01 16:14:59+0000
@@ -366,7 +495,6 @@ v0.7.15:
             If only to spark an open, serious discussion.
   blog: /blog/260201
   name: v0.7.15
-  latest: true
 v0.7.14:
   sum: 6a1605c84f5d8d6a4bb31587440a510ebbc29d144a45ea713c68a2d1af8c728bd9d389c4f01822d34e58d7ce15e608ebbdaed6868a984d5c2fead695d6bcc25c
   date: 2026-01-30 15:10:15+0000
