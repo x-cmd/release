@@ -1,3 +1,122 @@
+v0.8.2:
+  sum: be2a22d7208c2b8bad40a30531972f5efbf9fe210d689af3cb1b58d7beffbc8c970cb08b13a6a6fddfeffec562fc86020c20a03a68f5ee507d599ab67ad97cf5
+  date: 2026-02-12 14:46:27+0000
+  change:
+    nanorc:
+      update:
+        - cn: |
+            新增 `nanorc` 模块 —— 说实话，是因为我被坑了。
+
+            在 macOS 上调 nanorc 配置，折腾了大半天才发现：系统自带的 nano 其实是 pico 套皮，压根不支持 nanorc。
+            上网一搜，才发现这锅是 pico 的。
+
+            两年前在树莓派上我就用过 scopatz/nanorc，126 种语法文件，虽然六年没更新但质量过硬。
+            这次顺手把它搬过来，资源包用 curl 就能下，对 Linux 和嵌入式环境很友好。
+            为了国内访问速度，托管到了 codeberg。
+
+            另外还有个 `x nano` 命令，会自动检测并下载 GNU nano 直接使用，不影响系统。
+
+            示例：
+            ```bash
+            # 下载并配置语法高亮
+            x nanorc setup
+
+            # 查看已安装的语法文件
+            x nanorc ls
+
+            # 清理配置
+            x nanorc tdown
+            ```
+          en: |
+            Added `nanorc` module —— honestly, I got burned first.
+
+            Spent ages debugging my nanorc config on macOS, only to discover the system's "nano" is actually pico in disguise — it doesn't support nanorc at all.
+            Googled it, and yeah, turns out pico's the culprit.
+
+            I've used scopatz/nanorc on Raspberry Pi two years ago. 126 syntax files, hasn't been updated in six years, but rock solid.
+            Brought it over this time — resource pack downloads via curl, friendly for Linux and embedded environments.
+            Hosted on codeberg for faster access in China.
+
+            There's also `x nano` which auto-detects and downloads GNU nano for direct use, leaving the system untouched.
+
+            Examples:
+            ```bash
+            # Download and configure syntax highlighting
+            x nanorc setup
+
+            # List installed syntax files
+            x nanorc ls
+
+            # Clean up configuration
+            x nanorc tdown
+            ```
+    claude:
+      update:
+        - cn: |
+            `x claude attr` 新增 `-g|--global` 全局配置选项 —— 纯粹是因为项目太多，懒得一个个配。
+
+            之前 `use`、`set`、`rm`、`cat` 只能改当前项目的配置，x-cmd 项目多了就很麻烦。
+            加个 `-g` 全局生效，省事。
+
+            示例：
+            ```bash
+            # 全局设置配置
+            x claude attr use -g
+
+            # 查看全局配置
+            x claude attr cat -g
+
+            # 移除全局配置
+            x claude attr rm -g
+            ```
+          en: |
+            Added `-g|--global` option to `x claude attr` —— purely because we have too many projects and I'm too lazy to config them one by one.
+
+            Previously `use`, `set`, `rm`, and `cat` only modified project-level configs. With many x-cmd projects, that gets annoying.
+            Added `-g` for global scope, problem solved.
+
+            Examples:
+            ```bash
+            # Set configuration globally
+            x claude attr use -g
+
+            # Display global config
+            x claude attr cat -g
+
+            # Remove global config
+            x claude attr rm -g
+            ```
+    zhipu:
+      update:
+        - cn: |
+            `zhipu` 模块新增 `glm-5` 模型支持 —— 涨价 50%，官方应该挺有底气。
+
+            既然敢涨价，说明对模型有信心，那就第一时间集成到生产力里。
+
+            说实话我自己还没深度用，体感不多，先用起来再说。
+
+            示例：
+            ```bash
+            # 设置 glm-5 为默认模型
+            x zhipu --cfg model=glm-5
+            ```
+          en: |
+            Added `glm-5` model support to `zhipu` —— 50% price hike means they're pretty confident.
+
+            If they dare raise the price, they must believe in the model. So I integrated it into my workflow right away.
+
+            Honestly haven't used it enough to have a strong opinion yet. Just getting it ready first.
+
+            Example:
+            ```bash
+            # Use glm-5 as default model
+            x zhipu --cfg model=glm-5
+            ```
+  blog: null
+  name: v0.8.2
+  alpha: true
+  beta: true
+  latest: true
 v0.8.1:
   sum: 44d546e1194840622d1cef1d10b7541e1be26797b2f5488cf67bab64958519769eed07b2d6faf0197f91a4932f56f9fd8a9a01e33962f0a04eaa6f4a4b02b8b3
   date: 2026-02-11 10:17:55+0000
@@ -126,9 +245,6 @@ v0.8.1:
             See: https://github.com/x-cmd/x-cmd/issues/371
   blog: /blog/260211
   name: v0.8.1
-  alpha: true
-  beta: true
-  latest: true
 v0.8.0:
   sum: 83c75c718857ad3f2334563b0f68cd0914bdac9257a71f67c9bb7cbfb6cd415d6e04567643c0c027e2712efbd06fd39ffbaf914495ff96e52978373e34d854db
   date: 2026-02-06 13:19:22+0000
