@@ -1,3 +1,94 @@
+v0.8.3:
+  sum: 7a59c3c3688657c0459e8a85e9205e2c4fe75bede66d4be082aeee7e34816fd7aa3a2eca3c567797844e97656a2f0bf9c47526c9e836c893aa7d63ea5b57ea4c
+  date: 2026-02-16 12:34:11+0000
+  change:
+    x-cmd:
+      update:
+        - cn: "\U0001F389 各位 X-CMD 的朋友，祝大家马年大吉，万事如意！\U0001F434 \U0001F38A  X-CMD 越用越顺，vibe coding 越来越爽。\n\n新年新气象，从 v0.8.3 开始，我们将采用 Apache 2.0 协议发布 X-CMD ；企业用户可以更自由地使用和集成 x-cmd。\n\nHappy coding ~ \U0001F42E\U0001F37A\n"
+          en: "\U0001F389 Hey X-CMD friends, Happy Year of the Horse! \U0001F434 \U0001F38A x-cmd CLI keeps getting smoother, vibe coding keeps getting better.\n\nNew year, new vibes — starting from v0.8.3, we're releasing X-CMD under Apache 2.0 license. Enterprise users can now use and integrate x-cmd more freely.\n\nHappy coding ~ \U0001F42E\U0001F37A\n"
+    minimax:
+      update:
+        - cn: |
+            minimax 模块默认模型升级为 Minimax-M2.5。
+
+            春节那波，kimi、glm-5、minimax 都发布了最新模型。minimax 很良心，升级没加价，我们正在不断试用 M2.5。
+
+            示例：
+            ```bash
+            x minimax --cfg
+            ```
+          en: |
+            minimax module default model upgraded to Minimax-M2.5.
+
+            During Chinese New Year, kimi, glm-5, and minimax all released their latest models. minimax was nice enough to upgrade without raising prices, and we've been trying out M2.5.
+
+            Example:
+            ```bash
+            x minimax --cfg
+            ```
+    claude:
+      update:
+        - cn: |
+            claude 模块新增 `x claude use` 命令。
+
+            如果你只用一个厂商，设成默认后直接打 `claude` 就行，比 `x claude mm` 更省事。
+
+            项目级别可以用 `-p`（`--project`），只影响当前项目：
+            - `x claude use glm` → 写入 ~/.claude/settings.json（全局）
+            - `x claude use -p mm` → 写入 .claude/settings.local.json（项目，优先于全局）
+
+            想换回来？`x claude use claude`。我们也保留了前缀模式：
+            - `x claude mm` 使用 minimax
+            - `x claude glm` 使用智谱 glm-5
+
+            示例：
+            ```bash
+            # 全局默认用智谱
+            x claude use glm
+
+            # 项目级别用 minimax（优先于全局）
+            x claude use -p mm
+
+            # 换回官方 Claude
+            x claude use claude
+
+            # 前缀模式
+            x claude mm hello
+            x claude glm hello
+            ```
+          en: |
+            claude module adds `x claude use` command.
+
+            If you only use one provider, setting it as default lets you just run `claude` directly — simpler than `x claude mm`.
+
+            For project-level config, use `-p` (short for `--project`), affecting only the current project:
+            - `x claude use glm` → writes to ~/.claude/settings.json (global)
+            - `x claude use -p mm` → writes to .claude/settings.local.json (project, overrides global)
+
+            Want to switch back? `x claude use claude`. We also kept the prefix mode:
+            - `x claude mm` uses minimax
+            - `x claude glm` uses Zhipu glm-5
+
+            Examples:
+            ```bash
+            # Global default to Zhipu
+            x claude use glm
+
+            # Project-level to minimax (overrides global)
+            x claude use -p mm
+
+            # Switch back to official Claude
+            x claude use claude
+
+            # Prefix mode
+            x claude mm hello
+            x claude glm hello
+            ```
+  blog: null
+  name: v0.8.3
+  alpha: true
+  beta: true
+  latest: true
 v0.8.2:
   sum: be2a22d7208c2b8bad40a30531972f5efbf9fe210d689af3cb1b58d7beffbc8c970cb08b13a6a6fddfeffec562fc86020c20a03a68f5ee507d599ab67ad97cf5
   date: 2026-02-12 14:46:27+0000
@@ -114,9 +205,6 @@ v0.8.2:
             ```
   blog: null
   name: v0.8.2
-  alpha: true
-  beta: true
-  latest: true
 v0.8.1:
   sum: 44d546e1194840622d1cef1d10b7541e1be26797b2f5488cf67bab64958519769eed07b2d6faf0197f91a4932f56f9fd8a9a01e33962f0a04eaa6f4a4b02b8b3
   date: 2026-02-11 10:17:55+0000
