@@ -1,3 +1,75 @@
+v0.8.4:
+  sum: c056fa47ec1cbc6f2d42a45cdb642094a105e594ed1ecfd08cda8f2a3ab93cd756ab3d56fb8bfa563e18d881bbe36826819a724ea0986228d9b0046ff38bd008
+  date: 2026-02-28 15:02:37+0000
+  change:
+    mac:
+      update:
+        - cn: "\U0001F6E1️ x mac sb：AI Agent 时代的安全护盾\n\n当你的 AI 助手帮你操作文件时，你真的放心让它为所欲为吗？\nx mac sb 是 x-cmd 打造的 macOS 沙盒工具，专为 AI Agent 设计——让你既能享受 AI 带来的效率提升，又能精确控制它的权限边界。\n\n它可以：\n- 限制 AI 只能访问指定目录\n- 禁止访问敏感区域（如 ~/.ssh、~/.bitcoin）\n- 禁用网络、粘贴板等危险操作\n- 支持 0-9 级安全策略\n\n示例：\n```bash\nx mac sb -9 -d \"$HOME/.bitcoin\" -d \"$HOME/.ssh\" -d \"$HOME/Library\"  claude\n```\n\n---\n彩蛋：那个被 ~ 摆了一道的下午\n\n最近修了个有趣的小 bug：\n`~` 在 case 匹配前就被 shell 展开了，`~/*` 会变成 `/Users/xxx/*`，在检查时遗漏 `~` 开头的路径，导致安全检查被绕过\n还好发现得早，加个单引号就搞定 \U0001F60A\n"
+          en: "\U0001F6E1️ x mac sb: Security Shield for the AI Agent Era\n\nWhen your AI assistant helps you manipulate files, are you really comfortable letting it run wild?\nx mac sb is a macOS sandbox tool built by x-cmd, designed specifically for AI Agents — letting you enjoy the efficiency boost from AI while precisely controlling its permission boundaries.\n\nIt can:\n- Restrict AI to only access specified directories\n- Block access to sensitive areas (like ~/.ssh, ~/.bitcoin)\n- Disable dangerous operations like network and clipboard\n- Support security policies from level 0-9\n\nExample:\n```bash\nx mac sb -9 -d \"$HOME/.bitcoin\" -d \"$HOME/.ssh\" -d \"$HOME/Library\" claude\n```\n\n---\nEaster Egg: The Afternoon When ~ Got the Better of Me\n\nRecently fixed an interesting little bug:\n`~` gets expanded by the shell before case matching, so `~/*` becomes `/Users/xxx/*`, causing paths starting with `~` to be missed during security checks and bypassing the permission validation\nCaught it early though, fixed it with a single quote \U0001F60A\n"
+    abox:
+      update:
+        - cn: |
+            新增 `abox` 模块 —— 给 OpenClaw、Claude Code 这些 AI 搭个 Docker 沙盒。
+
+            怕这些 AI 在你本地乱来？abox 起个隔离容器，让它们在里面折腾，搞不出啥大事。
+
+            目前能做的：
+            - `x abox start` 秒起容器，常用端口自动映射好
+            - `x abox cmdi bash` 进去开个交互式 shell，跑你的 AI 工具
+            - SSH 公钥登录，比输密码省心
+
+            我刚用上，目前感觉还行。如果你也想试试：
+            ```bash
+            x abox start
+            x abox cmdi bash
+            ```
+
+            刚出炉，有坑正常，用着不顺就跟我说。
+          en: |
+            Added `abox` module —— a Docker sandbox for OpenClaw, Claude Code and other AI coding agents.
+
+            Worried about these AIs messing around on your local machine? abox spins up an isolated container — let them do whatever inside, can't cause real damage.
+
+            What it does right now:
+            - `x abox start` launches in seconds, common ports auto-mapped
+            - `x abox cmdi bash` opens an interactive shell to run your AI tools
+            - SSH key login, no password hassle
+
+            Just started using it myself, seems okay so far. If you want to try:
+            ```bash
+            x abox start
+            x abox cmdi bash
+            ```
+
+            Fresh out of the oven, bugs expected. Let me know if something breaks.
+    tui:
+      update:
+        - cn: |
+            优化 `x tui form` 交互体验。
+
+            这个组件是 x-cmd 内部用来做配置向导的，平时你初始化各种模块时填表用的就是它。
+
+            现在用起来更顺手了：
+            - 编辑内容和选择选项两种模式不再打架，操作更清楚
+            - 按 Tab 或 Enter 在表单项之间循环跳转，不用再想该按哪个
+            - 选择框里用方向键挑选项，左右键只管输入框的光标，互不干扰
+
+            之前那种按半天不知道自己在什么状态的迷糊感，应该少多了。
+          en: |
+            Improved `x tui form` interaction experience.
+
+            This is the component x-cmd uses internally for config wizards — those setup forms you fill out when initializing modules.
+
+            Now it just flows better:
+            - Edit mode and selection mode don't fight with each other anymore
+            - Tab or Enter cycles through form fields, no more guessing which key to press
+            - Arrow keys handle selection, left/right just moves the cursor, no interference
+
+            Less of that "wait, what state am I in?" confusion from before.
+  blog: null
+  name: v0.8.4
+  alpha: true
+  beta: true
 v0.8.3:
   sum: 7a59c3c3688657c0459e8a85e9205e2c4fe75bede66d4be082aeee7e34816fd7aa3a2eca3c567797844e97656a2f0bf9c47526c9e836c893aa7d63ea5b57ea4c
   date: 2026-02-16 12:34:11+0000
@@ -84,10 +156,8 @@ v0.8.3:
             x claude mm hello
             x claude glm hello
             ```
-  blog: null
+  blog: /blog/260217
   name: v0.8.3
-  alpha: true
-  beta: true
   latest: true
 v0.8.2:
   sum: be2a22d7208c2b8bad40a30531972f5efbf9fe210d689af3cb1b58d7beffbc8c970cb08b13a6a6fddfeffec562fc86020c20a03a68f5ee507d599ab67ad97cf5
@@ -203,7 +273,7 @@ v0.8.2:
             # Use glm-5 as default model
             x zhipu --cfg model=glm-5
             ```
-  blog: null
+  blog: /blog/260212
   name: v0.8.2
 v0.8.1:
   sum: 44d546e1194840622d1cef1d10b7541e1be26797b2f5488cf67bab64958519769eed07b2d6faf0197f91a4932f56f9fd8a9a01e33962f0a04eaa6f4a4b02b8b3
