@@ -1,3 +1,231 @@
+v0.8.5:
+  sum: 5caae133f70682adcabc449ec6cc731b0cfcc9f7e082e5d2bff5b14c4a763b664ea5dd2a630181b2f4d122f6708243e4f0367805902187381a437d3b53cf8d7d
+  date: 2026-03-05 13:12:30+0000
+  change:
+    humantime:
+      update:
+        - cn: |
+            新增 `humantime` 模块 —— 因为我受够了每次算时间都要掰手指。
+
+            86400 秒是多久？2h30m 又是多少秒？写脚本时这种换算烦死了。
+            所以搞了个双向转换的工具，整数和可读格式随便转。
+
+            ```bash
+            x humantime 3600      # 输出 1h
+            x humantime 2h30m     # 输出 9000
+            ```
+
+            支持 d/h/m/s，小数秒也行。下次写定时任务不用再心算了。
+          en: |
+            Added `humantime` module —— because I was tired of counting time on my fingers.
+
+            How long is 86400 seconds? How many seconds is 2h30m? Converting these in scripts is annoying.
+            So I built a bidirectional converter between integers and human-readable formats.
+
+            ```bash
+            x humantime 3600      # outputs 1h
+            x humantime 2h30m     # outputs 9000
+            ```
+
+            Supports d/h/m/s, decimal seconds too. No more mental math for cron jobs.
+    is:
+      update:
+        - cn: |
+            新增 `is` 模块 —— 写脚本时 `[ ]` 语法总让我心虚。
+
+            特别是检查数字范围、文件新旧、环境类型这些，test 命令的写法我总是记混。
+            干脆封装成一个个子命令，语义更清晰。
+
+            ```bash
+            x is int 42                 # 是不是整数？
+            x is minmax 1 100 50        # 50 在 1-100 范围内吗？
+            x is interactive            # 当前是交互式 shell 吗？
+            ```
+
+            支持类型检查、范围判断、文件新旧比较、环境检测。代码读起来更自解释。
+          en: |
+            Added `is` module —— because `[ ]` syntax always makes me nervous when writing scripts.
+
+            Especially checking number ranges, file ages, environment types —— I always mix up the test command syntax.
+            So I wrapped them into subcommands with clearer semantics.
+
+            ```bash
+            x is int 42                 # is it an integer?
+            x is minmax 1 100 50        # is 50 within 1-100?
+            x is interactive            # is this an interactive shell?
+            ```
+
+            Supports type checks, range checks, file comparisons, environment detection. Code reads more self-explanatory.
+    assert:
+      update:
+        - cn: |
+            新增 `assert` 模块 —— 被一次 debug 搞崩溃了。
+
+            有个函数偷偷改了 `$HOME`，后面所有命令全挂了，找了半天才发现。
+            所以做了这个测试工具，重点是变量快照功能：保存 → 执行 → 对比，一眼看出谁泄漏了。
+
+            ```bash
+            x assert true [ 1 -eq 1 ]
+            x assert var save; my_func; x assert var cmp
+            ```
+
+            也支持常规的 true/false、类型检查、文件判断。写模块测试时用着挺顺手的。
+          en: |
+            Added `assert` module —— because a debugging session broke me.
+
+            A function secretly modified `$HOME`, causing all subsequent commands to fail. Took me forever to find.
+            So I built this testing tool, focusing on variable snapshots: save → execute → compare, leaks become obvious.
+
+            ```bash
+            x assert true [ 1 -eq 1 ]
+            x assert var save; my_func; x assert var cmp
+            ```
+
+            Also supports standard true/false, type checks, file assertions. Handy for writing module tests.
+    host:
+      update:
+        - cn: |
+            新增 `host` 模块 —— 改 `/etc/hosts` 这件事我始终觉得危险。
+
+            sudo vim 进去，手一抖改错了，DNS 就全乱了。而且找域名的时候还得肉眼扫。
+            做个带模糊搜索的安全版本，自动备份，错了还能恢复。
+
+            ```bash
+            x host              # 分页查看，支持搜索
+            x host fz           # 模糊找域名
+            x host ed myapp.local=192.168.1.100
+            ```
+
+            编辑前自动备份，操作都在临时文件完成，确认无误才写入。放心多了。
+          en: |
+            Added `host` module —— because editing `/etc/hosts` always felt dangerous to me.
+
+            sudo vim, one typo and DNS breaks. Plus finding domains means scanning with your eyes.
+            Made a safer version with fuzzy search, auto backup, and easy recovery.
+
+            ```bash
+            x host              # paged view with search
+            x host fz           # fuzzy find domains
+            x host ed myapp.local=192.168.1.100
+            ```
+
+            Auto backup before editing, operations done in temp files, only writes after confirmation. Much safer.
+    tmp:
+      update:
+        - cn: |
+            新增 `tmp` 模块 —— 跨平台临时目录这事实在是太乱了。
+
+            Linux 是 `/tmp`，macOS 可能是 `$TMPDIR`，Windows 又是另一套。写脚本时总要判断。
+            统一封装一下，还加了创建临时文件/目录的功能。
+
+            ```bash
+            x tmp path          # 获取系统临时目录
+            x tmp mkdir cache   # 创建临时目录
+            x tmp mkfile        # 创建临时文件
+            ```
+
+            带 `_` 后缀的是内部版本（如 `x tmp path_`），结果存变量，供其他脚本调用。
+          en: |
+            Added `tmp` module —— because cross-platform temp directories are a mess.
+
+            Linux is `/tmp`, macOS might be `$TMPDIR`, Windows is different. Scripts always need to check.
+            Unified and wrapped them, plus added temp file/directory creation.
+
+            ```bash
+            x tmp path          # get system temp directory
+            x tmp mkdir cache   # create temp directory
+            x tmp mkfile        # create temp file
+            ```
+
+            Versions with `_` suffix (like `x tmp path_`) are internal, results stored in variables for other scripts.
+    rand:
+      update:
+        - cn: |
+            新增 `rand` 模块 —— 写测试数据时 `$RANDOM` 不够用了。
+
+            需要 UUID、假邮箱、随机 IP 的时候，总要去翻其他工具。
+            干脆集成到一起，还能批量生成。
+
+            ```bash
+            x rand uuid
+            x rand uuidv7       # 时间有序的 UUID
+            x rand email 5      # 批量生成 5 个邮箱
+            x rand int 1 100    # 1-100 之间的随机整数
+            ```
+
+            也支持浮点数、不同格式的字符串。写测试用例时少很多烦心事。
+          en: |
+            Added `rand` module —— because `$RANDOM` isn't enough when writing test data.
+
+            Need UUIDs, fake emails, random IPs? Always had to look up other tools.
+            Just bundled them together, with batch generation too.
+
+            ```bash
+            x rand uuid
+            x rand uuidv7       # time-ordered UUID
+            x rand email 5      # batch generate 5 emails
+            x rand int 1 100    # random int between 1-100
+            ```
+
+            Also supports floats, various string formats. Less hassle when writing test cases.
+    str:
+      update:
+        - cn: |
+            新增 `str` 模块 —— awk/sed/tr 组合拳我老是记混。
+
+            大小写转换、base64、trim、replace，这些简单操作其实挺常用的。
+            但每次都要想「这次该用哪个工具」就很烦。统一到一个命令里省事多了。
+
+            ```bash
+            x str upper hello
+            x str base64 hello
+            x str trim "  spaced  "
+            ```
+
+            还支持 split/join、md5/sha256、换行符转换。日常字符串处理基本够用了。
+          en: |
+            Added `str` module —— because I always mix up the awk/sed/tr combo.
+
+            Case conversion, base64, trim, replace —— these simple operations are actually quite common.
+            But having to think "which tool this time" is annoying. One command handles them all.
+
+            ```bash
+            x str upper hello
+            x str base64 hello
+            x str trim "  spaced  "
+            ```
+
+            Also supports split/join, md5/sha256, line ending conversion. Covers most daily string processing needs.
+    gemini:
+      bugfix:
+        - cn: |
+            修复配置自定义 endpoint 不生效的问题 —— 抱歉，这是个低级错误。
+
+            有用户反馈配置了中转站 endpoint 但请求还是跑到 Google 官方去了。
+            查了下发现是配置读取时的逻辑问题，自定义 endpoint 没有被正确应用到请求中。
+
+            现在配置会正确生效了：
+            ```bash
+            x gemini --cfg endpoint=https://your-proxy.example.com
+            ```
+
+            感谢 @shlroland 在 #376 的反馈。
+          en: |
+            Fixed custom endpoint configuration not taking effect —— sorry, this was a dumb mistake.
+
+            A user reported that after configuring a proxy endpoint, requests were still going to Google's official API.
+            Turned out to be a logic issue in config loading —— custom endpoint wasn't being applied to requests properly.
+
+            Now it works as expected:
+            ```bash
+            x gemini --cfg endpoint=https://your-proxy.example.com
+            ```
+
+            Thanks to @shlroland for reporting this in #376.
+  blog: null
+  name: v0.8.5
+  alpha: true
+  beta: true
 v0.8.4:
   sum: c056fa47ec1cbc6f2d42a45cdb642094a105e594ed1ecfd08cda8f2a3ab93cd756ab3d56fb8bfa563e18d881bbe36826819a724ea0986228d9b0046ff38bd008
   date: 2026-02-28 15:02:37+0000
@@ -68,8 +296,6 @@ v0.8.4:
             Less of that "wait, what state am I in?" confusion from before.
   blog: null
   name: v0.8.4
-  alpha: true
-  beta: true
 v0.8.3:
   sum: 7a59c3c3688657c0459e8a85e9205e2c4fe75bede66d4be082aeee7e34816fd7aa3a2eca3c567797844e97656a2f0bf9c47526c9e836c893aa7d63ea5b57ea4c
   date: 2026-02-16 12:34:11+0000
