@@ -1,3 +1,405 @@
+v0.8.6:
+  sum: 00528383ebc38b528a74303ffd4bb7605799c4d8e91b95525fe543f468ec31f2d054f49e92ac06e458ece31b2546c9b84834b762930593a93913172b26c67cf4
+  date: 2026-03-07 08:26:52+0000
+  change:
+    openai:
+      update:
+        - cn: |
+            新增 `gpt-5.4` 和 `gpt-5.4-pro` 支持 —— OpenAI 刚发布的旗舰模型，说实话，有点香。
+
+            错误率降了 18%，幻觉少了 33%。编码和办公能力整合到一块，写代码、做表格、整 PPT 都能干。还支持 100 万 token 上下文，长文档不用切了。
+
+            当然价格也涨了（Thinking 版 $2.5/$15 每百万 token），但官方说 token 效率更高，实际可能更省。
+
+            示例：
+            ```bash
+            # 使用 gpt-5.4 并启用所有工具
+            @gpt --model gpt-5.4 --tool all '分析这个项目的代码结构'
+
+            # 查看支持的模型列表
+            x openai model ls
+            ```
+
+            参考：[OpenAI 官方发布](https://openai.com/index/introducing-gpt-5-4/)
+          en: |
+            Added `gpt-5.4` and `gpt-5.4-pro` support —— OpenAI's new flagship model just dropped, and honestly? It's pretty sweet.
+
+            Error rate down 18%, hallucinations cut by 33%. Combines coding and office work in one — code, spreadsheets, presentations, all handled by a single model. Plus the 1M token context window means no more chopping up long docs.
+
+            Prices went up (Thinking at $2.5/$15 per million tokens), but OpenAI claims better token efficiency, so it might actually save you money.
+
+            Examples:
+            ```bash
+            # Use gpt-5.4 with all tools enabled
+            @gpt --model gpt-5.4 --tool all 'Analyze the code structure of this project'
+
+            # List supported models
+            x openai model ls
+            ```
+
+            Reference: [OpenAI Official Announcement](https://openai.com/index/introducing-gpt-5-4/)
+    sudo:
+      update:
+        - cn: |
+            为 `sudo` 模块增加文档 —— 权限提升这件事，不同系统做法完全不同。
+
+            sudo、doas、su 各有各的用法，Linux 普遍用 sudo，BSD 可能用 doas，有些精简系统只有 su，写脚本时判断系统类型挺花时间的。
+            另外，裸 sudo 会丢失 PATH 环境变量，额外安装的工具就用不了了。
+
+            x sudo 增强的权限提升模块，自动选择最佳可用方式：
+            1. 自动回退：sudo → doas → su，哪个能用用哪个
+            2. PATH 保持：自定义 PATH 注入到提升后的环境
+            3. x-cmd 可用：x-cmd 命令在 sudo 下无缝工作
+            4. 环境一致性：___X_CMD_ROOT 等变量被保留
+
+            ```bash
+            x sudo apt update              # 自动选择 sudo/doas/su
+            x sudo vim /etc/hosts          # 以 root 权限编辑文件
+            x sudo --suuser admin whoami   # 使用 su 指定用户
+            ```
+
+            跨平台脚本再也不用写一堆系统判断了。
+          en: |
+            Added `sudo` module documentation —— because privilege escalation works differently on every system.
+
+            sudo, doas, su all have different usage - Linux typically has sudo, BSD might have doas, some minimal systems only have su - writing scripts means spending time checking which one is available.
+            Additionally, bare sudo loses PATH env vars, tools installed separately stop working.
+
+            x sudo is an enhanced privilege escalation module, auto-selects best available method:
+            1. Auto fallback: sudo → doas → su, uses whatever's available
+            2. PATH preservation: custom PATH injected into elevated environment
+            3. x-cmd available: x-cmd commands work seamlessly under sudo
+            4. Environment consistency: ___X_CMD_ROOT and other vars preserved
+
+            ```bash
+            x sudo apt update              # auto selects sudo/doas/su
+            x sudo vim /etc/hosts          # edit file with root privileges
+            x sudo --suuser admin whoami   # use su with specific user
+            ```
+
+            Cross-platform scripts no longer need a ton of system detection.
+    os:
+      update:
+        - cn: |
+            为 `os` 模块增加文档 —— 查看系统信息要记一堆命令真的很烦。
+
+            uname、arch、uptime、sw_vers... 系统信息分散在各处，Linux/macOS/BSD 写法还不一样。
+            判断系统类型要写一堆条件，写脚本时挺费功夫的。
+
+            x os 统一入口，查看系统信息一步到位，还支持 is linux/wsl/mac/bsd 等类型判断。
+
+            ```bash
+            x os              # 查看完整系统信息
+            x os is mac       # 判断是否为 macOS
+            x os is linux     # 判断是否为 Linux
+            x os is wsl       # 判断是否为 WSL
+            ```
+
+            写脚本判断系统类型再也不用翻文档了。
+          en: |
+            Added `os` module documentation —— because remembering a bunch of commands to check system info is annoying.
+
+            uname, arch, uptime, sw_vers... System info scattered everywhere, Linux/macOS/BSD all have different commands.
+            Checking system type requires a bunch of conditionals, which takes effort in scripts.
+
+            x os provides a unified entry point, one command to get all system info, plus is linux/wsl/mac/bsd type checks.
+
+            ```bash
+            x os              # view full system info
+            x os is mac       # check if macOS
+            x os is linux     # check if Linux
+            x os is wsl       # check if WSL
+            ```
+
+            No more digging through docs to check system type in scripts.
+    hostname:
+      update:
+        - cn: |
+            为 `hostname` 模块增加文档 —— 不同系统改主机名的命令完全不同。
+
+            Linux 用 hostnamectl，macOS 用 scutil，BSD 又是另一个写法。
+            写脚本时要判断半天系统类型，挺累人的，而且有些容器环境还不支持这些命令。
+
+            x hostname 一个命令搞定所有系统，自动检测环境选择合适的方式。
+
+            ```bash
+            x hostname                    # 查看当前主机名
+            x hostname set myhost          # 设置主机名
+            ```
+
+            跨平台脚本再也不用写一堆 if-else 了。
+          en: |
+            Added `hostname` module documentation —— because changing hostname requires completely different commands on different systems.
+
+            Linux uses hostnamectl, macOS uses scutil, BSD has yet another way.
+            Writing scripts requires a lot of system detection logic, which is exhausting, and some container environments don't even support these commands.
+
+            x hostname handles all systems with one command, auto-detects environment and picks the right approach.
+
+            ```bash
+            x hostname                    # view current hostname
+            x hostname set myhost          # set hostname
+            ```
+
+            Cross-platform scripts no longer need a ton of if-else statements.
+    cpu:
+      update:
+        - cn: |
+            为 `cpu` 模块增加文档 —— 查 CPU 信息太分散了，字节序检测还要写代码。
+
+            Linux 看 /proc/cpuinfo，macOS 用 sysctl，Windows 又不一样。
+            字节序检测更是费劲，得写段 C 代码或者用 Python 脚本，有点重。
+
+            x cpu 一个命令查看 CPU 详细信息，还能直接检测字节序。
+
+            ```bash
+            x cpu info           # 查看 CPU 详细信息
+            x cpu endianness     # 检测字节序 (l 小端, b 大端)
+            ```
+
+            写跨平台脚本时判断字节序特别实用。
+          en: |
+            Added `cpu` module documentation —— because checking CPU info is scattered everywhere, and detecting endianness requires writing code.
+
+            Linux reads /proc/cpuinfo, macOS uses sysctl, Windows is different yet again.
+            Endianness detection is even more involved - need to write C code or a Python script, a bit heavy.
+
+            x cpu shows detailed CPU info, and can directly detect system endianness.
+
+            ```bash
+            x cpu info           # view detailed CPU info
+            x cpu endianness    # detect endianness (l = little, b = big)
+            ```
+
+            Super useful for checking endianness in cross-platform scripts.
+    ccmd:
+      update:
+        - cn: |
+            为 `ccmd` 模块增加文档 —— 重复执行同一个耗时命令真的很浪费时间。
+
+            curl 调 API、复杂数据库查询、耗时的文件处理，每次都要完整等一遍。
+            尤其是调试脚本的时候，同一个命令要跑十几遍，每次都得干等着，挺折磨人的。
+
+            x ccmd 缓存命令结果，支持自定义过期时间，下次执行直接返回缓存。
+
+            ```bash
+            x ccmd 1h -- curl https://httpbin.org/get
+            x ccmd which curl
+            x ccmd invalidate curl
+            ```
+
+            调试接口、重复查询时效率提升太明显了。
+          en: |
+            Added `ccmd` module documentation —— because repeatedly running the same time-consuming command is really wasteful.
+
+            curl API calls, complex database queries, time-consuming file processing - wait for full execution every time.
+            Especially when debugging scripts, running the same command dozens of times, each time waiting idly for results, which is frustrating.
+
+            x cmd caches command results with customizable expiration, next execution returns cached result directly.
+
+            ```bash
+            x ccmd 1h -- curl https://httpbin.org/get
+            x ccmd which curl
+            x ccmd invalidate curl
+            ```
+
+            Much more efficient when debugging APIs or making repeated queries.
+    sleep:
+      update:
+        - cn: |
+            为 `sleep` 模块增加文档 —— Cron 表达式太复杂，简单定时任务也要写 Cron。
+
+            想每小时执行一次任务，得写 `0 * * * *`，想每 30 分钟又是 `*/30 * * * *`。
+            说实话，这种格式记起来挺费劲的，而且很多简单场景完全没必要这么复杂。
+
+            x sleep 提供人类可读的时间格式，beacon 定时输出，schd 定时执行任务。
+
+            ```bash
+            x sleep 3h30m           # 等待 3 小时 30 分钟
+            x sleep beacon 5m       # 每 5 分钟输出当前时间
+            x sleep schd -i 5m -- make test   # 定时执行命令
+            ```
+
+            简单场景下比 Cron 直观多了。
+          en: |
+            Added `sleep` module documentation —— because Cron expressions are too complex for simple scheduled tasks.
+
+            Want to run a task every hour? Write `0 * * * *`. Every 30 minutes? `*/30 * * * *`.
+            Honestly, this format is hard to remember, and many simple cases don't need it at all.
+
+            x sleep provides human-readable time formats, beacon for timed output, schd for scheduled execution.
+
+            ```bash
+            x sleep 3h30m           # wait 3 hours 30 minutes
+            x sleep beacon 5m       # output current time every 5 minutes
+            x sleep schd -i 5m -- make test   # schedule command execution
+            ```
+
+            Much more intuitive than Cron for simple cases.
+    fsiter:
+      update:
+        - cn: |
+            为 `fsiter` 模块增加文档 —— 纯 Shell 实现的文件遍历，零外部依赖。
+
+            find 功能强大，但得 fork 外部进程。x fsiter 纯 Shell 实现，内置在 x-cmd 里，省去了进程调用的开销。
+            当然，日常用 find 也够用，这主要是给追求简洁的人多个选择。
+
+            接口也挺直观，--ls --file、--ls --folder、--ls --hidden 分类清晰，不用记复杂参数。
+
+            ```bash
+            x fsiter --ls --file                   # 只列出文件
+            x fsiter --ls --hidden                  # 包含隐藏文件
+            ```
+
+            不用额外装工具，开箱即用。
+          en: |
+            Added `fsiter` module documentation —— pure Shell file iteration, zero external dependencies.
+
+            find is powerful but forks external processes. x fsiter is pure Shell, built into x-cmd, saves the process spawn overhead.
+            Of course, find works fine for daily use — this just gives people who prefer self-contained tools another option.
+
+            The interface is intuitive too — --ls --file, --ls --folder, --ls --hidden for clear categorization, no complex parameters to remember.
+
+            ```bash
+            x fsiter --ls --file                   # list files only
+            x fsiter --ls --hidden                  # include hidden files
+            ```
+
+            Works out of the box, no extra tools needed.
+    gg:
+      update:
+        - cn: |
+            为 `gg` 模块增加文档 —— 查技术问题的时候，AI 比搜索引擎更懂你。
+
+            搜一个具体的技术问题，搜索引擎返回一堆链接，要自己点进去翻答案。
+            AI 直接理解你的问题，给出精准答案，省去筛选的时间。
+
+            x gg 集成 Gemini AI 搜索能力，在终端里直接用 AI 搜问题。
+
+            ```bash
+            x gg "What is x-cmd?"
+            x gg --md "Explain quantum computing"
+            x gg --raw "Current bitcoin price"
+            ```
+
+            解决技术问题效率提升明显，AI 理解力比关键词匹配强太多了。
+          en: |
+            Added `gg` module documentation —— because AI understands your technical questions better than search engines.
+
+            Searching for a specific technical problem, search engine returns a bunch of links, you have to click and dig for answers.
+            AI directly understands your question and gives precise answers, saving the filtering time.
+
+            x gg integrates Gemini AI search capability, search directly in terminal with AI.
+
+            ```bash
+            x gg "What is x-cmd?"
+            x gg --md "Explain quantum computing"
+            x gg --raw "Current bitcoin price"
+            ```
+
+            Much more efficient for solving technical problems, AI understanding far exceeds keyword matching.
+    hash:
+      update:
+        - cn: |
+            为 `hash` 模块增加文档 —— 不同系统哈希命令完全不同。
+
+            Linux 用 md5sum，macOS 用 md5，算法参数也不一样。
+            写跨平台脚本时要判断系统选择对应命令，挺折腾的，有时候还容易搞错。
+
+            x hash 跨平台统一接口，支持 md5/sha1/sha256 等常见算法，还支持验证文件哈希。
+
+            ```bash
+            x hash md5 file.txt
+            x hash sha256 file.txt
+            x hash assert file.txt d41d8cd98f00b204e9800998ecf8427e
+            ```
+
+            再也不用记哪个系统用哪个命令了。
+          en: |
+            Added `hash` module documentation —— because hash commands are completely different on different systems.
+
+            Linux uses md5sum, macOS uses md5, algorithm parameters differ too.
+            Writing cross-platform scripts means checking which system you're on, which is cumbersome and easy to mess up.
+
+            x hash provides a unified cross-platform interface, supports md5/sha1/sha256 and other common algorithms, plus file hash verification.
+
+            ```bash
+            x hash md5 file.txt
+            x hash sha256 file.txt
+            x hash assert file.txt d41d8cd98f00b204e9800998ecf8427e
+            ```
+
+            No more remembering which command to use on which system.
+    hashdir:
+      update:
+        - cn: |
+            为 `hashdir` 模块增加文档 —— 没有现成工具计算整个目录的哈希值。
+
+            想校验整个项目目录有没有被篡改，只能一个个文件算，挺费事的。
+            有些场景确实需要目录级别的哈希，但没有顺手的命令行工具。
+
+            x hashdir 递归计算目录中所有文件的哈希，生成统一的哈希列表。
+
+            ```bash
+            x hashdir --md5 /path/to/dir
+            x hashdir --sha256 /path/to/dir
+            x hashdir --sha1 ./project > project.sha1
+            ```
+
+            校验项目完整性、检测文件变化很方便。
+          en: |
+            Added `hashdir` module documentation —— because there's no handy tool to calculate hash for an entire directory.
+
+            Want to verify if a project directory has been tampered with? Have to hash each file one by one, quite a hassle.
+            Some scenarios really need directory-level hashing, but no convenient CLI tool exists.
+
+            x hashdir recursively calculates hashes of all files in a directory, produces a unified hash list.
+
+            ```bash
+            x hashdir --md5 /path/to/dir
+            x hashdir --sha256 /path/to/dir
+            x hashdir --sha1 ./project > project.sha1
+            ```
+
+            Very convenient for verifying project integrity or detecting file changes.
+    tee:
+      update:
+        - cn: |
+            为 `tee` 模块增加文档 —— 想同时记录日志又判断命令是否成功，真的很难。
+
+            写 CI 脚本时，既想保存输出到日志文件，又想判断命令是否成功。
+            用管道吧，exit code 是 tee 的，不是原命令的。不用管道吧，又没有 tee 的效果。
+            `set -o pipefail` 比较冷门，而且不是所有 shell 都支持。
+
+            x tee 通过命名管道技术让你鱼和熊掌兼得 —— 既保存日志，又保留原始 exit code。
+
+            ```bash
+            x tee output.txt -- make build
+            x tee results.txt -- pytest tests/
+            x tee deploy.log -- ./deploy.sh
+            ```
+
+            CI 脚本再也不用绕弯子处理 exit code 了。
+          en: |
+            Added `tee` module documentation —— because wanting both log output AND command success status is really hard.
+
+            In CI scripts, you often want to save output to a log file AND check if the command succeeded.
+            Use a pipe? Exit code is tee, not the original command. Don't use a pipe? No tee effect.
+            `set -o pipefail` is rather obscure, and not all shells support it.
+
+            x tee uses named pipe technology to give you both - log output AND original exit code preserved.
+
+            ```bash
+            x tee output.txt -- make build
+            x tee results.txt -- pytest tests/
+            x tee deploy.log -- ./deploy.sh
+            ```
+
+            No more dancing around exit codes in CI scripts.
+  blog: null
+  name: v0.8.6
+  alpha: true
+  beta: true
 v0.8.5:
   sum: 5caae133f70682adcabc449ec6cc731b0cfcc9f7e082e5d2bff5b14c4a763b664ea5dd2a630181b2f4d122f6708243e4f0367805902187381a437d3b53cf8d7d
   date: 2026-03-05 13:12:30+0000
@@ -5,10 +407,10 @@ v0.8.5:
     humantime:
       update:
         - cn: |
-            新增 `humantime` 模块 —— 因为我受够了每次算时间都要掰手指。
+            增加 `humantime` 模块文档 —— 为时间参数转换提供底层支持。
 
-            86400 秒是多久？2h30m 又是多少秒？写脚本时这种换算烦死了。
-            所以搞了个双向转换的工具，整数和可读格式随便转。
+            人类说"等3小时"，机器只懂"10800秒"。这个 GAP 由 humantime 来填。
+            它是 `x sleep 3h`、`x timeout 2h30m` 等命令的基础设施，让用户能直接用自然语言表达时间。
 
             ```bash
             x humantime 3600      # 输出 1h
@@ -17,10 +419,10 @@ v0.8.5:
 
             支持 d/h/m/s，小数秒也行。下次写定时任务不用再心算了。
           en: |
-            Added `humantime` module —— because I was tired of counting time on my fingers.
+            Added `humantime` module documentation —— provides underlying support for time parameter conversion.
 
-            How long is 86400 seconds? How many seconds is 2h30m? Converting these in scripts is annoying.
-            So I built a bidirectional converter between integers and human-readable formats.
+            Humans say "wait 3 hours", machines only understand "10800 seconds". humantime bridges this GAP.
+            It's the infrastructure behind commands like `x sleep 3h` and `x timeout 2h30m`, enabling natural time expressions.
 
             ```bash
             x humantime 3600      # outputs 1h
@@ -31,7 +433,7 @@ v0.8.5:
     is:
       update:
         - cn: |
-            新增 `is` 模块 —— 写脚本时 `[ ]` 语法总让我心虚。
+            为 `is` 模块增加文档 —— 写脚本时 `[ ]` 语法总让我心虚。
 
             特别是检查数字范围、文件新旧、环境类型这些，test 命令的写法我总是记混。
             干脆封装成一个个子命令，语义更清晰。
@@ -44,7 +446,7 @@ v0.8.5:
 
             支持类型检查、范围判断、文件新旧比较、环境检测。代码读起来更自解释。
           en: |
-            Added `is` module —— because `[ ]` syntax always makes me nervous when writing scripts.
+            Added `is` module documentation —— because `[ ]` syntax always makes me nervous when writing scripts.
 
             Especially checking number ranges, file ages, environment types —— I always mix up the test command syntax.
             So I wrapped them into subcommands with clearer semantics.
@@ -59,7 +461,7 @@ v0.8.5:
     assert:
       update:
         - cn: |
-            新增 `assert` 模块 —— 被一次 debug 搞崩溃了。
+            为 `assert` 模块增加文档 —— 被一次 debug 搞崩溃了。
 
             有个函数偷偷改了 `$HOME`，后面所有命令全挂了，找了半天才发现。
             所以做了这个测试工具，重点是变量快照功能：保存 → 执行 → 对比，一眼看出谁泄漏了。
@@ -71,7 +473,7 @@ v0.8.5:
 
             也支持常规的 true/false、类型检查、文件判断。写模块测试时用着挺顺手的。
           en: |
-            Added `assert` module —— because a debugging session broke me.
+            Added `assert` module documentation —— because a debugging session broke me.
 
             A function secretly modified `$HOME`, causing all subsequent commands to fail. Took me forever to find.
             So I built this testing tool, focusing on variable snapshots: save → execute → compare, leaks become obvious.
@@ -85,7 +487,7 @@ v0.8.5:
     host:
       update:
         - cn: |
-            新增 `host` 模块 —— 改 `/etc/hosts` 这件事我始终觉得危险。
+            为 `host` 模块增加文档 —— 改 `/etc/hosts` 这件事我始终觉得危险。
 
             sudo vim 进去，手一抖改错了，DNS 就全乱了。而且找域名的时候还得肉眼扫。
             做个带模糊搜索的安全版本，自动备份，错了还能恢复。
@@ -98,7 +500,7 @@ v0.8.5:
 
             编辑前自动备份，操作都在临时文件完成，确认无误才写入。放心多了。
           en: |
-            Added `host` module —— because editing `/etc/hosts` always felt dangerous to me.
+            Added `host` module documentation —— because editing `/etc/hosts` always felt dangerous to me.
 
             sudo vim, one typo and DNS breaks. Plus finding domains means scanning with your eyes.
             Made a safer version with fuzzy search, auto backup, and easy recovery.
@@ -113,7 +515,7 @@ v0.8.5:
     tmp:
       update:
         - cn: |
-            新增 `tmp` 模块 —— 跨平台临时目录这事实在是太乱了。
+            为 `tmp` 模块增加文档 —— 跨平台临时目录这事实在是太乱了。
 
             Linux 是 `/tmp`，macOS 可能是 `$TMPDIR`，Windows 又是另一套。写脚本时总要判断。
             统一封装一下，还加了创建临时文件/目录的功能。
@@ -126,7 +528,7 @@ v0.8.5:
 
             带 `_` 后缀的是内部版本（如 `x tmp path_`），结果存变量，供其他脚本调用。
           en: |
-            Added `tmp` module —— because cross-platform temp directories are a mess.
+            Added `tmp` module documentation —— because cross-platform temp directories are a mess.
 
             Linux is `/tmp`, macOS might be `$TMPDIR`, Windows is different. Scripts always need to check.
             Unified and wrapped them, plus added temp file/directory creation.
@@ -141,7 +543,7 @@ v0.8.5:
     rand:
       update:
         - cn: |
-            新增 `rand` 模块 —— 写测试数据时 `$RANDOM` 不够用了。
+            为 `rand` 模块增加文档 —— 写测试数据时 `$RANDOM` 不够用了。
 
             需要 UUID、假邮箱、随机 IP 的时候，总要去翻其他工具。
             干脆集成到一起，还能批量生成。
@@ -155,7 +557,7 @@ v0.8.5:
 
             也支持浮点数、不同格式的字符串。写测试用例时少很多烦心事。
           en: |
-            Added `rand` module —— because `$RANDOM` isn't enough when writing test data.
+            Added `rand` module documentation —— because `$RANDOM` isn't enough when writing test data.
 
             Need UUIDs, fake emails, random IPs? Always had to look up other tools.
             Just bundled them together, with batch generation too.
@@ -171,7 +573,7 @@ v0.8.5:
     str:
       update:
         - cn: |
-            新增 `str` 模块 —— awk/sed/tr 组合拳我老是记混。
+            为 `str` 模块增加文档 —— awk/sed/tr 组合拳我老是记混。
 
             大小写转换、base64、trim、replace，这些简单操作其实挺常用的。
             但每次都要想「这次该用哪个工具」就很烦。统一到一个命令里省事多了。
@@ -184,7 +586,7 @@ v0.8.5:
 
             还支持 split/join、md5/sha256、换行符转换。日常字符串处理基本够用了。
           en: |
-            Added `str` module —— because I always mix up the awk/sed/tr combo.
+            Added `str` module documentation —— because I always mix up the awk/sed/tr combo.
 
             Case conversion, base64, trim, replace —— these simple operations are actually quite common.
             But having to think "which tool this time" is annoying. One command handles them all.
@@ -222,10 +624,9 @@ v0.8.5:
             ```
 
             Thanks to @shlroland for reporting this in #376.
-  blog: null
+  blog: /blog/260306
   name: v0.8.5
-  alpha: true
-  beta: true
+  latest: true
 v0.8.4:
   sum: c056fa47ec1cbc6f2d42a45cdb642094a105e594ed1ecfd08cda8f2a3ab93cd756ab3d56fb8bfa563e18d881bbe36826819a724ea0986228d9b0046ff38bd008
   date: 2026-02-28 15:02:37+0000
@@ -294,7 +695,7 @@ v0.8.4:
             - Arrow keys handle selection, left/right just moves the cursor, no interference
 
             Less of that "wait, what state am I in?" confusion from before.
-  blog: null
+  blog: /blog/260301
   name: v0.8.4
 v0.8.3:
   sum: 7a59c3c3688657c0459e8a85e9205e2c4fe75bede66d4be082aeee7e34816fd7aa3a2eca3c567797844e97656a2f0bf9c47526c9e836c893aa7d63ea5b57ea4c
@@ -384,7 +785,6 @@ v0.8.3:
             ```
   blog: /blog/260217
   name: v0.8.3
-  latest: true
 v0.8.2:
   sum: be2a22d7208c2b8bad40a30531972f5efbf9fe210d689af3cb1b58d7beffbc8c970cb08b13a6a6fddfeffec562fc86020c20a03a68f5ee507d599ab67ad97cf5
   date: 2026-02-12 14:46:27+0000
