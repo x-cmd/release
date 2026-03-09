@@ -1,3 +1,91 @@
+v0.8.7:
+  sum: 798a941f39d0c8a1050b1748eac9206b8b40ec712e23fb2f552a39f34edadd5cde7edc8382a735196a3da2f96aca8e2ec3070c869b3d373098d19bf26f14ec45
+  date: 2026-03-09 13:23:36+0000
+  change:
+    free:
+      update:
+        - cn: |
+            为 `free` 模块增加文档 —— 不同系统查个内存，命令差这么多。
+
+            Linux 用 free，macOS 用 vm_stat，输出格式和字段含义完全不同。
+            写跨平台脚本时要分别处理，而且 macOS 的内存计算方式比 Linux 复杂得多——有内存压缩、wired、active、inactive 等概念。
+
+            x free 统一入口，自动识别系统，输出格式也帮你规范化好了。
+
+            ```bash
+            x free              # 显示内存使用情况
+            x free --csv        # CSV 格式输出
+            x free -s 2         # 每 2 秒刷新一次
+            ```
+
+            跨平台脚本再也不用写一堆系统判断了。
+          en: |
+            Added `free` module documentation —— different systems, wildly different memory commands.
+
+            Linux uses free, macOS uses vm_stat, output format and field meanings differ completely.
+            Writing cross-platform scripts requires separate handling, and macOS memory calculation is much more complex than Linux — has concepts like memory compression, wired, active, inactive, etc.
+
+            x free provides a unified entry, auto-detects system, and normalizes output format for you.
+
+            ```bash
+            x free              # show memory usage
+            x free --csv        # CSV format output
+            x free -s 2         # refresh every 2 seconds
+            ```
+
+            Cross-platform scripts no longer need a ton of system detection.
+    claude:
+      update:
+        - cn: |
+            有用户提需求，想在 claude-code 上更方便地使用国内三大云厂商的 coding 套餐。
+            安排！新增三个专用命令，阿里云百炼、百度千帆、腾讯云，一键接入妥妥的。
+
+            两种使用方式：
+            1. 独立命令（推荐）：直接启动 Claude Code 并接入对应厂商
+               ```bash
+               x claude ali        # 启动并接入阿里云百炼
+               x claude baidu      # 启动并接入百度千帆
+               x claude tencent    # 启动并接入腾讯云
+               ```
+            2. use 命令：切换并永久配置 Claude Code 接入的模型提供商
+               ```bash
+               x claude use ali        # 切换到阿里云
+               x claude use --project ali   # 写入项目配置，仅当前项目生效
+               ```
+
+            你可以使用 `x claude use other` 接入更多第三方模型提供商（如本地 ollama 部署的模型）：
+            ```bash
+            x claude use other "http://localhost:11434" <api_key> "gpt-oss:20b"
+            ```
+
+            使用前记得先设置 API Key 哦。
+          en: |
+            A user requested an easier way to use domestic cloud providers' coding plans on Claude Code.
+            Done! Added three dedicated commands — Alibaba Cloud, Baidu Qianfan, and Tencent Cloud, one-click access guaranteed.
+
+            Two ways to use:
+            1. Standalone commands (recommended): Launch Claude Code and connect to the corresponding provider
+               ```bash
+               x claude ali        # Launch and connect to Alibaba Cloud
+               x claude baidu      # Launch and connect to Baidu Qianfan
+               x claude tencent    # Launch and connect to Tencent Cloud
+               ```
+            2. Use command: Switch and permanently configure the model provider for Claude Code
+               ```bash
+               x claude use ali        # Switch to Alibaba Cloud
+               x claude use --project ali   # Write project config, only affects current project
+               ```
+
+            You can also use `x claude use other` to connect to more third-party model providers (e.g., locally deployed ollama models):
+            ```bash
+            x claude use other "http://localhost:11434" <api_key> "gpt-oss:20b"
+            ```
+
+            Remember to set your API key before using!
+  blog: null
+  name: v0.8.7
+  alpha: true
+  beta: true
 v0.8.6:
   sum: 00528383ebc38b528a74303ffd4bb7605799c4d8e91b95525fe543f468ec31f2d054f49e92ac06e458ece31b2546c9b84834b762930593a93913172b26c67cf4
   date: 2026-03-07 08:26:52+0000
@@ -396,10 +484,9 @@ v0.8.6:
             ```
 
             No more dancing around exit codes in CI scripts.
-  blog: null
+  blog: /blog/260307
   name: v0.8.6
-  alpha: true
-  beta: true
+  latest: true
 v0.8.5:
   sum: 5caae133f70682adcabc449ec6cc731b0cfcc9f7e082e5d2bff5b14c4a763b664ea5dd2a630181b2f4d122f6708243e4f0367805902187381a437d3b53cf8d7d
   date: 2026-03-05 13:12:30+0000
@@ -626,7 +713,6 @@ v0.8.5:
             Thanks to @shlroland for reporting this in #376.
   blog: /blog/260306
   name: v0.8.5
-  latest: true
 v0.8.4:
   sum: c056fa47ec1cbc6f2d42a45cdb642094a105e594ed1ecfd08cda8f2a3ab93cd756ab3d56fb8bfa563e18d881bbe36826819a724ea0986228d9b0046ff38bd008
   date: 2026-02-28 15:02:37+0000
