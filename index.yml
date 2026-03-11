@@ -1,3 +1,168 @@
+v0.8.8:
+  sum: a1ed508c750d77326f80e8d400f9d66f0c95de66172813755b926df981dcabfed3f48cae06d3788d2e2c9dfbac22a821ac63af4ab0974f1a76d4493e9bab5ed4
+  date: 2026-03-11 13:12:11+0000
+  change:
+    openclaw:
+      update:
+        - cn: |
+            openclaw 模块新增 `--uninstall` 命令 —— 彻底卸载不留残留。
+
+            之前不少朋友反馈，openclaw 自带的 uninstall 命令不会帮你删除二进制文件。
+            所以加了 `--uninstall`，帮你清理得干干净净。
+
+            ```bash
+            # 卸载 OpenClaw，包括二进制文件、网关服务、配置文件和工作区
+            x openclaw --uninstall
+            ```
+          en: |
+            Added `--uninstall` command to openclaw module —— clean removal without leftovers.
+
+            Several users reported that openclaw's built-in uninstall doesn't remove binary files.
+            Now with `--uninstall`, it cleans up everything thoroughly.
+
+            ```bash
+            # Uninstall OpenClaw, including binary files, gateway service, configuration files, and workspace.
+            x openclaw --uninstall
+            ```
+    hotkey:
+      update:
+        - cn: |
+            新增 `hotkey` 模块 —— 两年前就写好了，然后我们就忘了。
+
+            那是 2023 年，ChatGPT 刚火起来。我们在 co 模块里做了 Ctrl+X 的 AI 命令补全，跑了一下账单，倒吸一口凉气。
+            然后... 就没有然后了。代码躺在那儿，谁也没再提起。
+
+            现在不一样了。我们把 Ctrl+X 改成了 AI agent 切换，同时还加上了 fzf 系列快捷键：
+            - Ctrl+R 历史搜索
+            - Ctrl+T 文件选择
+            - Alt+C / Esc+C 目录跳转
+
+            先用 `x hotkey try` 试试，喜欢再用 `x hotkey use` 永久启用。
+
+            示例：
+            ```bash
+            # 试用 co 部件（Ctrl+X 触发）
+            x hotkey try co
+
+            # 永久启用 fzf 系列快捷键
+            x hotkey use fzf-history fzf-file fzf-cd
+            ```
+          en: |
+            Added `hotkey` module —— wrote this two years ago, then we forgot about it.
+
+            It was 2023, ChatGPT had just blown up. We built Ctrl+X AI command completion in the co module, ran the numbers, and... yeah.
+            Then silence. The code sat there, nobody mentioned it again.
+
+            Things changed. Now Ctrl+X is an AI agent switch, plus we added the fzf family:
+            - Ctrl+R for history
+            - Ctrl+T for files
+            - Alt+C / Esc+C for directory jumping
+
+            Try with `x hotkey try` first, then `x hotkey use` to enable permanently.
+
+            Examples:
+            ```bash
+            # Try the co widget (trigger with Ctrl+X)
+            x hotkey try co
+
+            # Permanently enable fzf shortcuts
+            x hotkey use fzf-history fzf-file fzf-cd
+            ```
+    neo:
+      update:
+        - cn: |
+            新增 `neo` 模块 —— neofetch 的功能我们有了，但 "Neo" 不只是 "new" 的意思。
+
+            说实话，市面上类似的系统信息展示工具不少。但我们想的是：《黑客帝国》里的 Neo 是干什么的？
+            他是来觉醒的，来帮你看清系统的真实面貌。
+
+            所以现在的 `x neo` 先做了基础版——系统信息、内核、运行时间、CPU/GPU/内存，配上各种发行版的 ASCII 艺术 Logo。
+            支持多种显示模式（mini/std/all/llm/ui），Logo 也有标准和大尺寸可选。
+
+            但这只是开始。下一步 `x neo chat` 会让它变成真正的 AI 智能体，根据你的系统信息主动帮你管理和理解操作系统。
+
+            示例：
+            ```bash
+            # 默认显示系统信息（带 Logo）
+            x neo
+
+            # 查看所有支持的发行版 Logo
+            x neo logo ls
+
+            # 显示大尺寸 Arch Logo
+            x neo logo large arch
+
+            # LLM 模式，纯文本输出适合喂给 AI
+            x neo fetch --llm
+            ```
+          en: |
+            Added `neo` module —— we've got neofetch-like features, but "Neo" means more than "new".
+
+            Look, there are plenty of system info tools out there. But we thought: what does Neo do in The Matrix?
+            He wakes people up, helps them see the system for what it is.
+
+            So `x neo` starts with the basics — OS, kernel, uptime, CPU/GPU/memory, with distro ASCII art logos.
+            Multiple display modes (mini/std/all/llm/ui), standard and large logos.
+
+            But this is just the beginning. Next up: `x neo chat` turns it into a proper AI agent that actively helps you manage and understand your OS.
+
+            Examples:
+            ```bash
+            # Default system info with logo
+            x neo
+
+            # List all supported distro logos
+            x neo logo ls
+
+            # Display large Arch Linux logo
+            x neo logo large arch
+
+            # LLM mode, plain text output for AI consumption
+            x neo fetch --llm
+            ```
+    ssh:
+      update:
+        - cn: |
+            新增 `x ssh setup` 命令 —— 终于能给内网服务器一键部署 x-cmd 了。
+
+            之前内网环境装 x-cmd 挺头疼的，得下安装包、传进去、解压、改配置，步骤多还容易踩坑。现在只要你的机器能 SSH 连上，一条命令搞定：
+
+            ```bash
+            x ssh setup user@hostname
+            ```
+
+            装完之后，内网机器上这些功能都能直接用：
+            - **主题和交互**：theme 换肤、智能 Tab 补全、语法高亮、历史记录增强
+            - **文件系统工具**：增强版 ls、path 路径操作、ps 进程查看、df 磁盘分析
+            - **开发辅助**：git 增强、gitconfig 配置管理、githook 钩子管理、docker 快捷操作
+            - **本地 AI**：llmf 模块调用本地部署的开源大模型
+
+            详细的内网安装方案参考：https://cn.x-cmd.com/start/airgap
+
+            需要实时联网的功能目前在内网还不好使。env 装软件包这块我们也在研究方案，如果你有需求欢迎加群或提 issue 讨论。
+          en: |
+            Added `x ssh setup` command —— finally one-click deploy x-cmd to internal network servers.
+
+            Installing x-cmd in air-gapped environments used to be painful: download the package, transfer it, extract, tweak configs — many steps, easy to mess up. Now if you can SSH into the machine, one command handles it all:
+
+            ```bash
+            x ssh setup user@hostname
+            ```
+
+            After installation, these features work right away on the internal server:
+            - **Themes & Interaction**: theme customization, smart tab completion, syntax highlighting, enhanced history
+            - **Filesystem Tools**: enhanced ls, path manipulation, ps process viewer, df disk analyzer
+            - **Dev Tools**: git enhancements, gitconfig management, githook management, docker shortcuts
+            - **Local AI**: llmf module to call your locally deployed open-source models
+
+            Detailed air-gapped installation guide: https://www.x-cmd.com/start/airgap
+
+            Features requiring real-time internet currently don't work offline. We're also exploring solutions for package installation via env — join our group or file an issue if you need this.
+  blog: null
+  name: v0.8.8
+  alpha: true
+  beta: true
+  latest: true
 v0.8.7:
   sum: 798a941f39d0c8a1050b1748eac9206b8b40ec712e23fb2f552a39f34edadd5cde7edc8382a735196a3da2f96aca8e2ec3070c869b3d373098d19bf26f14ec45
   date: 2026-03-09 13:23:36+0000
@@ -84,8 +249,6 @@ v0.8.7:
             Remember to set your API key before using!
   blog: null
   name: v0.8.7
-  alpha: true
-  beta: true
 v0.8.6:
   sum: 00528383ebc38b528a74303ffd4bb7605799c4d8e91b95525fe543f468ec31f2d054f49e92ac06e458ece31b2546c9b84834b762930593a93913172b26c67cf4
   date: 2026-03-07 08:26:52+0000
@@ -486,7 +649,6 @@ v0.8.6:
             No more dancing around exit codes in CI scripts.
   blog: /blog/260307
   name: v0.8.6
-  latest: true
 v0.8.5:
   sum: 5caae133f70682adcabc449ec6cc731b0cfcc9f7e082e5d2bff5b14c4a763b664ea5dd2a630181b2f4d122f6708243e4f0367805902187381a437d3b53cf8d7d
   date: 2026-03-05 13:12:30+0000
