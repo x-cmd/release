@@ -1,3 +1,243 @@
+v0.8.9:
+  sum: 6d1168cd30bc88a3a853c53bf60040595b0a093b00ad9edd82f78ee3c901f9e0f151dff7e0867a160a7201e514e29745e38290e0967c54d31deb800a8a12e71b
+  date: 2026-03-21 16:19:27+0000
+  change:
+    agent:
+      update:
+        - cn: |
+            实验性引入 `agent` 模块 —— 先搭好脚手架，边用边迭代。
+
+            Claude、Codex、Kimi、Opencode 这些 AI 工具各有自己的配置方式，
+            每次都要重复配置 x-cmd 的提示词，效率不高。
+
+            所以做了个统一入口：
+            - `x agent setup` —— 一键让主流 AI 工具使用 x-cmd 提示词和技能
+            - `x agent unify` —— 把各 AI 工具的配置合并到 ~/AGENTS.md，并用 symlink 统一管理
+
+            示例：
+            ```bash
+            # 交互式配置 AI 工具
+            x agent setup
+
+            # 合并配置文件
+            x agent unify
+            ```
+
+            这是实验性功能，还在早期阶段。
+            欢迎试用反馈，帮助我们迭代完善。
+          en: |
+            Experimental `agent` module —— scaffold first, iterate as we go.
+
+            AI tools like Claude, Codex, Kimi, and Opencode each have their own config formats.
+            Setting up x-cmd prompts repeatedly for each one isn't ideal.
+
+            So we built a unified entry point:
+            - `x agent setup` —— one-click setup for mainstream AI tools to use x-cmd prompts and skills
+            - `x agent unify` —— merge all AI tool configs into ~/AGENTS.md with symlink management
+
+            Example:
+            ```bash
+            # Interactive AI tool configuration
+            x agent setup
+
+            # Merge config files
+            x agent unify
+            ```
+
+            This is an early-stage experimental feature.
+            Try it out and let us know what you think — feedback helps us improve.
+    bakman:
+      update:
+        - cn: |
+            新增 `bakman` 模块 —— x-cmd 基础库新增了一个备份文件管理器。
+
+            之前 x-cmd 内部有些功能需要备份文件，但各做各的，没有统一的管理方式。
+            所以我干脆做了个基础模块，既给内部复用，也开放给用户直接使用 —— 反正备份和恢复这种事情，谁都有需要。
+
+            目前的功能还比较基础：
+            - `x bakman backup <file>` —— 创建带时间戳的备份
+            - `x bakman restore <file> [version]` —— 恢复指定版本
+            - `x bakman list [file]` —— 列出备份
+            - `x bakman clean <file> [keep]` —— 清理旧备份
+            - `x bakman latest <file>` —— 查看最新备份路径
+
+            备份按原始路径结构存储在 `$___X_CMD_ROOT_DATA/bakman/` 下。
+
+            示例：
+            ```bash
+            # 备份配置文件
+            x bakman backup ~/.bashrc
+
+            # 从备份恢复
+            x bakman restore ~/.bashrc
+
+            # 查看备份列表
+            x bakman list
+            ```
+
+            这只是个开始，功能还比较简单。如果你有更多备份管理的需求，欢迎提 issue。
+          en: |
+            Added `bakman` module —— a backup file manager for x-cmd core library.
+
+            Some x-cmd internal features needed file backups, but each was doing its own thing without a unified approach.
+            So I built a base module for internal reuse — but also exposed it to users, because everyone needs backup and restore sooner or later.
+
+            Current features are pretty basic:
+            - `x bakman backup <file>` —— create timestamped backup
+            - `x bakman restore <file> [version]` —— restore specific version
+            - `x bakman list [file]` —— list backups
+            - `x bakman clean <file> [keep]` —— clean old backups
+            - `x bakman latest <file>` —— show latest backup path
+
+            Backups are stored under `$___X_CMD_ROOT_DATA/bakman/` with original path structure.
+
+            Example:
+            ```bash
+            # Backup config file
+            x bakman backup ~/.bashrc
+
+            # Restore from backup
+            x bakman restore ~/.bashrc
+
+            # List backups
+            x bakman list
+            ```
+
+             This is just the beginning — features are intentionally simple for now. File an issue if you need more backup management features.
+    free:
+      update:
+        - cn: |
+            升级了 free 模块 —— 之前的输出不够直观，用户很难一眼看出哪些内存是真正可用的。
+
+            这次花时间理顺了逻辑：
+            - 标准化内核与物理层级的术语（例如：Logical → Detail，Physical → vm_stat）。
+            - 引入了颜色规范，绿色看可用，黄色看缓存，红色看占用。
+            - 此外还加了 hardware 列显示保留内存，并将 `Mem free` 改名为更直观的 `reusable`。
+
+            我自己用了一段时间，输出直观了很多，CSV/TSV 输出也顺手重构了。有问题随时反馈。
+          en: |
+            Upgraded the `free` module — the previous output wasn't intuitive enough, making it hard for users to see at a glance which memory was actually available.
+
+            This time I took the time to sort out the logic:
+            - Standardized terminology for kernel and physical layers (e.g., Logical → Detail, Physical → vm_stat).
+            - Added color coding: green for available, yellow for cached, red for used.
+            - Also added a hardware column to show reserved memory, and renamed `Mem free` to the more intuitive `reusable`.
+
+            I've been using it for a while — the output is much more intuitive now, and I also refactored the CSV/TSV output. Feel free to give feedback if you run into any issues.
+    root:
+      update:
+        - cn: |
+            新增 `x root dotconfig` 功能 —— 让 x-cmd 更好地融入你的 Dotfiles 管理工作流。
+
+            很多用户用 chezmoi 等工具管理配置文件，但 x-cmd 的配置目录结构与之不太兼容。
+            现在可以通过一行命令将配置映射至 ~/.config/x-cmd，实现标准化的 Infrastructure as Code：
+
+            - `x root dotconfig activate` —— 深度集成：将配置映射至 ~/.config/x-cmd，任何遵循 XDG 规范的工具都能轻松接管
+            - `x chezmoi add $___X_CMD_ROOT_CFG` —— 轻量备份：保持现有目录结构，仅追踪核心配置
+
+            该功能以 chezmoi 为例展示，但兼容所有主流 Dotfiles 管理工具。
+          en: |
+            Added `x root dotconfig` —— better integration with your dotfiles workflow.
+
+            Many users manage their configs with tools like chezmoi, but x-cmd's directory structure wasn't quite compatible.
+            Now you can map configurations to ~/.config/x-cmd with a single command for standardized Infrastructure as Code:
+
+            - `x root dotconfig activate` —— Deep integration: map configs to ~/.config/x-cmd, any XDG-compliant tool can manage them
+            - `x chezmoi add $___X_CMD_ROOT_CFG` —— Lightweight backup: keep existing structure, track only core configs
+
+            While demonstrated with chezmoi, this feature works with all major dotfiles management tools.
+    cutt:
+      update:
+        - cn: |
+            为 `cutt` 模块增加文档 —— 处理数据表简单日常需求时，awk 用起来有些麻烦。
+
+            日常想从数据表里选几行几列得用 awk 语法，命令写起来长，比如 `awk 'NR>3{ print $1, $5, $6 }'` 这种。
+            而且不同场景要调分隔符、负索引、范围选择，写多了挺累人的。
+
+            x cutt 简化这个过程，专门处理"从数据表选行选列"这种简单需求：
+
+            ```bash
+            # 从 ASCII 表选取第 100 行到倒数第 10 行，以及第 1、3、6 列之后的所有列
+            x ascii | x cutt 100:-10 1,3,6:
+
+            # 选取第 1 到 3 行的第二列
+            echo 'a1 a2 a3
+            b1 b2 b3
+            c1 c2 c3' | x cutt 1:3 2
+
+            # 选取第 1、3 行的第二列
+            echo 'a1 a2 a3
+            b1 b2 b3
+            c1 c2 c3' | x cutt 1,3 2
+            ```
+          en: |
+            Added `cutt` module documentation —— because awk is overkill for simple data table queries.
+
+            Daily needs like extracting specific rows and columns from a data table require awk syntax, commands get long — like `awk 'NR>3{ print $1, $5, $6 }'`.
+            Different scenarios need delimiter adjustments, negative indexing, range selection — writing these repeatedly is exhausting.
+
+            x cutt simplifies this, purpose-built for "select rows and columns from data table" tasks:
+
+            ```bash
+            # From ASCII table, select rows 100 to -10, and columns 1, 3, and 6 onward
+            x ascii | x cutt 100:-10 1,3,6:
+
+            # Select column 2 from rows 1 to 3
+            echo 'a1 a2 a3
+            b1 b2 b3
+            c1 c2 c3' | x cutt 1:3 2
+
+            # Select column 2 from rows 1 and 3
+            echo 'a1 a2 a3
+            b1 b2 b3
+            c1 c2 c3' | x cutt 1,3 2
+            ```
+    line:
+      update:
+        - cn: |
+            为 `line` 模块增加文档 —— 命令行里行处理需求很常见，但 sort | uniq 能力有限。
+
+            `sort | uniq` 做流式去重挺顺手，但 sort 需要先对整个输入排序，大文件效率低。
+            如果还要 join、wrap、filter，往往得组合好几个命令。
+
+            x line 提供一站式行处理工具：
+            - `uni` —— 流式去重，比 sort | uniq 高效
+            - `duo` / `uno` —— 筛出重复/仅出现一次的行
+            - `join` —— 用分隔符连接行
+            - `wrap` —— 用前缀后缀包裹行
+            - `minus` —— 过滤匹配的行
+
+            ```bash
+            { seq 1 3; seq 3 1; } | x line uni    # 流式去重
+            seq 5 | x line join ", "              # 用逗号连接
+            seq 10 | x line minus 3 5 7           # 过滤掉 3、5、7
+            ```
+
+            常见行处理一站式解决。
+          en: |
+            Added `line` module documentation —— line processing is common in CLI, but sort | uniq has its limits.
+
+            `sort | uniq` works fine for basic dedup, but sort needs to sort the entire input first — inefficient for large files.
+            Need join, wrap, or filter on top of that? Get ready to chain multiple commands.
+
+            x line gives you a complete line processing toolkit:
+            - `uni` —— streaming dedup, faster than sort | uniq
+            - `duo` / `uno` —— filter for duplicate or unique lines
+            - `join` —— join lines with delimiter
+            - `wrap` —— wrap lines with prefix and suffix
+            - `minus` —— filter out matching lines
+
+            ```bash
+            { seq 1 3; seq 3 1; } | x line uni    # streaming dedup
+            seq 5 | x line join ", "              # join with comma
+            seq 10 | x line minus 3 5 7          # filter out 3, 5, 7
+            ```
+
+            All common line processing tasks in one place.
+  blog: null
+  name: v0.8.9
+  alpha: true
+  beta: true
 v0.8.8:
   sum: a1ed508c750d77326f80e8d400f9d66f0c95de66172813755b926df981dcabfed3f48cae06d3788d2e2c9dfbac22a821ac63af4ab0974f1a76d4493e9bab5ed4
   date: 2026-03-11 13:12:11+0000
@@ -158,10 +398,8 @@ v0.8.8:
             Detailed air-gapped installation guide: https://www.x-cmd.com/start/airgap
 
             Features requiring real-time internet currently don't work offline. We're also exploring solutions for package installation via env — join our group or file an issue if you need this.
-  blog: null
+  blog: /blog/260311
   name: v0.8.8
-  alpha: true
-  beta: true
   latest: true
 v0.8.7:
   sum: 798a941f39d0c8a1050b1748eac9206b8b40ec712e23fb2f552a39f34edadd5cde7edc8382a735196a3da2f96aca8e2ec3070c869b3d373098d19bf26f14ec45
@@ -247,7 +485,7 @@ v0.8.7:
             ```
 
             Remember to set your API key before using!
-  blog: null
+  blog: /blog/260310
   name: v0.8.7
 v0.8.6:
   sum: 00528383ebc38b528a74303ffd4bb7605799c4d8e91b95525fe543f468ec31f2d054f49e92ac06e458ece31b2546c9b84834b762930593a93913172b26c67cf4
