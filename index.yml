@@ -1,6 +1,6 @@
 v0.8.9:
-  sum: 6d1168cd30bc88a3a853c53bf60040595b0a093b00ad9edd82f78ee3c901f9e0f151dff7e0867a160a7201e514e29745e38290e0967c54d31deb800a8a12e71b
-  date: 2026-03-21 16:19:27+0000
+  sum: 9caebaa24a1beef5b6a1eb3ac4e2f2bdc84ca0bad4296aeaa30e195131407443b8ef16ae0bbac5672808b62036edc14e12170a3d7938325fbbdfdfebadbcd07d
+  date: 2026-03-21 16:54:25+0000
   change:
     agent:
       update:
@@ -130,9 +130,9 @@ v0.8.9:
             新增 `x root dotconfig` 功能 —— 让 x-cmd 更好地融入你的 Dotfiles 管理工作流。
 
             很多用户用 chezmoi 等工具管理配置文件，但 x-cmd 的配置目录结构与之不太兼容。
-            现在可以通过一行命令将配置映射至 ~/.config/x-cmd，实现标准化的 Infrastructure as Code：
+            现在可以通过一行命令将配置映射至 ~/.config/x-cmd-cfg，实现标准化的 Infrastructure as Code：
 
-            - `x root dotconfig activate` —— 深度集成：将配置映射至 ~/.config/x-cmd，任何遵循 XDG 规范的工具都能轻松接管
+            - `x root dotconfig activate` —— 深度集成：将配置映射至 ~/.config/x-cmd-cfg，任何遵循 XDG 规范的工具都能轻松接管
             - `x chezmoi add $___X_CMD_ROOT_CFG` —— 轻量备份：保持现有目录结构，仅追踪核心配置
 
             该功能以 chezmoi 为例展示，但兼容所有主流 Dotfiles 管理工具。
@@ -140,9 +140,9 @@ v0.8.9:
             Added `x root dotconfig` —— better integration with your dotfiles workflow.
 
             Many users manage their configs with tools like chezmoi, but x-cmd's directory structure wasn't quite compatible.
-            Now you can map configurations to ~/.config/x-cmd with a single command for standardized Infrastructure as Code:
+            Now you can map configurations to ~/.config/x-cmd-cfg with a single command for standardized Infrastructure as Code:
 
-            - `x root dotconfig activate` —— Deep integration: map configs to ~/.config/x-cmd, any XDG-compliant tool can manage them
+            - `x root dotconfig activate` —— Deep integration: map configs to ~/.config/x-cmd-cfg, any XDG-compliant tool can manage them
             - `x chezmoi add $___X_CMD_ROOT_CFG` —— Lightweight backup: keep existing structure, track only core configs
 
             While demonstrated with chezmoi, this feature works with all major dotfiles management tools.
