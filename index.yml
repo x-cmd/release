@@ -1,3 +1,99 @@
+v0.8.10:
+  sum: 09a8b7035c158c8f72c85022eb3e3521de1921c31ee76863940d613afe54ddb6cc265cf8ad305c17c19451d16b5d0a1dd84bcf8c76bcc2de5c679c3f1c99b20d
+  date: 2026-03-25 13:51:08+0000
+  change:
+    shortcut:
+      update:
+        - cn: |
+            开放 `shortcut` 模块 —— 以前是内部工具，现在放出来给大家用。
+
+            配置一次，在 ash、bash、fish、zsh 等主流 Shell 都能生效。适合给常用命令设置短名，比如把 `x docker` 缩成 `xd`。
+
+            常用示例：
+            ```bash
+            x shortcut set --x-cmd docker xd      # xd 替代 x docker
+            x shortcut set --cmd 'ls -lah' ll     # ll 替代 ls -lah
+            x shortcut ls                         # 查看所有短名
+            ```
+          en: |
+            Open-sourced `shortcut` module —— was internal, now available for everyone.
+
+            Configure once, works across ash, bash, fish, zsh and more. Set short aliases for frequent commands, like `xd` for `x docker`.
+
+            Common examples:
+            ```bash
+            x shortcut set --x-cmd docker xd      # alias xd to x docker
+            x shortcut set --cmd 'ls -lah' ll     # alias ll to ls -lah
+            x shortcut ls                         # list all shortcuts
+            ```
+    whisper:
+      update:
+        - cn: |
+            whisper 模块新增 `livekit` 命令 —— 自动装好依赖，快速启动 WhisperLiveKit
+
+            WhisperLiveKit 依赖一大堆：PyTorch、ffmpeg、MLX（苹果 Silicon）、各种可选组件，自己装很费时间。我们帮你全装好，一行命令搞定：
+            ```bash
+            # 自动检测环境，装对应依赖，然后启动服务。
+            x whisper livekit run
+
+            # 转录音频文件（无需启动服务器）
+            x whisper livekit transcribe meeting.mp3
+            ```
+
+            说实话，WhisperLiveKit 我自己还没来得及深度用，但可玩性不小：
+            Simul-Whisper/Streaming 低延迟转写，说话人分离，Voxtral Mini，还有同声翻译。
+            欢迎试用反馈，帮助我们迭代完善。
+          en: |
+            The whisper module now has a `livekit` command — automatically installs dependencies and quickly launches WhisperLiveKit.
+
+            WhisperLiveKit has a ton of dependencies: PyTorch, ffmpeg, MLX (Apple Silicon), various optional components. Installing them manually is a hassle. We handle everything for you, one command to get started:
+            ```bash
+            # Auto-detects your environment, installs the right dependencies, then starts the server.
+            x whisper livekit run
+
+            # Transcribe an audio file (no server needed).
+            x whisper livekit transcribe meeting.mp3
+            ```
+
+            Honestly, I haven't had deep hands-on time with WhisperLiveKit yet, but it's pretty promising: Simul-Whisper/Streaming for low-latency transcription, speaker diarization, Voxtral Mini, and simultaneous translation.
+            Give it a try and share your feedback — help us iterate and improve it.
+    x-cmd:
+      update:
+        - cn: |
+            优化 `x-cmd` 模块的帮助输出 —— 300+ 命令全列出来确实有点多。
+
+            现在运行 `x -h` 会精简显示，每类只列出前 5 项常用命令，底部提示用 `--help` 查看完整列表。后续会逐步给其他模块也加上这个能力。
+
+            示例：
+            ```bash
+            x -h          # 简洁模式，每类 5 项
+            x --help      # 完整模式，全部命令
+            ```
+          en: |
+            Optimized `x-cmd` module help output —— 300+ commands is a lot to scroll through.
+
+            Now `x -h` shows a condensed view with just 5 items per category, plus a hint to use `--help` for the full list. We'll roll this out to other modules gradually.
+
+            Example:
+            ```bash
+            x -h          # Concise mode, 5 items per category
+            x --help      # Full mode, all commands
+            ```
+    7z:
+      bugfix:
+        - cn: |
+            修复 `7z` 模块 —— 现在会先找找本机有没有 7z，没有再下载。
+
+            之前调用 `x 7z` 会直接去联网，哪怕系统里已经装好了。感谢 @Leaderzhangyi 在 #389 指出这个问题。
+          en: |
+            Fixed `7z` module —— now checks for local 7z before downloading.
+
+            Previously `x 7z` would go straight to the network, even if 7z was already installed. Thanks to @Leaderzhangyi for pointing this out in #389.
+  blog: null
+  name: v0.8.10
+  alpha: true
+  beta: true
+  latest: true
 v0.8.9:
   sum: 9caebaa24a1beef5b6a1eb3ac4e2f2bdc84ca0bad4296aeaa30e195131407443b8ef16ae0bbac5672808b62036edc14e12170a3d7938325fbbdfdfebadbcd07d
   date: 2026-03-21 16:54:25+0000
@@ -234,10 +330,8 @@ v0.8.9:
             ```
 
             All common line processing tasks in one place.
-  blog: null
+  blog: /blog/260322
   name: v0.8.9
-  alpha: true
-  beta: true
 v0.8.8:
   sum: a1ed508c750d77326f80e8d400f9d66f0c95de66172813755b926df981dcabfed3f48cae06d3788d2e2c9dfbac22a821ac63af4ab0974f1a76d4493e9bab5ed4
   date: 2026-03-11 13:12:11+0000
@@ -400,7 +494,6 @@ v0.8.8:
             Features requiring real-time internet currently don't work offline. We're also exploring solutions for package installation via env — join our group or file an issue if you need this.
   blog: /blog/260311
   name: v0.8.8
-  latest: true
 v0.8.7:
   sum: 798a941f39d0c8a1050b1748eac9206b8b40ec712e23fb2f552a39f34edadd5cde7edc8382a735196a3da2f96aca8e2ec3070c869b3d373098d19bf26f14ec45
   date: 2026-03-09 13:23:36+0000
