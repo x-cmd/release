@@ -1,3 +1,82 @@
+v0.8.11:
+  sum: 53c7e5a780bc87fe2f35f83c9e4d2a6eb3b71fb2f9453c407e0b95df21cdbfa8d8d0e9952d06cf9fbf331f17b7cb96d728a6b08ec20063670d5ec49d48d7cce3
+  date: 2026-03-26 14:12:38+0000
+  change:
+    weixin:
+      update:
+        - cn: |
+            新增 `weixin` 模块 —— 支持腾讯 iLink Bot API。
+
+            2026 年腾讯通过 OpenClaw 开放了微信个人账号的官方 Bot API，这次我们把这套接口接进来了。以前搞微信机器人要么逆向协议要么 Hook 客户端，风险不小。现在是官方服务器 `ilinkai.weixin.qq.com`，有条款背书。
+
+            支持的能力：
+            - 扫码登录，凭证本地存储
+            - 长轮询收消息
+            - 发文字、图片、文件、视频
+
+            用法：
+            ```bash
+            x weixin login                      # 扫码登录
+            x weixin listen poll                # 监听消息
+            x weixin send text "Hello"
+            x weixin send image /path/to/img.jpg
+            x weixin send file /path/to/doc.pdf
+            ```
+
+            腾讯条款里提到"有权随时中断服务"，建议别把关键业务全押在这上面。欢迎试用反馈。
+          en: |
+            Added `weixin` module —— supports Tencent's iLink Bot API.
+
+            In 2026, Tencent opened an official Bot API for personal WeChat accounts via OpenClaw, and we've integrated it. The old ways — reverse-engineering protocols or hooking clients — carried real risk. Now it's the official server `ilinkai.weixin.qq.com` with proper terms.
+
+            Supported features:
+            - QR login with local credential storage
+            - Long-poll message receiving
+            - Send text, images, files, videos
+
+            Usage:
+            ```bash
+            x weixin login                      # Scan QR to login
+            x weixin listen poll                # Listen for messages
+            x weixin send text "Hello"
+            x weixin send image /path/to/img.jpg
+            x weixin send file /path/to/doc.pdf
+            ```
+
+            Tencent's terms mention they "may interrupt service at any time," so don't bet critical business on it. Feedback welcome.
+    shortcut:
+      update:
+        - cn: |
+            macOS 上默认设置 `free` 短名指向 `x free` —— 提供了原生实现，包括物理内存和 macOS 特有的内存压缩信息。
+
+            shortcut 模块配一次就行，ash、bash、fish、zsh 都能用，给常用命令起短名很方便。
+
+            示例：
+            ```bash
+            x shortcut default
+            free
+            ```
+          en: |
+            Default `free` alias on macOS pointing to `x free` —— native implementation with physical memory and macOS's compressed memory info.
+
+            shortcut works across ash, bash, fish, zsh — set it up once and you're good everywhere. Handy for aliasing commands you use often.
+
+            Example:
+            ```bash
+            x shortcut default
+            free
+            ```
+    p7zip:
+      bugfix:
+        - cn: |
+            修复 `p7zip` 模块 —— 解决文件夹压缩成 tar.gz 时写入异常的问题。
+          en: |
+            Fixed `p7zip` module —— resolved write error when compressing folders to tar.gz.
+  blog: null
+  name: v0.8.11
+  alpha: true
+  beta: true
+  latest: true
 v0.8.10:
   sum: 09a8b7035c158c8f72c85022eb3e3521de1921c31ee76863940d613afe54ddb6cc265cf8ad305c17c19451d16b5d0a1dd84bcf8c76bcc2de5c679c3f1c99b20d
   date: 2026-03-25 13:51:08+0000
@@ -91,9 +170,6 @@ v0.8.10:
             Previously `x 7z` would go straight to the network, even if 7z was already installed. Thanks to @Leaderzhangyi for pointing this out in #389.
   blog: null
   name: v0.8.10
-  alpha: true
-  beta: true
-  latest: true
 v0.8.9:
   sum: 9caebaa24a1beef5b6a1eb3ac4e2f2bdc84ca0bad4296aeaa30e195131407443b8ef16ae0bbac5672808b62036edc14e12170a3d7938325fbbdfdfebadbcd07d
   date: 2026-03-21 16:54:25+0000
