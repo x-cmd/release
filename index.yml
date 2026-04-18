@@ -1,3 +1,298 @@
+v0.8.14:
+  sum: e2f2f43a2a4ff9d21be960dcfc4df6c482fcf4a4a6ffe3f4c016c420ada1c31f8b38b095bfbfbde2c5b1b403ea5f292299961fccc87d147ea777017da585efbe
+  date: 2026-04-18 15:16:26+0000
+  change:
+    feishu:
+      update:
+        - cn: |
+            新增 `abot` 模块 —— 让 x claw 能往飞书发消息
+
+            x claw 想主动发消息到飞书，一直没个顺手的接口。
+            `abot send` 就是干这个的 —— 文本、图片、文件都能发，跟 x claw 搭配起来，AI 回复就能推到飞书群了。
+
+            ```bash
+            # 发送文本消息
+            x feishu abot send --text --chatid <chat_id> "Hello"
+            # 发送图片
+            x feishu abot send --image --chatid <chat_id> /path/to/img.png
+            # 发送文件
+            x feishu abot send --file --chatid <chat_id> /path/to/file.pdf
+            ```
+          en: |
+            Added `abot` module — gives `x claw` the ability to send messages to Feishu.
+
+            x claw wanted to proactively send messages to Feishu but had no convenient way to do it.
+            `abot send` solves that — text, images, files, all supported. Pair it with x claw and AI replies can now be pushed to Feishu groups.
+
+            ```bash
+            # Send text message
+            x feishu abot send --text --chatid <chat_id> "Hello"
+            # Send image
+            x feishu abot send --image --chatid <chat_id> /path/to/img.png
+            # Send file
+            x feishu abot send --file --chatid <chat_id> /path/to/file.pdf
+            ```
+    hw:
+      update:
+        - cn: |
+            新增 `hw` 模块 —— 一把捞完所有外设信息，快速摸清一台机器的硬件配置。
+
+            SSH 到一台不熟悉的机器，想知道它有什么外设 —— 蓝牙、摄像头、电池、Thunderbolt，一个个查太费事。
+            `x hw` 一把全捞出来，概览表格加网络接口，快速摸清一台机器的硬件配置。接了新的外设不知道识别没，跑一下 `x hw ls` 就知道了。
+
+            ```bash
+            # 外设概览 + 网络接口
+            x hw
+            # 详细外设信息
+            x hw info
+            # 紧凑表格
+            x hw ls
+            ```
+          en: |
+            Added `hw` module — pull all peripheral info at once, quickly size up a machine's hardware.
+
+            SSH into an unfamiliar machine and want to know what peripherals it has — Bluetooth, camera, battery, Thunderbolt... checking them one by one is tedious.
+            `x hw` pulls everything at once: overview table plus network interfaces, so you can quickly get a read on a machine's hardware. Plugged in something new and not sure if it's recognized? Run `x hw ls` and check.
+
+            ```bash
+            # peripheral overview + network interfaces
+            x hw
+            # detailed peripheral info
+            x hw info
+            # compact table
+            x hw ls
+            ```
+    gpu:
+      update:
+        - cn: |
+            新增 `gpu` 模块 —— 硬件信息和实时负载合在一起，一眼看完。
+
+            macOS 上看 GPU 负载挺费劲的 —— 系统报告只有硬件信息，Activity Monitor 又看不到 GPU 利用率。跑模型或者调试图形的时候，经常想知道 GPU 到底在不在干活。
+            `x gpu` 把硬件信息和实时负载合在一起了，型号、核心数、Metal 版本这些静态字段看完，紧接着就是 GPU 利用率和内存占用。
+
+            ```bash
+            # 硬件信息 + 实时负载
+            x gpu
+            # 只看硬件信息
+            x gpu info
+            # 只看实时负载
+            x gpu stat
+            ```
+          en: |
+            Added `gpu` module — hardware info and real-time load in one view.
+
+            Checking GPU load on macOS is surprisingly hard — System Report only has hardware info, and Activity Monitor doesn't show GPU utilization. When running models or debugging graphics, you often want to know if the GPU is actually doing anything.
+            `x gpu` combines hardware info and real-time load: model, core count, Metal version, followed by GPU utilization and memory usage.
+
+            ```bash
+            # hardware info + real-time load
+            x gpu
+            # hardware info only
+            x gpu info
+            # real-time load only
+            x gpu stat
+            ```
+    cpu:
+      update:
+        - cn: |
+            新增 `cpu` 模块 —— 关键字段整理好直接输出，不用再从 sysctl 里扒。
+
+            写脚本偶尔需要拿 CPU 信息做判断：几个核、什么架构、大核小核各多少。`sysctl -a | grep cpu` 一刷一大屏，有用的就那几个字段。
+            `x cpu info` 把关键字段整理好直接输出。`x cpu stat` 看实时负载，能细化到每核利用率。还有个 `x cpu endianness` 测字节序，交叉编译的时候用得上。
+
+            ```bash
+            # 硬件信息 + 实时负载
+            x cpu
+            # 只看硬件信息
+            x cpu info
+            # 只看实时负载
+            x cpu stat
+            # 测字节序
+            x cpu endianness
+            ```
+          en: |
+            Added `cpu` module — key fields laid out cleanly, no more digging through sysctl.
+
+            Scripts sometimes need CPU info for branching logic: how many cores, what architecture, P-core vs E-core counts. `sysctl -a | grep cpu` floods the terminal — the useful fields are buried in there.
+            `x cpu info` picks out the key fields. `x cpu stat` shows real-time load down to per-core utilization. There's also `x cpu endianness` for byte order detection — handy for cross-compilation.
+
+            ```bash
+            # hardware info + real-time load
+            x cpu
+            # hardware info only
+            x cpu info
+            # real-time load only
+            x cpu stat
+            # detect byte order
+            x cpu endianness
+            ```
+    disk:
+      update:
+        - cn: |
+            新增 `disk` 模块 —— APFS 容器自动合并，按物理磁盘分组，不再被一堆卷搞懵。
+
+            macOS 上 df 最烦的就是 APFS 容器会把一块盘拆成好几个卷，df 出来五六个挂载点，加起来超过盘的实际容量，看着就懵。
+            `x disk stat` 按「物理磁盘」分组，同一个 APFS 容器的卷自动合并，一眼看懂哪块盘用了多少。硬件信息（型号、SMART 状态、分区表）也顺便看了，不用再单独跑 system_profiler。
+
+            ```bash
+            # 硬件信息 + 使用率表格
+            x disk
+            # 只看使用率
+            x disk stat
+            # 列出磁盘和分区
+            x disk ls
+            ```
+          en: |
+            Added `disk` module — APFS containers auto-merged, grouped by physical disk, no more volume confusion.
+
+            The most annoying thing about df on macOS is how APFS containers split one disk into multiple volumes — df shows five or six mount points that add up to more than the actual disk capacity. Confusing.
+            `x disk stat` groups by physical disk, auto-merging volumes from the same APFS container. You can actually tell how full each disk is. Hardware info (model, SMART status, partition table) is included too — no need to run system_profiler separately.
+
+            ```bash
+            # hardware info + usage table
+            x disk
+            # usage only
+            x disk stat
+            # list disks and partitions
+            x disk ls
+            ```
+    wifi:
+      update:
+        - cn: |
+            新增 `wifi` 模块 —— 不只是看信息，还能扫描、连网、管理已保存的网络。
+
+            这个不只是看 WiFi 信息 —— `x wifi scan` 扫一圈附近的 AP，`x wifi connect` 直接连网，`x wifi prefer ls` 管理已保存的网络。信号强度还带颜色标记，不用猜哪个信号好了。
+            做现场运维或者帮别人排查网络问题的时候，不用再记那些 platform-specific 的一大串命令。
+
+            ```bash
+            # 网卡信息 + 可用网络
+            x wifi
+            # 扫描附近网络
+            x wifi scan
+            # 连接 WiFi
+            x wifi connect SSID password
+            # 已保存的网络
+            x wifi prefer ls
+            ```
+          en: |
+            Added `wifi` module — not just viewing info, but scanning, connecting, and managing saved networks.
+
+            This isn't just for viewing WiFi info — `x wifi scan` sweeps nearby APs, `x wifi connect` joins a network, and `x wifi prefer ls` manages saved networks. Signal strength is color-coded, so you don't have to guess which one's stronger.
+            When doing on-site ops or helping someone troubleshoot network issues, no need to memorize those long platform-specific commands anymore.
+
+            ```bash
+            # adapter info + available networks
+            x wifi
+            # scan nearby networks
+            x wifi scan
+            # connect to WiFi
+            x wifi connect SSID password
+            # saved networks
+            x wifi prefer ls
+            ```
+    usb:
+      update:
+        - cn: |
+            新增 `usb` 模块 —— 速度直接标成 12M、480M、5G、10G，一眼分辨设备规格。
+
+            ioreg 的输出基本没法看，lsusb 稍好但速度只显示原始数值，你得自己算这是 USB 2.0 还是 3.0。
+            `x usb` 把速度直接标成 12M、480M、5G、10G，一眼就知道设备跑在什么速率上。详细信息和紧凑表格一起输出，不用来回切。
+
+            ```bash
+            # 详细信息 + 紧凑表格
+            x usb
+            # 只看详细信息
+            x usb info
+            # 只看紧凑表格
+            x usb ls
+            ```
+          en: |
+            Added `usb` module — speeds labeled as 12M, 480M, 5G, 10G, tell device specs at a glance.
+
+            ioreg output is basically unreadable. lsusb is better but shows speeds as raw values — you have to figure out USB 2.0 vs 3.0 yourself.
+            `x usb` labels speeds directly as 12M, 480M, 5G, 10G — tell at a glance what speed each device is running at. Detailed info and compact table output together, no switching back and forth.
+
+            ```bash
+            # detailed info + compact table
+            x usb
+            # detailed info only
+            x usb info
+            # compact table only
+            x usb ls
+            ```
+    display:
+      update:
+        - cn: |
+            新增 `display` 模块 —— 多屏信息理清楚直接输出，还能看各屏实时亮度。
+
+            接了多个显示器的时候，想搞清楚哪个是哪个、分辨率多少、走的什么接口，得去翻系统设置。
+            `x display` 把这些信息理清楚直接输出 —— 分辨率、刷新率、连接方式、是不是主显示器，一个表格全有。还能 `x display stat` 看各屏的实时亮度。
+
+            ```bash
+            # 详细信息 + 紧凑表格
+            x display
+            # 只看紧凑表格
+            x display ls
+            # 实时亮度
+            x display stat
+            ```
+          en: |
+            Added `display` module — multi-monitor info laid out clearly, plus real-time brightness per screen.
+
+            With multiple monitors plugged in, figuring out which is which, what resolution, and what port it's connected through means digging through system settings.
+            `x display` lays it all out — resolution, refresh rate, connection type, whether it's the main display, all in one table. `x display stat` shows real-time brightness per screen.
+
+            ```bash
+            # detailed info + compact table
+            x display
+            # compact table only
+            x display ls
+            # real-time brightness
+            x display stat
+            ```
+    claw:
+      update:
+        - cn: |
+            新增 `claw` 模块 —— 说实话，做这个是因为我不想浪费 coding plan 的订阅钱。
+
+            想要一个跑在自己设备上的个人 AI 助手，能在微信、Telegram 里随时唤起处理事情。
+            `claw` 就是这个。内部 AI 引擎可以接入模型厂家自家的 AI Agent 工具，claude、codex、gemini-cli、opencode、kimi-cli 都能接，你想用哪个平台的订阅都行。
+
+            不只是聊天，是能改代码、跑命令的专业 Coding Agent。每个聊天有独立的 workspace 和持久化上下文，多会话同时跑也不打架。
+
+            目前微信和 Telegram 已经能跑了，飞书和企业微信正在路上。后续我们也会直接集成 x-cmd 自己开发的 ai agent chat，不用依赖外部引擎也能用。
+
+            这还是个早期版本，欢迎你来试试，看看能不能成为你离不开的工具。
+
+            ```bash
+            # 启动微信消息监听
+            x claw run
+            # 启动 Telegram 消息监听
+            x claw run telegram
+            ```
+          en: |
+            Added `claw` module —— honestly, I built this because I hated wasting money on coding plan subscriptions I could only use in the terminal.
+
+            Wanted a personal AI assistant running on my own device, accessible from WeChat or Telegram whenever I need it.
+            `claw` is exactly that. Its internal AI engine can connect to model vendors' own AI Agent tools — claude, codex, gemini-cli, opencode, kimi-cli all work, use whichever subscription you have.
+
+            Not just chat, but professional Coding Agents that can edit code and run commands. Each chat gets its own workspace with persistent context memory, and multiple sessions can run concurrently without stepping on each other.
+
+            WeChat and Telegram are already working. Feishu and enterprise WeChat are on the way. We'll also be integrating x-cmd's own ai agent chat directly, so you won't need external engines.
+
+            It's still early days. Give it a try — maybe it'll become something you can't live without too.
+
+            ```bash
+            # start WeChat message listener
+            x claw Run
+            # start Telegram message listener
+            x claw run telegram
+            ```
+  blog: null
+  name: v0.8.14
+  alpha: true
+  beta: true
+  latest: true
 v0.8.13:
   sum: 478bf0b596b74ff9597a95575d85f641a2428c610044a65b4052670421ed6299f3d9b800f1258239a46bdd143d1bcd79971e28763149a104836e071b546370be
   date: 2026-04-11 14:34:19+0000
@@ -162,8 +457,6 @@ v0.8.13:
             ```
   blog: null
   name: v0.8.13
-  alpha: true
-  beta: true
 v0.8.12:
   sum: 0ef7f0b7ef26998fd805f3b343f93720d4d36b8e400303a5e016f971405c0ccde2eb82d88765c84797d35c66fe4c003dbc39be47996f2e936935932d96524e1c
   date: 2026-04-03 10:06:42+0000
@@ -342,7 +635,6 @@ v0.8.11:
             Fixed `p7zip` module —— resolved write error when compressing folders to tar.gz.
   blog: /blog/260327
   name: v0.8.11
-  latest: true
 v0.8.10:
   sum: 09a8b7035c158c8f72c85022eb3e3521de1921c31ee76863940d613afe54ddb6cc265cf8ad305c17c19451d16b5d0a1dd84bcf8c76bcc2de5c679c3f1c99b20d
   date: 2026-03-25 13:51:08+0000
