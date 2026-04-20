@@ -5,7 +5,7 @@ v0.8.14:
     feishu:
       update:
         - cn: |
-            新增 `abot` 模块 —— 让 x claw 能往飞书发消息
+            新增 `abot` 命令 —— 让 x claw 能往飞书发消息
 
             x claw 想主动发消息到飞书，一直没个顺手的接口。
             `abot send` 就是干这个的 —— 文本、图片、文件都能发，跟 x claw 搭配起来，AI 回复就能推到飞书群了。
@@ -19,7 +19,7 @@ v0.8.14:
             x feishu abot send --file --chatid <chat_id> /path/to/file.pdf
             ```
           en: |
-            Added `abot` module — gives `x claw` the ability to send messages to Feishu.
+            Added `abot` command — gives `x claw` the ability to send messages to Feishu.
 
             x claw wanted to proactively send messages to Feishu but had no convenient way to do it.
             `abot send` solves that — text, images, files, all supported. Pair it with x claw and AI replies can now be pushed to Feishu groups.
