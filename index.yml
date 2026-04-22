@@ -1,3 +1,116 @@
+v0.8.15:
+  sum: 2e7c9610be34ae3c5a8cb0b9a04a4a48668dd41caa8f890ba6d289b8e83279200b6601d142a3ae6d21cbba033372408c7c7f90928c86cfc88d9dbf1b21b40da6
+  date: 2026-04-22 13:57:30+0000
+  change:
+    claw:
+      update:
+        - cn: |
+            X-Claw 全面升级。
+
+            Agent 连续失败会雪崩重试，现在加了熔断自动冷却恢复；心跳也降噪了，空闲后自我确认，减少无意义轮询。
+
+            Cron 任务提示规范统一，消息投递更可靠。新增 `x claw service` 命令，后台托管、开机自启、崩溃自恢复，适合长期挂机。
+
+            skill 支持也扩展了，Agent 能同时加载全局和对话工作区的 skill，不同来源的指令叠加使用，不用来回挪文件。
+
+            ```bash
+            x claw service start weixin
+            ```
+          en: |
+            X-Claw major upgrade.
+
+            Agents used to avalanche-retry on consecutive failures; now there's circuit breaker cooldown with auto-recovery, and heartbeats are quieter too —— idle Agents self-acknowledge, cutting pointless polling.
+
+            Cron task prompts are standardized across platforms, and message delivery is more reliable. Added `x claw service` for background daemon setup with auto-start and crash recovery —— set it and forget it.
+
+            Skill support is also expanded: Agents can now load both global and conversation workspace skills, so instructions from different sources stack together —— no more shuffling files around.
+
+            ```bash
+            x claw service start weixin
+            ```
+    skill:
+      update:
+        - cn: |
+            `x skill add` 扩展了下载源 —— 支持从 GitHub 和 Clawhub 装 skill 了。
+
+            有粉丝朋友说想用社区里一些热门又实用的 skill，但之前只能下载 x-cmd/skill 收录的 skill，选择太少了。
+            现在既能直接装 Clawhub 上的热门 skills，也能从 GitHub 仓库批量下载安装 skill 了。
+
+            ```bash
+            # 从 Clawhub 下载 self-improving-agent 和 ontology skill
+            x skill add clawhub:self-improving-agent clawhub:ontology
+
+            # 从 GitHub 仓库添加多个 skills
+            x skill add https://github.com/google-gemini/gemini-skills --skill gemini-api-dev --skill gemini-interactions-api
+
+            # 列出 GitHub 仓库的 skills
+            x skill ll --github https://github.com/google-gemini/gemini-skills
+            ```
+          en: |
+            `x skill add` has expanded its download sources — now supports installing skills directly from GitHub and Clawhub.
+
+            Some users wanted to try popular and practical community skills, but previously could only download skills from the x-cmd/skill registry — the selection was too limited. Now you can install popular skills directly from Clawhub, or batch-download and install skills from GitHub repositories.
+
+            ```bash
+            # Install self-improving-agent and ontology skill from Clawhub
+            x skill add clawhub:self-improving-agent clawhub:ontology
+
+            # Add multiple skills from a GitHub repository
+            x skill add https://github.com/google-gemini/gemini-skills --skill gemini-api-dev --skill gemini-interactions-api
+
+            # List the skills in the GitHub repository
+            x skill ll --github https://github.com/google-gemini/gemini-skills
+            ```
+    cron:
+      update:
+        - cn: |
+            新增 `x cron` 模块 —— 基础库工具，给 claw 和其他模块做定时任务用。
+
+            标准 cron 表达式，目录形式存任务，命名空间隔离，支持时区。service 托管、前台调试、单次补跑、直接 exec 测试都能用。claw 已经在用了。
+
+            ```bash
+            x cron add --name myjob "*/5 * * * *" "echo hello"
+            x cron ls
+            x cron service start
+            ```
+          en: |
+            Added `x cron` module —— foundational utility for cron jobs, used by claw and available to other modules.
+
+            Standard expressions, directory-based storage, namespace isolation, timezone support. Run as service, debug in foreground, catch up with runonce, or exec directly. claw is already using it.
+
+            ```bash
+            x cron add --name myjob "*/5 * * * *" "echo hello"
+            x cron ls
+            x cron service start
+            ```
+    free:
+      update:
+        - cn: |
+            新增 `--expert` 显示专家模式详情信息 —— 不想每次都翻 /proc
+
+            free 默认那几个数字根本不够看。想查内核参数、LRU 命中率、THP 情况、IO 统计、VM 状态、硬件占用，往往得折腾一堆命令或者读 /proc。
+
+            顺手给它加了个 `-e`，一键出来。
+
+            ```bash
+            # 显示专家模式详情内核、LRU、THP、IO、VM、硬件统计）
+            x free -e
+            ```
+          en: |
+            Added `--expert` mode for detailed system info —— no more flipping through /proc manually.
+
+            The default free output just doesn't cut it when you need to dig deeper. Kernel params, LRU hit rates, THP settings, IO stats, VM layout, hardware utilization —— usually means juggling a bunch of commands or reading /proc manually.
+
+            Threw in a `-e` flag to get all that with one shot.
+
+            ```bash
+            # Expert mode: kernel, LRU, THP, IO, VM, hardware stats
+            x free -e
+            ```
+  blog: null
+  name: v0.8.15
+  alpha: true
+  beta: true
 v0.8.14:
   sum: e2f2f43a2a4ff9d21be960dcfc4df6c482fcf4a4a6ffe3f4c016c420ada1c31f8b38b095bfbfbde2c5b1b403ea5f292299961fccc87d147ea777017da585efbe
   date: 2026-04-18 15:16:26+0000
@@ -290,8 +403,6 @@ v0.8.14:
             ```
   blog: null
   name: v0.8.14
-  alpha: true
-  beta: true
   latest: true
 v0.8.13:
   sum: 478bf0b596b74ff9597a95575d85f641a2428c610044a65b4052670421ed6299f3d9b800f1258239a46bdd143d1bcd79971e28763149a104836e071b546370be
