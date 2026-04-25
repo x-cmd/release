@@ -1,114 +1,127 @@
-v0.8.15:
-  sum: 2e7c9610be34ae3c5a8cb0b9a04a4a48668dd41caa8f890ba6d289b8e83279200b6601d142a3ae6d21cbba033372408c7c7f90928c86cfc88d9dbf1b21b40da6
-  date: 2026-04-22 13:57:30+0000
+v0.9.0:
+  sum: 7839d4467e80f47bf51652dc4906caf5959fab436255af21315150707560d7d5182e024be47422032af60e5e6eea36bc55054be8c9e0ef6d5c94267edd1f492c
+  date: 2026-04-25 15:52:13+0000
   change:
-    claw:
+    clawhub:
       update:
         - cn: |
-            X-Claw 全面升级。
+            新增 `clawhub` 模块 —— 让全球用户都能流畅下载 clawhub 热门 skill
 
-            Agent 连续失败会雪崩重试，现在加了熔断自动冷却恢复；心跳也降噪了，空闲后自我确认，减少无意义轮询。
-
-            Cron 任务提示规范统一，消息投递更可靠。新增 `x claw service` 命令，后台托管、开机自启、崩溃自恢复，适合长期挂机。
-
-            skill 支持也扩展了，Agent 能同时加载全局和对话工作区的 skill，不同来源的指令叠加使用，不用来回挪文件。
+            不同地区的网络环境差异巨大，直接访问 clawhub.ai 对部分用户来说可能并不顺畅。
+            现在 x clawhub 会根据你的网络环境，自动选择最优的数据源：
+            - 中国大陆用户 → 路由至 ByteDance/Volcano Engine 镜像站 (cn.clawhub-mirror.com)
+            - 国际用户 → 直连 OpenCLAW 官方平台 (clawhub.ai)
 
             ```bash
-            x claw service start weixin
+            # 搜索包含 http 的技能
+            x clawhub search "http"
+
+            # 查看技能详情
+            x clawhub skill get ontology
+
+            # 下载技能到本地
+            x clawhub download ontology -o ./ontology.zip
             ```
           en: |
-            X-Claw major upgrade.
+            Added the `clawhub` module — enabling global users to smoothly download popular clawhub skills.
 
-            Agents used to avalanche-retry on consecutive failures; now there's circuit breaker cooldown with auto-recovery, and heartbeats are quieter too —— idle Agents self-acknowledge, cutting pointless polling.
-
-            Cron task prompts are standardized across platforms, and message delivery is more reliable. Added `x claw service` for background daemon setup with auto-start and crash recovery —— set it and forget it.
-
-            Skill support is also expanded: Agents can now load both global and conversation workspace skills, so instructions from different sources stack together —— no more shuffling files around.
+            Different regions have vastly different network environments, and directly accessing clawhub.ai may not be smooth for some users.
+            Now `x clawhub` automatically selects the optimal data source based on your network environment:
+            - Users in mainland China → routed to ByteDance/Volcano Engine mirror (cn.clawhub-mirror.com)
+            - International users → direct connection to OpenCLAW official platform (clawhub.ai)
 
             ```bash
-            x claw service start weixin
+            # Search for skills containing "http"
+            x clawhub search "http"
+
+            # View skill details
+            x clawhub skill get ontology
+
+            # Download skill to local
+            x clawhub download ontology -o ./ontology.zip
             ```
     skill:
       update:
         - cn: |
-            `x skill add` 扩展了下载源 —— 支持从 GitHub 和 Clawhub 装 skill 了。
-
-            有粉丝朋友说想用社区里一些热门又实用的 skill，但之前只能下载 x-cmd/skill 收录的 skill，选择太少了。
-            现在既能直接装 Clawhub 上的热门 skills，也能从 GitHub 仓库批量下载安装 skill 了。
+            现在中国用户使用 `x skill add` 下载 ClawHub 平台的 skill 时，会自动走 ByteDance/Volcano Engine 镜像站，以加速下载。
+            同时，`ll` 命令正式改名为 `ls-remote`，简写 `lr`。之前叫 ll 有点迷糊，不知道是 list long 还是 list last，现在名字直接见名知意。
 
             ```bash
-            # 从 Clawhub 下载 self-improving-agent 和 ontology skill
-            x skill add clawhub:self-improving-agent clawhub:ontology
-
-            # 从 GitHub 仓库添加多个 skills
-            x skill add https://github.com/google-gemini/gemini-skills --skill gemini-api-dev --skill gemini-interactions-api
+            # 从 ClawHub 下载 skill
+            x skill add clawhub/skill-vetter clawhub/ontology
 
             # 列出 GitHub 仓库的 skills
-            x skill ll --github https://github.com/google-gemini/gemini-skills
+            x skill lr --github https://github.com/google-gemini/gemini-skills
             ```
           en: |
-            `x skill add` has expanded its download sources — now supports installing skills directly from GitHub and Clawhub.
-
-            Some users wanted to try popular and practical community skills, but previously could only download skills from the x-cmd/skill registry — the selection was too limited. Now you can install popular skills directly from Clawhub, or batch-download and install skills from GitHub repositories.
+            Chinese users downloading skills from ClawHub via `x skill add` will now automatically route through the ByteDance/Volcano Engine mirror for accelerated downloads.
+            Additionally, the `ll` command has been officially renamed to `ls-remote` with the alias `lr`. The previous name `ll` was confusing — it wasn't clear whether it meant "list long" or "list last". Now the name directly conveys its purpose.
 
             ```bash
-            # Install self-improving-agent and ontology skill from Clawhub
-            x skill add clawhub:self-improving-agent clawhub:ontology
+            # Download skills from ClawHub
+            x skill add clawhub/skill-vetter clawhub/ontology
 
-            # Add multiple skills from a GitHub repository
-            x skill add https://github.com/google-gemini/gemini-skills --skill gemini-api-dev --skill gemini-interactions-api
-
-            # List the skills in the GitHub repository
-            x skill ll --github https://github.com/google-gemini/gemini-skills
+            # List skills in a GitHub repo
+            x skill lr --github https://github.com/google-gemini/gemini-skills
             ```
-    cron:
+    claw:
       update:
         - cn: |
-            新增 `x cron` 模块 —— 基础库工具，给 claw 和其他模块做定时任务用。
+            `claw` 模块更新 —— 默认可读取当前环境的 OpenCLAW 数据记忆文件，修复了 `x claw service` 部分问题，新增 skill discover 机制
 
-            标准 cron 表达式，目录形式存任务，命名空间隔离，支持时区。service 托管、前台调试、单次补跑、直接 exec 测试都能用。claw 已经在用了。
+            现在 claw 会自动从当前环境读取 OpenCLAW 的数据记忆文件，不用额外配置就能直接用已有的数据。
+
+            另外，claw 现在支持 skill discover 机制，可以自动发现和管理技能。
+
+            `x claw service` 之前有些小问题，这次顺手修了几个，现在应该稳多了。
 
             ```bash
-            x cron add --name myjob "*/5 * * * *" "echo hello"
-            x cron ls
-            x cron service start
+            # 启动 weixin service
+            x claw service start weixin
             ```
+
+            如果你发现还有坑，欢迎提 issue，我看到会处理。
           en: |
-            Added `x cron` module —— foundational utility for cron jobs, used by claw and available to other modules.
+            `claw` module update — by default, it can read OpenCLAW data memory files from the current environment and fixed some issues with `x claw service`, added skill discover mechanism.
 
-            Standard expressions, directory-based storage, namespace isolation, timezone support. Run as service, debug in foreground, catch up with runonce, or exec directly. claw is already using it.
+            Now claw automatically reads OpenCLAW data memory files from your environment — no extra setup needed to reuse what you already have.
+
+            Also, claw now supports the skill discover mechanism for automatically discovering and managing skills.
+
+            Fixed a few issues with `x claw service`. Should be more stable now.
 
             ```bash
-            x cron add --name myjob "*/5 * * * *" "echo hello"
-            x cron ls
-            x cron service start
+            # Start weixin service
+            x claw service start weixin
             ```
-    free:
+
+            If you find any issues, file an issue and I'll look into it.
+    deepseek:
       update:
         - cn: |
-            新增 `--expert` 显示专家模式详情信息 —— 不想每次都翻 /proc
+            `deepseek` 新增 `deepseek-v4` 支持 —— 同上，我自己还没来得及细用。
 
-            free 默认那几个数字根本不够看。想查内核参数、LRU 命中率、THP 情况、IO 统计、VM 状态、硬件占用，往往得折腾一堆命令或者读 /proc。
-
-            顺手给它加了个 `-e`，一键出来。
+            DeepSeek 推了新模型，先把能力加上。现在你可以指定 `deepseek-v4` 来用最新的东西。
 
             ```bash
-            # 显示专家模式详情内核、LRU、THP、IO、VM、硬件统计）
-            x free -e
+            # 用 deepseek-v4-flash 模型
+            @ds --model deepseek-v4-flash "你好，请介绍一下你自己"
             ```
+
+            如果你用下来觉得不错，欢迎分享体验。
           en: |
-            Added `--expert` mode for detailed system info —— no more flipping through /proc manually.
+            `deepseek` added `deepseek-v4` support — same as above, haven't had time to really dig in yet.
 
-            The default free output just doesn't cut it when you need to dig deeper. Kernel params, LRU hit rates, THP settings, IO stats, VM layout, hardware utilization —— usually means juggling a bunch of commands or reading /proc manually.
-
-            Threw in a `-e` flag to get all that with one shot.
+            DeepSeek dropped a new model, so I added the capability. Now you can specify `deepseek-v4` to try out the latest stuff.
 
             ```bash
-            # Expert mode: kernel, LRU, THP, IO, VM, hardware stats
-            x free -e
+            # Use deepseek-v4-flash model
+            @ds --model deepseek-v4-flash "Hello, please introduce yourself"
             ```
+
+            If you find it works well for you, feel free to share your experience.
   blog: null
-  name: v0.8.15
+  name: v0.9.0
   alpha: true
   beta: true
 v0.8.14:
@@ -401,7 +414,7 @@ v0.8.14:
             # start Telegram message listener
             x claw run telegram
             ```
-  blog: null
+  blog: /blog/260419
   name: v0.8.14
   latest: true
 v0.8.13:
@@ -566,7 +579,7 @@ v0.8.13:
             # Days until a specific date
             x date diff '2026-01-01'
             ```
-  blog: null
+  blog: /blog/260412
   name: v0.8.13
 v0.8.12:
   sum: 0ef7f0b7ef26998fd805f3b343f93720d4d36b8e400303a5e016f971405c0ccde2eb82d88765c84797d35c66fe4c003dbc39be47996f2e936935932d96524e1c
@@ -668,7 +681,7 @@ v0.8.12:
           en: |
             Fixed the `refit` issue — when the base image user exists but the home directory is missing, the image build would fail.
             Thanks to @yyq19990828 for the bug report in #394.
-  blog: null
+  blog: /blog/260404
   name: v0.8.12
 v0.8.11:
   sum: 53c7e5a780bc87fe2f35f83c9e4d2a6eb3b71fb2f9453c407e0b95df21cdbfa8d8d0e9952d06cf9fbf331f17b7cb96d728a6b08ec20063670d5ec49d48d7cce3
