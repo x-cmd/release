@@ -1,3 +1,90 @@
+v0.9.1:
+  sum: de0a913291dc439bee1819d5faa77189a64272225d1f8352a4290871f74604575d48457635766c3cf9b1fefcc37fc419d369518e4baa392498e5364aace595d8
+  date: 2026-04-28 13:29:52+0000
+  change:
+    curl:
+      update:
+        - cn: |
+            从 v0.9.1 开始，x-cmd 不再默认向 Windows 提供保底 curl（Linux 不变，本地没有 curl 时仍使用 x-cmd 自编译的 curl）。
+
+            原因是 Windows Device Guard 会拦截 x-cmd 自编译的 curl——在一台小米笔记本上就遇到了这个问题。
+
+            之前我们默认使用 x-cmd 的 curl，是因为曾经有用户反映 Windows 自带的 curl 有证书问题。
+
+            如果你在 Windows 上遇到 curl 问题，有两种解决方案：
+            1. 使用新版 Git for Windows (v2.40+)，其自带的 curl 已升级到 v8.12。
+                或者更新 Windows 系统，其内置的 curl 也已到 v8.12。
+            2. 运行 `x winget install curl`，通过 winget 更新系统的 curl。
+          en: |
+            From v0.9.1, x-cmd no longer provides a bundled fallback curl for Windows by default (Linux remains unchanged — if curl is not available locally, x-cmd will still use its self-compiled curl).
+
+            The reason is that Windows Device Guard blocks x-cmd's self-compiled curl — we encountered this issue on a Xiaomi notebook.
+
+            Previously, we defaulted to x-cmd's curl because users had reported certificate issues with Windows' native curl.
+
+            If you encounter curl issues on Windows, you have two options:
+            1. Use a newer version of Git for Windows (v2.40+) which has curl v8.12.
+                Or update your Windows system where the built-in curl is already v8.12.
+            2. Run `x winget install curl` to update your system's curl via winget.
+    uuid:
+      update:
+        - cn: |
+            最近买了一台 Windows 笔记本，多年后重新重度使用 Windows，暴露了不少 git-bash 的兼容问题——其中之一就是 git-bash 基本没有 UUID 支持。
+            这推动了 UUID 模块的改进：代码源自 rand 模块（3-4 年前），此次大幅简化实现，减少 fork 和内存开销，并引入 UUIDv4。
+            v4 和 v7 各有适用场景：需要更强随机性和隐藏生成时间时用 v4（`x uuid get`）；在日志、排序等有序场景中用 v7。还提供了 `parsev7` 从 v7 中提取时间信息。
+            当前实现足够简洁，可以清晰地向用户说明 UUID 的原理。可通过 `x rfc 9562` 查阅标准（RFC 9562 定义了全部 8 个版本的 UUID）。
+          en: |
+            Buying a Windows laptop and returning to heavy Windows use after many years revealed quite a few git-bash compatibility issues — one of them being that git-bash has essentially no UUID support.
+            This drove improvements to the UUID module: the code originated from the rand module (3-4 years ago), and this version greatly simplifies the implementation with fewer forks and lower memory overhead, while adding UUIDv4 support.
+            v4 and v7 each suit different scenarios: use v4 (`x uuid get`) when you need stronger randomness and want to conceal generation time; use v7 for ordered scenarios like logging and sorting. A `parsev7` command is also provided to extract time information from v7.
+            The implementation is concise enough to clearly explain UUID principles to users. Consult the standard via `x rfc 9562` (RFC 9562 defines all 8 UUID versions).
+    epoch:
+      update:
+        - cn: |
+            epoch 模块新增 `ms`/`ms_` 毫秒级时间戳支持，为 UUIDv7 的时间前缀提供底层能力。
+            之前 timestamp 逻辑分散在多个模块中各自实现，来来回回改了好几轮，这次终于在 epoch 模块中统一收敛——UUIDv7 也因此不再需要自己算时间戳。
+          en: |
+            The epoch module adds `ms`/`ms_` for millisecond timestamps, providing the underlying capability for UUIDv7's time prefix.
+            Previously, timestamp logic was scattered across multiple modules and went through several rounds of rework. This version finally consolidates it into the epoch module — UUIDv7 no longer needs to compute timestamps on its own.
+    claude:
+      update:
+        - cn: |
+            调整 `x claude use` 配置 —— 激活 DeepSeek-V4-Pro Max 模式与 1M 上下文，榨干国产旗舰模型的性能
+
+            有很多粉丝朋友在用 DeepSeek V4 的时候忘记激活 max 推理模式和 1M 上下文，白白浪费了 V4-Pro 的核心能力。
+            那干脆帮大家配好吧。现在 `x claude use ds` 直接帮你三件事一起干：
+            - 模型设为 `deepseek-v4-pro[1m]`，激活百万 Token 上下文
+            - 推理强度拉到 `max`，复杂算法、多文件重构这些硬核任务提升尤其显著
+            - 子代理切到 `deepseek-v4-flash`，轻量任务自动分流，兼顾速度与成本
+
+            ```bash
+            # 设置使用 DeepSeek V4 模型
+            x deepseek --cfg model=deepseek-v4-pro
+
+            # 配置好了 Max 模式和 1M 上下文，之后每次打 claude 都自动用
+            x claude use ds
+            ```
+          en: |
+            Adjusted `x claude use` config — activate DeepSeek-V4-Pro Max reasoning and 1M context to unleash the full power of the best domestic coding model.
+
+            Many users forget to enable max reasoning mode and the 1M context window when using DeepSeek V4, leaving V4-Pro's core capabilities on the table.
+            So we took care of it for you. `x claude use ds` now handles three things at once:
+            - Sets the model to `deepseek-v4-pro[1m]`, activating the million-token context window
+            - Cranks reasoning to `max` — a significant boost for complex algorithms and multi-file refactors
+            - Routes sub-agents to `deepseek-v4-flash`, offloading lightweight tasks to balance speed and cost
+
+            ```bash
+            # Configure DeepSeek V4 model
+            x deepseek --cfg model=deepseek-v4-pro
+
+            # Max mode and 1M context configured — every `claude` session auto-uses it
+            x claude use ds
+            ```
+  blog: null
+  name: v0.9.1
+  alpha: true
+  beta: true
+  latest: true
 v0.9.0:
   sum: 7839d4467e80f47bf51652dc4906caf5959fab436255af21315150707560d7d5182e024be47422032af60e5e6eea36bc55054be8c9e0ef6d5c94267edd1f492c
   date: 2026-04-25 15:52:13+0000
@@ -122,8 +209,6 @@ v0.9.0:
             If you find it works well for you, feel free to share your experience.
   blog: null
   name: v0.9.0
-  alpha: true
-  beta: true
 v0.8.14:
   sum: e2f2f43a2a4ff9d21be960dcfc4df6c482fcf4a4a6ffe3f4c016c420ada1c31f8b38b095bfbfbde2c5b1b403ea5f292299961fccc87d147ea777017da585efbe
   date: 2026-04-18 15:16:26+0000
@@ -416,7 +501,6 @@ v0.8.14:
             ```
   blog: /blog/260419
   name: v0.8.14
-  latest: true
 v0.8.13:
   sum: 478bf0b596b74ff9597a95575d85f641a2428c610044a65b4052670421ed6299f3d9b800f1258239a46bdd143d1bcd79971e28763149a104836e071b546370be
   date: 2026-04-11 14:34:19+0000
