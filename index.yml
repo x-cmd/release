@@ -1,3 +1,173 @@
+v0.9.2:
+  sum: abb3e6a0ef47a5d74fb4220721eb9ca73df465ba41024879a01e3012da5c5f6a5e77a8a1287e7f2c4b9cb71f10f2d3e9c848c87ba4fc25a9a2c218b3506f69ba
+  date: 2026-05-01 03:55:57+0000
+  change:
+    hub:
+      update:
+        - cn: |
+            `x hub` 现在支持绑定邮箱，以及分享整个静态站点了。
+
+            想分享一个静态页面或者小作品，以前只能一个文件一个链接分享出去。
+            现在只需要把整个文件夹打成 zip 传到云端，一行命令就能得到一个可访问的分享链接，还能指定入口文件和有效期。
+
+            邮箱绑定后，重要消息和提醒也能及时收到了。
+
+            ```bash
+            # 绑定邮箱地址，用于接收重要通知
+            x hub bind email user@example.com
+
+            # 把用 AI 写好的静态博客或作品集打成 zip，一键生成可访问的分享链接
+            x hub file share zip ./dist.zip
+
+            # 指定入口文件（如 main.html）和有效期，分享给同事或客户
+            x hub file share zip --entry main.html --expires 3600 ./dist.zip
+            ```
+          en: |
+            `x hub` now supports email binding and sharing entire static sites.
+
+            Previously, sharing a static page or project meant one file per link.
+            Now just zip up your folder, upload to cloud, one command gives you a working shareable link — with custom entry file and optional expiration.
+
+            Email binding also available so you get important messages and alerts in time.
+
+            ```bash
+            # bind an email address for notifications
+            x hub bind email user@example.com
+
+            # zip up an AI-generated static blog or portfolio, generate a shareable link in one shot
+            x hub file share zip ./dist.zip
+
+            # specify entry (e.g. main.html) and expiration, share with colleagues or clients
+            x hub file share zip --entry main.html --expires 3600 ./dist.zip
+            ```
+    service:
+      update:
+        - cn: |
+            新增 `x service` 模块 —— claw daemon 长期跑在后台，离不开一个靠谱的服务层。
+
+            之前启停、状态、日志分散在各处，改个配置还得翻 systemctl。
+            service 把这些拢到一块，start/stop/restart/status/log/isalive/pause/resume/rm 一条命令搞定，服务名可带可不带 .service 后缀。
+
+            ```bash
+            # 启动一个服务（比如 nginx）
+            x service start nginx
+
+            # 查看服务运行状态
+            x service status nginx
+
+            # 实时查看服务日志输出
+            x service log nginx
+            ```
+          en: |
+            Added `x service` module —— claw daemon needs a solid service layer to stay running reliably in the background.
+
+            Previously, start/stop, status, and logs were scattered across different places, and tweaking configs meant digging into systemctl.
+            service brings them together — start/stop/restart/status/log/isalive/pause/resume/rm in one command, service names with or without .service suffix.
+
+            ```bash
+            # start a service (e.g. nginx)
+            x service start nginx
+
+            # check service running status
+            x service status nginx
+
+            # stream real-time service logs
+            x service log nginx
+            ```
+    worker:
+      update:
+        - cn: |
+            新增 `x worker` 模块 —— 后台跑着多个 agent 任务，得清楚谁还活着、谁挂了。
+
+            任务一多，PID 是多少、跑了多久、是不是还在跑，这些信息翻来翻去很麻烦。
+            worker 用命名空间加进程指纹把每个任务隔离开，isalive 验活、info 看详情、ls 列出全部。
+
+            ```bash
+            # 启动一个后台 worker，持续运行 python agent
+            x worker run --name mytask -- python agent.py
+
+            # 检查 worker 是否还在运行
+            x worker isalive --name mytask
+
+            # 查看 worker 详情，包括 PID 和启动时间
+            x worker info --name mytask
+            ```
+          en: |
+            Added `x worker` module —— when multiple agent tasks are running in the background, you need to know who's alive and who's gone.
+
+            As tasks pile up, checking PID, uptime, or whether it's still running is a hassle.
+            worker isolates each task with namespace and process fingerprint, so isalive verifies, info shows details, and ls lists all.
+
+            ```bash
+            # start a background worker running a python agent
+            x worker run --name mytask -- python agent.py
+
+            # check if the worker is still alive
+            x worker isalive --name mytask
+
+            # view worker details including PID and start time
+            x worker info --name mytask
+            ```
+    claw:
+      update:
+        - cn: |
+            `x claw` 现在支持收发图片和文件了 —— 微信、飞书、Telegram 这些渠道都打通了。
+
+            之前只能发纯文本，想传个截图或者文档得另外想办法。
+            现在直接可以带附件发送，图片、PDF、日志文件都能走，用法跟原来一样，不需要改命令参数。
+
+            ```bash
+            # 启动微信服务
+            x claw service start weixin
+            ```
+          en: |
+            `x claw` now supports sending and receiving images and files —— Weixin, Feishu, and Telegram are all wired up.
+
+            Previously it was text-only, so sharing a screenshot or document meant figuring out another way.
+            Now you can attach files directly, including images, PDFs, and logs. The commands stay the same, no new flags needed.
+
+            ```bash
+            # start weixin service
+            x claw service start weixin
+            ```
+    tailer:
+      update:
+        - cn: |
+            新增 `x tailer` 模块 —— claw agent 之间靠 A2A 协议通信，消息中转就靠它了。
+
+            不依赖额外的消息队列服务，目录就是队列，多 writer 单 reader 模型。
+            run 持续监听，send 发消息，pending 看积压，sub/pub 做订阅广播，GC 阈值清理和一次性订阅也支持。
+
+            ```bash
+            # 启动一个消息队列监听，持续处理消息
+            x tailer run /tmp/mq
+
+            # 向队列发送一条消息
+            x tailer send /tmp/mq "hello"
+
+            # 查看队列当前积压了多少条消息
+            x tailer pending /tmp/mq
+            ```
+          en: |
+            Added `x tailer` module —— claw agents communicate via A2A protocol, and this is the message broker underneath.
+
+            No external message queue needed — the directory itself is the queue, multi-writer single-reader model.
+            run to listen, send to post, pending to check backlog, sub/pub to manage subscriptions. GC threshold cleanup and one-shot subscriptions also supported.
+
+            ```bash
+            # start a message queue listener, continuously processing messages
+            x tailer run /tmp/mq
+
+            # send a message to the queue
+            x tailer send /tmp/mq "hello"
+
+            # check how many messages are currently backlogged
+            x tailer pending /tmp/mq
+            ```
+  blog: null
+  name: v0.9.2
+  alpha: true
+  beta: true
 v0.9.1:
   sum: de0a913291dc439bee1819d5faa77189a64272225d1f8352a4290871f74604575d48457635766c3cf9b1fefcc37fc419d369518e4baa392498e5364aace595d8
   date: 2026-04-28 13:29:52+0000
@@ -82,8 +252,6 @@ v0.9.1:
             ```
   blog: null
   name: v0.9.1
-  alpha: true
-  beta: true
   latest: true
 v0.9.0:
   sum: 7839d4467e80f47bf51652dc4906caf5959fab436255af21315150707560d7d5182e024be47422032af60e5e6eea36bc55054be8c9e0ef6d5c94267edd1f492c
