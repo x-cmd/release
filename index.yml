@@ -14,7 +14,7 @@ v0.9.3:
 
             Writing module documentation is time-consuming. `x advise spec` handles it for you.
             Just describe what the module does, and it generates a properly formatted advise.yml,
-            sparing you from来回调整格式。
+            sparing you from fiddling with formatting.
     core:
       bugfix:
         - cn: |
