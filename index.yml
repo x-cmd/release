@@ -1,3 +1,122 @@
+v0.9.4:
+  sum: 08341a16f1c5dfc187d348c1fd8b53c7e1f6fe3720e67ad8807e6867e5748e665ee1fd364260480fd74a08258ff5b20a7c403fcaecd888966333cda69667f560
+  date: 2026-05-09 15:49:02+0000
+  change:
+    ccal:
+      update:
+        - cn: |
+            `x ccal` 优化 —— 专为 AI Agent 打造更适合的中国农历和调休放假处理。
+
+            - tiaoxiu 子命令：管道输出改为 TSV 格式（更易于 AI 解析），新增 `--hide-plain-rest` 选项排除普通周末休息日
+            - 所有子命令增加输出模式提示，明确 TTY 输出彩色表格 / Pipe 输出结构化数据
+            - 调休放假标识更清晰：`假` = 假日、`工` = 调休上班、`休` = 普通周末
+            - 数据完全本地存储，直接下载数据离线运行，不依赖任何外部 API
+          en: |
+            `x ccal` optimized —— better Chinese lunar calendar and holiday handling designed for AI Agents.
+
+            - tiaoxiu subcommand: pipe output now uses TSV format (easier for AI parsing), new `--hide-plain-rest` option to exclude plain weekend rest days
+            - All subcommands add output mode hints: TTY outputs colorful table / Pipe outputs structured data
+            - Holiday markers clearer: `假` = holiday, `工` = make-up work, `休` = regular weekend
+            - Data stored locally, downloaded directly, runs offline without any external API dependency
+    humantime:
+      update:
+        - cn: |
+            `x humantime` 增强 —— 新增毫秒转换、时间范围判断和比较运算符。
+
+            - 新增 `toms` 子命令：将时间格式转为毫秒（如 `2h30m` → `9000000`）
+            - `tosec` 新增 `--decimal` 选项：输出固定三位小数（如 `9000.000`）
+            - 新增 `in` 子命令：判断秒数是否在指定时间范围内（适合超时检测）
+            - 新增比较运算符：`gt`（大于）、`lt`（小于），支持时间大小的逻辑判断
+            - `fromsec` 和 `tosec` 成为主要命令名称，`sec` 和 `tohuman` 作为别名保留
+          en: |
+            `x humantime` enhanced —— new millisecond conversion, time range check, and comparison operators.
+
+            - New `toms` subcommand: convert time format to milliseconds (e.g., `2h30m` → `9000000`)
+            - `tosec` new `--decimal` option: fixed 3 decimal places output (e.g., `9000.000`)
+            - New `in` subcommand: check if seconds are within specified range (great for timeout detection)
+            - New comparison operators: `gt` (greater than), `lt` (less than), for time comparison logic
+            - `fromsec` and `tosec` are primary names, `sec` and `tohuman` kept as aliases
+    claw:
+      update:
+        - cn: |
+            `x claw` 参数接口优化 —— 现在支持多平台同时运行了。
+
+            之前启动服务得写 `x claw service start weixin`，想多跑几个平台还得开多个实例，有点麻烦。
+            现在改成 `x claw start`，直接跟 `--weixin --telegram` 就能同时跑多个平台，省事多了。
+
+            不指定平台的话会自动检测已登录的 IM 平台，默认回退到微信，不用操心。
+
+            支持的平台：weixin, telegram, feishu, qywx。
+
+            ```bash
+            # 同时启动微信和 Telegram
+            x claw start --weixin --telegram
+
+            # 自动检测可用平台
+            x claw start
+            ```
+          en: |
+            `x claw` parameter interface overhaul — now supports multiple platforms running simultaneously.
+
+            Previously you had to run `x claw service start weixin`, and running multiple platforms meant multiple instances. That was a bit of a hassle.
+            Now it's `x claw start`, and you can pass `--weixin --telegram` to run several platforms at once.
+
+            If you don't specify a platform, it auto-detects logged-in IM platforms and falls back to weixin by default.
+
+            Supported platforms: weixin, telegram, feishu, qywx.
+
+            ```bash
+            # start weixin and telegram together
+            x claw start --weixin --telegram
+
+            # auto-detect available platforms
+            x claw start
+            ```
+    qr:
+      update:
+        - cn: |
+            `x qr` 实验性提供纯 AWK 二维码生成方案，不依赖任何二进制。
+
+            为了实现跨平台兼容性，z7/mod/qr 模块现在内置了纯 AWK 实现的二维码生成逻辑。
+            不依赖 qrencode 或其他外部工具，在任何安装了 AWK 的环境下都能工作。
+            核心实现使用了 gawk/mawk/nawk/gawk 兼容的语法，同时提供了 posix awk 的回退逻辑。
+          en: |
+            `x qr` experimentally provides a pure AWK QR code generation solution with no binary dependencies.
+
+            For cross-platform compatibility, the z7/mod/qr module now includes a pure AWK implementation of QR code generation.
+            No dependencies on qrencode or other external tools — works in any environment with AWK installed.
+            Core implementation uses gawk/mawk/nawk compatible syntax with posix awk fallback logic.
+    ossinsight:
+      add:
+        - cn: |
+            `x ossinsight` 实验性模块 —— GitHub 开源项目分析数据的 CLI 工具。
+
+            通过 OSSInsight API 获取 GitHub 热门仓库、collection 排名、仓库 star 历史趋势、Issue/PR 创建者统计、国家/组织分布等数据。
+            适合在终端里快速查询某个项目或语言的趋势情况。
+          en: |
+            `x ossinsight` experimental module —— CLI tool for GitHub open source project analytics data.
+
+            Fetch GitHub trending repos, collection rankings, stargazer history trends, Issue/PR creator stats, country/org distribution via OSSInsight API.
+            Ideal for quickly checking trends for a project or language in the terminal.
+    umami:
+      update:
+        - cn: |
+            `x umami` 模块升级 —— 全面支持 Umami V2 API，同时保持对自托管场景的兼容。
+
+            Umami V1 API 已废弃（存在安全漏洞），新版 CLI 全面转向 V2 API (https://api.umami.is/v2)。
+            云端用户只需配置 token 即可使用，自托管用户可指定 endpoint。
+            新增 `--profile` 功能支持多站点配置管理。
+          en: |
+            `x umami` module upgraded —— full Umami V2 API support with self-hosted compatibility.
+
+            Umami V1 API is deprecated (security vulnerabilities). The new CLI fully switches to V2 API (https://api.umami.is/v2).
+            Cloud users just need to configure their token. Self-hosted users can specify their own endpoint.
+            New `--profile` feature enables multi-site configuration management.
+  blog: null
+  name: v0.9.4
+  alpha: true
+  beta: true
+  latest: true
 v0.9.3:
   sum: 7099d76e74ad242bd4dc63c21b493482ee49172e191dcc8081f334e7c5d10a98b77f56d6031906830d4913bddfab5263d44abb860ef92fa7785a01b29b7d39e1
   date: 2026-05-06 12:34:53+0000
@@ -87,8 +206,6 @@ v0.9.3:
             This feature is designed for x tmo — when tmo kills a subshell, it needs to clean up the entire process tree to avoid leaving orphaned processes.
   blog: null
   name: v0.9.3
-  alpha: true
-  beta: true
 v0.9.2:
   sum: abb3e6a0ef47a5d74fb4220721eb9ca73df465ba41024879a01e3012da5c5f6a5e77a8a1287e7f2c4b9cb71f10f2d3e9c848c87ba4fc25a9a2c218b3506f69ba
   date: 2026-05-01 03:55:57+0000
@@ -341,7 +458,6 @@ v0.9.1:
             ```
   blog: null
   name: v0.9.1
-  latest: true
 v0.9.0:
   sum: 7839d4467e80f47bf51652dc4906caf5959fab436255af21315150707560d7d5182e024be47422032af60e5e6eea36bc55054be8c9e0ef6d5c94267edd1f492c
   date: 2026-04-25 15:52:13+0000
