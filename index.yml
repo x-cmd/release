@@ -87,7 +87,7 @@ v0.9.4:
             No dependencies on qrencode or other external tools — works in any environment with AWK installed.
             Core implementation uses gawk/mawk/nawk compatible syntax with posix awk fallback logic.
     ossinsight:
-      add:
+      update:
         - cn: |
             `x ossinsight` 实验性模块 —— GitHub 开源项目分析数据的 CLI 工具。
 
