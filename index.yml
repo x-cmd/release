@@ -1,3 +1,235 @@
+v0.9.5:
+  sum: 94fb5c681112fa473c9cda8f33b085de0ed0690a9a9b2902537dac7232641d00463c5bf3dc6eb43db5929a80d9972ed21b78b8e60c4cf27efef3cf8a4287d7bd
+  date: 2026-05-19 13:04:42+0000
+  change:
+    ask:
+      update:
+        - cn: |
+            新增 `ask` 模块 —— 一个帮你过滤 AI 废话、直接拿结果的小工具。
+
+            我用 AI 的时候有个痛点：它总是先解释半天思路，再给出答案。
+            有时候我只想要一段代码、一个翻译，或者一条 commit message，不想看它的"思考过程"。
+            所以 `x ask` 的设计就很简单：你提问，它给结果，中间那些多余的解释和推理都帮你过滤掉。
+
+            适合这些场景：
+            - 快速生成代码片段，直接贴到编辑器里用
+            - 翻译文本，只输出译文不加注释
+            - 生成 Conventional Commits 格式的提交信息
+            - 总结长文本，输出要点列表
+            - 任何你只想"要答案"的时刻
+
+            而且失败时会返回非零退出码，可以嵌进脚本里做自动化，挺顺手。
+
+            ```bash
+            # 向 AI 提问，只获取一句话解释
+            x ask "What is quantum mechanics? Answer in one sentence."
+
+            # 生成 Python 代码，直接复制使用
+            x ask "Write a Python one-liner that prints current timestamp"
+
+            # 生成提交信息
+            x ask "Generate a git commit message for 'fix: corrected typo in README'"
+
+            # 翻译文本，只输出译文
+            x ask "Translate 'hello world' into French, output translation only"
+
+            # 总结长文本为要点
+            x ask "Summarize the following text in 3 bullet points: ..."
+            ```
+          en: |
+            Added `ask` module —— a small tool that filters AI fluff and gives you the result directly.
+
+            Here's my pain point with AI: it always explains its reasoning at length before getting to the answer.
+            Sometimes I just want a code snippet, a translation, or a commit message. I don't need to see its "thought process."
+            So `x ask` is designed to be simple: you ask, it answers, and all the extra explanations get filtered out.
+
+            Good for:
+            - Quickly generating code snippets to paste into your editor
+            - Translating text with only the output, no commentary
+            - Generating Conventional Commits style messages
+            - Summarizing long text into bullet points
+            - Any time you just want "the answer"
+
+            Plus it returns a non-zero exit code on failure, so you can embed it in scripts for automation. Pretty handy.
+
+            ```bash
+            # Ask a question, get a one-sentence answer
+            x ask "What is quantum mechanics? Answer in one sentence."
+
+            # Generate Python code, ready to copy and use
+            x ask "Write a Python one-liner that prints current timestamp"
+
+            # Generate a commit message
+            x ask "Generate a git commit message for 'fix: corrected typo in README'"
+
+            # Translate text, output only
+            x ask "Translate 'hello world' into French, output translation only"
+
+            # Summarize long text into bullet points
+            x ask "Summarize the following text in 3 bullet points: ..."
+            ```
+    git:
+      update:
+        - cn: |
+            `x git ci/commit` 新增 AI 自动生成提交信息 —— 写 commit message 这件事，我做了一个偷懒的优化。
+
+            每次改完代码，脑子里已经有"这是个 fix"或者"加了个功能"的概念，但还是要手动组织语言写成 commit message。
+            尤其是不确定该用 `feat:` 还是 `fix:` 的时候，得去翻规范，有点累。
+
+            所以现在 `x git ci` 和 `x git commit` 做了个小优化：
+            - **不带参数运行**：自动调用 AI 分析你的变更内容，生成一条规范的 Conventional Commits 格式提交信息，直接帮你填好
+            - **带参数运行**：一切照旧，完全走原生 git，不干扰你已有的工作流
+
+            也就是说，你平时该咋用还咋用，只有懒得写 message 的时候，直接 `x git ci` 甩给 AI，省事。
+
+            ```bash
+            # AI 自动生成提交信息
+            x git ci
+            x git commit
+
+            # 带参数时完全走原生 git，不受影响
+            x git commit -m "manual message"
+            x git commit -am "quick fix"
+            ```
+          en: |
+            `x git ci/commit` now supports AI-generated commit messages —— I made a lazy optimization for writing commit messages.
+
+            You finish your changes, you already know in your head "this is a fix" or "I added a feature," but then you still have to manually craft the commit message.
+            Especially when you're not sure whether to use `feat:` or `fix:` — end up digging through the spec. Kind of tedious.
+
+            So `x git ci` and `x git commit` got a small upgrade:
+            - **Run without args**: AI automatically analyzes your changes and generates a proper Conventional Commits style message for you
+            - **Run with args**: Business as usual, passes straight through to native git, doesn't interfere with your existing workflow
+
+            In other words, use it however you normally would. Only when you don't feel like writing a message, just `x git ci` and let AI handle it.
+
+            ```bash
+            # AI auto-generates the commit message
+            x git ci
+            x git commit
+
+            # With args, it falls back to native git, no interference
+            x git commit -m "manual message"
+            x git commit -am "quick fix"
+            ```
+    claw:
+      update:
+        - cn: |
+            `claw` 模块优化 —— 自托管 AI Agent 网关，这次做了运行时的优化。
+
+            主要改进：
+            - 增加了更多运行时 log，排查问题更方便
+            - 记录了更多的状态信息，监控网关运行更直观
+
+            用法不变，一条命令启动：
+
+            ```bash
+            x claw start
+            ```
+
+            支持多平台同时运行：`x claw start --weixin --telegram`。
+            查看网关日志：`x claw log`。
+          en: |
+            `claw` module optimization —— self-hosted AI Agent gateway, this time it's a runtime improvement.
+
+            Key changes:
+            - Added more runtime logging for easier troubleshooting
+            - Recorded more state information for clearer gateway monitoring
+
+            Usage stays the same, one command to start:
+
+            ```bash
+            x claw start
+            ```
+
+            Supports multiple platforms: `x claw start --weixin --telegram`.
+            View gateway logs: `x claw log`.
+    install:
+      update:
+        - cn: |
+            `x install` 升级 —— 装东西这件事，我想整顺手点。
+
+            每次要装个工具，得先想"这玩意儿该用 brew 还是 apt 还是 npm"，不同系统还得换不同的命令，有点累。
+            而且最近 AI Agent 闹得凶，它们经常需要知道"怎么安装某个工具"，但又不想真的执行安装，只想拿到命令或者信息就行。
+
+            所以这次 `x install` 做了几件事：
+
+            - **skill 也能装了**：`x install skill/anthropics/pptx clawhub/skill-vetter`，通过 `skill/*` 和 `clawhub/*` 格式直接装 skill，不用手动 clone 再配置
+            - **前缀语法，一眼知道从哪装**：`brew/jq`、`apt/git`、`npm/express`、`sys/bun`、`best/jq`，不用背各个包管理器的命令
+            - **三种自动化模式**：`--best` 自动挑最优方式，`--withtool` 指定用哪个包管理器，`--sys` 走系统自带的
+            - **AI Agent 友好**：`--printinfo` 和 `--printcmd` 只查不装，输出信息或命令本身，适合集成进脚本或喂给 AI。还可以跟 `--best` 组合，只查最佳方案的信息
+            - **先看看系统有啥**：`--available-tool` 查询支持的包管理器，加 `--installed` 只看已装的
+
+            ```bash
+            # 默认进入交互模式，选一个装
+            x install
+
+            # 装 skill，一键搞定
+            x install skill/anthropics/pptx
+
+            # 用前缀指定来源，不用记命令
+            x install brew/jq
+
+            # 自动选择最佳方式安装，适合 CI/CD
+            x install --best bun
+
+            # 优先用 brew，其次 xpkg
+            x install --best --priority brew,xpkg bun
+
+            # 只输出安装命令，不执行，适合喂给 AI
+            x install --printcmd bun
+            x install --best --printcmd bun
+
+            # 用指定包管理器装多个软件
+            x install --withtool brew vim bun
+
+            # 看看系统装了哪些包管理器
+            x install --available-tool --installed
+            ```
+          en: |
+            `x install` upgraded —— installing things is something I've wanted to streamline for a while.
+
+            Every time you need a tool, you have to think "should I use brew, apt, or npm for this?" and switch commands depending on the system. Kind of tedious.
+            Plus AI Agents are getting pretty popular lately — they often need to know "how to install something" without actually running the install, just getting the command or info.
+
+            So here's what `x install` got this time:
+
+            - **Skills can be installed too**: `x install skill/anthropics/pptx clawhub/skill-vetter`, install skills via `skill/*` and `clawhub/*` format, no more manual cloning and configuring
+            - **Prefix syntax, source at a glance**: `brew/jq`, `apt/git`, `npm/express`, `sys/bun`, `best/jq` — no need to memorize different package manager commands
+            - **Three automation modes**: `--best` auto-selects the optimal method, `--withtool` lets you pick the package manager, `--sys` uses the system one
+            - **AI Agent friendly**: `--printinfo` and `--printcmd` query without installing, outputting info or the command itself, great for scripting or feeding to AI. Can also combine with `--best` to query only the optimal method's info
+            - **Check what's available**: `--available-tool` queries supported package managers, add `--installed` to show only installed ones
+
+            ```bash
+            # default interactive mode, pick one to install
+            x install
+
+            # install a skill, one shot
+            x install skill/anthropics/pptx
+
+            # use prefix to specify source, no command memorization needed
+            x install brew/jq
+
+            # auto-select the best method, great for CI/CD
+            x install --best bun
+
+            # prefer brew, fallback to xpkg
+            x install --best --priority brew,xpkg bun
+
+            # print install command without executing, perfect for AI feeding
+            x install --printcmd bun
+            x install --best --printcmd bun
+
+            # use a specific package manager for multiple packages
+            x install --withtool brew vim bun
+
+            # see what package managers are installed on this system
+            x install --available-tool --installed
+            ```
+  blog: null
+  name: v0.9.5
+  alpha: true
+  beta: true
 v0.9.4:
   sum: 08341a16f1c5dfc187d348c1fd8b53c7e1f6fe3720e67ad8807e6867e5748e665ee1fd364260480fd74a08258ff5b20a7c403fcaecd888966333cda69667f560
   date: 2026-05-09 15:49:02+0000
@@ -114,8 +346,6 @@ v0.9.4:
             New `--profile` feature enables multi-site configuration management.
   blog: null
   name: v0.9.4
-  alpha: true
-  beta: true
   latest: true
 v0.9.3:
   sum: 7099d76e74ad242bd4dc63c21b493482ee49172e191dcc8081f334e7c5d10a98b77f56d6031906830d4913bddfab5263d44abb860ef92fa7785a01b29b7d39e1
