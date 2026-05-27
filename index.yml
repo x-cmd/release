@@ -1,3 +1,177 @@
+v0.9.6:
+  sum: 3a85ce8721ecf46da769bf226347112416f4054337ea74cbc4b3eafe4df8f41fa5dd7e9f153eb4798a773a2225be80d3d86d6cc35b890fe0cf8f4b04133ffd91
+  date: 2026-05-27 13:35:08+0000
+  change:
+    slash:
+      update:
+        - cn: |
+            新增 `slash` 模块 —— 我想在终端里直接跑 agent 的 slash command，不用先打开 Claude 或 Codex。
+
+            以前想跑个 slash command 得先打开对应工具，现在不用了。交互环境下自动加载，直接在终端敲 `/command` 就能执行，顺手很多。
+
+            自动扫描 `.claude`、`.agents`、`.codex` 这些常见目录，支持 `commands/*.md` 和 `skills/*/SKILL.md`，走 `x agent request` 执行，不绑死特定平台。
+
+            ```bash
+            # 扫描并注册所有 slash command
+            x slash init
+
+            # 查看已注册的命令
+            x slash ls
+
+            # 直接运行
+            /my-skill 帮我写个脚本
+
+            # 查看命令详情
+            /my-skill --info
+            ```
+
+            还是测试阶段，有问题欢迎提 issue。
+          en: |
+            Added `slash` module —— so I can run agent slash commands from the terminal without opening Claude or Codex first.
+
+            Used to have to open Claude Code or Codex just to run a slash command. Not anymore — auto-loaded in interactive shells, just type `/command` and go.
+
+            Auto-scans the usual directories like `.claude`, `.agents`, and `.codex`. Supports both `commands/*.md` and `skills/*/SKILL.md`. Runs through `x agent request`, so it's not locked to any specific platform.
+
+            ```bash
+            # Scan and register all slash commands
+            x slash init
+
+            # List registered commands
+            x slash ls
+
+            # Run directly
+            /my-skill help me write a script
+
+            # View command details
+            /my-skill --info
+            ```
+
+            Still early days — file an issue if something breaks.
+    claw:
+      update:
+        - cn: |
+            为 `claw` 新增 `connect` 和 `disconnect` 命令 —— 把 IM 平台连接管理抽成了独立接口，`x claw` 可以自己管连哪个、断哪个。
+
+            `x claw start` 之后，通过这个接口接更多 IM 平台。比如飞书先启动单聊，再 `x claw connect feishu:oc_xxx` 把指定群聊拉进来。
+            支持同时连多个，格式是 `im` 或 `im:chatid`：
+            - `weixin` —— 微信
+            - `telegram` —— Telegram
+            - `qywx` —— 企业微信
+            - `feishu:groups` —— 飞书所有群聊
+            - `feishu:oc_xxx` —— 飞书指定群聊
+
+            用户和 agent 都能灵活管理连了哪些 IM 平台。`x claw connect --ls` 扫一眼当前连接，`x claw disconnect` 断开时顺便停掉后台服务，比较干净。
+
+            ```bash
+            # 同时连接微信、Telegram 和飞书所有群聊
+            x claw connect weixin telegram feishu:groups
+
+            # 连接飞书指定群聊
+            x claw connect feishu:oc_xxx
+
+            # 查看当前活跃连接
+            x claw connect --ls
+
+            # 断开微信和飞书
+            x claw disconnect weixin feishu:groups
+            ```
+
+            还是测试阶段，有问题欢迎提 issue。
+          en: |
+            Added `connect` and `disconnect` commands to `claw` —— pulled IM platform connection management into a dedicated interface, so `x claw` manages its own links.
+
+            After `x claw start`, use this to hook up more IM platforms. For example, start Feishu one-on-one first, then `x claw connect feishu:oc_xxx` to bring in a specific group.
+            Supports multiple platforms at once, using `im` or `im:chatid` format:
+            - `weixin` —— WeChat
+            - `telegram` —— Telegram
+            - `qywx` —— WeCom
+            - `feishu:groups` —— all Feishu groups
+            - `feishu:oc_xxx` —— specific Feishu group
+
+            Both users and agents can flexibly manage which IM platforms are hooked up. `x claw connect --ls` gives a quick overview of active links. `x claw disconnect` stops the background services too, keeping things tidy.
+
+            ```bash
+            # Connect WeChat, Telegram and all Feishu groups
+            x claw connect weixin telegram feishu:groups
+
+            # Connect a specific Feishu group
+            x claw connect feishu:oc_xxx
+
+            # List active connections
+            x claw connect --ls
+
+            # Disconnect WeChat and Feishu
+            x claw disconnect weixin feishu:groups
+            ```
+
+            Still early days — file an issue if something breaks.
+    clawhub:
+      update:
+        - cn: |
+            新增 `x clawhub explore` 命令 —— 在终端里浏览 clawhub 上最新上架的 skill。
+
+            之前想看 clawhub 上有没有好用的新 skill，得打开浏览器去网站上翻，来回切换挺麻烦的。
+            现在 `x clawhub explore` 直接在终端里搞定，按下载量、评分、最新上架、trending 随便排，支持分页翻，不用离开命令行。
+
+            默认返回 25 条，`--limit/-n` 可以调到最多 200 条。想只看审核过的 skill 加 `--non-suspicious-only` 就行。
+
+            ```bash
+            # 浏览最新上架的 skill
+            x clawhub explore
+
+            # 看看最近什么下载量最高
+            x clawhub explore --sort downloads --limit 10
+
+            # 追一下 trending
+            x clawhub explore --sort trending
+
+            # 只看已审核的
+            x clawhub explore --non-suspicious-only
+            ```
+          en: |
+            Added `x clawhub explore` —— browse the latest skills on clawhub right from the terminal.
+
+            Before, checking what's new on clawhub meant opening a browser, switching windows — kind of a hassle.
+            Now `x clawhub explore` handles it in the terminal: sort by downloads, rating, newest, or trending, paginate through results, all without leaving the command line.
+
+            Returns 25 by default, adjustable up to 200 with `--limit/-n`. Add `--non-suspicious-only` to filter for reviewed skills only.
+
+            ```bash
+            # Browse the latest skills
+            x clawhub explore
+
+            # See what's getting the most downloads
+            x clawhub explore --sort downloads --limit 10
+
+            # Check what's trending
+            x clawhub explore --sort trending
+
+            # Reviewed skills only
+            x clawhub explore --non-suspicious-only
+            ```
+        - cn: |
+            中国区用户默认通过火山引擎提供的镜像站（cn.clawhub-mirror.com）加速访问，下载速度会快不少。
+
+            不过镜像站和主站之间有个同步时间差，有时候 clawhub 上刚发布的 skill，镜像站这边还没同步过来，搜不到也下不了。
+            遇到这种情况不用等，切回主站就行：
+
+            ```bash
+            x clawhub --cfg endpoint="https://clawhub.ai"
+            ```
+          en: |
+            Users in mainland China are routed through the Volcano Engine mirror (cn.clawhub-mirror.com) by default, which makes downloads noticeably faster.
+
+            The tradeoff is a sync delay — newly published skills on clawhub may not appear on the mirror right away.
+            If you run into this, just switch back to the primary site:
+
+            ```bash
+            x clawhub --cfg endpoint="https://clawhub.ai"
+            ```
+  blog: null
+  name: v0.9.6
+  alpha: true
+  beta: true
 v0.9.5:
   sum: 94fb5c681112fa473c9cda8f33b085de0ed0690a9a9b2902537dac7232641d00463c5bf3dc6eb43db5929a80d9972ed21b78b8e60c4cf27efef3cf8a4287d7bd
   date: 2026-05-19 13:04:42+0000
@@ -226,10 +400,9 @@ v0.9.5:
             # see what package managers are installed on this system
             x install --available-tool --installed
             ```
-  blog: null
+  blog: /blog/260520
   name: v0.9.5
-  alpha: true
-  beta: true
+  latest: true
 v0.9.4:
   sum: 08341a16f1c5dfc187d348c1fd8b53c7e1f6fe3720e67ad8807e6867e5748e665ee1fd364260480fd74a08258ff5b20a7c403fcaecd888966333cda69667f560
   date: 2026-05-09 15:49:02+0000
@@ -344,9 +517,8 @@ v0.9.4:
             Umami V1 API is deprecated (security vulnerabilities). The new CLI fully switches to V2 API (https://api.umami.is/v2).
             Cloud users just need to configure their token. Self-hosted users can specify their own endpoint.
             New `--profile` feature enables multi-site configuration management.
-  blog: null
+  blog: /blog/260510
   name: v0.9.4
-  latest: true
 v0.9.3:
   sum: 7099d76e74ad242bd4dc63c21b493482ee49172e191dcc8081f334e7c5d10a98b77f56d6031906830d4913bddfab5263d44abb860ef92fa7785a01b29b7d39e1
   date: 2026-05-06 12:34:53+0000
@@ -434,7 +606,7 @@ v0.9.3:
           en: |-
             Added `x kill tree` subcommand to recursively kill a process and all its children.
             This feature is designed for x tmo — when tmo kills a subshell, it needs to clean up the entire process tree to avoid leaving orphaned processes.
-  blog: null
+  blog: /blog/260507
   name: v0.9.3
 v0.9.2:
   sum: abb3e6a0ef47a5d74fb4220721eb9ca73df465ba41024879a01e3012da5c5f6a5e77a8a1287e7f2c4b9cb71f10f2d3e9c848c87ba4fc25a9a2c218b3506f69ba
@@ -602,7 +774,7 @@ v0.9.2:
             # check how many messages are currently backlogged
             x tailer pending /tmp/mq
             ```
-  blog: null
+  blog: /blog/260501
   name: v0.9.2
 v0.9.1:
   sum: de0a913291dc439bee1819d5faa77189a64272225d1f8352a4290871f74604575d48457635766c3cf9b1fefcc37fc419d369518e4baa392498e5364aace595d8
@@ -686,7 +858,7 @@ v0.9.1:
             # Max mode and 1M context configured — every `claude` session auto-uses it
             x claude use ds
             ```
-  blog: null
+  blog: /blog/260429
   name: v0.9.1
 v0.9.0:
   sum: 7839d4467e80f47bf51652dc4906caf5959fab436255af21315150707560d7d5182e024be47422032af60e5e6eea36bc55054be8c9e0ef6d5c94267edd1f492c
@@ -810,7 +982,7 @@ v0.9.0:
             ```
 
             If you find it works well for you, feel free to share your experience.
-  blog: null
+  blog: /blog/260426
   name: v0.9.0
 v0.8.14:
   sum: e2f2f43a2a4ff9d21be960dcfc4df6c482fcf4a4a6ffe3f4c016c420ada1c31f8b38b095bfbfbde2c5b1b403ea5f292299961fccc87d147ea777017da585efbe
