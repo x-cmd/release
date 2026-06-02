@@ -2,7 +2,7 @@
 
 [x-cmd](https://github.com/x-cmd/x-cmd) 全部发布包的集中仓库。
 
-**[x-cmd](https://www.x-cmd.com)** 是一个便携式包管理器和 Shell 工具集，提供 600+ 工具和 1000+ 软件包，无需 sudo，支持 bash/dash/zsh，运行在 Linux、macOS 和 WSL 上。
+**[x-cmd](https://www.x-cmd.com)** 是一个 POSIX Shell 标准库——为 Shell 脚本提供基础库，内置实用工具集，并包含自托管的包管理模块（`x pk`）。支持 bash/dash/zsh，运行在 Linux、macOS 和 WSL 上，无需 sudo。
 
 > 主仓库：[x-cmd/x-cmd](https://github.com/x-cmd/x-cmd) | 官网：[x-cmd.com](https://www.x-cmd.com)
 

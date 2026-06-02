@@ -2,7 +2,7 @@
 
 Central repository for all [x-cmd](https://github.com/x-cmd/x-cmd) release artifacts.
 
-**[x-cmd](https://www.x-cmd.com)** is a portable package manager and shell toolkit that provides 600+ tools and 1000+ packages — no sudo required. It runs on bash/dash/zsh across Linux, macOS, and WSL.
+**[x-cmd](https://www.x-cmd.com)** is a POSIX shell standard library — a foundation for shell scripting that includes built-in utility tools and a self-hosted package manager module (`x pk`). It runs on bash/dash/zsh across Linux, macOS, and WSL, with no sudo required.
 
 > Main repo: [x-cmd/x-cmd](https://github.com/x-cmd/x-cmd) | Website: [x-cmd.com](https://www.x-cmd.com)
 
