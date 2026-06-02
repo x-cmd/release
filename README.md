@@ -5,6 +5,8 @@ Central repository for all [x-cmd](https://github.com/x-cmd/x-cmd) release artif
 **[x-cmd](https://www.x-cmd.com)** is a POSIX shell standard library — a foundation for shell scripting that includes built-in utility tools and a self-hosted package manager module (`x pkg`). It runs on bash/dash/zsh across Linux, macOS, and WSL, with no sudo required.
 
 > Main repo: [x-cmd/x-cmd](https://github.com/x-cmd/x-cmd) | Website: [x-cmd.com](https://www.x-cmd.com)
+>
+> The source repo [x-cmd/x-cmd](https://github.com/x-cmd/x-cmd) follows the same mirroring principle and is also available on [Codeberg](https://codeberg.org/x-cmd/x-cmd) and [Gitee](https://gitee.com/x-cmd/x-cmd).
 
 ## Why a dedicated release repo?
 
