@@ -70,4 +70,4 @@ git clone https://gitee.com/x-cmd/release.git
 
 ## License
 
-See [LICENSE](LICENSE).
+Apache License 2.0 — Copyright Li Junhao 李均豪 and X-CMD Team. See [LICENSE](LICENSE).
