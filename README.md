@@ -52,10 +52,30 @@ Because everything is just git, the release system is easy to extend and adapt:
 ## Structure
 
 ```
-index.yml     Version index with checksums
-dist/         Release artifacts organized by module
-sum/          Integrity checksums
+index.yml              Version index with checksums, dates, and changelogs
+dist/
+  └── v{version}/
+      ├── allinone.tgz           Minimal bootstrap package
+      ├── full.tgz               Full package bundle
+      ├── x-cmd_{v}_all.apk      Alpine Linux package (since v0.9.6)
+      ├── x-cmd_{v}_all.deb      Debian/Ubuntu package (since v0.9.6)
+      ├── x-cmd_{v}_all.rpm      Fedora/RHEL package (since v0.9.6)
+      └── x-cmd_{v}_all.pkg.tar.zst  Arch Linux package (since v0.9.6)
+sum/                   Per-file integrity checksums (SHA-512)
 ```
+
+### Package formats (v0.9.6+)
+
+Starting from v0.9.6, native packages are provided for major Linux distributions:
+
+| Format | Distribution | Install |
+|--------|-------------|---------|
+| `.apk` | Alpine Linux | `apk add x-cmd_0.9.6_all.apk` |
+| `.deb` | Debian, Ubuntu | `dpkg -i x-cmd_0.9.6_all.deb` |
+| `.rpm` | Fedora, RHEL, CentOS | `rpm -i x-cmd_0.9.6_all.rpm` |
+| `.pkg.tar.zst` | Arch Linux | `pacman -U x-cmd_0.9.6_all.pkg.tar.zst` |
+
+Earlier versions (pre-v0.9.6) ship only `allinone.tgz` and `full.tgz`.
 
 ## Usage
 

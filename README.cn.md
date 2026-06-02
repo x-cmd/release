@@ -52,10 +52,30 @@ diff <(cd mirror-a && git rev-parse HEAD) <(cd mirror-b && git rev-parse HEAD)
 ## 目录结构
 
 ```
-index.yml     版本索引（含校验和）
-dist/         按模块组织的发布包
-sum/          完整性校验文件
+index.yml              版本索引（含校验和、日期、更新日志）
+dist/
+  └── v{version}/
+      ├── allinone.tgz           最小引导包
+      ├── full.tgz               完整安装包
+      ├── x-cmd_{v}_all.apk      Alpine Linux 包（v0.9.6 起）
+      ├── x-cmd_{v}_all.deb      Debian/Ubuntu 包（v0.9.6 起）
+      ├── x-cmd_{v}_all.rpm      Fedora/RHEL 包（v0.9.6 起）
+      └── x-cmd_{v}_all.pkg.tar.zst  Arch Linux 包（v0.9.6 起）
+sum/                   每个文件的完整性校验（SHA-512）
 ```
+
+### 包格式（v0.9.6 起）
+
+从 v0.9.6 开始，为主流 Linux 发行版提供原生包：
+
+| 格式 | 发行版 | 安装命令 |
+|------|--------|----------|
+| `.apk` | Alpine Linux | `apk add x-cmd_0.9.6_all.apk` |
+| `.deb` | Debian、Ubuntu | `dpkg -i x-cmd_0.9.6_all.deb` |
+| `.rpm` | Fedora、RHEL、CentOS | `rpm -i x-cmd_0.9.6_all.rpm` |
+| `.pkg.tar.zst` | Arch Linux | `pacman -U x-cmd_0.9.6_all.pkg.tar.zst` |
+
+v0.9.6 之前的版本仅提供 `allinone.tgz` 和 `full.tgz`。
 
 ## 使用方法
 
