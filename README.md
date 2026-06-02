@@ -16,9 +16,14 @@ Individual x-cmd packages are typically 1–5 MB (around 2–3 MB each). At this
 
 Relying solely on GitHub Releases would create a single point of failure — subject to GitHub's availability, bandwidth limits, and rate limiting. A git-based approach is platform-agnostic.
 
-### Multi-mirror architecture
+### Multi-mirror — tamper-proof by design
 
-The repo is mirrored across multiple platforms, ensuring global availability and fairness:
+The repo is mirrored across three independent platforms. This is not just for availability — it provides **tamper resistance**:
+
+- Every mirror holds an identical copy of all artifacts, including cryptographic checksums (`sum/`, `index.yml`).
+- If any single platform is compromised, users can verify integrity by comparing against the other two mirrors.
+- No single platform operator can silently alter release artifacts without detection.
+- Users can `git clone` from any mirror and cross-check commit hashes and checksums.
 
 | Platform | URL |
 |----------|-----|
@@ -26,7 +31,15 @@ The repo is mirrored across multiple platforms, ensuring global availability and
 | Codeberg | https://codeberg.org/x-cmd/release |
 | Gitee | https://gitee.com/x-cmd/release |
 
-Anyone can replicate the full release set with a simple `git clone` from any mirror.
+**How to verify:** Clone from two different mirrors and compare:
+
+```bash
+git clone https://github.com/x-cmd/release.git   mirror-a
+git clone https://codeberg.org/x-cmd/release.git  mirror-b
+diff <(cd mirror-a && git rev-parse HEAD) <(cd mirror-b && git rev-parse HEAD)
+```
+
+If the commit hashes match, the artifacts are untampered.
 
 ## Structure
 

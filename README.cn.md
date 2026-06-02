@@ -16,9 +16,14 @@ x-cmd 全部发布包的集中仓库。
 
 如果仅依赖 GitHub Releases，会存在单点故障风险 —— 受制于 GitHub 的可用性、带宽限制和频率限制。基于 git 的方案是平台无关的。
 
-### 多镜像架构
+### 多镜像 —— 天然防篡改
 
-仓库在多个平台之间镜像，确保全球可用性和公平性：
+仓库在三个独立平台之间镜像。这不仅是为了可用性，更关键的是提供**防篡改保障**：
+
+- 每个镜像持有完全相同的制品副本，包括加密校验和（`sum/`、`index.yml`）
+- 如果任一平台被篡改，用户可以通过对比另外两个镜像发现异常
+- 任何单一平台运营商都无法在不被发现的情况下静默修改发布包
+- 用户可以从任意镜像 `git clone`，然后交叉比对提交哈希和校验和
 
 | 平台 | 地址 |
 |------|------|
@@ -26,7 +31,15 @@ x-cmd 全部发布包的集中仓库。
 | Codeberg | https://codeberg.org/x-cmd/release |
 | Gitee | https://gitee.com/x-cmd/release |
 
-任何人都可以从任意镜像通过 `git clone` 获取完整的发布集。
+**验证方法：** 从两个不同镜像克隆并对比：
+
+```bash
+git clone https://github.com/x-cmd/release.git   mirror-a
+git clone https://codeberg.org/x-cmd/release.git  mirror-b
+diff <(cd mirror-a && git rev-parse HEAD) <(cd mirror-b && git rev-parse HEAD)
+```
+
+提交哈希一致，说明制品未被篡改。
 
 ## 目录结构
 
