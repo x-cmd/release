@@ -41,6 +41,14 @@ diff <(cd mirror-a && git rev-parse HEAD) <(cd mirror-b && git rev-parse HEAD)
 
 If the commit hashes match, the artifacts are untampered.
 
+### Portable and extensible
+
+Because everything is just git, the release system is easy to extend and adapt:
+
+- **Add more mirrors** — Need a new region or platform? Just push to another git host. No tooling changes required.
+- **Private mirrors** — Organizations can maintain internal mirrors for air-gapped or self-hosted environments. Clone once, serve internally.
+- **No vendor lock-in** — The entire release set is a standard git repo. Migrate to any git hosting provider at any time.
+
 ## Structure
 
 ```
