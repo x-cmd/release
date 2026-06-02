@@ -1,6 +1,10 @@
 # x-cmd/release
 
-x-cmd 全部发布包的集中仓库。
+[x-cmd](https://github.com/x-cmd/x-cmd) 全部发布包的集中仓库。
+
+**[x-cmd](https://www.x-cmd.com)** 是一个便携式包管理器和 Shell 工具集，提供 600+ 工具和 1000+ 软件包，无需 sudo，支持 bash/dash/zsh，运行在 Linux、macOS 和 WSL 上。
+
+> 主仓库：[x-cmd/x-cmd](https://github.com/x-cmd/x-cmd) | 官网：[x-cmd.com](https://www.x-cmd.com)
 
 ## 为什么使用独立仓库？
 
