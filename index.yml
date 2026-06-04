@@ -1,3 +1,123 @@
+v0.9.7:
+  sum: e2d2b3ec4b51e44960e56eac391044ddcd8c1007550957b4b2595cdc1e6d1f39cdfd71ef115048384181709a7fe1aacda794fe40a3a9e0c393eae86658ee7649
+  date: 2026-06-04 10:25:09+0000
+  change:
+    eget:
+      update:
+        - cn: |
+            新增 `eget` 模块 —— 从 GitHub/GitLab/Codeberg Release 直接下载安装二进制文件，纯 shell 实现，零依赖。
+
+            之前装 CLI 工具要么走包管理器（版本经常滞后），要么自己去 Release 页面找对的 asset，下载解压放到 PATH，挺费劲的。
+            `x eget` 给一个 `user/repo`，自动找到匹配你系统的二进制文件，一步到位。
+
+            和 `x pkg` 互为补充：`x pkg` 是 x-cmd 官方打包维护的稳定发行渠道，`x eget` 直接从作者 Release 拉，所有版本都能拿到。
+
+            ```bash
+            # 安装到 ~/.local/bin
+            x eget --to ~/.local/bin BurntSushi/ripgrep
+
+            # 即下即运行
+            x eget snap BurntSushi/ripgrep --version
+
+            # 列出所有 release 版本
+            x eget ls BurntSushi/ripgrep
+            ```
+
+            目前还是早期版本，后续计划加入声明式批量安装、版本升级管理等。有问题欢迎提 issue。
+          en: |
+            Added `eget` module —— download and install binaries directly from GitHub/GitLab/Codeberg Releases. Pure shell, zero dependencies.
+
+            Installing CLI tools usually means either package managers (with lagging versions) or manually hunting through Release pages for the right asset — it's tedious.
+            `x eget` takes a `user/repo`, finds the right binary for your system, and installs it in one shot.
+
+            Complements `x pkg`: `x pkg` is x-cmd's curated stable channel, `x eget` pulls directly from the author's releases — every version available.
+
+            ```bash
+            # Install to ~/.local/bin
+            x eget --to ~/.local/bin BurntSushi/ripgrep
+
+            # Run instantly
+            x eget snap BurntSushi/ripgrep --version
+
+            # List all releases
+            x eget ls BurntSushi/ripgrep
+            ```
+
+            Early days —— declarative batch install and upgrade management are on the roadmap. File an issue if something breaks.
+    claw:
+      update:
+        - cn: |
+            优化 `x claw` 的内部处理 —— 说实话，之前遇到报错的时候用户完全不知道发生了啥，挺懵的。
+
+            `x claw start` 启动后，内部 `x agent request` 如果出错，以前是一点提示都没有，用户干等着还以为在正常运行。
+            现在报错会直接提示出来，至少知道发生了什么问题。
+
+            另外，引入了 `x agent job` 机制。遇到复杂、需要长时间运行的任务，`x claw` 会自己判断并走异步处理，不用卡着聊天界面，你可以继续跟它对话。
+
+            使用方式没变，还是老样子：
+
+            ```bash
+            x claw start
+            ```
+
+            内部自己搞定，你只需要正常聊就行。
+          en: |
+            Polished `x claw` internals —— honestly, when things broke before, users had no idea what was happening. Pretty confusing.
+
+            After running `x claw start`, if an internal `x agent request` failed, there used to be zero feedback. Users just sat there thinking everything was fine.
+            Now errors surface properly so you actually know what's going on.
+
+            Also integrated the `x agent job` mechanism. Complex, long-running tasks are automatically detected and handled asynchronously, so the chat doesn't freeze and you can keep talking.
+
+            Usage hasn't changed:
+
+            ```bash
+            x claw start
+            ```
+
+            The internals handle the heavy lifting —— just chat as usual.
+    minimax:
+      update:
+        - cn: |
+            默认模型升级为 MiniMax-M3 —— 百万上下文、原生多模态、编程对标 Claude Opus 4.7。
+
+            从 M2.5 到 M2.7 一路用过来，这次 M3 直接把上下文拉到 100 万 token，比上一代翻了 4 倍，塞整个代码库进去都绰绰有余。
+            原生多模态支持图片输入，编程能力直接对标 Claude Opus 4.7。
+
+            通过 `x claude` 配置 claude-code 接入时 MiniMax-M3 模型，默认激活 1M 上下文，不用手动去调什么参数。
+
+            ```bash
+            # 切换至 MiniMax-M3 模型
+            x minimax --cfg model=MiniMax-M3
+
+            # 配置 claude-code 接入 MiniMax，自动激活 1M 上下文
+            x claude use minimax
+            ```
+          en: |
+            Default model upgraded to MiniMax-M3 —— 1M context, native multimodal, coding on par with Claude Opus 4.7.
+
+            Been using minimax since M2.5 through M2.7. M3 bumps the context window to 1 million tokens — 4× the previous generation,
+            enough to dump an entire codebase in. Native multimodal means image inputs work out of the box,
+            and coding performance goes head-to-head with Claude Opus 4.7.
+
+            When you set up claude-code via `x claude use minimax`, the 1M context window is activated by default — no manual tweaking required.
+
+            ```bash
+            # Switch to MiniMax-M3 model
+            x minimax --cfg model=MiniMax-M3
+
+            # Set up claude-code with MiniMax, 1M context auto-activated
+            x claude use minimax
+            ```
+    font|ollama|kasm:
+      bugfix:
+        - cn: |
+            修复了 `ls` 预览列表的显示报错，感谢 [@yuchang106](https://github.com/yuchang106) 指出了这个问题 [#411](https://github.com/x-cmd/x-cmd/issues/411)
+          en: Fixed the display error of the `ls` preview list, thanks to [@yuchang106](https://github.com/yuchang106) for pointing out this issue [#411](https://github.com/x-cmd/x-cmd/issues/411)
+  blog: null
+  name: v0.9.7
+  alpha: true
+  beta: true
 v0.9.6:
   sum: 3a85ce8721ecf46da769bf226347112416f4054337ea74cbc4b3eafe4df8f41fa5dd7e9f153eb4798a773a2225be80d3d86d6cc35b890fe0cf8f4b04133ffd91
   date: 2026-05-27 13:35:08+0000
@@ -168,10 +288,8 @@ v0.9.6:
             ```bash
             x clawhub --cfg endpoint="https://clawhub.ai"
             ```
-  blog: null
+  blog: /blog/260528
   name: v0.9.6
-  alpha: true
-  beta: true
 v0.9.5:
   sum: 94fb5c681112fa473c9cda8f33b085de0ed0690a9a9b2902537dac7232641d00463c5bf3dc6eb43db5929a80d9972ed21b78b8e60c4cf27efef3cf8a4287d7bd
   date: 2026-05-19 13:04:42+0000
