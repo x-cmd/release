@@ -5,12 +5,12 @@ v0.9.8:
     feishu:
       update:
         - cn: |
-            `x feishu abot send` 新增 Markdown 渲染 & 卡片消息 —— 纯因为我让 Agent 接了飞书之后，看它发的消息实在看不下去了。
+            `x feishu abot send` 新增 Markdown 渲染 & 卡片消息 —— 因为我让 x claw 接了飞书之后，看它发的消息实在看不下去了。
 
-            之前用 `x claw` 把 AI 接到飞书，Agent 在群里回消息全是干巴巴的纯文本。Agent 本来回的就是 Markdown，结果飞到飞书全被剥光 —— **加粗**变普通字、链接变成孤零零的 `https://...`、代码块、表格更别提了，整段话挤在一起。
+            于是连夜对发送消息接口进行更新：
 
-            现在 `x feishu abot send` 的 `--text` 支持发送带 Markdown 渲染的文本（飞书富文本 post），**加粗**、链接、行内代码都能正常显示。
-            想要更精致？上 `--card` —— 基于飞书 Schema 2.0 的 interactive 卡片，代码块、表格、列表全活；管道、文件、单行都能当卡片正文塞进去。Agent 给老板汇报、给同事贴日志，档次直接上来。
+            1. **富文本支持 (`--text`)**：完美支持 Markdown 语法，高亮、加粗、链接一目了然。
+            2. **高级卡片 (`--card`)**：原生适配飞书 Schema 2.0 互动卡片。支持代码块、结构化表格及动态列表。
 
             ```bash
             # 发送带 Markdown 渲染的文本（加粗、链接、行内代码）
@@ -23,12 +23,12 @@ v0.9.8:
             git log --oneline -10 | x feishu abot send --card --chatid <chat_id> -
             ```
           en: |
-            `x feishu abot send` adds markdown rendering & card messages —— purely because I couldn't stand watching my Agent's plain-text replies in Feishu anymore.
+            `x feishu abot send` adds Markdown rendering & card messages — because once I connected `x claw` to Feishu, I just couldn't stand the messages it was sending.
 
-            Before this, with `x claw` connecting AI to Feishu, every reply from the Agent was a wall of dry plain text. The Agent already replies in Markdown, but it all got stripped on the way to Feishu —— **bold** became regular text, links became lonely `https://...`, code blocks and tables were out of the question, the whole thing just collapsed into a blob.
+            So I updated the send-message interface overnight:
 
-            Now `x feishu abot send`'s `--text` supports markdown-rendered text (Feishu's rich-text post), so **bold**, links, and inline code all render properly.
-            Want it fancier? Bring in `--card` —— built on Feishu's Schema 2.0 interactive cards, code blocks, tables, and lists are all alive; pipes, files, and one-liners can all become card bodies. When the Agent reports to the boss or pastes logs to a colleague, the polish jumps up.
+            1. **Rich-text support (`--text`)** — full Markdown syntax, with highlighting, bold, and links all crystal clear.
+            2. **Advanced cards (`--card`)** — native Feishu Schema 2.0 interactive cards. Code blocks, structured tables, and dynamic lists all supported.
 
             ```bash
             # Send markdown-rendered text (bold, links, inline code)
@@ -88,7 +88,7 @@ v0.9.8:
             # Pipe to less -R for paging
             x column -t -s : --color file | less -R
             ```
-  blog: null
+  blog: /blog/260612
   name: v0.9.8
   alpha: true
   beta: true
@@ -208,7 +208,7 @@ v0.9.7:
         - cn: |
             修复了 `ls` 预览列表的显示报错，感谢 [@yuchang106](https://github.com/yuchang106) 指出了这个问题 [#411](https://github.com/x-cmd/x-cmd/issues/411)
           en: Fixed the display error of the `ls` preview list, thanks to [@yuchang106](https://github.com/yuchang106) for pointing out this issue [#411](https://github.com/x-cmd/x-cmd/issues/411)
-  blog: null
+  blog: /blog/260605
   name: v0.9.7
   latest: true
 v0.9.6:
