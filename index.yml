@@ -1,121 +1,95 @@
-v0.9.7:
-  sum: e2d2b3ec4b51e44960e56eac391044ddcd8c1007550957b4b2595cdc1e6d1f39cdfd71ef115048384181709a7fe1aacda794fe40a3a9e0c393eae86658ee7649
-  date: 2026-06-04 10:25:09+0000
+v0.9.8:
+  sum: 1390968485f0f109428d588502b07adab9fa7aeb0398592ac81d60ab7e4a8f5f8cd0a24995d99ee01b4a78695f599fc468cdb6099cc1658b5c803afa8d48300e
+  date: 2026-06-12 03:01:39+0000
   change:
-    eget:
+    feishu:
       update:
         - cn: |
-            新增 `eget` 模块 —— 从 GitHub/GitLab/Codeberg Release 直接下载安装二进制文件，纯 shell 实现，零依赖。
+            `x feishu abot send` 新增 Markdown 渲染 & 卡片消息 —— 纯因为我让 Agent 接了飞书之后，看它发的消息实在看不下去了。
 
-            之前装 CLI 工具要么走包管理器（版本经常滞后），要么自己去 Release 页面找对的 asset，下载解压放到 PATH，挺费劲的。
-            `x eget` 给一个 `user/repo`，自动找到匹配你系统的二进制文件，一步到位。
+            之前用 `x claw` 把 AI 接到飞书，Agent 在群里回消息全是干巴巴的纯文本。Agent 本来回的就是 Markdown，结果飞到飞书全被剥光 —— **加粗**变普通字、链接变成孤零零的 `https://...`、代码块、表格更别提了，整段话挤在一起。
 
-            和 `x pkg` 互为补充：`x pkg` 是 x-cmd 官方打包维护的稳定发行渠道，`x eget` 直接从作者 Release 拉，所有版本都能拿到。
+            现在 `x feishu abot send` 的 `--text` 支持发送带 Markdown 渲染的文本（飞书富文本 post），**加粗**、链接、行内代码都能正常显示。
+            想要更精致？上 `--card` —— 基于飞书 Schema 2.0 的 interactive 卡片，代码块、表格、列表全活；管道、文件、单行都能当卡片正文塞进去。Agent 给老板汇报、给同事贴日志，档次直接上来。
 
             ```bash
-            # 安装到 ~/.local/bin
-            x eget --to ~/.local/bin BurntSushi/ripgrep
+            # 发送带 Markdown 渲染的文本（加粗、链接、行内代码）
+            x feishu abot send --text --chatid <chat_id> '**任务完成** ✅ 详见 [构建报告](https://github.com/x-cmd/x-cmd) `code`'
 
-            # 即下即运行
-            x eget snap BurntSushi/ripgrep --version
+            # 发送 Markdown 卡片（代码块、表格、列表全活）
+            x feishu abot send --card --chatid <chat_id> -f ./README.md
 
-            # 列出所有 release 版本
-            x eget ls BurntSushi/ripgrep
+            # 命令输出直接转卡片发出去
+            git log --oneline -10 | x feishu abot send --card --chatid <chat_id> -
             ```
-
-            目前还是早期版本，后续计划加入声明式批量安装、版本升级管理等。有问题欢迎提 issue。
           en: |
-            Added `eget` module —— download and install binaries directly from GitHub/GitLab/Codeberg Releases. Pure shell, zero dependencies.
+            `x feishu abot send` adds markdown rendering & card messages —— purely because I couldn't stand watching my Agent's plain-text replies in Feishu anymore.
 
-            Installing CLI tools usually means either package managers (with lagging versions) or manually hunting through Release pages for the right asset — it's tedious.
-            `x eget` takes a `user/repo`, finds the right binary for your system, and installs it in one shot.
+            Before this, with `x claw` connecting AI to Feishu, every reply from the Agent was a wall of dry plain text. The Agent already replies in Markdown, but it all got stripped on the way to Feishu —— **bold** became regular text, links became lonely `https://...`, code blocks and tables were out of the question, the whole thing just collapsed into a blob.
 
-            Complements `x pkg`: `x pkg` is x-cmd's curated stable channel, `x eget` pulls directly from the author's releases — every version available.
+            Now `x feishu abot send`'s `--text` supports markdown-rendered text (Feishu's rich-text post), so **bold**, links, and inline code all render properly.
+            Want it fancier? Bring in `--card` —— built on Feishu's Schema 2.0 interactive cards, code blocks, tables, and lists are all alive; pipes, files, and one-liners can all become card bodies. When the Agent reports to the boss or pastes logs to a colleague, the polish jumps up.
 
             ```bash
-            # Install to ~/.local/bin
-            x eget --to ~/.local/bin BurntSushi/ripgrep
+            # Send markdown-rendered text (bold, links, inline code)
+            x feishu abot send --text --chatid <chat_id> '**Done** ✅ see [build report](https://github.com/x-cmd/x-cmd) `code`'
 
-            # Run instantly
-            x eget snap BurntSushi/ripgrep --version
+            # Send markdown card (code blocks, tables, lists all alive)
+            x feishu abot send --card --chatid <chat_id> -f ./README.md
 
-            # List all releases
-            x eget ls BurntSushi/ripgrep
+            # Pipe command output straight into a card
+            git log --oneline -10 | x feishu abot send --card --chatid <chat_id> -
             ```
-
-            Early days —— declarative batch install and upgrade management are on the roadmap. File an issue if something breaks.
-    claw:
+    column:
       update:
         - cn: |
-            优化 `x claw` 的内部处理 —— 说实话，之前遇到报错的时候用户完全不知道发生了啥，挺懵的。
+            新增 `x column` —— POSIX shell 实现的 GNU column 替代，把分隔文本对齐成表格，或把多行输入排成多列。
 
-            `x claw start` 启动后，内部 `x agent request` 如果出错，以前是一点提示都没有，用户干等着还以为在正常运行。
-            现在报错会直接提示出来，至少知道发生了什么问题。
+            一个工具两种模式：`-t` 走表格模式，按 `-s` 切分、对齐成规整的列；不带 `-t` 走填充模式，每行一条记录按终端宽度自动排成多列，`ls | x column` 直接出多列 ls。不用 GNU `column` 和 `pr` / `paste` 之间换来换去。
 
-            另外，引入了 `x agent job` 机制。遇到复杂、需要长时间运行的任务，`x claw` 会自己判断并走异步处理，不用卡着聊天界面，你可以继续跟它对话。
-
-            使用方式没变，还是老样子：
+            着色是 TTY 感知的 —— 这是 GNU `column` 没有的：终端里给标题行（第 1 行）反色高亮，管道里自动关色，保证 `grep` / 二次处理不带乱码。`NO_COLOR=1` 关色、`--color` 强制开、`--no-color` 强制关，规矩都按 GNU 习惯对齐。
 
             ```bash
-            x claw start
-            ```
+            # 表格化 /etc/passwd 的 TSV 输出
+            x passwd --tsv | x column -t -s "$(printf '\t')"
 
-            内部自己搞定，你只需要正常聊就行。
-          en: |
-            Polished `x claw` internals —— honestly, when things broke before, users had no idea what was happening. Pretty confusing.
+            # 表格化 ps 输出
+            ps -eo pid,user,comm | tr ' ' $'\t' | x column -t -s "$(printf '\t')"
 
-            After running `x claw start`, if an internal `x agent request` failed, there used to be zero feedback. Users just sat there thinking everything was fine.
-            Now errors surface properly so you actually know what's going on.
+            # ls 输出按终端宽度排成多列
+            ls | x column
 
-            Also integrated the `x agent job` mechanism. Complex, long-running tasks are automatically detected and handled asynchronously, so the chat doesn't freeze and you can keep talking.
+            # 强制关色（遵循 NO_COLOR 约定）
+            NO_COLOR=1 x column -t -s : file
 
-            Usage hasn't changed:
-
-            ```bash
-            x claw start
-            ```
-
-            The internals handle the heavy lifting —— just chat as usual.
-    minimax:
-      update:
-        - cn: |
-            默认模型升级为 MiniMax-M3 —— 百万上下文、原生多模态、编程对标 Claude Opus 4.7。
-
-            从 M2.5 到 M2.7 一路用过来，这次 M3 直接把上下文拉到 100 万 token，比上一代翻了 4 倍，塞整个代码库进去都绰绰有余。
-            原生多模态支持图片输入，编程能力直接对标 Claude Opus 4.7。
-
-            通过 `x claude` 配置 claude-code 接入时 MiniMax-M3 模型，默认激活 1M 上下文，不用手动去调什么参数。
-
-            ```bash
-            # 切换至 MiniMax-M3 模型
-            x minimax --cfg model=MiniMax-M3
-
-            # 配置 claude-code 接入 MiniMax，自动激活 1M 上下文
-            x claude use minimax
+            # pipe 给 less -R 翻看
+            x column -t -s : --color file | less -R
             ```
           en: |
-            Default model upgraded to MiniMax-M3 —— 1M context, native multimodal, coding on par with Claude Opus 4.7.
+            Added `x column` —— a POSIX shell + awk reimplementation of GNU `column`. Aligns delimited text into tables, or arranges multi-line input into multiple columns.
 
-            Been using minimax since M2.5 through M2.7. M3 bumps the context window to 1 million tokens — 4× the previous generation,
-            enough to dump an entire codebase in. Native multimodal means image inputs work out of the box,
-            and coding performance goes head-to-head with Claude Opus 4.7.
+            One tool, two modes: `-t` runs in table mode (split by `-s` and align into proper columns); without `-t` it runs in fill mode, laying out one-record-per-line into multiple columns to terminal width — `ls | x column` just works. No more swapping between GNU `column` and `pr` / `paste`.
 
-            When you set up claude-code via `x claude use minimax`, the 1M context window is activated by default — no manual tweaking required.
+            Coloring is TTY-aware — something GNU `column` doesn't have: in a terminal, the header row (line 1) is highlighted with reverse video; in a pipe, coloring is automatically disabled so `grep` and downstream tools see clean output. `NO_COLOR=1` to force off, `--color` to force on, `--no-color` to force off — conventions aligned with GNU habits.
 
             ```bash
-            # Switch to MiniMax-M3 model
-            x minimax --cfg model=MiniMax-M3
+            # Tabulate /etc/passwd TSV output
+            x passwd --tsv | x column -t -s "$(printf '\t')"
 
-            # Set up claude-code with MiniMax, 1M context auto-activated
-            x claude use minimax
+            # Tabulate ps output
+            ps -eo pid,user,comm | tr ' ' $'\t' | x column -t -s "$(printf '\t')"
+
+            # Lay out ls output in multiple columns to terminal width
+            ls | x column
+
+            # Force colors off (honor NO_COLOR convention)
+            NO_COLOR=1 x column -t -s : file
+
+            # Pipe to less -R for paging
+            x column -t -s : --color file | less -R
             ```
-    font|ollama|kasm:
-      bugfix:
-        - cn: |
-            修复了 `ls` 预览列表的显示报错，感谢 [@yuchang106](https://github.com/yuchang106) 指出了这个问题 [#411](https://github.com/x-cmd/x-cmd/issues/411)
-          en: Fixed the display error of the `ls` preview list, thanks to [@yuchang106](https://github.com/yuchang106) for pointing out this issue [#411](https://github.com/x-cmd/x-cmd/issues/411)
   blog: null
-  name: v0.9.7
+  name: v0.9.8
   alpha: true
   beta: true
 v0.9.6:
@@ -520,7 +494,6 @@ v0.9.5:
             ```
   blog: /blog/260520
   name: v0.9.5
-  latest: true
 v0.9.4:
   sum: 08341a16f1c5dfc187d348c1fd8b53c7e1f6fe3720e67ad8807e6867e5748e665ee1fd364260480fd74a08258ff5b20a7c403fcaecd888966333cda69667f560
   date: 2026-05-09 15:49:02+0000
