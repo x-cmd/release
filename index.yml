@@ -1,3 +1,179 @@
+v0.9.9:
+  sum: 43e6b44a4f4966c6196facae0c6fc203465d3fcd2456be167e2a40e70f92f671bbc0b2521f8658b8eeede7e6efcbec2738690e1f42a961186a9f07b1823d4ea1
+  date: 2026-06-17 13:10:49+0000
+  change:
+    claude:
+      update:
+        - cn: |
+            `x claude` 默认接入的智谱模型升级为 GLM-5.2 —— 753B 参数旗舰，1M 无损上下文，Code Arena 全球可用模型第一。
+
+            GLM-5.2 是智谱最新一代专为长程代码任务打造的旗舰模型，拥有 1M 上下文窗口，并支持 Max / High 两档思考强度控制。配套快速模型用 `GLM-4.5-Air`，跑批量任务不心疼 token。
+
+            一行切到智谱：
+
+            ```bash
+            # 默认 GLM-5.2 + GLM-4.5-Air，并激活 1M 上下文窗口
+            x claude use glm
+            ```
+
+            想换 model 走 `x zhipu --cfg model=<名字>`，下一次 `x claude use glm` 就用新的。
+
+            另外把一堆 provider（ali / baidu / doubao / ds / kimi / minimax / moonshot / mthreads / openrouter / sili / tencent / zhipu）的 `--cfg` 引导流程做了统一 —— 之前卡在 TTY 检测，脚本里跑就吞错；现在脚本里也会自动提示填 API key，agent 跑批更省心。
+
+            ```bash
+            # minimax / kimi / deepseek 一行配好
+            x claude use minimax
+            x claude use kimi
+            x claude use ds
+            ```
+          en: |
+            `x claude`'s default Zhipu model upgraded to GLM-5.2 — 753B-param flagship, 1M lossless context, #1 on Code Arena among globally available models.
+
+            GLM-5.2 is Zhipu's latest flagship model purpose-built for long-horizon coding tasks, featuring a 1M context window with Max / High effort level control. The companion fast model is `GLM-4.5-Air` — cheap enough for batch jobs.
+
+            One-line switch to Zhipu:
+
+            ```bash
+            # Default: GLM-5.2 + GLM-4.5-Air, 1M context window activated
+            x claude use glm
+            ```
+
+            To change the model: `x zhipu --cfg model=<name>` — the next `x claude use glm` picks it up.
+
+            Also unified the `--cfg` prompt flow across providers (ali / baidu / doubao / ds / kimi / minimax / moonshot / mthreads / openrouter / sili / tencent / zhipu) — used to be gated on TTY detection so scripts would silently swallow the missing key. Now scripts also get prompted for an API key, which is much friendlier for agent-driven batch runs.
+
+            ```bash
+            # Same one-liner for minimax / kimi / deepseek
+            x claude use minimax
+            x claude use kimi
+            x claude use ds
+            ```
+    repo:
+      update:
+        - cn: |
+            新增 `x repo` 模块 —— x-cmd 为 AI agent 提供的全局 repo 管理方案，跨 agent 共享克隆路径。
+
+            之前每个 agent（Claude、Codex、Gemini、opencode）都自己 clone 一份 repo，硬盘上 N 份拷贝、各 agent 之间互相看不见 —— `which` 不到别人已经 clone 过的仓库，全得重新拉。
+
+            `x repo` 给一套统一的克隆根目录布局，默认 `~/.x-repo/<provider>/<owner>/<name>`，所有 agent 都往这里放，跨 agent 复用、互相能 `which` 到。
+
+            子命令很短：
+
+            - `x repo <name>` —— 默认行为：解析后 cd 进本地仓库；不存在就 update 克隆。
+            - `x repo ls` —— 列出所有已克隆仓库；支持 `--raw` / `--tsv` / `--csv` / `--app` / `--auto`。
+            - `x repo which owner/name` —— 解析 owner/name 到本地路径；前缀 `/` 走 fuzzywhich 模糊匹配。
+            - `x repo cd owner/name` —— 显式 cd。
+            - `x repo fe owner/name` / `x repo c owner/name` —— 简写，分别用 fresh 编辑器 / vscode 打开。
+
+            用起来：
+
+            ```bash
+            # 默认：解析后 cd 进去；没有就 update 克隆
+            x repo x-bash/repo
+
+            # 列出所有已克隆仓库（交互终端开 csv app）
+            x repo ls
+
+            # 管道处理直接拿 TSV
+            x repo ls --tsv
+
+            # 模糊匹配：owner/name 任一可省略当通配
+            x repo which /sh/re
+
+            # vscode 打开
+            x repo c x-bash/repo
+            ```
+          en: |
+            Added `x repo` module — x-cmd's global repo management solution for AI agents, sharing clone paths across agents.
+
+            Previously each agent (Claude, Codex, Gemini, opencode) cloned its own copy of every repo — N copies on disk, agents couldn't see each other's clones and `which` couldn't find what was already pulled elsewhere. Everything had to be re-cloned.
+
+            `x repo` provides a unified clone-root layout, defaulting to `~/.x-repo/<provider>/<owner>/<name>`. Every agent writes there, so clones are reused across agents and discoverable via `which`.
+
+            Short subcommand set:
+
+            - `x repo <name>` — default: resolve then cd into the local repo; update-clones if missing.
+            - `x repo ls` — list all cloned repos; supports `--raw` / `--tsv` / `--csv` / `--app` / `--auto`.
+            - `x repo which owner/name` — resolve owner/name to a local path; a leading `/` routes through fuzzywhich for fuzzy matching.
+            - `x repo cd owner/name` — explicit cd.
+            - `x repo fe owner/name` / `x repo c owner/name` — shortcuts, opening in fresh editor / vscode respectively.
+
+            In practice:
+
+            ```bash
+            # Default: resolve then cd in; update-clones if missing
+            x repo x-bash/repo
+
+            # List all cloned repos (interactive terminal opens csv app)
+            x repo ls
+
+            # Pipe-friendly TSV
+            x repo ls --tsv
+
+            # Fuzzy match: owner/name are independent substrings, either empty = wildcard
+            x repo which /sh/re
+
+            # Open in vscode
+            x repo c x-bash/repo
+            ```
+    abox:
+      bugfix:
+        - cn: |
+            修复 `x abox tmux` 参数解析歧义 —— 不再接受裸容器名（容易误落 `abox-0`），容器名与 session 名明确分开。
+
+            之前 `x abox tmux mybox` 这种裸名调用，参数解析里 `name` 留空，默认落到 `abox-0`，经常误开别的容器。早先打过 `[ -n "$name" ] || name="$1"` 的补丁，但和 `:session` 语法撞车、又撤了。
+
+            这次干脆把容器名和 session 名拆开：
+
+            - `x abox tmux mybox:dev` —— 显式 `container:session`，最直观
+            - `x abox tmux :dev` —— 省略容器名（默认 `abox-0`），显式 session
+            - `x abox tmux -n mybox :dev` —— 用 `-n` 显式指定容器名
+            - `x abox mybox:dev` —— 短形式，连 `tmux` 关键字都省了
+            - `x abox -- cmd` —— 新增 `--` 分隔，往下传 `cmdi`
+
+            ```bash
+            # 启动一个 abox 容器
+            x abox start mybox
+
+            # 显式 container:session
+            x abox tmux mybox:dev
+
+            # 短形式
+            x abox mybox:dev
+
+            # 用默认 abox-0 + 新 session
+            x abox tmux :dev
+            ```
+          en: |
+            Fixed argument-parsing ambiguity in `x abox tmux` —— bare container names are no longer accepted (they silently fell through to `abox-0`); container and session are now explicitly separated.
+
+            Previously `x abox tmux mybox` left `name` empty and fell through to `abox-0`, frequently opening the wrong container. An earlier `[ -n "$name" ] || name="$1"` patch collided with the `:session` syntax and was reverted.
+
+            This time, container and session are cleanly separated:
+
+            - `x abox tmux mybox:dev` — explicit `container:session`, most intuitive
+            - `x abox tmux :dev` — omit container (defaults to `abox-0`), explicit session
+            - `x abox tmux -n mybox :dev` — explicit `-n` flag for the container name
+            - `x abox mybox:dev` — short form, no `tmux` keyword needed
+            - `x abox -- cmd` — new `--` separator, passes through to `cmdi`
+
+            ```bash
+            # Start an abox container
+            x abox start mybox
+
+            # Explicit container:session
+            x abox tmux mybox:dev
+
+            # Short form
+            x abox mybox:dev
+
+            # Default abox-0 + new session
+            x abox tmux :dev
+            ```
+  blog: null
+  name: v0.9.9
+  alpha: true
+  beta: true
 v0.9.8:
   sum: 7aaec6620594f4c5e24ace9acc769c76434fdf6822ef5051c35dd37927cd98bd48778e9f8d78d8a7616dfe71301d026d0f68c7c0b8678fdc8e280483468071d9
   date: 2026-06-12 03:52:00+0000
@@ -90,8 +266,7 @@ v0.9.8:
             ```
   blog: /blog/260612
   name: v0.9.8
-  alpha: true
-  beta: true
+  latest: true
 v0.9.7:
   sum: e2d2b3ec4b51e44960e56eac391044ddcd8c1007550957b4b2595cdc1e6d1f39cdfd71ef115048384181709a7fe1aacda794fe40a3a9e0c393eae86658ee7649
   date: 2026-06-04 14:35:24+0800
@@ -210,7 +385,6 @@ v0.9.7:
           en: Fixed the display error of the `ls` preview list, thanks to [@yuchang106](https://github.com/yuchang106) for pointing out this issue [#411](https://github.com/x-cmd/x-cmd/issues/411)
   blog: /blog/260605
   name: v0.9.7
-  latest: true
 v0.9.6:
   sum: 3a85ce8721ecf46da769bf226347112416f4054337ea74cbc4b3eafe4df8f41fa5dd7e9f153eb4798a773a2225be80d3d86d6cc35b890fe0cf8f4b04133ffd91
   date: 2026-05-27 13:35:08+0000
