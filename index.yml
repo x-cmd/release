@@ -1,3 +1,196 @@
+v0.9.10:
+  sum: bfa65a349a31b4e9595395166896304bfd3f0b2755daa2eff8565e658da16041e3db20b8e4001100cae9be76bbe9ff52e1693f37b5f636c7fafbf03713c5432a
+  date: 2026-06-27 17:37:08+0000
+  change:
+    claw:
+      bugfix:
+        - cn: |
+            修复 `x claw log` 内部 awk 迭代调用函数的问题 —— 说实话，这个坑藏得有点深。
+
+            `x claw log` 在解析日志时内部用 awk 做函数迭代调用，结果在某些场景下会触发 awk 的实现差异（比如函数递归/迭代深度、变量作用域），导致日志输出中断或者格式错乱。
+
+            这次把内部调用逻辑理顺了，绕过 awk 的迭代限制，现在 `x claw log` 在各种环境下都能稳定出日志。
+
+            ```bash
+            # 查看 claw 日志
+            x claw log
+            ```
+          en: |
+            Fixed the internal awk iterative function call issue in `x claw log` — honestly, this one was buried pretty deep.
+
+            `x claw log` uses awk internally for iterative function calls while parsing logs, and in some scenarios that triggered awk implementation differences (like recursion/iteration depth and variable scoping), causing log output to break or format incorrectly.
+
+            This time we restructured the internal call logic to work around awk's iteration limits, so `x claw log` now produces stable output across environments.
+
+            ```bash
+            # View claw logs
+            x claw log
+            ```
+      update:
+        - cn: |
+            新增 `x claw service install/uninstall` 功能 —— 让 `x claw` 能自己照顾自己开机。
+
+            之前想让 `x claw` 随系统启动，得自己手写 launchd plist 或者 systemd unit，步骤不少还容易配错。我干脆把它包成两个命令。
+
+            现在你只需要：
+            - `x claw service install` —— 自动生成并注册开机自启动（macOS 用 launchd plist，Linux 用 systemd unit）
+            - `x claw service uninstall` —— 干净移除，不留痕迹
+
+            ```bash
+            # 注册开机自启动
+            x claw service install
+
+            # 移除开机自启动
+            x claw service uninstall
+            ```
+
+            当然，不同系统的服务路径和权限要求略有不同，如果安装完没生效，检查一下对应的服务管理器状态就行。
+          en: |
+            Added `x claw service install/uninstall` — so `x claw` can take care of its own startup.
+
+            Previously, if you wanted `x claw` to start with the system, you had to hand-write a launchd plist or systemd unit — multiple steps and easy to misconfigure. So I wrapped it into two commands.
+
+            Now you just run:
+            - `x claw service install` — auto-generates and registers the startup service (launchd plist on macOS, systemd unit on Linux)
+            - `x claw service uninstall` — cleanly removes it, no leftovers
+
+            ```bash
+            # Register as a startup service
+            x claw service install
+
+            # Remove the startup service
+            x claw service uninstall
+            ```
+
+            Service paths and permission requirements vary slightly by OS, so if it doesn't take effect immediately, check the status of the corresponding service manager.
+        - cn: |
+            优化 `x claw` 的运行时体验 —— 配置、心跳、告警、日志这几块都顺手多了。
+
+            之前初次配置步骤多、心跳固定轮询有点浪费、agent 挂了没动静、日志又全堆在一起，排查起来费劲。这次一并收拾了一下：
+
+            - 交互配置流程合并精简，默认选项给好，几步就能配完
+            - 心跳调度策略优化，减少不必要的轮询
+            - agent 连续失败或抛错时，会通过已连接的 IM 平台发告警
+            - 日志分级分类优化，排查问题更顺手
+
+            ```bash
+            # 交互配置
+            x claw init
+
+            # 启动后新调度、告警自动生效
+            x claw start
+            ```
+
+            整体用起来更省资源，出问题也更好定位。
+          en: |
+            Polished the `x claw` runtime experience — setup, heartbeat, alerts, and logs all got some love.
+
+            Previously, first-time setup had too many prompts, heartbeats polled at a fixed rate, agents could fail silently, and logs were one big pile. This update cleans all of that up:
+
+            - Interactive setup is streamlined with fewer prompts and sensible defaults
+            - Heartbeat scheduling optimized to reduce unnecessary polling
+            - Repeated agent failures or exceptions trigger alerts through connected IM platforms
+            - Log level and category handling improved for easier troubleshooting
+
+            ```bash
+            # Interactive setup
+            x claw init
+
+            # New scheduling and alerts take effect automatically
+            x claw start
+            ```
+
+            Overall it's lighter on resources and easier to debug.
+    find:
+      update:
+        - cn: |
+            `x find` 重构为“三维剪枝”模型 —— 为 AI Agent 量身打造的 find，默认就把噪音目录挡在门外。
+
+            原生 find 搜代码，结果里总混着 .git、node_modules、.cursor、.claude 一堆噪音；搜 `$HOME` 时 Library、Desktop 也会冒出来，macOS 还弹一堆权限框。这些噪音喂给 AI agent，token 瞬间被撑爆。`x find` 把“什么该排除”拆成三个互不干扰的维度，按需开关：
+
+            - **隐藏目录** —— 最大的噪声源。默认 `.*` 全排，`--unhide .vscode:.claude` 按目录放行。
+            - **项目噪音** —— 默认只排 `node_modules`、`__pycache__`，`--prune vendor:venv` 追加。
+            - **HOME 平台目录** —— 根为 `$HOME` 时自动排 Applications/Library 等（顺带避开权限弹窗），`--no-homeprune` 关闭。
+
+            100% 兼容原生 find 表达式，`--prune` / `--unhide` 支持 `:` 分隔多值，`-v` 看生效列表、`--dryrun` 打印生成命令，三维全关即退化原生 find。
+
+            ```bash
+            # 自动排除隐藏目录和 node_modules 等噪音
+            x find . -name "*.ts"
+
+            # 放行 .vscode .claude，只在这俩里找 json
+            x find --unhide .vscode:.claude -- . -name "*.json"
+
+            # 追加排除 build、release 目录
+            x find --prune build:release -- . -name "*.go"
+
+            # 看看当前到底排了哪些
+            x find -v -- . -name "*.ts"
+            ```
+          en: |
+            `x find` rebuilt around a "three-dimension prune" model — a find wrapper built for AI agents that keeps noise directories out by default.
+
+            Native `find` for code search drowns results in .git, node_modules, .cursor, .claude noise; under `$HOME`, Library and Desktop spill out and macOS throws permission dialogs. Feed that noise to an agent and the context fills with garbage. `x find` splits "what to prune" into three independent dimensions you toggle independently:
+
+            - **Hidden dirs** — the biggest noise source. `.*` pruned by default; `--unhide .vscode:.claude` exempts specific dirs.
+            - **Project noise** — only `node_modules` and `__pycache__` by default; `--prune vendor:venv` adds more.
+            - **HOME platform dirs** — when the root is `$HOME`, Applications/Library etc. are auto-excluded (sidestepping permission dialogs too); `--no-homeprune` turns it off.
+
+            100% native find compatible; `--prune` / `--unhide` take `:`-separated values, `-v` prints active prune lists, `--dryrun` prints the generated command, and turning all three dimensions off collapses it back to raw find.
+
+            ```bash
+            # Auto-exclude hidden dirs and noise like node_modules
+            x find . -name "*.ts"
+
+            # Exempt .vscode .claude, search json only in those
+            x find --unhide .vscode:.claude -- . -name "*.json"
+
+            # Add build and release to the prune list
+            x find --prune build:release -- . -name "*.go"
+
+            # See what's actually being pruned
+            x find -v -- . -name "*.ts"
+            ```
+    bfind:
+      update:
+        - cn: |
+            `x bfind` 升级为 BFS 广度优先搜索 —— 浅层结果先出，让 AI Agent 先看到最相关的文件。
+
+            原生 find 是深度优先，会一头扎进 node_modules 层层依赖的最深处才回头，可项目真正的源码、配置都在浅层——agent 先翻过一堆深层噪音，最后才在浅层撞见想要的文件。`x bfind` 换成广度优先，浅层打头、逐层深入，agent 先拿到项目骨架，不够再往下，又快又省。
+
+            更妙的是 `--dfs2bfs`——它不搜索、只重排，把任何工具的 DFS 输出按深度重排成 BFS 顺序。现有 find / grep 管道尾巴接一个 `| x bfind --dfs2bfs`，结果立刻浅层优先；原生 find、`x find`、`grep -rl` 匹配文件都能一键“浅层优先化”。默认 3 层（`--depth` 加深、`--all` 不限），剪枝规则与 `x find` 一致；终端里按深度分段着色、文件名高亮。
+
+            ```bash
+            # BFS 搜索当前目录，默认 3 层
+            x bfind .
+
+            # 任意 find/grep 结果按浅层优先重排
+            grep -rl "TODO" . | x bfind --dfs2bfs
+
+            # 加深到 5 层；--all 不限深度
+            x bfind --depth 5 .
+            ```
+          en: |
+            `x bfind` upgraded to BFS breadth-first search — shallow results first, so AI agents see the most relevant files first.
+
+            Native `find` is depth-first: it dives to the bottom of one branch (say, deep inside node_modules' dependency tree) before coming back, yet the real source and config live in shallow layers — the agent wades through deep noise first and only stumbles onto what it wanted in the shallows at the very end. `x bfind` switches to breadth-first, shallow layers first and going deeper incrementally, so the agent grabs the project skeleton first and drills down only if needed — fast and frugal.
+
+            Even better, `--dfs2bfs` doesn't search — it only reorders, taking any tool's DFS output and re-sorting it by depth into BFS order. Tag `| x bfind --dfs2bfs` onto existing find / grep pipelines and the results are instantly shallow-first; native `find`, `x find`, `grep -rl` matches all "shallow-first-ified" in one move. Default depth is 3 (`--depth` to go deeper, `--all` for unlimited), prune rules match `x find`, and in a terminal it color-codes by depth with the filename highlighted.
+
+            ```bash
+            # BFS the current directory, default 3 layers
+            x bfind .
+
+            # Reorder any find/grep output shallow-first
+            grep -rl "TODO" . | x bfind --dfs2bfs
+
+            # Go 5 layers deep; --all for unlimited
+            x bfind --depth 5 .
+            ```
+  blog: null
+  name: v0.9.10
+  alpha: true
+  beta: true
 v0.9.9:
   sum: 43e6b44a4f4966c6196facae0c6fc203465d3fcd2456be167e2a40e70f92f671bbc0b2521f8658b8eeede7e6efcbec2738690e1f42a961186a9f07b1823d4ea1
   date: 2026-06-17 13:10:49+0000
@@ -172,8 +365,7 @@ v0.9.9:
             ```
   blog: null
   name: v0.9.9
-  alpha: true
-  beta: true
+  latest: true
 v0.9.8:
   sum: 7aaec6620594f4c5e24ace9acc769c76434fdf6822ef5051c35dd37927cd98bd48778e9f8d78d8a7616dfe71301d026d0f68c7c0b8678fdc8e280483468071d9
   date: 2026-06-12 03:52:00+0000
@@ -266,7 +458,6 @@ v0.9.8:
             ```
   blog: /blog/260612
   name: v0.9.8
-  latest: true
 v0.9.7:
   sum: e2d2b3ec4b51e44960e56eac391044ddcd8c1007550957b4b2595cdc1e6d1f39cdfd71ef115048384181709a7fe1aacda794fe40a3a9e0c393eae86658ee7649
   date: 2026-06-04 14:35:24+0800
