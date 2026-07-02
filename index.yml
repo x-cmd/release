@@ -1,3 +1,127 @@
+v0.9.11:
+  sum: 60ee0d49c4dbe8febc4ab30042a13f2f5026432b6ce194dbedd756dc0db8f54c89e261747cc3a60ef025f3bbb52139102e063f4b7354ccfefa1e9d725d5d27c2
+  date: 2026-07-02 13:18:35+0000
+  change:
+    eget:
+      update:
+        - cn: |
+            新增 `x eget use / unuse / usels` —— 让 eget 从"下完就撒手"的下载器，升级成装得上、卸得掉、查得到的轻量安装器。
+
+            之前 `x eget` 装个工具，二进制往 `~/.local/bin` 一扔就完事，装过哪些、想卸哪个、版本旧了怎么升，全靠自己记着自己来，挺碎的。
+
+            这次补上了"管理"这一环：
+            - `x eget use <owner/repo>` —— 装到 `~/.local/bin`（没缓存就自动下载），同时登记到 `use.list.tsv`，记下它来自哪个仓库
+            - `x eget unuse <name>` —— 按命令名或 `owner/repo` 卸载；加 `--all` 一次性清空
+            - `x eget usels` —— 列出所有 use 跟踪的安装
+            - 想升级，重新 `x eget use --force <owner/repo>` 拉最新覆盖即可
+
+            ```bash
+            # 装一个，自动落到 ~/.local/bin
+            x eget use BurntSushi/ripgrep
+
+            # 看看都装了哪些、各自来自哪
+            x eget usels
+
+            # 不想要了，按命令名卸
+            x eget unuse rg
+
+            # 升级到最新版
+            x eget use --force BurntSushi/ripgrep
+            ```
+          en: |
+            Added `x eget use / unuse / usels` —— promoting eget from a "download and walk away" fetcher into a lightweight installer you can install, remove, and list from.
+
+            Previously `x eget` just dropped a binary into `~/.local/bin` and moved on — what you'd installed, which repo it came from, how to remove it, how to upgrade were all on you to track. Pretty tedious.
+
+            This adds the "management" half:
+            - `x eget use <owner/repo>` — installs to `~/.local/bin` (auto-downloads if not cached) and records it in `use.list.tsv`, tracking which repo it came from
+            - `x eget unuse <name>` — removes by binary name or `owner/repo`; `--all` wipes everything
+            - `x eget usels` — lists everything use has tracked
+            - To upgrade, just `x eget use --force <owner/repo>` to pull the latest and overwrite
+
+            ```bash
+            # Install one, lands in ~/.local/bin
+            x eget use BurntSushi/ripgrep
+
+            # See what's installed and where from
+            x eget usels
+
+            # Done with it — remove by command name
+            x eget unuse rg
+
+            # Upgrade to the latest
+            x eget use --force BurntSushi/ripgrep
+            ```
+        - cn: |
+            `x eget` 加上 GitHub 下载加速 + 默认 SHA-256 校验 —— 走代理提速，但校验值不经代理，速度和安全感都有了。
+
+            直连 GitHub Release 下载经常慢得让人想砸键盘；想走第三方 ghproxy 加速吧，又怕代理那头被动过手脚，下下来的二进制不放心。
+
+            这次把"加速"和"信任"拆开了：
+            - 设环境变量 `___X_CMD_GHPROXY_ENDPOINT`，GitHub 的二进制下载自动走代理提速
+            - 但代理**只**作用于 `github.com` 的下载链接；校验用的 SHA-256 digest 仍从 `api.github.com` 直连拿，绝不走代理
+            - 文件下完，本地拿 digest 做一次 SHA-256 比对（GitHub 默认开，`--no-verify` 可关），对不上直接报错删文件
+
+            说白了：代理只管"快"，digest 直连管"准"。代理就算被篡改，本地校验照样兜得住 —— 这才是放心走第三方代理的正确姿势。
+
+            ```bash
+            # 走代理下载，速度立竿见影
+            ___X_CMD_GHPROXY_ENDPOINT=https://your-proxy.example.com x eget use BurntSushi/ripgrep
+
+            # 想确认校验过了，盯着日志里的 "SHA-256 verified"
+            ___X_CMD_GHPROXY_ENDPOINT=https://your-proxy.example.com x eget --verbose BurntSushi/ripgrep
+
+            # 极端情况想跳过校验（比如自己完全信得过的镜像）
+            x eget --no-verify BurntSushi/ripgrep
+            ```
+          en: |
+            `x eget` gains GitHub download acceleration plus SHA-256 verification by default — proxy for speed, but the digest never goes through the proxy. Speed and peace of mind, together.
+
+            Downloading GitHub Releases directly is often painfully slow; routing through a third-party ghproxy fixes the speed, but then you worry the proxy might tamper with the binary on the way through.
+
+            This update splits "speed" from "trust":
+            - Set `___X_CMD_GHPROXY_ENDPOINT` and GitHub binary downloads route through the proxy automatically
+            - But the proxy applies **only** to `github.com` download URLs; the SHA-256 digest used for verification is still fetched directly from `api.github.com`, never proxied
+            - After download, the digest is checked locally with SHA-256 (on by default for GitHub; `--no-verify` to skip), and any mismatch errors out and deletes the file
+
+            In short: the proxy handles "fast", the direct API connection handles "correct". Even a tampering proxy gets caught by the local check — that's the right way to trust a third-party mirror.
+
+            ```bash
+            # Download through a proxy, speed is immediate
+            ___X_CMD_GHPROXY_ENDPOINT=https://your-proxy.example.com x eget use BurntSushi/ripgrep
+
+            # To confirm verification passed, watch for "SHA-256 verified" in the log
+            ___X_CMD_GHPROXY_ENDPOINT=https://your-proxy.example.com x eget --verbose BurntSushi/ripgrep
+
+            # Skip verification in edge cases (e.g. a mirror you trust completely)
+            x eget --no-verify BurntSushi/ripgrep
+            ```
+    x-cmd:
+      bugfix:
+        - cn: |
+            修复 fish 下 `x cd` 首次使用报错 —— 根因藏得有点深。
+
+            在 fish shell 里每次启动后第一次用 `x cd`，目录能进去，但会跟着报一句 `set: hB-export: 无效的变量名`。查了半天，问题出在 `___x_cmd_xbinexp___add`（`x-cmd/lib/bin/___x_cmdexe_exp`）处理 `--export` 分支时，没把 `--export` 本身 `shift` 掉。
+
+            结果就是循环第一次迭代时 `$1` 还是 `--export`，写出了一个多余的 `export_--export` 文件，内容是 `$- + -export = hB-export`。fish 回读时把它解析成 `set -g --export hB-export`，`--export` 被当成 `set` 的导出选项，`hB-export` 被当成变量名，于是报错。`export_PWD` 还是正常处理的，所以目录能切过去，只是每次都要被这条报错膈应一下。
+
+            修复很简单：在 `--export` 分支补上 `shift`。现在 fish 下 `x cd` 不会再冒出这条报错。
+
+            感谢 @stirp 在 [#443](https://github.com/x-cmd/x-cmd/issues/443) 的反馈！
+          en: |
+            Fixed the first-use error of `x cd` in fish — the root cause was deeper than it looked.
+
+            In fish shell, the first `x cd` after launch would still change directories, but throw `set: hB-export: invalid variable name`. It turned out `___x_cmd_xbinexp___add` in `x-cmd/lib/bin/___x_cmdexe_exp` wasn't shifting away the `--export` argument before entering the export branch.
+
+            So on the first loop iteration `$1` was still `--export`, and an extra `export_--export` file got written with content `$- + -export = hB-export`. When fish read it back, it parsed it as `set -g --export hB-export`: `--export` became the export option, `hB-export` became the variable name, hence the error. `export_PWD` was still handled normally, so the directory change worked — you just got an annoying error every time.
+
+            The fix was a one-liner: add `shift` in the `--export` branch. `x cd` is now clean in fish.
+
+            Thanks to @stirp for catching this in [#443](https://github.com/x-cmd/x-cmd/issues/443)!
+  blog: null
+  name: v0.9.11
+  alpha: true
+  beta: true
 v0.9.10:
   sum: bfa65a349a31b4e9595395166896304bfd3f0b2755daa2eff8565e658da16041e3db20b8e4001100cae9be76bbe9ff52e1693f37b5f636c7fafbf03713c5432a
   date: 2026-06-27 17:37:08+0000
@@ -189,8 +313,7 @@ v0.9.10:
             ```
   blog: null
   name: v0.9.10
-  alpha: true
-  beta: true
+  latest: true
 v0.9.9:
   sum: 43e6b44a4f4966c6196facae0c6fc203465d3fcd2456be167e2a40e70f92f671bbc0b2521f8658b8eeede7e6efcbec2738690e1f42a961186a9f07b1823d4ea1
   date: 2026-06-17 13:10:49+0000
@@ -365,7 +488,6 @@ v0.9.9:
             ```
   blog: null
   name: v0.9.9
-  latest: true
 v0.9.8:
   sum: 7aaec6620594f4c5e24ace9acc769c76434fdf6822ef5051c35dd37927cd98bd48778e9f8d78d8a7616dfe71301d026d0f68c7c0b8678fdc8e280483468071d9
   date: 2026-06-12 03:52:00+0000
