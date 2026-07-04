@@ -1,3 +1,94 @@
+v0.9.12:
+  sum: d5535530f5cb23820be9e39dd92ab7d83633d0c082b047faf5212ac6d5d85cfff0173e9f77c6aae4f520d7da0ab313f5e2ccd2e63e54fe689bd32143ed1c4f8c
+  date: 2026-07-04 08:57:44+0000
+  change:
+    eget:
+      bugfix:
+        - cn: |
+            修复 `x eget` GitHub token 认证未生效的问题。
+
+            现在正确读取 `GITHUB_TOKEN` 或 `GH_TOKEN`，认证后不再那么容易触发限流。
+
+            ```bash
+            export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
+            x eget ls BurntSushi/ripgrep
+            ```
+          en: |
+            Fixed GitHub token authentication not working in `x eget`.
+
+            It now reads `GITHUB_TOKEN` or `GH_TOKEN` correctly, so authenticated requests don't hit rate limits as easily.
+
+            ```bash
+            export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
+            x eget ls BurntSushi/ripgrep
+            ```
+      update:
+        - cn: |
+            加固 `x eget upgrade`。
+
+            遇到 GitHub API 异常会自动 fallback，报错也更清楚。
+
+            ```bash
+            x eget upgrade
+            ```
+          en: |
+            Hardened `x eget upgrade`.
+
+            It now falls back automatically when the GitHub API fails and gives clearer error messages.
+
+            ```bash
+            x eget upgrade
+            ```
+    claw:
+      update:
+        - cn: |
+            新增 pending acknowledgement 机制 —— agent 请求如果一时半会儿没回，至少先告诉用户“我还在处理”。
+
+            单聊场景下，agent 开始处理后超过默认 60 秒还没发出任何消息，claw 会自动从预设文案里随机挑一条发给用户，比如 "Working..."。群聊默认跳过，避免打扰。如果想调间隔，可以设置 `___X_CMD_CLAW_PENDING_ACK_DELAY`。
+
+            ```bash
+            # 启动 claw，等待提示会自动生效
+            x claw start
+
+            # 查看 claw 日志确认 pending ack 已触发
+            x claw log
+            ```
+          en: |
+            Added pending acknowledgement — if an agent request takes a while, at least let the user know it's still being handled.
+
+            In single-chat scenarios, once the agent starts processing, if no message has been sent after the default 60-second delay, claw automatically picks a random preset line like "Working..." and sends it. Group chats are skipped by default to avoid noise. You can adjust the delay via `___X_CMD_CLAW_PENDING_ACK_DELAY`.
+
+            ```bash
+            # Start claw — pending ack is active automatically
+            x claw start
+
+            # Check claw logs to confirm pending ack was triggered
+            x claw log
+            ```
+        - cn: |
+            `x claw log` 改得更顺手了 —— 之前看日志要么全量 dump，要么只给时间戳，定位问题不太方便。
+
+            现在支持 `--since` 按时间范围、`--last` 按条目数、`--all` 看完整历史，默认显示最近 50 条。想看得更细可以加 `--debug`。
+
+            ```bash
+            x claw log --since 30m
+            x claw log --last 100
+            x claw log --all --debug
+            ```
+          en: |
+            `x claw log` got nicer — before, logs were either a full dump or just timestamps, making it hard to pinpoint issues.
+
+            Now it supports `--since` for time ranges, `--last` for entry counts, and `--all` for full history, defaulting to the last 50 entries. Add `--debug` when you need more detail.
+
+            ```bash
+            x claw log --since 30m
+            x claw log --last 100
+            x claw log --all --debug
+            ```
+  blog: null
+  name: v0.9.12
+  alpha: true
+  beta: true
 v0.9.11:
   sum: 60ee0d49c4dbe8febc4ab30042a13f2f5026432b6ce194dbedd756dc0db8f54c89e261747cc3a60ef025f3bbb52139102e063f4b7354ccfefa1e9d725d5d27c2
   date: 2026-07-02 13:18:35+0000
@@ -118,10 +209,9 @@ v0.9.11:
             The fix was a one-liner: add `shift` in the `--export` branch. `x cd` is now clean in fish.
 
             Thanks to @stirp for catching this in [#443](https://github.com/x-cmd/x-cmd/issues/443)!
-  blog: null
+  blog: /blog/260704
   name: v0.9.11
-  alpha: true
-  beta: true
+  latest: true
 v0.9.10:
   sum: bfa65a349a31b4e9595395166896304bfd3f0b2755daa2eff8565e658da16041e3db20b8e4001100cae9be76bbe9ff52e1693f37b5f636c7fafbf03713c5432a
   date: 2026-06-27 17:37:08+0000
@@ -311,9 +401,8 @@ v0.9.10:
             # Go 5 layers deep; --all for unlimited
             x bfind --depth 5 .
             ```
-  blog: null
+  blog: /blog/260630
   name: v0.9.10
-  latest: true
 v0.9.9:
   sum: 43e6b44a4f4966c6196facae0c6fc203465d3fcd2456be167e2a40e70f92f671bbc0b2521f8658b8eeede7e6efcbec2738690e1f42a961186a9f07b1823d4ea1
   date: 2026-06-17 13:10:49+0000
@@ -486,7 +575,7 @@ v0.9.9:
             # Default abox-0 + new session
             x abox tmux :dev
             ```
-  blog: null
+  blog: /blog/260620
   name: v0.9.9
 v0.9.8:
   sum: 7aaec6620594f4c5e24ace9acc769c76434fdf6822ef5051c35dd37927cd98bd48778e9f8d78d8a7616dfe71301d026d0f68c7c0b8678fdc8e280483468071d9
