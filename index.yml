@@ -1,3 +1,207 @@
+v0.9.14:
+  sum: 3fbcd5c8a3c2b629369f418bb421d6ea2efb4cc2f4392cd4b1afd9455475981056fbf60b8fb9909f547ee6f258150afe80b947136d5c57eea1826f9583259f4a
+  date: 2026-07-18 02:23:23+0000
+  change:
+    cve:
+      feat:
+        - cn: |
+            朋友突然扔来一个 CVE 编号，问你"这玩意儿到底有没有人在实战里用？"
+
+            10 秒前你要开 5 个网页：cve.org 找描述、cvelistV5 看受影响产品、nvd 翻 CVSS、EPSS 看被利用概率、cisa kev 查在野……现在一行 `x cve`：
+
+            - `x cve` —— TTY 进 fzf 选（最新优先）/ 管道直接吐 TSV
+            - `x cve info CVE-2024-3094` —— 按 id 查快字段（cvss / 描述 / 年份），支持批量 + 多 ID 时按年并行 curl（HTTP/2 multiplex，单连接多请求）
+            - `x cve detail CVE-2024-3094` —— 拉 cvelistV5 完整原始记录（受影响产品、CWE 分类、参考、ADP、metrics、时间线）
+            - `x cve year 2024` —— 按年浏览；`--score 9` / `--grep chromium` 随手过滤
+            - `x shodan CVE-2024-3094` —— 直接拿更详细的资料：EPSS、KEV listing、漏洞利用文章、厂商公告（上游 CVE 记录本身不带这些）。关键是**不需要 Shodan API key**，走 `cvedb.shodan.io` 的公开端点——比 `x shodan search` 少一道门槛
+
+            数据从 `x-cmd/cve` 每日发布的 xz 压缩 TSV 拉，落地就是本地缓存：当年 1 天刷新一次，老年份 180 天不动。第二次起即命中，无需 API key、无需 sudo、无后台进程。
+
+            ```bash
+            # 同事扔了一个 CVE 给你
+            x cve info CVE-2024-3094
+
+            # 想看完整上游
+            x cve detail CVE-2024-3094
+
+            # 这玩意儿到底有没有人在用？(无需 Shodan token)
+            x shodan CVE-2024-3094
+
+            # 看一眼最近都出了啥
+            x cve
+            ```
+          en: |
+            A coworker drops a CVE ID and asks: "Is this thing actually being exploited in the wild?"
+
+            Ten seconds ago you'd open five tabs — cve.org for the description, cvelistV5 for affected products, NVD for CVSS, EPSS for exploitation probability, CISA KEV for in-the-wild confirmation. Now it's one `x cve`:
+
+            - `x cve` — TTY → fzf picker / pipe → TSV, newest first
+            - `x cve info CVE-2024-3094` — quick fields by id (cvss / description / year); batched and parallel across years via HTTP/2 multiplex
+            - `x cve detail CVE-2024-3094` — full cvelistV5 record (affected products, CWE, references, ADP, metrics, timeline)
+            - `x cve year 2024` — browse by year; `--score 9` / `--grep chromium` to filter
+            - `x shodan CVE-2024-3094` — straight to the deeper stuff: EPSS, KEV listing, exploit writeups, vendor advisories (the upstream CVE record doesn't carry these). Crucially **no Shodan API key needed** — it hits `cvedb.shodan.io`'s public endpoint, so you skip the token gate that `x shodan search` requires
+
+            Data pulls from daily xz-compressed TSVs at `x-cmd/cve`, cached locally — 1-day TTL for the current year, 180 days for older ones (they barely change). Cache hits from the second call. No API key, no sudo, no daemons.
+
+            ```bash
+            # A coworker drops a CVE on you
+            x cve info CVE-2024-3094
+
+            # Want the full upstream record
+            x cve detail CVE-2024-3094
+
+            # Is this thing actually being exploited? (no Shodan token needed)
+            x shodan CVE-2024-3094
+
+            # What's landed lately
+            x cve
+            ```
+      update:
+        - cn: |
+            `x cve la / ls` —— 这一次把"快"和"看起来不卡"两件事都做到位了。
+
+            - 流式按年倒序，写盘就已是 new-first，读取时不再 `tac`；目录走文件系统直接遍历，不再依赖 `index.tsv` 中转
+            - 老年份 TTL 30 → 180 天，老数据几乎不动，少拉一次少等几秒
+            - 同步刷新 + 每次下载前打一行日志，缓存未命中不再像"卡住"——你能看到下一步在干嘛
+            - stalled github.com 超时从 5s 收紧到 2s，更快 fallback 到镜像
+            - 缺年份时按 manifest 自动补齐，不再需要任何 flag 或特殊路径
+            - fz picker：score bucket 给 id 列上色（之前只给 score 列），预览窗口修正成 9 列对齐（之前 6 列错位，score 显示成 desc），CRITICAL→品红 / MEDIUM→青 / unrated 才标红，整体红海消失
+
+            ```bash
+            x cve
+            x cve ls
+            ```
+          en: |
+            `x cve la / ls` — both "fast" and "doesn't feel stuck" got attention this round.
+
+            - Streams years in reverse, stores rows newest-first on disk, no `tac` at read time; walks the filesystem directly, no `index.tsv` round-trip
+            - Older-year TTL bumped 30 → 180 days; older data barely changes, fewer round-trips, less waiting
+            - Synchronous refresh with a log line per download — cache misses no longer feel like a hang; you see what's happening next
+            - stalled github.com timeout tightened 5s → 2s, falls back to the mirror faster
+            - Missing years auto-fill from the manifest; no flags, no special case
+            - fz picker: id column colored by score bucket (was only the score column), preview pane fixed to 9 columns (was 6, showed score as desc), CRITICAL→magenta / MEDIUM→cyan / unrated only gets red — the sea of red is gone
+
+            ```bash
+            x cve
+            x cve ls
+            ```
+    cwe:
+      feat:
+        - cn: |
+            拿到 CVE 不够，还想知道它归到哪个弱点类？MITRE CWE 目录 969+ 条目，网页翻太慢。
+
+            `x cwe` 直接拉 MITRE 公开目录（`2000.csv.zip`，约 640 KB），本地缓存 + POSIX awk 解析，零依赖。最常用：
+
+            - `x cwe info CWE-79` —— 按 id 查完整记录（描述、关联弱点、缓解措施、后果、观察示例），支持批量
+            - `x cwe` / `x cwe ls` —— TTY 进 fzf / 管道吐 TSV
+            - `x cwe fz` —— 交互式挑选
+            - `x cwe update` —— 强制刷新（默认 30 天 TTL）
+
+            离线场景 `X_CMD_CWE_OFFLINE=1` 走纯缓存，墙内 `HTTP_PROXY` / `HTTPS_PROXY` 自动透传。
+
+            ```bash
+            # 看一眼 XSS 这类弱点都讲啥
+            x cwe info CWE-79
+
+            # 简写
+            x cwe CWE-89
+
+            # 浏览 / 选
+            x cwe
+            x cwe fz
+
+            # 强制刷新
+            x cwe update
+            ```
+          en: |
+            Got the CVE but still want to know which weakness class it falls under? MITRE's CWE catalog has 969+ entries — flipping through pages is slow.
+
+            `x cwe` pulls the MITRE catalog directly (`2000.csv.zip`, ~640 KB), caches locally, parses in pure POSIX awk — zero dependencies. The commands you'll actually use:
+
+            - `x cwe info CWE-79` — full record by id (description, related weaknesses, mitigations, consequences, observed examples), batched
+            - `x cwe` / `x cwe ls` — TTY → fzf / pipe → TSV
+            - `x cwe fz` — interactive picker
+            - `x cwe update` — force-refresh (30-day TTL by default)
+
+            For offline use, set `X_CMD_CWE_OFFLINE=1` to stay on cache only. Behind a proxy, `HTTP_PROXY` / `HTTPS_PROXY` are honored transparently through `___x_cmd curl`.
+
+            ```bash
+            # What does XSS as a class actually say?
+            x cwe info CWE-79
+
+            # Shorthand
+            x cwe CWE-89
+
+            # Browse / pick
+            x cwe
+            x cwe fz
+
+            # Force refresh
+            x cwe update
+            ```
+      update:
+        - cn: |
+            `x cwe info` 输出更稳、`x cwe fz` 预览更干净。
+
+            - 渲染层整体重写：info 渲染 + fz 预览合并成单次 awk 扫描，少过一遍数据
+            - YAML 输出改用 block scalar，含冒号 / 引号 / 逗号的字段也能正确解析
+            - 支持 plain / double-quoted 两种标量形式，键名染色后只看一眼就能扫到字段名
+            - `x cwe recent` 已移除（MITRE CSV 没有 `lastModified` 列，留着是误导）
+
+            ```bash
+            x cwe info CWE-79
+            x cwe fz
+            ```
+          en: |
+            `x cwe info` output is sturdier and `x cwe fz` preview is cleaner.
+
+            - Renderer rewritten end-to-end: info render + fz preview collapse into a single awk pass
+            - YAML emission now uses block scalars, so fields with colons / quotes / commas parse correctly
+            - Plain / double-quoted scalars supported; keys are colored so you can scan field names at a glance
+            - `x cwe recent` removed (MITRE's CSV has no `lastModified` column — keeping it was misleading)
+
+            ```bash
+            x cwe info CWE-79
+            x cwe fz
+    coin:
+      bugfix:
+        - cn: |
+            修复 `x coin` 跑出 `I|tui: The CSV table is empty` 之后整页交互界面直接退出的问题。
+
+            旧实现依赖 `https://api.coincap.io/v2/assets`，该域名在 DNS 层面已经停摆（不只是国内不可达，欧美多地 `curl` 也是 `Could not resolve host`），结果 TUI 拿到的是空 CSV、自然没法启动交互视图。
+
+            改用 `https://api.coinpaprika.com/v1/tickers?limit=100` 拉市值前 100 的币种——免费、无需注册、无需 API key，Cloudflare 加速，国内访问走 Cloudflare 节点比旧源友好得多。CoinPaprika 返回的是顶层数组，所以 `jo .data` 这一步省掉；字段映射顺手对齐：`priceUsd` → `quotes.USD.price`、`marketCapUsd` → `quotes.USD.market_cap`、`supply` → `total_supply`、`volumeUsd24Hr` → `quotes.USD.volume_24h`、`changePercent24Hr` → `quotes.USD.percent_change_24h`。
+
+            顺便：CoinPaprika 的 keyless tier 没有 VWAP 字段，TUI 表格里的 `VWAP(24Hr)` 列换成 `Change(7d)`（`quotes.USD.percent_change_7d`，keyless tier 也能拿到真值），整张表还是 7 列、行数还是 100。
+
+            ```bash
+            x coin
+            x coin --csv
+            x coin --raw
+            ```
+
+            感谢 @donbagger 提的方案和可复现的测试报告！
+          en: |
+            Fixed `x coin` exiting with `I|tui: The CSV table is empty` because the upstream API died.
+
+            The old source, `https://api.coincap.io/v2/assets`, is gone at the DNS level — not just unreachable from China, `curl` reports `Could not resolve host` from Europe and US vantage points too. Result: empty CSV piped into the TUI, TUI bails out immediately.
+
+            Now points at `https://api.coinpaprika.com/v1/tickers?limit=100` — top 100 by market cap, free, no registration, no API key, served via Cloudflare so it's reachable from more places than the old source. CoinPaprika returns a top-level array, so the `jo .data` step is dropped; field mapping is realigned: `priceUsd` → `quotes.USD.price`, `marketCapUsd` → `quotes.USD.market_cap`, `supply` → `total_supply`, `volumeUsd24Hr` → `quotes.USD.volume_24h`, `changePercent24Hr` → `quotes.USD.percent_change_24h`.
+
+            CoinPaprika's keyless tier doesn't expose VWAP, so the TUI table's `VWAP(24Hr)` column becomes `Change(7d)` (`quotes.USD.percent_change_7d`, which returns real values on the keyless tier). Still 7 columns, still 100 rows.
+
+            ```bash
+            x coin
+            x coin --csv
+            x coin --raw
+            ```
+
+            Thanks @donbagger for the suggestion and the reproducible test report!
+  blog: null
+  name: v0.9.14
+  alpha: true
+  beta: true
+  latest: true
 v0.9.13:
   sum: 6d776aef69c2650ac572d1329027547edc0bac0946507b40f08de20d26012c8120753b91b54ddbc0ed75354d1e24057ada1d16199ce0ccdc98b215201ad86de3
   date: 2026-07-15 12:35:38+0000
@@ -65,9 +269,6 @@ v0.9.13:
             Thanks @yuantao313 for the report!
   blog: null
   name: v0.9.13
-  alpha: true
-  beta: true
-  latest: true
 v0.9.12:
   sum: d5535530f5cb23820be9e39dd92ab7d83633d0c082b047faf5212ac6d5d85cfff0173e9f77c6aae4f520d7da0ab313f5e2ccd2e63e54fe689bd32143ed1c4f8c
   date: 2026-07-04 08:57:44+0000
