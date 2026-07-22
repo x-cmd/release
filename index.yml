@@ -135,7 +135,7 @@ v0.9.14:
   date: 2026-07-18 02:23:23+0000
   change:
     cve:
-      feat:
+      update:
         - cn: |
             朋友突然扔来一个 CVE 编号，问你"这玩意儿到底有没有人在实战里用？"
 
@@ -188,7 +188,6 @@ v0.9.14:
             # What's landed lately
             x cve
             ```
-      update:
         - cn: |
             `x cve la / ls` —— 这一次把"快"和"看起来不卡"两件事都做到位了。
 
@@ -218,7 +217,7 @@ v0.9.14:
             x cve ls
             ```
     cwe:
-      feat:
+      update:
         - cn: |
             拿到 CVE 不够，还想知道它归到哪个弱点类？MITRE CWE 目录 969+ 条目，网页翻太慢。
 
@@ -271,7 +270,6 @@ v0.9.14:
             # Force refresh
             x cwe update
             ```
-      update:
         - cn: |
             `x cwe info` 输出更稳、`x cwe fz` 预览更干净。
 
