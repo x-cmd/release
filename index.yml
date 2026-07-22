@@ -1,3 +1,135 @@
+v0.9.15:
+  sum: b7d1dc21390e98c66f19a5fbfb5ef8f3ac73a3abdddbea41bbf6f8aa1cbb5e76c157a967960a0051caf7ed63187503a707ed7e3efec70625c8acab23954c1fe8
+  date: 2026-07-22 04:04:38+0000
+  change:
+    skill0:
+      update:
+        - cn: |
+            上线 `x skill0` —— agent 共享的"零教学"知识包，本地索引、跨 agent 复用。
+
+            `x skill0` 把以前藏在 `x-cmd/skill0` 仓里的 25 个 skill（agent-browser、ccal、meme、yfm、install、x-cmd 自身用法……）装成可发现、可查阅的命令行入口。最常用：
+
+            - `x skill0 ls` —— 列出所有 skill（含 `--tsv` / `--csv` / `--app` 多种格式），`x skill0` 不带参数默认进 `--app` 交互式浏览
+            - `x skill0 which <slug>` —— 拿到一个 skill 在本地的绝对路径，便于 agent `cat` / `Read` 注入上下文
+
+            全部走本地 `~/.x-cmd.root/.../skill0/` 缓存，无网络请求；内容更新靠 `x skill0 update`（开发期直接同步 `x-bash/skill0` 仓）。
+
+            ```bash
+            # 浏览全部 skill
+            x skill0
+
+            # 看一眼某 skill 的本地路径，喂给 agent
+            x skill0 which ccal
+
+            # 管道进 awk 过滤
+            x skill0 ls --tsv | awk '$1 == "it/agent-browser"'
+            ```
+          en: |
+            Shipped `x skill0` — the agent-shared "zero-teaching" knowledge pack, locally indexed and reusable across agents.
+
+            `x skill0` turns the 25 skills previously tucked away in `x-cmd/skill0` (agent-browser, ccal, meme, yfm, install, x-cmd itself…) into discoverable CLI entries. The commands you'll actually use:
+
+            - `x skill0 ls` — list every skill (with `--tsv` / `--csv` / `--app` formats); bare `x skill0` defaults to `--app`
+            - `x skill0 which <slug>` — print the absolute local path to a skill, so an agent can `cat` / `Read` it into context
+
+            All local under `~/.x-cmd.root/.../skill0/`, no network; refresh with `x skill0 update` (or sync `x-bash/skill0` directly during dev).
+
+            ```bash
+            # Browse every skill
+            x skill0
+
+            # Hand a skill's path to your agent
+            x skill0 which ccal
+
+            # Filter from the pipeline
+            x skill0 ls --tsv | awk '$1 == "it/agent-browser"'
+            ```
+        - cn: |
+            `x skill0` 这次把"库结构"和"教学方式"两块都重新规整了一遍。
+
+            **目录重组成 4 桶** —— 原本一锅端的 `skills/` 拆成 `core/` / `data/` / `it/` / `life/` 四类，索引从 `<slug>` 变成 `<bucket>/<slug>`（比如 `it/agent-browser`），查找时一眼能看出 skill 属于哪一类。`misc-skills/` 改名 `life-skills/`，doc-orphan 之类的孤儿文件并入 `skill0-writer/` 子目录。`agent-browser` 从 `core/` 挪到 `it/`，符合"它是 IT/工具而非核心"的定位。
+
+            **零教学哲学** —— skill0 的角色从"教 agent 怎么用 x-cmd"明确收敛为"给 agent 一份知识包，遇到问题时自己来查"。根 `SKILL.md` 重写 Design Philosophy 段，把这条主轴放第一位；`adv/index.yml` 的 `desc` + `tip` 也按这个口径重写（中英双版，3 段 意群 + folded scalar）。
+
+            **YFM 强约束** —— 所有 skill0 下的 markdown 现在强制带 YAML front matter（slug、type、x-meta 等），少一个字段就拒收。新增 `yfm-yaml-front-matter-as-ontology-metadata` skill 本身就是这条规则的范本。
+
+            **新增 `ls` / `which` 子命令** —— 之前 `x skill0` 只有 `--help`，现在有真正的 list + 路径解析（修了 [#2](https://github.com/x-cmd/x-cmd/issues/2) `ls --tsv` 死循环、`fsiter --glob` 路径输出泄漏的 [#3](https://github.com/x-cmd/x-cmd/issues/3)、agent-browser 跨桶相对路径 [#4](https://github.com/x-cmd/x-cmd/issues/4) 7 个死链）。
+
+            **catalog 自描述** —— 新增 `skills/index.tsv` 按重要性排序，目录里每条 skill 都带 `## Related` 段交叉引用、`x-meta` 段自描述；`adv/index.yml` 从 `lib/skill0/` 挪到仓根目录，对齐 `x advise` 规范；`skill0-writer` 拆分出 `.rule.yml` 装机械校验规则，SKILL.md 只留人读的指引。
+
+            ```bash
+            # 看完整目录结构
+            x skill0 ls --tsv
+
+            # 拿到 ccal 这条 skill 的本地路径
+            x skill0 which ccal
+            ```
+          en: |
+            `x skill0` got reorganized on two axes this round: how the library is laid out, and how it teaches.
+
+            **Reorganized into 4 buckets** — the flat `skills/` is now `core/` / `data/` / `it/` / `life/`, and index entries go from `<slug>` to `<bucket>/<slug>` (e.g. `it/agent-browser`), so it's obvious at a glance which category a skill belongs to. `misc-skills/` renamed to `life-skills/`; the doc-orphan file folded into `skill0-writer/`. `agent-browser` moved from `core/` to `it/` to reflect "it's an IT/tool, not core."
+
+            **Zero-teaching philosophy** — skill0's role is now explicitly framed as "knowledge pack for the agent to consult" rather than "teach the agent how to use x-cmd." Root `SKILL.md`'s Design Philosophy section was rewritten to lead with this axis; `adv/index.yml`'s `desc` + `tip` got the same rewrite (cn+en, 3-paragraph 意群 + folded scalar).
+
+            **YFM is now mandatory** — every markdown under `skill0/` must carry YAML front matter (slug, type, x-meta, etc.); missing fields get rejected. The new `yfm-yaml-front-matter-as-ontology-metadata` skill is itself the canonical example.
+
+            **`ls` / `which` subcommands landed** — `x skill0` previously only had `--help`; now there's a real list + path resolver. Three real bugs got fixed along the way: [#2](https://github.com/x-cmd/x-cmd/issues/2) `ls --tsv` infinite loop, [#3](https://github.com/x-cmd/x-cmd/issues/3) `fsiter --glob` stdout leak that broke `which`, and [#4](https://github.com/x-cmd/x-cmd/issues/4) the 7 broken cross-bucket relative links to agent-browser.
+
+            **Self-describing catalog** — new `skills/index.tsv` sorted by importance; every skill gets a `## Related` section (cross-references) and an `x-meta` section (self-description). `adv/index.yml` moved out of `lib/skill0/` to the repo root, matching the `x advise` spec; `skill0-writer` split its mechanical checks into `.rule.yml` so `SKILL.md` stays human-readable.
+
+            ```bash
+            # Full catalog
+            x skill0 ls --tsv
+
+            # Resolve a skill's local path
+            x skill0 which ccal
+            ```
+    agent:
+      update:
+        - cn: |
+            `x agent setup` 提示词打磨 + 通用化。
+
+            - prompt 接入 x-cmd meta skill（指向 `x skill0` 体系）和仓克隆约定（`~/.x-repo/<provider>/<owner>/<repo>`），让 agent 在 setup 阶段就认识 x-cmd 自己的 skill 库
+            - `___x_cmd_agent_setup___addskill_ln` 通用化：从硬编码几条 `addskill` 调用改成扫一份 `(skill_to_add, skill_name)` heredoc，未来新增 skill 不用动函数体
+            - 措辞微调："for more usages" → "for more options"、单数 "helper command" → 复数 "helper commands"、外部链接用 "at https://..." 而不是 "from https://..."
+
+            ```bash
+            x agent setup
+            ```
+          en: |
+            `x agent setup` got prompt polish and a small generalization.
+
+            - The prompt now wires in the x-cmd meta skill (pointing at `x skill0`) and the repo-clone convention (`~/.x-repo/<provider>/<owner>/<repo>`), so the agent knows about x-cmd's own skill library from the setup step onward
+            - `___x_cmd_agent_setup___addskill_ln` is now a heredoc-driven loop over `(skill_to_add, skill_name)` pairs; future skills don't require touching the function body
+            - Wording tightened: "for more usages" → "for more options", singular "helper command" → plural "helper commands", external links say "at https://..." instead of "from https://..."
+
+            ```bash
+            x agent setup
+            ```
+    xrc:
+      bugfix:
+        - cn: |
+            修复 `xrc` 启动时定位 skill0 根路径错位的 bug。
+
+            旧实现把 `___X_CMD_ROOT_SKILL0` 指到带尾随 `/skills` 子目录的路径上，但实际内容在父目录；任何依赖这个变量去 `cd` / `cat` / `source` skill0 内容的调用都会 404。改成去掉尾随的 `skills` 段，路径对齐 `lib/skill0/` 的真实布局。
+
+            ```bash
+            # 触发场景（间接）—— x skill0 ls / which 走 xrc 加载流程
+            x skill0
+            ```
+          en: |-
+            Fixed `xrc` mis-pointing at the skill0 root directory.
+
+            The old `___X_CMD_ROOT_SKILL0` ended with a trailing `/skills` segment, but the content actually lives in the parent directory; any call relying on it (to `cd` / `cat` / `source` skill0 contents) would 404. Now points one segment up, matching the real `lib/skill0/` layout.
+
+            ```bash
+            # Trigger path (indirect) — x skill0 ls / which goes through xrc load
+            x skill0
+            ```
+  blog: null
+  name: v0.9.15
+  alpha: true
+  beta: true
 v0.9.14:
   sum: 3fbcd5c8a3c2b629369f418bb421d6ea2efb4cc2f4392cd4b1afd9455475981056fbf60b8fb9909f547ee6f258150afe80b947136d5c57eea1826f9583259f4a
   date: 2026-07-18 02:23:23+0000
@@ -180,7 +312,7 @@ v0.9.14:
             x coin --raw
             ```
 
-            感谢 @donbagger 提的方案和可复现的测试报告！
+            感谢 @donbagger 在 [#264](https://github.com/x-cmd/x-cmd/issues/264) 的方案和可复现的测试报告！根因是上游 CoinCap v2 API 在 [#217](https://github.com/x-cmd/x-cmd/issues/217) 报告的 deprecation。
           en: |
             Fixed `x coin` exiting with `I|tui: The CSV table is empty` because the upstream API died.
 
@@ -196,11 +328,9 @@ v0.9.14:
             x coin --raw
             ```
 
-            Thanks @donbagger for the suggestion and the reproducible test report!
+            Thanks @donbagger for the patch and the reproducible test report in [#264](https://github.com/x-cmd/x-cmd/issues/264). Root cause: the upstream CoinCap v2 API deprecation reported in [#217](https://github.com/x-cmd/x-cmd/issues/217).
   blog: null
   name: v0.9.14
-  alpha: true
-  beta: true
   latest: true
 v0.9.13:
   sum: 6d776aef69c2650ac572d1329027547edc0bac0946507b40f08de20d26012c8120753b91b54ddbc0ed75354d1e24057ada1d16199ce0ccdc98b215201ad86de3
