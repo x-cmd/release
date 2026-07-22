@@ -1,3 +1,404 @@
+v0.9.15:
+  sum: b7d1dc21390e98c66f19a5fbfb5ef8f3ac73a3abdddbea41bbf6f8aa1cbb5e76c157a967960a0051caf7ed63187503a707ed7e3efec70625c8acab23954c1fe8
+  date: 2026-07-22 04:04:38+0000
+  change:
+    skill0:
+      update:
+        - cn: |
+            上线 `x skill0` —— agent 共享的"零教学"知识包，本地索引、跨 agent 复用。
+
+            `x skill0` 把以前藏在 `x-cmd/skill0` 仓里的 25 个 skill（agent-browser、ccal、meme、yfm、install、x-cmd 自身用法……）装成可发现、可查阅的命令行入口。最常用：
+
+            - `x skill0 ls` —— 列出所有 skill（含 `--tsv` / `--csv` / `--app` 多种格式），`x skill0` 不带参数默认进 `--app` 交互式浏览
+            - `x skill0 which <slug>` —— 拿到一个 skill 在本地的绝对路径，便于 agent `cat` / `Read` 注入上下文
+
+            全部走本地 `~/.x-cmd.root/.../skill0/` 缓存，无网络请求；内容更新靠 `x skill0 update`（开发期直接同步 `x-bash/skill0` 仓）。
+
+            ```bash
+            # 浏览全部 skill
+            x skill0
+
+            # 看一眼某 skill 的本地路径，喂给 agent
+            x skill0 which ccal
+
+            # 管道进 awk 过滤
+            x skill0 ls --tsv | awk '$1 == "it/agent-browser"'
+            ```
+          en: |
+            Shipped `x skill0` — the agent-shared "zero-teaching" knowledge pack, locally indexed and reusable across agents.
+
+            `x skill0` turns the 25 skills previously tucked away in `x-cmd/skill0` (agent-browser, ccal, meme, yfm, install, x-cmd itself…) into discoverable CLI entries. The commands you'll actually use:
+
+            - `x skill0 ls` — list every skill (with `--tsv` / `--csv` / `--app` formats); bare `x skill0` defaults to `--app`
+            - `x skill0 which <slug>` — print the absolute local path to a skill, so an agent can `cat` / `Read` it into context
+
+            All local under `~/.x-cmd.root/.../skill0/`, no network; refresh with `x skill0 update` (or sync `x-bash/skill0` directly during dev).
+
+            ```bash
+            # Browse every skill
+            x skill0
+
+            # Hand a skill's path to your agent
+            x skill0 which ccal
+
+            # Filter from the pipeline
+            x skill0 ls --tsv | awk '$1 == "it/agent-browser"'
+            ```
+        - cn: |
+            `x skill0` 这次把"库结构"和"教学方式"两块都重新规整了一遍。
+
+            **目录重组成 4 桶** —— 原本一锅端的 `skills/` 拆成 `core/` / `data/` / `it/` / `life/` 四类，索引从 `<slug>` 变成 `<bucket>/<slug>`（比如 `it/agent-browser`），查找时一眼能看出 skill 属于哪一类。`misc-skills/` 改名 `life-skills/`，doc-orphan 之类的孤儿文件并入 `skill0-writer/` 子目录。`agent-browser` 从 `core/` 挪到 `it/`，符合"它是 IT/工具而非核心"的定位。
+
+            **零教学哲学** —— skill0 的角色从"教 agent 怎么用 x-cmd"明确收敛为"给 agent 一份知识包，遇到问题时自己来查"。根 `SKILL.md` 重写 Design Philosophy 段，把这条主轴放第一位；`adv/index.yml` 的 `desc` + `tip` 也按这个口径重写（中英双版，3 段 意群 + folded scalar）。
+
+            **YFM 强约束** —— 所有 skill0 下的 markdown 现在强制带 YAML front matter（slug、type、x-meta 等），少一个字段就拒收。新增 `yfm-yaml-front-matter-as-ontology-metadata` skill 本身就是这条规则的范本。
+
+            **新增 `ls` / `which` 子命令** —— 之前 `x skill0` 只有 `--help`，现在有真正的 list + 路径解析（修了 [#2](https://github.com/x-cmd/x-cmd/issues/2) `ls --tsv` 死循环、`fsiter --glob` 路径输出泄漏的 [#3](https://github.com/x-cmd/x-cmd/issues/3)、agent-browser 跨桶相对路径 [#4](https://github.com/x-cmd/x-cmd/issues/4) 7 个死链）。
+
+            **catalog 自描述** —— 新增 `skills/index.tsv` 按重要性排序，目录里每条 skill 都带 `## Related` 段交叉引用、`x-meta` 段自描述；`adv/index.yml` 从 `lib/skill0/` 挪到仓根目录，对齐 `x advise` 规范；`skill0-writer` 拆分出 `.rule.yml` 装机械校验规则，SKILL.md 只留人读的指引。
+
+            ```bash
+            # 看完整目录结构
+            x skill0 ls --tsv
+
+            # 拿到 ccal 这条 skill 的本地路径
+            x skill0 which ccal
+            ```
+          en: |
+            `x skill0` got reorganized on two axes this round: how the library is laid out, and how it teaches.
+
+            **Reorganized into 4 buckets** — the flat `skills/` is now `core/` / `data/` / `it/` / `life/`, and index entries go from `<slug>` to `<bucket>/<slug>` (e.g. `it/agent-browser`), so it's obvious at a glance which category a skill belongs to. `misc-skills/` renamed to `life-skills/`; the doc-orphan file folded into `skill0-writer/`. `agent-browser` moved from `core/` to `it/` to reflect "it's an IT/tool, not core."
+
+            **Zero-teaching philosophy** — skill0's role is now explicitly framed as "knowledge pack for the agent to consult" rather than "teach the agent how to use x-cmd." Root `SKILL.md`'s Design Philosophy section was rewritten to lead with this axis; `adv/index.yml`'s `desc` + `tip` got the same rewrite (cn+en, 3-paragraph 意群 + folded scalar).
+
+            **YFM is now mandatory** — every markdown under `skill0/` must carry YAML front matter (slug, type, x-meta, etc.); missing fields get rejected. The new `yfm-yaml-front-matter-as-ontology-metadata` skill is itself the canonical example.
+
+            **`ls` / `which` subcommands landed** — `x skill0` previously only had `--help`; now there's a real list + path resolver. Three real bugs got fixed along the way: [#2](https://github.com/x-cmd/x-cmd/issues/2) `ls --tsv` infinite loop, [#3](https://github.com/x-cmd/x-cmd/issues/3) `fsiter --glob` stdout leak that broke `which`, and [#4](https://github.com/x-cmd/x-cmd/issues/4) the 7 broken cross-bucket relative links to agent-browser.
+
+            **Self-describing catalog** — new `skills/index.tsv` sorted by importance; every skill gets a `## Related` section (cross-references) and an `x-meta` section (self-description). `adv/index.yml` moved out of `lib/skill0/` to the repo root, matching the `x advise` spec; `skill0-writer` split its mechanical checks into `.rule.yml` so `SKILL.md` stays human-readable.
+
+            ```bash
+            # Full catalog
+            x skill0 ls --tsv
+
+            # Resolve a skill's local path
+            x skill0 which ccal
+            ```
+    agent:
+      update:
+        - cn: |
+            `x agent setup` 提示词打磨 + 通用化。
+
+            - prompt 接入 x-cmd meta skill（指向 `x skill0` 体系）和仓克隆约定（`~/.x-repo/<provider>/<owner>/<repo>`），让 agent 在 setup 阶段就认识 x-cmd 自己的 skill 库
+            - `___x_cmd_agent_setup___addskill_ln` 通用化：从硬编码几条 `addskill` 调用改成扫一份 `(skill_to_add, skill_name)` heredoc，未来新增 skill 不用动函数体
+            - 措辞微调："for more usages" → "for more options"、单数 "helper command" → 复数 "helper commands"、外部链接用 "at https://..." 而不是 "from https://..."
+
+            ```bash
+            x agent setup
+            ```
+          en: |
+            `x agent setup` got prompt polish and a small generalization.
+
+            - The prompt now wires in the x-cmd meta skill (pointing at `x skill0`) and the repo-clone convention (`~/.x-repo/<provider>/<owner>/<repo>`), so the agent knows about x-cmd's own skill library from the setup step onward
+            - `___x_cmd_agent_setup___addskill_ln` is now a heredoc-driven loop over `(skill_to_add, skill_name)` pairs; future skills don't require touching the function body
+            - Wording tightened: "for more usages" → "for more options", singular "helper command" → plural "helper commands", external links say "at https://..." instead of "from https://..."
+
+            ```bash
+            x agent setup
+            ```
+    xrc:
+      bugfix:
+        - cn: |
+            修复 `xrc` 启动时定位 skill0 根路径错位的 bug。
+
+            旧实现把 `___X_CMD_ROOT_SKILL0` 指到带尾随 `/skills` 子目录的路径上，但实际内容在父目录；任何依赖这个变量去 `cd` / `cat` / `source` skill0 内容的调用都会 404。改成去掉尾随的 `skills` 段，路径对齐 `lib/skill0/` 的真实布局。
+
+            ```bash
+            # 触发场景（间接）—— x skill0 ls / which 走 xrc 加载流程
+            x skill0
+            ```
+          en: |-
+            Fixed `xrc` mis-pointing at the skill0 root directory.
+
+            The old `___X_CMD_ROOT_SKILL0` ended with a trailing `/skills` segment, but the content actually lives in the parent directory; any call relying on it (to `cd` / `cat` / `source` skill0 contents) would 404. Now points one segment up, matching the real `lib/skill0/` layout.
+
+            ```bash
+            # Trigger path (indirect) — x skill0 ls / which goes through xrc load
+            x skill0
+            ```
+  blog: null
+  name: v0.9.15
+  alpha: true
+  beta: true
+v0.9.14:
+  sum: 3fbcd5c8a3c2b629369f418bb421d6ea2efb4cc2f4392cd4b1afd9455475981056fbf60b8fb9909f547ee6f258150afe80b947136d5c57eea1826f9583259f4a
+  date: 2026-07-18 02:23:23+0000
+  change:
+    cve:
+      feat:
+        - cn: |
+            朋友突然扔来一个 CVE 编号，问你"这玩意儿到底有没有人在实战里用？"
+
+            10 秒前你要开 5 个网页：cve.org 找描述、cvelistV5 看受影响产品、nvd 翻 CVSS、EPSS 看被利用概率、cisa kev 查在野……现在一行 `x cve`：
+
+            - `x cve` —— TTY 进 fzf 选（最新优先）/ 管道直接吐 TSV
+            - `x cve info CVE-2024-3094` —— 按 id 查快字段（cvss / 描述 / 年份），支持批量 + 多 ID 时按年并行 curl（HTTP/2 multiplex，单连接多请求）
+            - `x cve detail CVE-2024-3094` —— 拉 cvelistV5 完整原始记录（受影响产品、CWE 分类、参考、ADP、metrics、时间线）
+            - `x cve year 2024` —— 按年浏览；`--score 9` / `--grep chromium` 随手过滤
+            - `x shodan CVE-2024-3094` —— 直接拿更详细的资料：EPSS、KEV listing、漏洞利用文章、厂商公告（上游 CVE 记录本身不带这些）。关键是**不需要 Shodan API key**，走 `cvedb.shodan.io` 的公开端点——比 `x shodan search` 少一道门槛
+
+            数据从 `x-cmd/cve` 每日发布的 xz 压缩 TSV 拉，落地就是本地缓存：当年 1 天刷新一次，老年份 180 天不动。第二次起即命中，无需 API key、无需 sudo、无后台进程。
+
+            ```bash
+            # 同事扔了一个 CVE 给你
+            x cve info CVE-2024-3094
+
+            # 想看完整上游
+            x cve detail CVE-2024-3094
+
+            # 这玩意儿到底有没有人在用？(无需 Shodan token)
+            x shodan CVE-2024-3094
+
+            # 看一眼最近都出了啥
+            x cve
+            ```
+          en: |
+            A coworker drops a CVE ID and asks: "Is this thing actually being exploited in the wild?"
+
+            Ten seconds ago you'd open five tabs — cve.org for the description, cvelistV5 for affected products, NVD for CVSS, EPSS for exploitation probability, CISA KEV for in-the-wild confirmation. Now it's one `x cve`:
+
+            - `x cve` — TTY → fzf picker / pipe → TSV, newest first
+            - `x cve info CVE-2024-3094` — quick fields by id (cvss / description / year); batched and parallel across years via HTTP/2 multiplex
+            - `x cve detail CVE-2024-3094` — full cvelistV5 record (affected products, CWE, references, ADP, metrics, timeline)
+            - `x cve year 2024` — browse by year; `--score 9` / `--grep chromium` to filter
+            - `x shodan CVE-2024-3094` — straight to the deeper stuff: EPSS, KEV listing, exploit writeups, vendor advisories (the upstream CVE record doesn't carry these). Crucially **no Shodan API key needed** — it hits `cvedb.shodan.io`'s public endpoint, so you skip the token gate that `x shodan search` requires
+
+            Data pulls from daily xz-compressed TSVs at `x-cmd/cve`, cached locally — 1-day TTL for the current year, 180 days for older ones (they barely change). Cache hits from the second call. No API key, no sudo, no daemons.
+
+            ```bash
+            # A coworker drops a CVE on you
+            x cve info CVE-2024-3094
+
+            # Want the full upstream record
+            x cve detail CVE-2024-3094
+
+            # Is this thing actually being exploited? (no Shodan token needed)
+            x shodan CVE-2024-3094
+
+            # What's landed lately
+            x cve
+            ```
+      update:
+        - cn: |
+            `x cve la / ls` —— 这一次把"快"和"看起来不卡"两件事都做到位了。
+
+            - 流式按年倒序，写盘就已是 new-first，读取时不再 `tac`；目录走文件系统直接遍历，不再依赖 `index.tsv` 中转
+            - 老年份 TTL 30 → 180 天，老数据几乎不动，少拉一次少等几秒
+            - 同步刷新 + 每次下载前打一行日志，缓存未命中不再像"卡住"——你能看到下一步在干嘛
+            - stalled github.com 超时从 5s 收紧到 2s，更快 fallback 到镜像
+            - 缺年份时按 manifest 自动补齐，不再需要任何 flag 或特殊路径
+            - fz picker：score bucket 给 id 列上色（之前只给 score 列），预览窗口修正成 9 列对齐（之前 6 列错位，score 显示成 desc），CRITICAL→品红 / MEDIUM→青 / unrated 才标红，整体红海消失
+
+            ```bash
+            x cve
+            x cve ls
+            ```
+          en: |
+            `x cve la / ls` — both "fast" and "doesn't feel stuck" got attention this round.
+
+            - Streams years in reverse, stores rows newest-first on disk, no `tac` at read time; walks the filesystem directly, no `index.tsv` round-trip
+            - Older-year TTL bumped 30 → 180 days; older data barely changes, fewer round-trips, less waiting
+            - Synchronous refresh with a log line per download — cache misses no longer feel like a hang; you see what's happening next
+            - stalled github.com timeout tightened 5s → 2s, falls back to the mirror faster
+            - Missing years auto-fill from the manifest; no flags, no special case
+            - fz picker: id column colored by score bucket (was only the score column), preview pane fixed to 9 columns (was 6, showed score as desc), CRITICAL→magenta / MEDIUM→cyan / unrated only gets red — the sea of red is gone
+
+            ```bash
+            x cve
+            x cve ls
+            ```
+    cwe:
+      feat:
+        - cn: |
+            拿到 CVE 不够，还想知道它归到哪个弱点类？MITRE CWE 目录 969+ 条目，网页翻太慢。
+
+            `x cwe` 直接拉 MITRE 公开目录（`2000.csv.zip`，约 640 KB），本地缓存 + POSIX awk 解析，零依赖。最常用：
+
+            - `x cwe info CWE-79` —— 按 id 查完整记录（描述、关联弱点、缓解措施、后果、观察示例），支持批量
+            - `x cwe` / `x cwe ls` —— TTY 进 fzf / 管道吐 TSV
+            - `x cwe fz` —— 交互式挑选
+            - `x cwe update` —— 强制刷新（默认 30 天 TTL）
+
+            离线场景 `X_CMD_CWE_OFFLINE=1` 走纯缓存，墙内 `HTTP_PROXY` / `HTTPS_PROXY` 自动透传。
+
+            ```bash
+            # 看一眼 XSS 这类弱点都讲啥
+            x cwe info CWE-79
+
+            # 简写
+            x cwe CWE-89
+
+            # 浏览 / 选
+            x cwe
+            x cwe fz
+
+            # 强制刷新
+            x cwe update
+            ```
+          en: |
+            Got the CVE but still want to know which weakness class it falls under? MITRE's CWE catalog has 969+ entries — flipping through pages is slow.
+
+            `x cwe` pulls the MITRE catalog directly (`2000.csv.zip`, ~640 KB), caches locally, parses in pure POSIX awk — zero dependencies. The commands you'll actually use:
+
+            - `x cwe info CWE-79` — full record by id (description, related weaknesses, mitigations, consequences, observed examples), batched
+            - `x cwe` / `x cwe ls` — TTY → fzf / pipe → TSV
+            - `x cwe fz` — interactive picker
+            - `x cwe update` — force-refresh (30-day TTL by default)
+
+            For offline use, set `X_CMD_CWE_OFFLINE=1` to stay on cache only. Behind a proxy, `HTTP_PROXY` / `HTTPS_PROXY` are honored transparently through `___x_cmd curl`.
+
+            ```bash
+            # What does XSS as a class actually say?
+            x cwe info CWE-79
+
+            # Shorthand
+            x cwe CWE-89
+
+            # Browse / pick
+            x cwe
+            x cwe fz
+
+            # Force refresh
+            x cwe update
+            ```
+      update:
+        - cn: |
+            `x cwe info` 输出更稳、`x cwe fz` 预览更干净。
+
+            - 渲染层整体重写：info 渲染 + fz 预览合并成单次 awk 扫描，少过一遍数据
+            - YAML 输出改用 block scalar，含冒号 / 引号 / 逗号的字段也能正确解析
+            - 支持 plain / double-quoted 两种标量形式，键名染色后只看一眼就能扫到字段名
+            - `x cwe recent` 已移除（MITRE CSV 没有 `lastModified` 列，留着是误导）
+
+            ```bash
+            x cwe info CWE-79
+            x cwe fz
+            ```
+          en: |
+            `x cwe info` output is sturdier and `x cwe fz` preview is cleaner.
+
+            - Renderer rewritten end-to-end: info render + fz preview collapse into a single awk pass
+            - YAML emission now uses block scalars, so fields with colons / quotes / commas parse correctly
+            - Plain / double-quoted scalars supported; keys are colored so you can scan field names at a glance
+            - `x cwe recent` removed (MITRE's CSV has no `lastModified` column — keeping it was misleading)
+
+            ```bash
+            x cwe info CWE-79
+            x cwe fz
+    coin:
+      bugfix:
+        - cn: |
+            修复 `x coin` 跑出 `I|tui: The CSV table is empty` 之后整页交互界面直接退出的问题。
+
+            旧实现依赖 `https://api.coincap.io/v2/assets`，该域名在 DNS 层面已经停摆（不只是国内不可达，欧美多地 `curl` 也是 `Could not resolve host`），结果 TUI 拿到的是空 CSV、自然没法启动交互视图。
+
+            改用 `https://api.coinpaprika.com/v1/tickers?limit=100` 拉市值前 100 的币种——免费、无需注册、无需 API key，Cloudflare 加速，国内访问走 Cloudflare 节点比旧源友好得多。CoinPaprika 返回的是顶层数组，所以 `jo .data` 这一步省掉；字段映射顺手对齐：`priceUsd` → `quotes.USD.price`、`marketCapUsd` → `quotes.USD.market_cap`、`supply` → `total_supply`、`volumeUsd24Hr` → `quotes.USD.volume_24h`、`changePercent24Hr` → `quotes.USD.percent_change_24h`。
+
+            顺便：CoinPaprika 的 keyless tier 没有 VWAP 字段，TUI 表格里的 `VWAP(24Hr)` 列换成 `Change(7d)`（`quotes.USD.percent_change_7d`，keyless tier 也能拿到真值），整张表还是 7 列、行数还是 100。
+
+            ```bash
+            x coin
+            x coin --csv
+            x coin --raw
+            ```
+
+            感谢 @donbagger 在 [#264](https://github.com/x-cmd/x-cmd/issues/264) 的方案和可复现的测试报告！根因是上游 CoinCap v2 API 在 [#217](https://github.com/x-cmd/x-cmd/issues/217) 报告的 deprecation。
+          en: |
+            Fixed `x coin` exiting with `I|tui: The CSV table is empty` because the upstream API died.
+
+            The old source, `https://api.coincap.io/v2/assets`, is gone at the DNS level — not just unreachable from China, `curl` reports `Could not resolve host` from Europe and US vantage points too. Result: empty CSV piped into the TUI, TUI bails out immediately.
+
+            Now points at `https://api.coinpaprika.com/v1/tickers?limit=100` — top 100 by market cap, free, no registration, no API key, served via Cloudflare so it's reachable from more places than the old source. CoinPaprika returns a top-level array, so the `jo .data` step is dropped; field mapping is realigned: `priceUsd` → `quotes.USD.price`, `marketCapUsd` → `quotes.USD.market_cap`, `supply` → `total_supply`, `volumeUsd24Hr` → `quotes.USD.volume_24h`, `changePercent24Hr` → `quotes.USD.percent_change_24h`.
+
+            CoinPaprika's keyless tier doesn't expose VWAP, so the TUI table's `VWAP(24Hr)` column becomes `Change(7d)` (`quotes.USD.percent_change_7d`, which returns real values on the keyless tier). Still 7 columns, still 100 rows.
+
+            ```bash
+            x coin
+            x coin --csv
+            x coin --raw
+            ```
+
+            Thanks @donbagger for the patch and the reproducible test report in [#264](https://github.com/x-cmd/x-cmd/issues/264). Root cause: the upstream CoinCap v2 API deprecation reported in [#217](https://github.com/x-cmd/x-cmd/issues/217).
+  blog: null
+  name: v0.9.14
+  latest: true
+v0.9.13:
+  sum: 6d776aef69c2650ac572d1329027547edc0bac0946507b40f08de20d26012c8120753b91b54ddbc0ed75354d1e24057ada1d16199ce0ccdc98b215201ad86de3
+  date: 2026-07-15 12:35:38+0000
+  change:
+    rfc:
+      bugfix:
+        - cn: |
+            修复 `x rfc ls` 静默输出 0 行的问题。
+
+            旧 `lib/awk/ls.awk` 用 `$0 ~ /^0001/` 去"进入正文区"，但 `rfc-index.txt` 里 RFC 号是右对齐到 4 列的（RFC 1 是 `   1`），根本不会匹配 `^0001`。结果 `skip` 永远是 1，`handle()` 一次都没调用，`x rfc ls --csv` / `--tsv` 一行都不吐，还不报错。改成 `/^[[:space:]]*1[[:space]]/` 匹配 RFC 1 的入口（POSIX 字符类，BWK awk / mawk / gawk / busybox awk 全部支持），9796 行 / 无尾空行 / 末行 RFC 10014。
+
+            ```bash
+            x rfc ls --tsv
+            ```
+          en: |
+            Fixed `x rfc ls` silently emitting zero rows.
+
+            The old `lib/awk/ls.awk` used `$0 ~ /^0001/` to "enter the body", but in `rfc-index.txt` the RFC numbers are right-aligned to 4 columns (RFC 1 is `   1`), so `^0001` never matches. `skip` stayed 1, `handle()` was never called, and `x rfc ls --csv` / `--tsv` produced no rows at all without any error. It now matches RFC 1's entry with `/^[[:space:]]*1[[:space]]/` (POSIX character class, works across BWK awk / mawk / gawk / busybox awk) — 9796 rows, no trailing blanks, last row is RFC 10014.
+
+            ```bash
+            x rfc ls --tsv
+            ```
+      update:
+        - cn: |
+            `x rfc ls` 非 tty 默认改用 TSV 输出，并把 awk 解析循环重构成 do-while。
+
+            `x rfc ls` 在终端里仍走交互式 `csv app` 浏览器（不变）；被管道、重定向或其他 x-cmd 工具消费时，原来回退到 CSV，现在回退到 TSV，和 `x repo` 等命令保持一致。awk 脚本本身只产 CSV，TSV 走原 `awk | tsv fromcsv` 管道（顺手把 `csv static_tab` 换成规范名 `tsv fromcsv`）。
+
+            解析循环也清理了：原来底部两个 `if (! getline) return` 散在各处，文件末尾多个空行会多走一圈、产出 `,,,,,,,,,,,` 这种空字段行；改成单个 `do { ... } while (getline)`，推进点收拢到循环末尾一处，空行用顶部 `if ($0 == "") continue` 一并跳过。
+
+            ```bash
+            x rfc ls --tsv | x tsv ...
+            ```
+          en: |
+            `x rfc ls` now defaults to TSV output in non-tty scenarios, and the awk parsing loop is refactored into a do-while.
+
+            `x rfc ls` still opens the interactive `csv app` browser in a terminal (unchanged); when piped, redirected, or consumed by other x-cmd tools it used to fall back to CSV and now falls back to TSV, consistent with commands like `x repo`. The awk script itself only emits CSV, and the TSV path is the existing `awk | tsv fromcsv` pipe (with `csv static_tab` renamed to the canonical `tsv fromcsv`).
+
+            The parsing loop got cleaned up too: the old code had `if (! getline) return` scattered around, so multiple trailing blank lines produced extra empty `,,,,,,,,,,,` rows. It is now a single `do { ... } while (getline)` with the advance at one place, and blank lines are skipped by a single `if ($0 == "") continue` guard at the top.
+
+            ```bash
+            x rfc ls --tsv | x tsv ...
+            ```
+    ohmyposh:
+      bugfix:
+        - cn: |
+            修复 `x ohmyposh use` 设置部分内置主题时报错的问题。
+
+            之前执行 `x ohmyposh use 1_shell` 会报 `Invaild value for prompt theme [name=1_shell]`，可它明明是 oh-my-posh 自带的有效主题。问题出在主题目录初始化/校验这一环，命令没能定位到已下载的主题文件。现在主题能被正确识别，设置也就正常了。
+
+            ```bash
+            x ohmyposh use 1_shell
+            ```
+
+            感谢 @yuantao313 的反馈！
+          en: |
+            Fixed `x ohmyposh use` erroring out on some built-in themes.
+
+            Running `x ohmyposh use 1_shell` used to fail with `Invaild value for prompt theme [name=1_shell]`, even though it's a valid built-in oh-my-posh theme. The theme directory init/validation step couldn't locate the downloaded theme file. Themes are now resolved correctly and the command works as expected.
+
+            ```bash
+            x ohmyposh use 1_shell
+            ```
+
+            Thanks @yuantao313 for the report!
+  blog: null
+  name: v0.9.13
 v0.9.12:
   sum: d5535530f5cb23820be9e39dd92ab7d83633d0c082b047faf5212ac6d5d85cfff0173e9f77c6aae4f520d7da0ab313f5e2ccd2e63e54fe689bd32143ed1c4f8c
   date: 2026-07-04 08:57:44+0000
@@ -85,10 +486,8 @@ v0.9.12:
             x claw log --last 100
             x claw log --all --debug
             ```
-  blog: null
+  blog: /blog/260707
   name: v0.9.12
-  alpha: true
-  beta: true
 v0.9.11:
   sum: 60ee0d49c4dbe8febc4ab30042a13f2f5026432b6ce194dbedd756dc0db8f54c89e261747cc3a60ef025f3bbb52139102e063f4b7354ccfefa1e9d725d5d27c2
   date: 2026-07-02 13:18:35+0000
@@ -211,7 +610,6 @@ v0.9.11:
             Thanks to @stirp for catching this in [#443](https://github.com/x-cmd/x-cmd/issues/443)!
   blog: /blog/260704
   name: v0.9.11
-  latest: true
 v0.9.10:
   sum: bfa65a349a31b4e9595395166896304bfd3f0b2755daa2eff8565e658da16041e3db20b8e4001100cae9be76bbe9ff52e1693f37b5f636c7fafbf03713c5432a
   date: 2026-06-27 17:37:08+0000
