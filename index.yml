@@ -1,3 +1,68 @@
+v0.10.0:
+  sum: 046ee051050e2c59ca3b3549cb63d476e0ebd052b36b8d92138b03d8546989556b500e7cbdfce51cb4cdcd71db6687d2b376e4682ef84a97b18483cdfad0b547
+  date: 2026-07-27 12:19:22+0000
+  change:
+    solo:
+      bugfix:
+        - cn: |
+            修复 `x me:xxx.fish` / `x solo run xxx.fish` 没法跑 fish 脚本的问题。
+
+            终端里 fish shell 里用 `i demo.fish` 这种 hub 短链触发脚本时，`solo` 的 `tryinit___runcode_` 只对 `pip` / `deno` / `ruby` / `perl` / `julia` / `elisp` / `bun` 这几种引擎有专门 case，fish 落到默认 `*` 分支生成的 `___x_cmd fish $wsdp/$wsfn "$@"` 路径不稳定，再加上 `detect_` / `parse` 里有 `fish` 但 `tryinit___code_` 没有，于是出现 `W|solo: No engine found -> fish`、鱼却能起来但首跑失败这类"半好半坏"的怪现象。
+
+            修法：`detect` 的扩展名映射和 `runcode_` 的 case 对齐 fish，把 `tryinit___code_` 里没有的 fish 也补上一条 fallback（典型场景：仅给出一份 `#!/usr/bin/env fish` + 无 `x-cmd.engine` 注释时，code 阶段也要能识别）。
+
+            ```bash
+            # 现在 fish 脚本能直接跑
+            i demo.fish
+
+            # 或者本地
+            x solo run ./hello.fish
+            ```
+          en: |
+            Fixed `x me:xxx.fish` / `x solo run xxx.fish` failing on fish scripts.
+
+            When triggered via the hub short-link `i demo.fish` from a fish shell, `solo`'s `tryinit___runcode_` only has explicit cases for `pip` / `deno` / `ruby` / `perl` / `julia` / `elisp` / `bun`. Fish landed in the default `*` branch, generating the unstable `___x_cmd fish $wsdp/$wsfn "$@"` path; combined with `detect_` / `parse` listing `fish` but `tryinit___code_` not matching it, you got the half-working "W|solo: No engine found -> fish" + fish REPL actually starting.
+
+            Fix: align `detect`'s extension map with `runcode_`'s case (both now cover fish end-to-end), and add a fish fallback in `tryinit___code_` so a script with only a `#!/usr/bin/env fish` shebang and no `x-cmd.engine` comment still resolves.
+
+            ```bash
+            # Now fish scripts run directly
+            i demo.fish
+
+            # Or local
+            x solo run ./hello.fish
+            ```
+    df:
+      bugfix:
+        - cn: |
+            修复 Android (Termux) / Alpine chroot 之类的 toybox 环境跑 `x df` 报 `/usr/bin/awk: Argument list too long` 后整页交互界面退出的问题。
+
+            旧实现把 toybox 的 `mount` 输出整段塞进 shell 变量 `mount_data`，再以 `ENVIRON["mount_data"]` 传给 awk 的 BEGIN 块建索引。问题是 toybox 在这些场景里会列出 `/system/*` / `/acct/*` / `/dsp/*` / `/persist/*` / `/sbin/.magisk/*` 等几十甚至上百个系统挂载点，整段 mount 表写进 argv 时直接撞上 ARG_MAX，自然 `Argument list too long`，awk 没起来、后面 `csv app` 拿到空表就退出。
+
+            修法：把 `mount` 输出改成**流式**给 awk（`mount | awk ...`），不再走 env 变量中转，BEGIN 块也就没了 `mount_data` 依赖。toybox 解析路径（`mount_toybox.awk`）不变。
+
+            ```bash
+            # Termux / Alpine chroot 都能正常跑了
+            x df
+            x df --csv
+            ```
+          en: |
+            Fixed `x df` failing with `/usr/bin/awk: Argument list too long` in toybox environments (Android / Termux / Alpine chroot), followed by the interactive view exiting because the CSV came back empty.
+
+            The old code stuffed toybox's full `mount` output into a shell variable `mount_data` and passed it into awk's BEGIN block via `ENVIRON["mount_data"]`. The trouble: toybox in these environments reports dozens-to-hundreds of system mount points (`/system/*`, `/acct/*`, `/dsp/*`, `/persist/*`, `/sbin/.magisk/*`, ...), so the whole table blew past ARG_MAX when injected as an argv-sized blob, awk never started, and `csv app` bailed on an empty CSV.
+
+            Fix: stream `mount` straight into awk (`mount | awk ...`) instead of bouncing it through an env var, so the BEGIN block no longer depends on `mount_data`. The toybox-side parser (`mount_toybox.awk`) is unchanged.
+
+            ```bash
+            # Now runs fine under Termux / Alpine chroot
+            x df
+            x df --csv
+            ```
+  blog: null
+  name: v0.10.0
+  alpha: true
+  beta: true
+  latest: true
 v0.9.15:
   sum: b7d1dc21390e98c66f19a5fbfb5ef8f3ac73a3abdddbea41bbf6f8aa1cbb5e76c157a967960a0051caf7ed63187503a707ed7e3efec70625c8acab23954c1fe8
   date: 2026-07-22 04:04:38+0000
@@ -128,8 +193,6 @@ v0.9.15:
             ```
   blog: null
   name: v0.9.15
-  alpha: true
-  beta: true
 v0.9.14:
   sum: 3fbcd5c8a3c2b629369f418bb421d6ea2efb4cc2f4392cd4b1afd9455475981056fbf60b8fb9909f547ee6f258150afe80b947136d5c57eea1826f9583259f4a
   date: 2026-07-18 02:23:23+0000
@@ -329,7 +392,6 @@ v0.9.14:
             Thanks @donbagger for the patch and the reproducible test report in [#264](https://github.com/x-cmd/x-cmd/issues/264). Root cause: the upstream CoinCap v2 API deprecation reported in [#217](https://github.com/x-cmd/x-cmd/issues/217).
   blog: null
   name: v0.9.14
-  latest: true
 v0.9.13:
   sum: 6d776aef69c2650ac572d1329027547edc0bac0946507b40f08de20d26012c8120753b91b54ddbc0ed75354d1e24057ada1d16199ce0ccdc98b215201ad86de3
   date: 2026-07-15 12:35:38+0000
