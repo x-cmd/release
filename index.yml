@@ -1,3 +1,103 @@
+v0.10.1:
+  sum: 6f9599dbd66c732f1d13c5ed09df11a149440f19f8bd32cdda9c7fb7c8b29f020b8acb0055b90e0373dfb12cfb586df19d53c8c6b7b14d955a6b2abce9877a48
+  date: 2026-08-03 07:04:14+0000
+  change:
+    agent:
+      update:
+        - cn: |
+            现在的 agent setup 变得极简：只在环境的 AGENTS.md 或 CLAUDE.md 里注入一句 prompt，并安装 skill0。
+            原先独立的 x-cmd skill 现已全面收归到 skill0 旗下。
+            我们的理念很简单 —— agent 有 skill0 一个就够了。它致力于收拢 agent 所需的一切技能，告别重复造轮子。
+
+            示例：
+            ```bash
+            x agent setup
+            ```
+          en: |
+            We made agent setup dead simple: it just injects one prompt into your environment's AGENTS.md or CLAUDE.md and installs skill0.
+            The previously standalone x-cmd skill is now fully under skill0.
+            Our philosophy is straightforward — one skill0 is all an agent needs. It's meant to gather every skill an agent needs, so we stop reinventing the wheel.
+
+            Example:
+            ```bash
+            x agent setup
+            ```
+    skill0:
+      update:
+        - cn: |
+            `skill0` 这一版进一步规范了 YFM 元数据、writer 规则和 repo 工作流，让各个 subskill 的写法更统一。
+
+            `skill0` 是 Agent 的“原则与技能库”。
+
+            我们不希望 agent 靠 prompt 去死记硬背各种规范，而是把“怎么协作、怎么验证、怎么查权威来源”沉淀为一个个清晰的 `SKILL.md`，遇到任务时让 agent 自行按需加载。
+            通过 `core/`、`data/`、`it/`、`life/` 四大分类和严格的规则校验，`skill0` 让 agent 的能力扩展变成了一套可复用、可验收、可持续维护的工程化体系。
+            它不给一次性的答案，而是提供长期的规范与标准，让你的技能资产越用越精简，告别臃肿。
+
+
+            示例：
+            ```bash
+            x skill0 ls
+            ```
+          en: |
+            This release further tightens the conventions around YFM metadata, writer rules, and repo workflow, making subskills more consistent.
+
+            skill0 is the agent's principle and skill library.
+
+            We don't want agents to memorize prompts full of conventions. Instead, we encode "how to collaborate, how to verify, and where to find authoritative sources" into clear SKILL.md files that agents load on demand.
+            With the four buckets `core/`, `data/`, `it/`, `life/` and strict rule checks, skill0 turns agent capability expansion into a reusable, verifiable, maintainable engineering practice.
+            It doesn't hand out one-off answers; it provides long-term conventions and standards, so your skill assets get leaner over time instead of bloated.
+
+
+            Example:
+            ```bash
+            x skill0 ls
+            ```
+    repo:
+      update:
+        - cn: |
+            `repo` 模块用于统一管理 agent、开发者和 CI 环境中的代码仓库位置与工作空间。现已引入 Worktree 支持，告别了过去每次执行任务都要重新 `clone` 一整份代码的低效方式。
+
+            现在，一个仓库只需要在 `~/.x-repo/.bare/` 里 `clone` 一次裸仓库，多 agent 在处理不同分支或任务时，直接用 `x repo wt <id> <wtname>` 快速拉出独立工作区即可。每个工作区都有专属的分支和文件视图，**多个任务同时运行也互不干扰**。任务完成后使用 `x repo wt rm` 优雅清理，避免直接删除工作区带来的 Git 元数据残留问题。
+
+            这让**多 agent 并行开发**拥有统一的仓库布局和更低的环境管理成本：只需维护一次裸仓库，所有工作区都能共享 Git 历史和最新状态。
+
+            示例：
+            ```bash
+            # 两个任务并行，各开各的工作区
+            x repo wt x-bash/skill0 fix-bug
+            x repo wt x-bash/skill0 feat-yfm
+
+            # 查看所有工作区
+            x repo wt ls x-bash/skill0
+
+            # 做完清理
+            x repo wt rm x-bash/skill0 fix-bug
+            x repo wt rm x-bash/skill0 feat-yfm
+            ```
+          en: |
+            The `repo` module centralizes code repository locations and workspaces across agent, developer, and CI environments, and now supports worktrees —— no more re-cloning the entire repo for every single task.
+
+            Now a repo only needs to be cloned once as a bare repo under `~/.x-repo/.bare/`. When multiple agents work on different branches or tasks, just use `x repo wt <id> <wtname>` to spin up isolated workspaces. Each worktree has its own branch and file view, so **multiple tasks can run side by side without interfering with each other**. When a task is done, `x repo wt rm` cleans it up gracefully and avoids the Git metadata residue problem caused by directly deleting workspaces.
+
+            This gives **multi-agent parallel development** a unified repo layout and lower environment management costs: maintain the bare repo once, and every workspace shares the Git history and latest state.
+
+            Example:
+            ```bash
+            # Two tasks running in parallel, each in its own worktree
+            x repo wt x-bash/skill0 fix-bug
+            x repo wt x-bash/skill0 feat-yfm
+
+            # List worktrees
+            x repo wt ls x-bash/skill0
+
+            # Clean up when done
+            x repo wt rm x-bash/skill0 fix-bug
+            x repo wt rm x-bash/skill0 feat-yfm
+            ```
+  blog: null
+  name: v0.10.1
+  alpha: true
+  beta: true
 v0.10.0:
   sum: 046ee051050e2c59ca3b3549cb63d476e0ebd052b36b8d92138b03d8546989556b500e7cbdfce51cb4cdcd71db6687d2b376e4682ef84a97b18483cdfad0b547
   date: 2026-07-27 12:19:22+0000
@@ -60,8 +160,6 @@ v0.10.0:
             ```
   blog: null
   name: v0.10.0
-  alpha: true
-  beta: true
   latest: true
 v0.9.15:
   sum: b7d1dc21390e98c66f19a5fbfb5ef8f3ac73a3abdddbea41bbf6f8aa1cbb5e76c157a967960a0051caf7ed63187503a707ed7e3efec70625c8acab23954c1fe8
