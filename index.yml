@@ -94,7 +94,7 @@ v0.10.1:
             x repo wt rm x-bash/skill0 fix-bug
             x repo wt rm x-bash/skill0 feat-yfm
             ```
-  blog: null
+  blog: /blog/260805
   name: v0.10.1
   alpha: true
   beta: true
@@ -158,7 +158,7 @@ v0.10.0:
             x df
             x df --csv
             ```
-  blog: null
+  blog: /blog/260802
   name: v0.10.0
   latest: true
 v0.9.15:
@@ -488,7 +488,7 @@ v0.9.14:
             ```
 
             Thanks @donbagger for the patch and the reproducible test report in [#264](https://github.com/x-cmd/x-cmd/issues/264). Root cause: the upstream CoinCap v2 API deprecation reported in [#217](https://github.com/x-cmd/x-cmd/issues/217).
-  blog: null
+  blog: /blog/260722
   name: v0.9.14
 v0.9.13:
   sum: 6d776aef69c2650ac572d1329027547edc0bac0946507b40f08de20d26012c8120753b91b54ddbc0ed75354d1e24057ada1d16199ce0ccdc98b215201ad86de3
@@ -555,7 +555,7 @@ v0.9.13:
             ```
 
             Thanks @yuantao313 for the report!
-  blog: null
+  blog: /blog/260720
   name: v0.9.13
 v0.9.12:
   sum: d5535530f5cb23820be9e39dd92ab7d83633d0c082b047faf5212ac6d5d85cfff0173e9f77c6aae4f520d7da0ab313f5e2ccd2e63e54fe689bd32143ed1c4f8c
