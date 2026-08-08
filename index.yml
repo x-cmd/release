@@ -1,3 +1,78 @@
+v0.10.2:
+  sum: 7470a69f01960a354bce1177072d9d953ddd06237af6cbc7133fdf444e5f5482d91c820e94e8cef544291e72a0c3957d2efde35612fa3b3b06363d18baa4c1cf
+  date: 2026-08-08 03:27:07+0000
+  change:
+    keyring:
+      update:
+        - cn: |
+            新增 `keyring` 模块 —— 说实话，这只是个开始。
+
+            其实这件事我们心里想了很久 —— 我们**四年前就开始调研 vault 和 1password**，并思考**构造一个既安全又方便的配置文件**应该如何设计。
+
+            调研走了一圈下来，我们意识到 **`keyring` 不会成为 x-cmd 加密方案的底座 —— 跨平台不一致性是个硬约束**（macOS Keychain 是 OS 级保护，Linux SecretService 依赖 gnome-keyring / kwallet 等 daemon，Windows Credential Manager 登录就能解，基本是会话级）。但它可以成为 **x-cmd 加密方案里一个可选的 OS 级别落盘加密增强** —— 用户用 `x keyring`，就把系统已有的能力复用起来，享受系统级的 at-rest encryption。
+
+            我们先试着把系统相应的能力抽象出来，看能多大程度解决多少问题。Python 的 `keyring` 方案给了我们把这个思考细化的一个角度 —— 把"用户自己拼 service 名、跨平台抽象"这些痛点先在 shell 这层验证掉。直到 [GitHub discussion #455](https://github.com/x-cmd/x-cmd/discussions/455) 的用户反馈把这件事推上来，我们才正式开干。
+
+            所以 `keyring` 现在是**对 OS 落盘加密的统一封装** —— 本地 note、API token、SSH key 密码、recovery code 都能往里塞，享受系统级的 at-rest encryption。
+
+            顺便说一句，我们也参考了 Python 的 `keyring` 库 / CLI，但走了不一样的路：
+
+            - **只依赖 —— 无新增二进制**：直接调 `security`（macOS Keychain）/ `secret-tool`（Linux SecretService）/ `kwalletcli5`（KWallet）/ PowerShell + Win32 advapi32（Windows Credential Manager），以及一套透明的 shell/awk 实现，不引入任何新的二进制依赖。代价是锁在每个 OS CLI 的能力边界内 —— 但好处是零供应链风险、零二进制更新负担；之前尝试过的 file backend 已经砍掉（一旦走文件，at-rest encryption 这层就破了，再去自己实现又会撞到"二进制凭证大一点就报错"的坑）。
+            - **默认 namespace `x-cmd-<UID>`**：你的 service 名不会跟同机其他 UID 或其他脚本撞，多脚本互不干扰。要独立 slot 就 `--ns deploy-bot`。Python `keyring` 库每次都得自己拼 service 名，CLI 帮你省了这一步。
+            - **iCloud Keychain 单独命名**：`cget` / `cset` / `cls` / `crm`，`c` = cloud，跟本地 `get` / `set` 显式分开。你把 SSH key 的密码存进 iCloud Keychain，就能跨 Apple 设备同步；Linux / Windows 上 `cset` 直接 exit 64 告诉你"这不在你这"。
+
+            你也可以基于这个模块定制自己的脚本：本地加密 note、iCloud 同步 SSH key 密码或文件、本地缓存一些一次性凭证，等等。
+
+            示例：
+            ```bash
+            x keyring set github alice                       # 静默提示输 token
+            printf '%s' "$pw" | x keyring set github alice  # 脚本里 pipe，不留 shell history
+            x keyring get github alice                       # 取用
+            x keyring cset ssh alice                                 # 同步 SSH key 密码到 Apple 设备
+            x keyring cset ssh-key alice < ~/.ssh/id_ed25519         # SSH key 文件也可以走 iCloud 同步
+            # 设备 B 上: 取出来后直接 pipe 给 ssh-add, 全程不落盘
+            x keyring cget ssh-key alice | ssh-add -
+            x keyring ls                                            # 审计自己落盘了哪些条目
+            ```
+
+            **现状**：模块首发，我自己还在试。等我把 SSH key 等场景多跑几遍，再回来补 v0.10.x 的增量。
+          en: |
+            Added `keyring` module — honestly, this is just the beginning.
+
+            Honestly, this had been on our minds for a while — we started surveying vault and 1password four years ago, thinking through how to design a config file that's **both secure and convenient**.
+
+            After going around the loop, we realized **`keyring` won't be the foundation of x-cmd's encryption scheme — cross-platform inconsistency is a hard constraint** (macOS Keychain gives real OS-level protection; Linux SecretService leans on gnome-keyring / kwallet daemons; Windows Credential Manager unlocks at login, basically session-level). But it can be **a selectable OS-level at-rest encryption enhancement within x-cmd's encryption story** — users who pick `x keyring` get to lean on whatever their system already ships, enjoying system-grade at-rest encryption.
+
+            We're starting by abstracting what the OS already gives us, and seeing how far it can take us. Python's `keyring` library gave us a sharper angle to refine the question — work through the "users rolling their own service names, cross-platform abstraction" pain points at the shell layer first. [GitHub discussion #455](https://github.com/x-cmd/x-cmd/discussions/455) from a user finally pushed it onto the active roadmap.
+
+            So `keyring` is a **unified wrapper over OS-level at-rest encryption** — drop in local notes, API tokens, SSH key passwords, recovery codes, and the OS handles the encryption.
+
+            Side note: we looked at Python's `keyring` library / CLI, but went a different way:
+
+            - **Only the OS, no new binaries**: shell out to `security` (macOS Keychain) / `secret-tool` (Linux SecretService) / `kwalletcli5` (KWallet) / PowerShell + Win32 advapi32 (Windows Credential Manager), plus a transparent shell/awk layer. Zero supply-chain risk, zero binary-update burden — but bounded by what each OS CLI can do. The file backend we tried earlier got dropped — once you go file-based, you've broken the at-rest encryption story, and re-implementing it hits the "binary credential too large" wall.
+            - **Default namespace `x-cmd-<UID>`**: your service names won't collide with other users' or other scripts'; spin up independent slots with `--ns deploy-bot`. The Python `keyring` library makes you roll your own service names; the CLI is nicer.
+            - **iCloud Keychain gets its own verb family**: `cget` / `cset` / `cls` / `crm`, `c` = cloud, deliberately separate from local `get` / `set`. Drop your SSH key password into iCloud Keychain and it syncs across your Apple devices. On Linux / Windows, `cset` exits 64 immediately with a "not for you" note.
+
+            On top of this, you can roll your own scripts: local encrypted notes, iCloud-synced SSH key passwords or files, cached one-shot credentials, etc.
+
+            Example:
+            ```bash
+            x keyring set github alice                       # silent tty prompt for the token
+            printf '%s' "$pw" | x keyring set github alice  # pipe in scripts, no shell history
+            x keyring get github alice                       # retrieve
+            x keyring cset ssh alice                                 # sync SSH key password to Apple devices
+            x keyring cset ssh-key alice < ~/.ssh/id_ed25519         # SSH key files can ride iCloud too
+            # On device B: pipe straight into ssh-add, never touches disk
+            x keyring cget ssh-key alice | ssh-add -
+            x keyring ls                                            # audit what you've stored
+            ```
+
+            **Status**: first release — I'm still poking at it. Will come back with v0.10.x increments once I've stress-tested SSH key and other scenarios.
+  blog: null
+  name: v0.10.2
+  alpha: true
+  beta: true
+  latest: true
 v0.10.1:
   sum: 6f9599dbd66c732f1d13c5ed09df11a149440f19f8bd32cdda9c7fb7c8b29f020b8acb0055b90e0373dfb12cfb586df19d53c8c6b7b14d955a6b2abce9877a48
   date: 2026-08-03 07:04:14+0000
@@ -96,8 +171,6 @@ v0.10.1:
             ```
   blog: /blog/260805
   name: v0.10.1
-  alpha: true
-  beta: true
 v0.10.0:
   sum: 046ee051050e2c59ca3b3549cb63d476e0ebd052b36b8d92138b03d8546989556b500e7cbdfce51cb4cdcd71db6687d2b376e4682ef84a97b18483cdfad0b547
   date: 2026-07-27 12:19:22+0000
@@ -160,7 +233,6 @@ v0.10.0:
             ```
   blog: /blog/260802
   name: v0.10.0
-  latest: true
 v0.9.15:
   sum: b7d1dc21390e98c66f19a5fbfb5ef8f3ac73a3abdddbea41bbf6f8aa1cbb5e76c157a967960a0051caf7ed63187503a707ed7e3efec70625c8acab23954c1fe8
   date: 2026-07-22 04:04:38+0000
