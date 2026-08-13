@@ -68,7 +68,7 @@ v0.10.2:
             ```
 
             **Status**: first release — I'm still poking at it. Will come back with v0.10.x increments once I've stress-tested SSH key and other scenarios.
-  blog: null
+  blog: /blog/260811
   name: v0.10.2
   alpha: true
   beta: true
