@@ -1,3 +1,72 @@
+v0.10.3:
+  sum: 59809df4e1929274d10e272c172082b8f79934c2a64d2c401a7ff10c6aee4ac3a80ec2643932c0811ccb4649dd43f2ca680623ef47f258d960966e6b665ea77b
+  date: 2026-08-14 12:16:44+0000
+  change:
+    codex:
+      update:
+        - cn: |
+            新增 `x codex ds` 对 DeepSeek Responses API 的支持 —— 因为 DeepSeek-v4 模型终于兼容 OpenAI Responses API 输出格式。
+
+            Codex 新版只认 Responses API，但 `x codex` 之前对接第三方模型还只能走 chat/completions，结果就是要么降版本，要么干瞪眼。现在这个问题可以解决了。
+
+            相比 DeepSeek 官方的接入教程，`x codex ds` 的优势是不动你的全局配置文件。官方教程无论是一键配置脚本还是手动编辑，改的都是 `~/.codex/config.toml` 和 `~/.codex/models.json`；改完想切回 OpenAI 模型就比较麻烦，还可能把原来的 toml 配置改坏。
+
+            `x codex ds` 利用 `codex --config` 参数叠加覆盖关键配置项，不用修改文件，零入侵你原先的全局配置。想用 DeepSeek 就用，想切回 OpenAI 也随时能切，更安全也更方便。
+
+            API key 可以放置配置文件，也可以通过传递环境变量 `DEEPSEEK_API_KEY` 使用。
+
+            示例：
+            ```bash
+            # 不影响配置文件，直接启动使用 DeepSeek Responses API
+            x codex ds
+            ```
+          en: |
+            Added Responses API support for `x codex ds` — DeepSeek-v4 finally supports the OpenAI Responses API output format.
+
+            Newer Codex versions require Responses API, but `x codex` previously only supported chat/completions for third-party models, leaving you with either downgrading Codex or staring at errors. That's now fixed.
+
+            Compared to DeepSeek's official setup tutorial, `x codex ds` has a clear advantage: it doesn't touch your global config files. The official tutorial, whether it's the one-click config script or manual editing, modifies files like `~/.codex/config.toml` and `~/.codex/models.json`. Switching back to OpenAI after that is awkward, and you might break your original toml config.
+
+            `x codex ds` takes a different route: it uses the `codex --config` parameter to overlay critical config items, without modifying files and with zero invasion into your existing global config. Use DeepSeek when you want, switch back to OpenAI whenever you want — safer and more convenient.
+
+            API key can be placed in the config file, or passed via the `DEEPSEEK_API_KEY` environment variable.
+
+            Example:
+            ```bash
+            # Start using DeepSeek Responses API without touching config files
+            x codex ds
+            ```
+    man:
+      bugfix:
+        - cn: |
+            修复 `x man` 在 tldr 段落里把回车符（`^M`）直接显示出来的问题。
+
+            tldr 页面里部分条目用了 CRLF 换行，预览时没做 `\r` 剥离，结果命令示例后面就拖着 `^M`，看着不对。
+            现在读取内容时顺手把 `\r` 清掉，预览界面就正常了。
+
+            示例：
+            ```bash
+            x man
+            ```
+
+            感谢 @ljh-zs 在 [#461](https://github.com/x-cmd/x-cmd/issues/461) 的反馈。
+          en: |
+            Fixed `x man` showing raw carriage returns (`^M`) in the tldr section.
+
+            Some tldr entries use CRLF line endings, and the preview wasn't stripping `\r`, so command examples ended up trailing `^M` characters.
+            Now we clean up `\r` while reading the content, so the preview renders correctly.
+
+            Example:
+            ```bash
+            x man
+            ```
+
+            Thanks to @ljh-zs for reporting this in [#461](https://github.com/x-cmd/x-cmd/issues/461).
+  blog: null
+  name: v0.10.3
+  alpha: true
+  beta: true
+  latest: true
 v0.10.2:
   sum: 7470a69f01960a354bce1177072d9d953ddd06237af6cbc7133fdf444e5f5482d91c820e94e8cef544291e72a0c3957d2efde35612fa3b3b06363d18baa4c1cf
   date: 2026-08-08 03:27:07+0000
@@ -70,9 +139,6 @@ v0.10.2:
             **Status**: first release — I'm still poking at it. Will come back with v0.10.x increments once I've stress-tested SSH key and other scenarios.
   blog: /blog/260811
   name: v0.10.2
-  alpha: true
-  beta: true
-  latest: true
 v0.10.1:
   sum: 6f9599dbd66c732f1d13c5ed09df11a149440f19f8bd32cdda9c7fb7c8b29f020b8acb0055b90e0373dfb12cfb586df19d53c8c6b7b14d955a6b2abce9877a48
   date: 2026-08-03 07:04:14+0000
