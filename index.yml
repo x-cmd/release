@@ -9,15 +9,18 @@ v0.10.3:
 
             Codex 新版只认 Responses API，但 `x codex` 之前对接第三方模型还只能走 chat/completions，结果就是要么降版本，要么干瞪眼。现在这个问题可以解决了。
 
-            相比 DeepSeek 官方的接入教程，`x codex ds` 的优势是不动你的全局配置文件。官方教程无论是一键配置脚本还是手动编辑，改的都是 `~/.codex/config.toml` 和 `~/.codex/models.json`；改完想切回 OpenAI 模型就比较麻烦，还可能把原来的 toml 配置改坏。
+            我们注意到，DeepSeek 官方的接入教程，是以纯文本方式（而非 toml 专用的修改工具）直接修改全局配置文件。在一些高度定制的场景，这种做法可能会破坏原本的配置文件。而且改完想切回 OpenAI 模型就比较麻烦。
 
-            `x codex ds` 利用 `codex --config` 参数叠加覆盖关键配置项，不用修改文件，零入侵你原先的全局配置。想用 DeepSeek 就用，想切回 OpenAI 也随时能切，更安全也更方便。
+            因此我们另辟蹊径，利用 `codex --config` 参数叠加覆盖关键配置项，不用修改文件，零入侵你原先的全局配置。想用 DeepSeek 就用，想切回 OpenAI 也随时能切，更安全也更方便。
 
             API key 可以放置配置文件，也可以通过传递环境变量 `DEEPSEEK_API_KEY` 使用。
 
             示例：
             ```bash
-            # 不影响配置文件，直接启动使用 DeepSeek Responses API
+            # 交互式配置 DeepSeek API key
+            x ds init
+
+            # 不影响全局配置文件的情况下，直接启动使用 DeepSeek Responses API
             x codex ds
             ```
           en: |
@@ -25,15 +28,18 @@ v0.10.3:
 
             Newer Codex versions require Responses API, but `x codex` previously only supported chat/completions for third-party models, leaving you with either downgrading Codex or staring at errors. That's now fixed.
 
-            Compared to DeepSeek's official setup tutorial, `x codex ds` has a clear advantage: it doesn't touch your global config files. The official tutorial, whether it's the one-click config script or manual editing, modifies files like `~/.codex/config.toml` and `~/.codex/models.json`. Switching back to OpenAI after that is awkward, and you might break your original toml config.
+            We noticed that DeepSeek's official setup tutorial modifies global config files directly as plain text (rather than using a toml-specific editing tool). In highly customized setups, this can break your existing config files. And switching back to OpenAI models after that is awkward.
 
-            `x codex ds` takes a different route: it uses the `codex --config` parameter to overlay critical config items, without modifying files and with zero invasion into your existing global config. Use DeepSeek when you want, switch back to OpenAI whenever you want — safer and more convenient.
+            So we took a different route: `x codex ds` uses the `codex --config` parameter to overlay critical config items, without modifying files and with zero invasion into your existing global config. Use DeepSeek when you want, switch back to OpenAI whenever you want — safer and more convenient.
 
             API key can be placed in the config file, or passed via the `DEEPSEEK_API_KEY` environment variable.
 
             Example:
             ```bash
-            # Start using DeepSeek Responses API without touching config files
+            # Interactively configure the DeepSeek API key
+            x ds init
+
+            # Start using DeepSeek Responses API without touching global config files
             x codex ds
             ```
     man:
