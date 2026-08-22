@@ -1,3 +1,80 @@
+v0.10.4:
+  sum: fd238e48026eb053d63312cb2731f51cc0e8b6683e11f58b296329d7d1167fa96da8deb2931890d798d8385dce0c589e6068ae3fd1b463bed4f3de96a43d79b8
+  date: "2026-08-22T08:43:17+00:00"
+  change:
+    agent:
+      update:
+        - cn: |
+            新增 `x agent tdown` 子命令 —— `x agent setup` 的反向操作（teardown）。
+
+            `tdown` 是 `teardown` 的简写，和 `setup` 正好成对：setup 是搭建，tdown 就是拆卸。这样命名语义清楚，也比较好记。
+
+            `x agent setup` 会自动把 x-cmd 的提示词和技能装进你的编辑器/IDE 环境。[GitHub discussion #459](https://github.com/x-cmd/x-cmd/discussions/459) 的反馈让我们意识到，应该给用户一个明确的选项：如果你不想用，可以一键撤掉。
+
+            `x agent tdown` 就是干这个的：撤销 `x agent setup` 做过的所有配置，移除 x-cmd 提示词和相关技能，把环境还原到 setup 之前的状态。别名 `x agent teardown` 也留着，随你习惯用哪个。
+
+            而且这个选择是持久化的 —— 运行 tdown 之后，后续更新 x-cmd 也不会再默认把这些配置装回来。除非你手动再跑 `x agent setup`，随时可以改主意。
+
+            示例：
+            ```bash
+            x agent tdown
+            ```
+
+            另外，`x agent setup` 也不再默认启用 `x rule` 偏好。提示词和技能还是会正常装好，但规则提示默认不打开，需要的话你自己手动开启，不需要也不会被硬塞。
+          en: |
+            Added `x agent tdown` — the reverse of `x agent setup` (teardown).
+
+            `tdown` is short for `teardown`, which naturally pairs with `setup`: setup builds things in, tdown tears them down. The name is clear and easy to remember.
+
+            `x agent setup` auto-installs x-cmd prompts and skills into your editor/IDE environment. Feedback from [GitHub discussion #459](https://github.com/x-cmd/x-cmd/discussions/459) made us realize we should give users a clear option: if you don't want them, you can remove them in one go.
+
+            `x agent tdown` does exactly that — rolls back everything `x agent setup` configured, removes x-cmd prompts and related skills, and restores your setup to its pre-setup state. `x agent teardown` is also available as an alias if that's your preference.
+
+            This choice is persistent. After running tdown, future x-cmd updates won't reinstall these by default. You can always opt back in by running `x agent setup`.
+
+            Example:
+            ```bash
+            x agent tdown
+            ```
+
+            Also, `x agent setup` no longer enables `x rule` as the default preference. Prompts and skills are still installed as usual, but the rule prompt is left off by default. Turn it on manually if you want it; otherwise it stays out of the way.
+    keyring:
+      bugfix:
+        - cn: |
+            修复 `x keyring ls` 在 git-bash / MSYS 环境下报错的问题。
+
+            `keyring` 模块用来帮你读写系统凭证库（比如 Windows Credential / macOS Keychain / Linux Secret Service），管理密码、Token 这类敏感信息。
+
+            当 git-bash 的 locale 是 `C` 或 `POSIX` 时，`iconv` 没指定源编码，会把脚本里的 UTF-8 字符（比如注释里的 `—`）当成 ASCII 解析，直接抛 `cannot convert`，后面 `pwsh` 收到截断的 UTF-16LE 内容又报 `Missing closing '}'`。
+
+            修复方法是在 `lib/impl/windows` 的 heredoc 转码时显式加上 `-f UTF-8`，不再依赖环境 locale。
+
+            现在就算 `LANG=C LC_ALL=C`，`x keyring ls` 也能正常跑。
+
+            示例：
+            ```bash
+            LANG=C LC_ALL=C x keyring ls
+            ```
+          en: |
+            Fixed `x keyring ls` failing in git-bash / MSYS environments.
+
+            The `keyring` module reads from and writes to the system credential store (Windows Credential / macOS Keychain / Linux Secret Service) to manage passwords, tokens, and other sensitive data.
+
+            When git-bash's locale was `C` or `POSIX`, `iconv` was not given a source encoding, so UTF-8 characters in the script (like the `—` in a comment) were parsed as ASCII and triggered `cannot convert`. The truncated UTF-16LE output then caused `pwsh` to complain about a `Missing closing '}'`.
+
+            The fix was to explicitly pass `-f UTF-8` when converting the heredoc in `lib/impl/windows`, so it no longer depends on the environment locale.
+
+            Now `x keyring ls` works even with `LANG=C LC_ALL=C`.
+
+            Example:
+            ```bash
+            LANG=C LC_ALL=C x keyring ls
+            ```
+  blog: null
+  name: v0.10.4
+  alpha: true
+  beta: true
+  latest: true
 v0.10.3:
   sum: 59809df4e1929274d10e272c172082b8f79934c2a64d2c401a7ff10c6aee4ac3a80ec2643932c0811ccb4649dd43f2ca680623ef47f258d960966e6b665ea77b
   date: 2026-08-14 12:16:44+0000
@@ -68,11 +145,8 @@ v0.10.3:
             ```
 
             Thanks to @ljh-zs for reporting this in [#461](https://github.com/x-cmd/x-cmd/issues/461).
-  blog: null
+  blog: /blog/260819
   name: v0.10.3
-  alpha: true
-  beta: true
-  latest: true
 v0.10.2:
   sum: 7470a69f01960a354bce1177072d9d953ddd06237af6cbc7133fdf444e5f5482d91c820e94e8cef544291e72a0c3957d2efde35612fa3b3b06363d18baa4c1cf
   date: 2026-08-08 03:27:07+0000
