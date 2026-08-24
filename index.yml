@@ -1,3 +1,122 @@
+v0.10.5:
+  sum: 6b518de35465f5ec2bb012791d16d29066816ecabf85de6d685bd69a3eeb9a755339adc6a0ca79792fc9f6a0b9f960393e99e0a04b4650785ba8a6386d8f0f90
+  date: "2026-08-24T11:15:41+00:00"
+  change:
+    ajv:
+      update:
+        - cn: |
+            新增 `x ajv` 模块 —— 周日下午在公司，整 x-cmd/install 的外部 PR 提交流程，整到 schema check 那一步发现没现成工具，干脆自己撸一个。
+
+            我们在给 x-cmd/install 准备一套外部 PR 检测 —— PR 改 yml 配置、改 schema、加新文件的时候，需要确保不会偷偷塞进不合规的内容。一个 PR 经常一次性改一坨文件，所以我们需要的不是"自己 `npm install ajv` 然后写个 wrapper"那种东西 —— 要 `package.json`、要 `npm install`、要写入口脚本、要自己处理 arg parsing、还不能从 stdin 流式喂入，跟"在 shell 里直接调、批量扫、按文件粒度推进"完全不在一个频段。
+
+            整个设计是 **agent-first** 的 —— PR 检测本身是 agent 驱动的（自动读 PR diff、自动扫、自动报告），所以工具得让 agent 能直接消费：TSV `awk -F'\t'` 可解析、结果码（`io-error` / `syntax-error` / `schema-error` / `invalid` 等）机器可分支、JSON detail 列结构化（`instancePath` / `schemaPath` / `keyword` 直接 `jq` 处理）、stderr YAML summary 是聚合指标、stdin 按行喂入、默认失败-only 省噪声。
+
+            刚开始的时候也看过 `ajv-cli` —— ajv 官方的 CLI。它的参数设计偏死板、流式能力也不到位，跟"shell 里调、批量扫、按文件粒度推进"这些目标不在一个频段上。所以干脆自己撸一个，**目标是兼容 ajv-cli 的 flag 命名**（`-s` / `-d` / `-o` / `--valid` / `--invalid` 跟它同义），参数比它灵活得多，流式从一开始就是一等公民。
+
+            选 AJV 不是因为它"流行"——流行是因为它做了对的事：**compile 能力**（`ajv.compile(schema)` 一次性产出 validator，几千个文件共享这一个，批量校验跑得快不快关键就在这里）、**全 draft 支持**（PR 进来的 schema 是什么 draft 我们控制不了，draft-04 / 06 / 07 / 2019-09 / 2020-12 都要能吃）、**ajv-formats 配套标准 format 关键字**（`date-time` / `email` / `uri` 这些不用自己写 keyword）。
+
+            选 Deno 而不是 bun —— bun 沙箱这一块我们没仔细看过，但 Deno 的沙箱机制打磨多年、可信度比较高，而且用 Deno 跑 js/ts 也是 x-cmd 团队的老习惯，整个栈一致。沙箱只给 `--allow-read`；migrate 额外给 `--allow-write=<输出文件>`。`--allow-net` / `--allow-env` / `--allow-run` 都不给（除了 `--allow-env=AJV_SHOW_ALL`，限定到 `--all` 那个变量）。—— **攻击者即使触发了 AJV 或 `@std/yaml` / `@std/toml` 的漏洞，能做的也基本是 `cat`**：不能写文件、不能调子进程、不能联网、不能偷环境变量。整个攻击面压到"读 PR 仓库下的文件"这一格，CVE 即便被触发也没什么施展空间。
+
+            流式（streaming）是批处理必需 —— validate / compile 按文件粒度增量推进：读到一条路径就立刻校验 / 编译并输出一行 TSV，不攒齐再开跑。stdin 上的路径也按行喂入，配合 `find` / `xargs` 处理大批量文件很自然。第一个文件错不会阻塞后面的文件。
+
+            覆盖的场景：
+
+            - `validate` —— 数据文件是否符合 schema（默认子命令）
+            - `compile` —— 预编译 schema，做语法 / 关键字检查
+            - `migrate` —— 把 draft-04/06/07/2019-09 升级到 draft-2020-12，同时把 `id` 重命名为 `$id`
+            - `test` —— 断言数据应当通过或被拒绝（CI gate —— "这个改动不该让 schema 通过"这种场景特别好用）
+
+            I/O 错误和解析错误也分开了 —— 找不到文件 / 是个目录这种是 `io-error`，JSON/YAML/TOML 语法问题是 `syntax-error`，AJV 拒掉是 `invalid` / `schema-error`。每条结果按 `<file>\t<result>\t<text>[\t<json>]` 的 TSV 输出，结尾在 stderr 给一个 YAML 风格的 summary（按 result / format 计数）。文件格式按后缀自动识别（`.json / .yml / .yaml / .toml`）。
+
+            默认只输出失败行（`valid` / `compiled` / `pass` / `migrated` 都静默），加 `--all` 才会把成功行也打出来 —— 适合 CI / 批量场景。错误统一按 x-cmd log 格式（`- E|ajv: <message>` 加若干 `key: value` 行）输出，parse / schema / data / IO 错误长得一样，便于脚本统一 grep。
+
+            示例：
+            ```bash
+            # PR 检测：批量 lint + schema check
+            find config/ -name '*.yml' | x ajv -s schema.yml
+
+            # 单文件校验
+            x ajv -s schema.json data.json
+
+            # 整合进 x-cmd 的 solo 体系
+            x rule.schema.json data.json
+
+            # 如果你的 rule.schema.json 在项目的 .x-cmd 目录内。
+            xw rule data.json
+            ```
+
+            顺便提一下，其它 ajv-cli 的功能也支持。
+            ```bash
+            # 预编译 schema（PR 改了 schema，先看能不能编译）
+            x ajv compile -s new-schema.yml
+
+            # 把老 draft-04 schema 升到 2020-12
+            x ajv migrate -s draft-04.json -o new.json
+
+            # CI gate：断言这个改动应当被拒
+            x ajv test -s schema.json -d bad.yml --invalid
+            ```
+
+            现状：模块首发，我自己还在试。还没在线上跑真实 PR 流量，批量校验的速度数字没整理出来 —— 等我用真实 PR 数据跑通再说。
+          en: |-
+            Added the `x ajv` module — Sunday afternoon, at the office, sorting out x-cmd/install's external PR submission pipeline; got to the schema-check step and found nothing off the shelf, so I just wrote one.
+
+            We're preparing an external-PR detection pipeline for x-cmd/install — when PRs land touching yml configs, schemas, and new files, we need to make sure nothing smuggles in non-conforming content. A single PR usually changes a whole batch of files at once, so what we needed wasn't "run `npm install ajv` and write a wrapper" — that's a package.json, an install step, an entry script, manual arg parsing, no stdin streaming. None of that lands. We needed a small CLI you can call straight from the shell, that does bulk scans and pushes file-by-file (one bad file shouldn't block the rest of the batch).
+
+            The whole design is **agent-first** — PR detection is itself agent-driven (auto-read PR diff, auto-scan, auto-report), so the tool has to be directly consumable by an agent: TSV output that `awk -F'\t'` parses cleanly, result codes (`io-error` / `syntax-error` / `schema-error` / `invalid` and friends) that scripts can branch on, a structured JSON detail column (`instancePath` / `schemaPath` / `keyword` ready for `jq`), a stderr YAML summary as aggregate metrics, line-by-line stdin input, and failures-only by default to keep the noise down.
+
+            We also looked at `ajv-cli` — AJV's official CLI — at the start. Its flag design is rigid and its streaming story is thin; none of "callable from the shell, bulk scans, file-by-file push" landed. So we wrote our own, **with the goal of staying compatible with ajv-cli's flag naming** (`-s` / `-d` / `-o` / `--valid` / `--invalid` mean the same thing), with much more flexible parameter handling, and with streaming as a first-class concern from day one.
+
+            We picked AJV not because it's "popular" — it's popular because it did the right things: **a compile step** (`ajv.compile(schema)` produces a validator once, and the same compiled validator is reused across every file in the batch — that's the whole reason bulk validation is fast here), **full draft coverage** (we don't control which draft a PR brings in, so draft-04 / 06 / 07 / 2019-09 / 2020-12 all need to be supported), and **`ajv-formats`** handles the standard format keywords (`date-time` / `email` / `uri` and friends) so we don't have to write custom keywords for them.
+
+            We picked Deno over bun — we haven't looked closely at bun's sandbox story, but Deno's permission model has been around for years and has earned its credibility, and using Deno to run js/ts is already a long-standing habit in the x-cmd team, so the whole stack stays consistent. The sandbox grants only `--allow-read`; `migrate` additionally grants `--allow-write=<output>`. No `--allow-net` / `--allow-env` / `--allow-run` (the only env access is `--allow-env=AJV_SHOW_ALL`, scoped to that one variable). — **Even if an attacker triggers a CVE in AJV or `@std/yaml` / `@std/toml`, what can they actually do? Basically `cat`.** No file writes, no subprocesses, no network, no env reads. The CVE might fire, but the attack surface collapses to "read files under the PR repo" — not much more than `find / cat / ls` would give them.
+
+            Streaming is required for batch work — validate / compile push file-by-file: each path is read, validated / compiled, and a TSV row is flushed as soon as it lands, no buffering. stdin paths are consumed line-by-line too, so `find` / `xargs` flows straight through. A bad first file doesn't poison the rest of the batch.
+
+            What it covers:
+
+            - `validate` — check data against a schema (the default subcommand)
+            - `compile` — pre-compile a schema to surface syntax / keyword errors
+            - `migrate` — upgrade draft-04 / 06 / 07 / 2019-09 schemas to draft-2020-12, also renaming `id` → `$id`
+            - `test` — assert that data should pass or be rejected (a CI gate — perfect for "this change should NOT satisfy the schema" cases)
+
+            I/O and parse failures are split: missing files / directories come back as `io-error`, JSON / YAML / TOML syntax issues as `syntax-error`, AJV rejections as `invalid` / `schema-error`. Every result is emitted as `<file>\t<result>\t<text>[\t<json>]`, and at the end a YAML-style summary (counts by result and by format) lands on stderr. File format is auto-detected by extension (`.json / .yml / .yaml / .toml`).
+
+            By default only failure rows are printed (`valid` / `compiled` / `pass` / `migrated` stay silent); pass `--all` to also surface success rows — perfect for CI / bulk runs. Errors are unified to the x-cmd log format (`- E|ajv: <message>` plus a handful of `key: value` lines) regardless of whether the failure is parse / schema / data / IO, so a script can grep uniformly.
+
+            Examples:
+            ```bash
+            # PR detection: bulk lint + schema check
+            find config/ -name '*.yml' | x ajv -s schema.yml
+
+            # Single-file validation
+            x ajv -s schema.json -d data.json
+
+            # Integrate into x-cmd's solo system
+            x rule.schema.json data.json
+
+            # If your rule.schema.json lives under the project's .x-cmd directory.
+            xw rule data.json
+            ```
+
+            By the way, the rest of `ajv-cli` is also covered.
+            ```bash
+            # Pre-compile a schema (PR touched a schema — does it still compile?)
+            x ajv compile -s new-schema.yml
+
+            # Upgrade a legacy draft-04 schema to 2020-12
+            x ajv migrate -s draft-04.json -o new.json
+
+            # CI gate: assert this change SHOULD be rejected
+            x ajv test -s schema.json -d bad.yml --invalid
+            ```
+
+            Status: first release — I'm still poking at it. Haven't pushed real PR volume through it yet; bulk-validation speed numbers will come back in a v0.10.x increment once I've pushed actual PR data through.
+  blog: null
+  name: v0.10.5
+  alpha: true
+  beta: true
+  latest: true
 v0.10.4:
   sum: fd238e48026eb053d63312cb2731f51cc0e8b6683e11f58b296329d7d1167fa96da8deb2931890d798d8385dce0c589e6068ae3fd1b463bed4f3de96a43d79b8
   date: "2026-08-22T08:43:17+00:00"
@@ -72,9 +191,6 @@ v0.10.4:
             ```
   blog: null
   name: v0.10.4
-  alpha: true
-  beta: true
-  latest: true
 v0.10.3:
   sum: 59809df4e1929274d10e272c172082b8f79934c2a64d2c401a7ff10c6aee4ac3a80ec2643932c0811ccb4649dd43f2ca680623ef47f258d960966e6b665ea77b
   date: 2026-08-14 12:16:44+0000
