@@ -2,7 +2,7 @@ v0.10.6:
   sum: 702153f2ee4251c6e01d8af6cf21d128886281e187af88a144fbc9ff70ccab619dbf34c23ef8418cc5b9b7d3bb6adf9d8213045a74c3caf9c2e829c9ffcad5f9
   date: "2026-08-26T13:05:22+00:00"
   change:
-    repo card:
+    repo:
       update:
         - cn: |
             新增 `x repo card` 子命令 —— 为仓库生成一份评分卡。
