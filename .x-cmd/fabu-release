@@ -29,18 +29,24 @@
         command git commit -m "Update: version/index.yml"
         command git push git@github.com:x-cmd/x-cmd-version main || true
     ) && (
-        ___x_cmd_cmds_cd release || {
+        (
+            ___x_cmd_cmds_cd release || {
+                x:error "Cannot ___x_cmd_cmds_cd to release"
+                exit 1
+            }
+
+            command git add .
+            command git status -s
+            command git diff --cached --quiet || {
+                command git commit -m ... || return
+                command git push git@github.com:x-cmd/release main  || return
+            }
+        ) || return 1
+
+        ___x_cmd_cmds_cd x-cmd-version || {
             x:error "Cannot ___x_cmd_cmds_cd to release"
             exit 1
         }
-
-        command git add .
-        command git status -s
-        command git diff --cached --quiet || {
-            command git commit -m ... || return
-            command git push git@github.com:x-cmd/release main  || return
-        }
-
         x ws release-other "$distfolder" "$sumfolder" || exit 1
     ) && (
         ___x_cmd_cmds_cd release || {
