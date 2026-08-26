@@ -1,3 +1,96 @@
+v0.10.6:
+  sum: 702153f2ee4251c6e01d8af6cf21d128886281e187af88a144fbc9ff70ccab619dbf34c23ef8418cc5b9b7d3bb6adf9d8213045a74c3caf9c2e829c9ffcad5f9
+  date: "2026-08-26T13:05:22+00:00"
+  change:
+    repo card:
+      update:
+        - cn: |
+            新增 `x repo card` 子命令 —— 为仓库生成一份评分卡。
+
+            主要是给 `x-cmd/install` 做配套：为各个工具仓库做数据评分。
+            全程走 GitHub API：1 次 GraphQL 合并 16 个 search 计数，再加 1 次 REST `/stats/commit_activity`，不碰本地 clone，仓库还没拉下来也能直接跑。
+
+            默认在终端里是一张带颜色的卡片表格，直观好看；管道或重定向时自动切成裸 YAML，方便 `yq` 之类的工具继续消费。想锁定格式就显式给 `--tty` 或 `--yml`。
+
+            评分卡主要包含这几块：
+            - `about:` 仓库描述、license、homepage、head、latest version、采集时刻
+            - `timeline:` 创建时间、最后提交、最后发布
+            - `popularity:` star / watcher / fork / release / contributor / PR / issue 数
+            - `language:` + `totalLine:` linguist 字节构成
+            - `recent:` last30d/90d/180d/360d 四个窗口的合并 PR / 开放 PR / 关闭 issue / 开放 issue / release / commit 计数
+
+            不过有个前提：GitHub 未鉴名时 GraphQL 只有 60 req/h，容易撞墙。
+            建议先 `gh auth login`，或者设置 `$GH_TOKEN` / `$GITHUB_TOKEN`，跑起来才稳。
+
+            示例：
+            ```bash
+            # 默认输出最近 90 天窗口的评分卡
+            x repo card x-cmd/x-cmd
+
+            # 用 yq 抽取 popularity 段
+            x repo card x-cmd/install | yq '.popularity'
+
+            # 锁定裸 YAML，落地到文件
+            x repo card --yml x-cmd/install > card.yml
+            ```
+          en: |
+            Added `x repo card` subcommand —— generates a scorecard for repositories.
+
+            Mainly supporting `x-cmd/install`: scoring data for its tool repositories.
+            Goes straight through the GitHub API: one GraphQL call combining 16 search counters, plus one REST `/stats/commit_activity` call. No local clone touched, so it works even before the repo is pulled down.
+
+            By default you get a colorful card table in the terminal — easy on the eyes. Pipe or redirect it and it automatically switches to bare YAML for tools like `yq`. Lock the format with `--tty` or `--yml` when you need.
+
+            The scorecard covers:
+            - `about:` description, license, homepage, head, latest version, collection time
+            - `timeline:` created, last commit, last release
+            - `popularity:` stars, watchers, forks, releases, contributors, PRs, issues
+            - `language:` + `totalLine:` linguist byte breakdown
+            - `recent:` counts for merged PRs, open PRs, closed issues, open issues, releases, and commits across last30d/90d/180d/360d windows
+
+            One caveat: unauthenticated GraphQL only gets 60 req/h from GitHub, so it can hit the wall quickly.
+            Run `gh auth login` first, or set `$GH_TOKEN` / `$GITHUB_TOKEN`, to keep it smooth.
+
+            Examples:
+            ```bash
+            # Default scorecard with the last 90-day window
+            x repo card x-cmd/x-cmd
+
+            # Extract the popularity section with yq
+            x repo card x-cmd/install | yq '.popularity'
+
+            # Lock bare YAML and save to file
+            x repo card --yml x-cmd/install > card.yml
+            ```
+    ps:
+      update:
+        - cn: |
+            新增 `x ps monitor` 子命令 —— 盯单个进程的 CPU / 内存。
+
+            有时候只想看一个进程有没有偷偷涨内存、CPU 有没有飙高，不想开 top 或者 htop 满屏找。
+            现在直接给 PID，每秒轮询一次，YAML 输出，按 Ctrl-C 退出。
+
+            示例：
+            ```bash
+            # 监控 PID 1234 的 CPU / 内存
+            x ps monitor 1234
+            ```
+          en: |
+            Added `x ps monitor` subcommand —— watch one process's CPU and memory.
+
+            Sometimes you just want to check if a single process is leaking memory or spiking CPU, without digging through a full top or htop screen.
+            Now pass a PID, poll once per second, get YAML output, hit Ctrl-C to stop.
+
+            Example:
+            ```bash
+            # Monitor CPU / memory for PID 1234
+            x ps monitor 1234
+            ```
+  blog: null
+  name: v0.10.6
+  alpha: true
+  beta: true
+  latest: true
 v0.10.5:
   sum: 6b518de35465f5ec2bb012791d16d29066816ecabf85de6d685bd69a3eeb9a755339adc6a0ca79792fc9f6a0b9f960393e99e0a04b4650785ba8a6386d8f0f90
   date: "2026-08-24T11:15:41+00:00"
@@ -114,9 +207,6 @@ v0.10.5:
             Status: first release — I'm still poking at it. Haven't pushed real PR volume through it yet; bulk-validation speed numbers will come back in a v0.10.x increment once I've pushed actual PR data through.
   blog: null
   name: v0.10.5
-  alpha: true
-  beta: true
-  latest: true
 v0.10.4:
   sum: fd238e48026eb053d63312cb2731f51cc0e8b6683e11f58b296329d7d1167fa96da8deb2931890d798d8385dce0c589e6068ae3fd1b463bed4f3de96a43d79b8
   date: "2026-08-22T08:43:17+00:00"
