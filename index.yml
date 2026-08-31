@@ -1,3 +1,145 @@
+v0.10.7:
+  sum: 66803d43ac9e31411bda9305f2a077c8bd59a98b965b9aff94315e68c253854644e7bee778517df70383c31c7b003638fb7392d8f163299b5cc4c21103d5e7a8
+  date: "2026-08-31T13:21:50+00:00"
+  change:
+    install:
+      update:
+        - cn: |
+            `x-cmd/install` 仓库正式对外开放了，欢迎外部贡献。
+
+            之前 install 数据跟 x-cmd 主仓的 `pkg` 模块绑在一起，外部想参与只能绕一圈。这次直接把它拆成独立仓库 [github.com/x-cmd/install](https://github.com/x-cmd/install)，Apache 2.0，CONTRIBUTING.md / CONTRIBUTING.cn.md 都齐了 —— 想加新工具、修 URL、改翻译、补规则，直接 PR 进去就行。
+
+            仓库目前覆盖 **2,350+ 个软件、70+ 个分类**；CI 在 UTC 12:00 自动重建 + 发版，以不可变 `vYYYYMMDD` GitHub Release 形式发布 TSV（`v1.all.tsv`）和 tar.xz。
+
+            配合这次拆分，`x install` 这边也做了几处改动：
+
+            - **`x install --update` 自包含**：不再依赖 `x pkg update`，直接 `curl` GitHub release 下载 `v1.all.tsv`，失败重试也好、独立排错也好，都顺了很多。
+            - **国内加速**：中国区用户走 cloudflare 镜像加速下载，避开 GitHub raw 直连的卡顿。
+
+            另外，AI 助理也能参考与贡献，提示词如下：
+            ```
+            Following https://github.com/x-cmd/install/blob/main/CONTRIBUTING.md ,
+            submit a new package to the x-cmd/install repo:
+              https://github.com/<owner/repo>
+            ```
+          en: |
+            The `x-cmd/install` repo is now open to external contributions.
+
+            The install data used to live alongside the `pkg` module inside the main x-cmd repo, so external contributors had to go the long way around. We've now split it out as a standalone repo at [github.com/x-cmd/install](https://github.com/x-cmd/install) — Apache 2.0, with CONTRIBUTING.md / CONTRIBUTING.cn.md ready to go. Want to add a tool, fix a URL, sharpen a translation, or add a rule? Just open a PR.
+
+            The repo currently covers **2,350+ packages across 70+ categories**. CI rebuilds and ships daily at UTC 12:00 as an immutable `vYYYYMMDD` GitHub Release, producing a flat TSV (`v1.all.tsv`) and a tar.xz.
+
+            To support the split, this v0.10.7 ships a few changes on the `x install` side:
+
+            - **`x install --update` is now self-contained**: no more dependency on `x pkg update`. It `curl`s the latest release of `v1.all.tsv` directly from GitHub, which makes retries and independent debugging much cleaner.
+            - **CN acceleration**: users in mainland China pull from a Cloudflare mirror to bypass the raw GitHub slowdown.
+
+            AI coding assistants can contribute too — here's the ready-made prompt:
+            ```
+            Following https://github.com/x-cmd/install/blob/main/CONTRIBUTING.md ,
+            submit a new package to the x-cmd/install repo:
+              https://github.com/<owner/repo>
+            ```
+    repo:
+      bugfix:
+        - cn: |
+            修复 `x repo card` 遇到 null 或异常值时输出不稳定的问题。
+
+            之前有些仓库的字段（比如 license、homepage、language 等）可能为空或返回异常，导致输出里出现奇怪的 null 或格式错乱。这次统一做了兜底处理，空值展示更干净，管道到 YAML 时也稳了很多。
+
+            `x repo card` 是给仓库打分的评分卡。走 GitHub API，不用本地 clone，终端里是一张带颜色的卡片表格，管道或重定向时自动切裸 YAML。主要覆盖：
+            - `about:` 仓库描述、license、homepage、head、最新版本
+            - `timeline:` 创建时间、最后提交、最后发布
+            - `popularity:` star / watcher / fork / release / contributor / PR / issue
+            - `language:` 语言构成和总代码行数
+            - `recent:` 最近 30/90/180/360 天的合并 PR、开放 PR、关闭/开放 issue、release、commit 统计
+
+            示例：
+            ```bash
+            # 默认输出最近 90 天窗口的评分卡
+            x repo card x-cmd/x-cmd
+
+            # 用 yq 抽取 popularity 段
+            x repo card x-cmd/install | yq '.popularity'
+
+            # 锁定裸 YAML，落地到文件
+            x repo card --yml x-cmd/install > card.yml
+            ```
+          en: |
+            Fixed `x repo card` output being unstable when encountering null or abnormal values.
+
+            Some repository fields (like license, homepage, language, etc.) could be empty or return unexpected values, leading to messy nulls or formatting issues in the output. We've unified the fallback handling so empty values display cleanly and piping to YAML is more reliable.
+
+            `x repo card` generates a scorecard for repositories. It goes through the GitHub API with no local clone needed. By default you get a colorful card table in the terminal; pipe or redirect it and it automatically switches to bare YAML. The scorecard covers:
+            - `about:` description, license, homepage, head, latest version
+            - `timeline:` created, last commit, last release
+            - `popularity:` stars, watchers, forks, releases, contributors, PRs, issues
+            - `language:` language breakdown and total lines
+            - `recent:` counts for merged PRs, open PRs, closed/open issues, releases, and commits across last30d/90d/180d/360d windows
+
+            Examples:
+            ```bash
+            # Default scorecard with the last 90-day window
+            x repo card x-cmd/x-cmd
+
+            # Extract the popularity section with yq
+            x repo card x-cmd/install | yq '.popularity'
+
+            # Lock bare YAML and save to file
+            x repo card --yml x-cmd/install > card.yml
+            ```
+    agent:
+      update:
+        - cn: |
+            新增 `codex-ds` harness —— 让 `x agent request` 直接用 Codex + DeepSeek 跑任务。
+
+            不用改 Codex 的全局配置文件，也不会影响你平时用 Codex 默认模型。指定 `--harness codex-ds` 就行，DeepSeek 会走 Codex 的调用流程，任务跑完自动退出。
+
+            示例：
+            ```bash
+            x agent request --harness codex-ds "帮我写一个快速排序"
+            ```
+          en: |
+            Added `codex-ds` harness —— so `x agent request` can run tasks with Codex + DeepSeek.
+
+            No need to touch your global Codex config, and it won't affect your normal Codex usage. Just pass `--harness codex-ds`; DeepSeek runs through Codex's flow and exits when done.
+
+            Example:
+            ```bash
+            x agent request --harness codex-ds "write me a quicksort"
+            ```
+      bugfix:
+        - cn: |
+            修复 `x agent request` 的 Codex harness 在新版 Codex CLI 上启动失败的问题 —— Codex CLI v0.147.0 直接移除了 `--full-auto`，现在已改用 `--dangerously-bypass-approvals-and-sandbox`。
+
+            `x agent request` 适合单次、非交互式地跑一些简单 AI 任务：你把提示词发出去，AI 自动执行命令、改文件，完事就退出。
+
+            不过它设计上是无人值守模式，内部会打开对应 AI 工具的自动执行权限：
+            - Claude: `--dangerously-skip-permissions`
+            - Codex: `--dangerously-bypass-approvals-and-sandbox`
+            - Cursor / Gemini / Kimi 等：对应的 yolo / auto-approve 模式
+
+            也就是说，AI 会自己运行命令、读写文件、修改代码，不会每次都问你。日常用建议只在隔离环境、容器、CI 或已备份好的本地项目里跑，重要改动前自己再过一眼。
+
+            感谢 @Galaxy-Husky 在 [x-cmd/x-cmd#476](https://github.com/x-cmd/x-cmd/issues/476) 里反馈这个问题。
+          en: |
+            Fixed `x agent request`'s Codex harness failing to start on newer Codex CLI —— Codex CLI v0.147.0 removed `--full-auto`, and we've switched to `--dangerously-bypass-approvals-and-sandbox`.
+
+            `x agent request` is meant for single, non-interactive runs of simple AI tasks: you pass a prompt, the agent executes commands and edits files, then exits.
+
+            Keep in mind it's built for unattended execution, so it enables the corresponding auto-run permission for each AI tool under the hood:
+            - Claude: `--dangerously-skip-permissions`
+            - Codex: `--dangerously-bypass-approvals-and-sandbox`
+            - Cursor / Gemini / Kimi etc.: their respective yolo / auto-approve modes
+
+            In other words, the AI will run commands, read and write files, and modify code without asking every time. For day-to-day use, we suggest running it in isolated environments, containers, CI, or backed-up local projects, and reviewing any changes before they land somewhere important.
+
+            Thanks to @Galaxy-Husky for reporting this in [x-cmd/x-cmd#476](https://github.com/x-cmd/x-cmd/issues/476).
+  blog: null
+  name: v0.10.7
+  alpha: true
+  beta: true
+  latest: true
 v0.10.6:
   sum: 702153f2ee4251c6e01d8af6cf21d128886281e187af88a144fbc9ff70ccab619dbf34c23ef8418cc5b9b7d3bb6adf9d8213045a74c3caf9c2e829c9ffcad5f9
   date: "2026-08-26T13:05:22+00:00"
@@ -88,9 +230,6 @@ v0.10.6:
             ```
   blog: null
   name: v0.10.6
-  alpha: true
-  beta: true
-  latest: true
 v0.10.5:
   sum: 6b518de35465f5ec2bb012791d16d29066816ecabf85de6d685bd69a3eeb9a755339adc6a0ca79792fc9f6a0b9f960393e99e0a04b4650785ba8a6386d8f0f90
   date: "2026-08-24T11:15:41+00:00"
