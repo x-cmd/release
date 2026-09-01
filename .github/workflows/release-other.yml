@@ -1,11 +1,7 @@
-name: release
+name: release-other
 on:
   # push:
   workflow_dispatch:
-    inputs:
-      skip-release-other:
-        description: 'if skip release other packages'
-        required: false
 
 jobs:
   release-worker:
@@ -18,11 +14,10 @@ jobs:
       git_user: l
       git_email: l@x-cmd.com
       CONCURRENCY: 10
-      SKIP_RELEASE_OTHER: ${{ github.event.inputs.skip-release-other }}
     steps:
       - name: main
         uses: x-cmd/action@main
         with:
           code: |
-            x ws fabu-release
+            x ws fabu-release-other
 

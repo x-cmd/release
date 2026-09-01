@@ -1,0 +1,23 @@
+# shellcheck shell=dash
+# 发布完成后的通知与索引更新
+
+(
+    [ -d x-cmd-version ] || command git clone git@github.com:x-cmd/x-cmd-version    || return
+    VER_LABEL_FP="x-cmd-version/version/label.yml"
+
+    [ -z "$QYWX_BOT_RELEASE_WEBHOOK" ] || {
+        x:info "正在使用 qywx 机器人发送信息"
+        # x log +x +http +qywx
+        x qywx --cfg "webhook=$QYWX_BOT_RELEASE_WEBHOOK"
+        x qywx send --markdown  "@所有人${___X_CMD_UNSEENCHAR_NEWLINE}${___X_CMD_UNSEENCHAR_NEWLINE}### 🔔 版本更新: [x-cmd/release](https://github.com/x-cmd/release):${___X_CMD_UNSEENCHAR_NEWLINE}${___X_CMD_UNSEENCHAR_NEWLINE}$( x y2j "$VER_LABEL_FP" | x jo 1.link | x j2y )"
+    }
+
+
+    (
+        ___x_cmd_cmds_cd x-cmd-version || {
+            x:error "Cannnot cd to x-cmd/x-cmd-version"
+            exit 1
+        }
+        x ws index pkg
+    )
+)

@@ -1,6 +1,7 @@
 # shellcheck shell=dash
 
 (
+    x:info "准备打包 x-cmd/release 安装包"
     [ -d release ] || command git clone git@github.com:x-cmd/release || return
 
     distfolder="$PWD/release/dist"
@@ -12,7 +13,6 @@
     x rmrf x-cmd-version
     x:info "正在下载 x-cmd/x-cmd-version"
     command git clone git@github.com:x-cmd/x-cmd-version    || return
-    VER_LABEL_FP="$PWD/x-cmd-version/version/label.yml"
 
     (
         ___x_cmd_cmds_cd x-cmd-version || {
@@ -28,56 +28,31 @@
         command git status -s
         command git commit -m "Update: version/index.yml"
         command git push git@github.com:x-cmd/x-cmd-version main || true
-    ) && (
-        (
-            ___x_cmd_cmds_cd release || {
-                x:error "Cannot ___x_cmd_cmds_cd to release"
-                exit 1
-            }
+    ) || {
+        x:error "x ws release failed"
+        exit 1
+    }
 
-            command git add .
-            command git status -s
-            command git diff --cached --quiet || {
-                command git commit -m ... || return
-                command git push git@github.com:x-cmd/release main  || return
-            }
-        ) || return 1
-
-        ___x_cmd_cmds_cd x-cmd-version || {
-            x:error "Cannot ___x_cmd_cmds_cd to release"
-            exit 1
-        }
-        x ws release-other "$distfolder" "$sumfolder" || exit 1
-    ) && (
+    (
         ___x_cmd_cmds_cd release || {
             x:error "Cannot ___x_cmd_cmds_cd to release"
             exit 1
         }
 
-        command git add .
+        x:info "正在上传 x-cmd/release 到 github.com"
+        command git add dist sum index.yml
         command git status -s
         command git diff --cached --quiet || {
             command git commit -m ... || return
             command git push git@github.com:x-cmd/release main  || return
         }
-        command git push git@gitee.com:x-cmd/release main   || return
-        command git push git@gitcode.net:x-cmd/release main
+    ) || return 1
 
-    ) || return
+    x ws fabu-release-sync || return
 
-    [ -z "$QYWX_BOT_RELEASE_WEBHOOK" ] || {
-        x:info "正在使用 qywx 机器人发送信息"
-        # x log +x +http +qywx
-        x qywx --cfg "webhook=$QYWX_BOT_RELEASE_WEBHOOK"
-        x qywx send --markdown  "@所有人${___X_CMD_UNSEENCHAR_NEWLINE}${___X_CMD_UNSEENCHAR_NEWLINE}### 🔔 版本更新: [x-cmd/release](https://github.com/x-cmd/release):${___X_CMD_UNSEENCHAR_NEWLINE}${___X_CMD_UNSEENCHAR_NEWLINE}$( x y2j "$VER_LABEL_FP" | x jo 1.link | x j2y )"
+    [ "$SKIP_RELEASE_OTHER" = "1" ] || {
+        x ws fabu-release-other || exit 1
     }
 
-
-    (
-        ___x_cmd_cmds_cd x-cmd-version || {
-            x:error "Cannnot cd to x-cmd/x-cmd-version"
-            exit 1
-        }
-        x ws index pkg
-    )
+    x ws fabu-release-post || exit 1
 )

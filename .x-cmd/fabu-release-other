@@ -1,0 +1,41 @@
+# shellcheck shell=dash
+
+(
+    x:info "准备打包 x-cmd/release 其他平台的版本"
+    [ -d release ] || command git clone git@github.com:x-cmd/release || return
+
+    distfolder="$PWD/release/dist"
+    sumfolder="$PWD/release/sum"
+    ___x_cmd_cmds_mkdir -p "$distfolder" "$sumfolder"
+
+    [ -d x-cmd-version ] || command git clone git@github.com:x-cmd/x-cmd-version    || return
+
+    (
+
+        ___x_cmd_cmds_cd x-cmd-version || {
+            x:error "Cannot ___x_cmd_cmds_cd to release"
+            exit 1
+        }
+        x ws release-other "$distfolder" "$sumfolder" || exit 1
+    ) || {
+        x:error "x ws release-other failed"
+        exit 1
+    }
+
+    (
+        ___x_cmd_cmds_cd release || {
+            x:error "Cannot ___x_cmd_cmds_cd to release"
+            exit 1
+        }
+
+        x:info "正在上传 x-cmd/release 到 github.com"
+        command git add dist sum
+        command git status -s
+        command git diff --cached --quiet || {
+            command git commit -m ... || return
+            command git push git@github.com:x-cmd/release main  || return
+        }
+    ) || return
+
+    x ws fabu-release-sync || return
+)

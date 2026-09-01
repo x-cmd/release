@@ -33,8 +33,6 @@
         command git status -s
         command git commit -m "Update: version index.yml" || return
         command git push git@github.com:x-cmd/release main
-        command git push git@gitee.com:x-cmd/release main
-        command git push git@gitcode.net:x-cmd/release main
     ) || return
 
     (
