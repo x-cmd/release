@@ -1,3 +1,130 @@
+v0.10.8:
+  sum: 9e40c656140c1a7dd35096a28c7be412d73cb576309fb9bf332643489208361d63ca9bda4137b8c0e618dc2743d6c8cd6587476688dde66663e4410c681feef2
+  date: "2026-09-02T14:03:31+00:00"
+  change:
+    x-cmd-action:
+      update:
+        - cn: |
+            正式公开 [x-cmd-action](https://github.com/x-cmd-action) —— 把 x-cmd shell 库的能力，以及它包装的 AI 工具集，一起带进 GitHub Actions。
+
+            这些 action 都是纯 shell 实现，没有 Node.js runtime，没有打包的 JS，也没有一层套一层的 action 依赖。这样就不用被 Node.js、Python 或各种依赖库的版本升级拖着频繁升级 action 版本。
+
+            用起来很轻：先把 runner 配好，安装 x-cmd、配置 git/ssh/docker、按需克隆仓库。真正的可重复流程代码，建议用 shell（x-cmd）、nodejs、python 等不依赖 GitHub Action 部件的方式去写，action 只是个入口。
+
+            再就是安全轻便地用 AI 辅助维护者管理项目：新 issue 自动打 label、每次 push 自动发 PR review 草稿、每周自动生成 changelog、从已关闭的 bug 里提取 post-mortem。AI 只出草稿，最终决策还是人来做。
+
+            示例：
+            ```yaml
+            - uses: x-cmd-action/ai/reply@v1
+              with:
+                use_ai: 'true'
+                provider: 'deepseek'
+                model: 'deepseek-chat'
+              env:
+                DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+            ```
+
+            详细见 [github.com/x-cmd-action](https://github.com/x-cmd-action)。
+          en: |
+            Publicly launched [x-cmd-action](https://github.com/x-cmd-action) — bringing the x-cmd shell library and the AI toolkit wrapped by it into GitHub Actions.
+
+            These actions are pure shell. No Node.js runtime, no bundled JS, no nested action dependencies. That means no more frequent action version bumps driven by Node.js, Python, or library upgrades.
+
+            They set the runner up — install x-cmd, configure git/ssh/docker, clone repos on demand. The real reusable workflow code should be built in shell (x-cmd), nodejs, python, or anything that doesn't depend on GitHub Action internals; the action is just the entry point.
+
+            Then there's the lightweight AI-assisted project management: auto-label new issues, draft a PR review on every push, generate weekly changelogs, extract post-mortems from closed bugs. The AI drafts; humans decide.
+
+            Example:
+            ```yaml
+            - uses: x-cmd-action/ai/reply@v1
+              with:
+                use_ai: 'true'
+                provider: 'deepseek'
+                model: 'deepseek-chat'
+              env:
+                DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+            ```
+
+            See [github.com/x-cmd-action](https://github.com/x-cmd-action) for more.
+    x-cmd:
+      update:
+        - cn: |
+            启动器支持 Termux 的 prefix 布局，x-cmd 可以通过 Termux 官方 `pkg` 源安装了。
+
+            Termux 的安装前缀不是 `/usr`，而是 `/data/data/com.termux/files/usr`。之前启动器只探测了几个常见的 FHS / Homebrew 路径，在 Termux 里会直接找不到安装。这次加上了 `$TERMUX_PREFIX` 检测，启动器能正确找到 Termux 下的 x-cmd。
+
+            这意味着以后在 Termux 里可以直接：
+            ```bash
+            pkg install x-cmd
+            x --version
+            ```
+            不用自己 curl 安装脚本，也不用下游打包者每次 release 后打补丁。
+          en: |
+            The launcher now recognizes Termux's prefix layout, so x-cmd can be installed through the official Termux `pkg` repository.
+
+            Termux uses `/data/data/com.termux/files/usr` as its prefix instead of `/usr`. The launcher previously only probed common FHS / Homebrew paths, so it would fail to find the installation on Termux. We've added `$TERMUX_PREFIX` detection so the launcher can locate x-cmd in the Termux layout.
+
+            This means on Termux you can soon do:
+            ```bash
+            pkg install x-cmd
+            x --version
+            ```
+            without curling the install script or requiring downstream packagers to patch every release.
+    agent:
+      update:
+        - cn: |
+            `x agent request` 新增 `x-chat` harness —— 直接用 x-cmd 自己的 AI Chat 能力跑任务。
+
+            之前 `x agent request` 主要接 Codex、Claude 这类外部工具，现在可以走 x-cmd 内置的 AI Chat 了。整个 agent 是我们自己用 shell + awk 写的，不依赖任何第三方 CLI 或库，直接调各家的 API。
+
+            目前覆盖了 OpenAI、DeepSeek、Minimax 等常用提供商，你可以按自己的账号和模型偏好来选。
+
+            示例：
+            ```bash
+            # 先初始化 agent 配置
+            x agent init
+
+            # 用 x-chat harness 跑单次任务
+            x agent request --harness x-chat "解释一下这段代码"
+            ```
+
+            注意这是无人值守模式，AI 会自动执行命令和修改文件，建议在隔离环境或已备份的项目里跑。
+          en: |
+            `x agent request` now supports the `x-chat` harness — using x-cmd's own AI Chat capabilities.
+
+            Previously `x agent request` mostly wired up external tools like Codex and Claude. Now it can route through x-cmd's built-in AI Chat instead. The agent is implemented directly in shell + awk, with no third-party CLI tools or libraries required; it calls provider APIs straight.
+
+            It covers major providers including OpenAI, DeepSeek, and Minimax, so you can pick whichever model and account you prefer.
+
+            Examples:
+            ```bash
+            # Initialize agent config first
+            x agent init
+
+            # Run a one-shot task with the x-chat harness
+            x agent request --harness x-chat "explain this code"
+            ```
+
+            Keep in mind this is unattended mode: the AI will run commands and edit files automatically. Use it in isolated environments or backed-up projects.
+    skill0:
+      bugfix:
+        - cn: |
+            修复简体中文站 Skill0 专区页面正文仍显示英文的问题。
+
+            之前 [cn.x-cmd.com/skill0/](https://cn.x-cmd.com/skill0/) 入口页以及 `/skill0/` 路径下的部分 Skill 文档页虽然导航和界面文案是中文，但主要正文还是英文，跟中文站的定位对不上。这次把相关页面补上了简体中文内容，后续新增或更新 Skill0 文档时也会同步带上中文版本。
+
+            感谢 @Galaxy-Husky 在 [x-cmd/x-cmd#478](https://github.com/x-cmd/x-cmd/issues/478) 里反馈这个问题。
+          en: |
+            Fixed Skill0 pages on the Simplified Chinese site still showing English body content.
+
+            On [cn.x-cmd.com/skill0/](https://cn.x-cmd.com/skill0/) and some Skill docs under `/skill0/`, the navigation and UI labels were already in Chinese, but the main body was still English — which didn't match the Chinese site's intent. We've added the missing Simplified Chinese content and will keep Chinese versions in sync when adding or updating Skill0 docs going forward.
+
+            Thanks to @Galaxy-Husky for reporting this in [x-cmd/x-cmd#478](https://github.com/x-cmd/x-cmd/issues/478).
+  blog: null
+  name: v0.10.8
+  alpha: true
+  beta: true
+  latest: true
 v0.10.7:
   sum: 66803d43ac9e31411bda9305f2a077c8bd59a98b965b9aff94315e68c253854644e7bee778517df70383c31c7b003638fb7392d8f163299b5cc4c21103d5e7a8
   date: "2026-08-31T13:21:50+00:00"
@@ -137,9 +264,6 @@ v0.10.7:
             Thanks to @Galaxy-Husky for reporting this in [x-cmd/x-cmd#476](https://github.com/x-cmd/x-cmd/issues/476).
   blog: null
   name: v0.10.7
-  alpha: true
-  beta: true
-  latest: true
 v0.10.6:
   sum: 702153f2ee4251c6e01d8af6cf21d128886281e187af88a144fbc9ff70ccab619dbf34c23ef8418cc5b9b7d3bb6adf9d8213045a74c3caf9c2e829c9ffcad5f9
   date: "2026-08-26T13:05:22+00:00"
