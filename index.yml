@@ -344,7 +344,7 @@ v0.10.5:
             ```
 
             Status: first release — I'm still poking at it. Haven't pushed real PR volume through it yet; bulk-validation speed numbers will come back in a v0.10.x increment once I've pushed actual PR data through.
-  blog: null
+  blog: /blog/260828
   name: v0.10.5
 v0.10.4:
   sum: fd238e48026eb053d63312cb2731f51cc0e8b6683e11f58b296329d7d1167fa96da8deb2931890d798d8385dce0c589e6068ae3fd1b463bed4f3de96a43d79b8
