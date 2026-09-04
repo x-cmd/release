@@ -352,7 +352,7 @@ v0.10.6:
             # Monitor CPU / memory for PID 1234
             x ps monitor 1234
             ```
-  blog: null
+  blog: /blog/260904
   name: v0.10.6
 v0.10.5:
   sum: 6b518de35465f5ec2bb012791d16d29066816ecabf85de6d685bd69a3eeb9a755339adc6a0ca79792fc9f6a0b9f960393e99e0a04b4650785ba8a6386d8f0f90
