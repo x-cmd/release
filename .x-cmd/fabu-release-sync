@@ -1,16 +1,43 @@
 # shellcheck shell=dash
 # 同步 x-cmd/release 到 gitee.com 与 gitcode.net 镜像仓库
 
+# gitee/gitcode 对境外 IP 的 SSH(22) 连接经常超时,
+# 优先使用 HTTPS + Token 推送;失败时重试若干次
+___x_cmd_sync_push(){
+    local remote_url="$1"
+    local try=1
+    while [ "$try" -le 3 ]; do
+        x:info "第 ${try} 次尝试 push 到 $remote_url"
+        command git push "$remote_url" main && return 0
+        x:warn "push 失败,30 秒后重试"
+        sleep 30
+        try=$(( try + 1 ))
+    done
+    return 1
+}
+
 (
+    command git config http.postBuffer 524288000
+
     [ -d release ] || command git clone git@github.com:x-cmd/release || exit 1
     ___x_cmd_cmds_cd release || {
         x:error "Cannot cd to release"
         exit 1
     }
 
+    # Gitee: 有 token 走 HTTPS,否则退回 SSH
+    gitee_url="git@gitee.com:x-cmd/release"
+    if [ -n "${GITEE_TOKEN:-}" ]; then
+        gitee_url="https://oauth2:${GITEE_TOKEN}@gitee.com/x-cmd/release.git"
+    fi
     x:info "正在同步 x-cmd/release 到 gitee.com 仓库"
-    command git push git@gitee.com:x-cmd/release main   || exit 1
+    ___x_cmd_sync_push "$gitee_url" || exit 1
 
+    # GitCode: 有 token 走 HTTPS,否则退回 SSH
+    gitcode_url="git@gitcode.net:x-cmd/release"
+    if [ -n "${GITCODE_TOKEN:-}" ]; then
+        gitcode_url="https://oauth2:${GITCODE_TOKEN}@gitcode.net/x-cmd/release.git"
+    fi
     x:info "正在同步 x-cmd/release 到 gitcode.net 仓库"
-    command git push git@gitcode.net:x-cmd/release main || exit 1
+    ___x_cmd_sync_push "$gitcode_url" || exit 1
 )
