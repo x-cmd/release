@@ -1,3 +1,126 @@
+v0.10.9:
+  sum: cbf189821f87301409d39e28e1eb00fbfe3bd2937a496f8f70dc6cd4e95789b1c452a8eed6c6e6df4578c2eb5ff9a726c1721e29e1153e6001bbc7c98fa791e7
+  date: "2026-09-05T08:50:23+00:00"
+  change:
+    cpu:
+      update:
+        - cn: |
+            `x cpu` 新增 E/P 核区分 —— 因为我突然好奇自己的 M5 里 10 个核到底哪几个在真干活。
+
+            Apple Silicon 一直是性能核（P-core）+ 能效核（E-core）混搭：刷网页、敲代码悄悄跑在 E-core 上省电，剪视频、跑模型才轮到 P-core 发力。但系统自带的工具不直接告诉你当前哪个核在忙，`x cpu` 之前也只能看到一堆 core 编号，分不清谁是谁。
+
+            现在每个 `core N` 后面都会标上 `(P)` 或 `(E)`，末尾还多出两行 `ecpu idle` / `pcpu idle` —— E 簇和 P 簇各自的整体空闲率。肉眼一扫就能看出你的 Mac 当前是「省电模式」还是「性能模式」。
+
+            有个坑顺带说一下：不同代芯片的 perflevel 顺序不一样（M1/M2/M3 是 E 在前，M5 是 P 在前），所以 `x cpu` 是按 perflevel 的名字（Efficiency / Performance / Super）来判断的，不会张冠李戴。
+
+            示例：
+            ```bash
+            # 看每个核是 P 还是 E，以及两簇的整体空闲率
+            x cpu
+            ```
+          en: |
+            `x cpu` now distinguishes E/P cores — I got curious which of my M5's 10 cores were actually doing the work.
+
+            Apple Silicon has always mixed Performance cores (P) with Efficiency cores (E): web browsing and coding quietly run on the E-cores to save power, while video editing and model inference get the P-cores. But system tools don't tell you which cores are busy, and `x cpu` previously just showed a pile of core numbers with no way to tell them apart.
+
+            Now each `core N` is tagged `(P)` or `(E)`, plus two extra lines at the end — `ecpu idle` and `pcpu idle`, the overall idle rates of the E and P clusters. One glance tells you whether your Mac is in "power-saving mode" or "performance mode".
+
+            One gotcha worth mentioning: the perflevel order differs across chip generations (E first on M1/M2/M3, P first on M5), so `x cpu` identifies them by the perflevel name (Efficiency / Performance / Super) instead of assuming an order.
+
+            Example:
+            ```bash
+            # See which cores are P or E, plus per-cluster idle rates
+            x cpu
+            ```
+    codex:
+      update:
+        - cn: |
+            新增 `x codex glm` 与 `x codex minimax` —— 在 Codex CLI 中直接使用智谱 GLM 模型与 MiniMax 模型。
+
+            继 DeepSeek 之后，GLM 与 MiniMax 也兼容了 OpenAI Responses API，于是我们把它们接进了 `x codex`。沿用 `x codex ds` 的方案：通过 `codex --config` 参数叠加关键配置项，不修改、也不污染全局配置文件，随时可以在 OpenAI 官方模型与第三方模型之间切换。
+
+            - `x codex glm`（别名 `zhipu`）：默认模型 glm-5.3
+            - `x codex minimax`（别名 `mm`）：默认模型 MiniMax-M3
+
+            API key 可以通过环境变量 `ZHIPU_API_KEY` / `MINIMAX_API_KEY` 传入，也可以用 `x zhipu init`、`x minimax init` 交互式配置后直接使用。
+
+            示例：
+            ```bash
+            # 交互式配置智谱 API key
+            x zhipu init
+
+            # 不影响全局配置文件的情况下，直接启动使用 GLM 模型
+            x codex glm
+
+            # 直接启动使用 MiniMax 模型
+            MINIMAX_API_KEY=<KEY> x codex minimax
+            ```
+          en: |
+            Added `x codex glm` and `x codex minimax` — use Zhipu GLM and MiniMax models directly in the Codex CLI.
+
+            Following DeepSeek, GLM and MiniMax now support the OpenAI Responses API, so we wired them into `x codex`. Same approach as `x codex ds`: critical config items are overlaid via the `codex --config` parameter — no file modification, zero pollution of your global config, and you can switch between OpenAI and third-party models anytime.
+
+            - `x codex glm` (alias `zhipu`): defaults to glm-5.3
+            - `x codex minimax` (alias `mm`): defaults to MiniMax-M3
+
+            API keys can be passed via the `ZHIPU_API_KEY` / `MINIMAX_API_KEY` environment variables, or configured interactively with `x zhipu init` / `x minimax init`.
+
+            Example:
+            ```bash
+            # Interactively configure the Zhipu AI API key
+            x zhipu init
+
+            # Start using GLM models without touching global config files
+            x codex glm
+
+            # Start using MiniMax models
+            MINIMAX_API_KEY=<KEY> x codex minimax
+            ```
+    repo:
+      update:
+        - cn: |
+            `x repo card` 评分卡增强 —— 从「近期热度」升级到「看仓库的一生」。
+
+            给仓库做选型评估时，最常见的问题是：它现在活跃，是一直这么活跃，还是最近才火？以前四个固定窗口（30/90/180/360 天）最多看到一年内的动静，再往前就是空白。
+            这次补上 60 天和 720 天的数据，并新增 `total:` 全量历史段 —— release、PR、issue、commit 六项指标从建仓第一天算起的总数。
+
+            顺便补上了「这个仓库到底有多少行代码」。card 原有的语言构成来自 GitHub linguist 的字节数，vendored/generated 文件还不计入；现在可以直接数本地工作区的物理行数（tokei 口径，连文档里嵌的示例代码都照数）。
+            card 本身依旧全程只走 API、不碰磁盘，要行数时才会 clone 仓库顺带统计，`x repo loc` 也可单独使用。
+
+            示例：
+            ```bash
+            # 六个固定窗口 + total 全量历史段
+            x repo card jqlang/jq
+
+            # 抽取全量历史数，对比「最近」与「一生」
+            x repo card jqlang/jq | yq '.total'
+
+            # 单独数一个仓库的物理行数
+            x repo loc jqlang/jq
+            ```
+          en: |
+            `x repo card` scorecard enhanced — from "recent activity" to "the repo's whole life".
+
+            The most common question when evaluating a repo: it's active now, but has it always been — or did it just catch fire recently? The old four fixed windows (30/90/180/360 days) could only see back one year; anything earlier was blank. This release adds 60-day and 720-day windows, plus an all-time `total:` section — six metrics (releases, PRs, issues, commits) counted from the repo's first day.
+
+            Also filled in: "how many lines of code does this repo actually have". The card's language breakdown comes from GitHub linguist byte counts, which skip vendored/generated files; you can now count physical lines of the local working tree instead (tokei-style — even code blocks embedded in docs get counted). The card itself still stays API-only and never touches disk; it only clones when you ask for line counts, and `x repo loc` works standalone too.
+
+            Example:
+            ```bash
+            # Six fixed windows + the all-time total section
+            x repo card jqlang/jq
+
+            # Pull the all-time numbers to compare "recent" vs "ever"
+            x repo card jqlang/jq | yq '.total'
+
+            # Count physical lines of a repo on its own
+            x repo loc jqlang/jq
+            ```
+  blog: null
+  name: v0.10.9
+  alpha: true
+  beta: true
+  latest: true
 v0.10.8:
   sum: 9e40c656140c1a7dd35096a28c7be412d73cb576309fb9bf332643489208361d63ca9bda4137b8c0e618dc2743d6c8cd6587476688dde66663e4410c681feef2
   date: "2026-09-02T14:03:31+00:00"
@@ -122,9 +245,6 @@ v0.10.8:
             Thanks to @Galaxy-Husky for reporting this in [x-cmd/x-cmd#478](https://github.com/x-cmd/x-cmd/issues/478).
   blog: null
   name: v0.10.8
-  alpha: true
-  beta: true
-  latest: true
 v0.10.7:
   sum: 66803d43ac9e31411bda9305f2a077c8bd59a98b965b9aff94315e68c253854644e7bee778517df70383c31c7b003638fb7392d8f163299b5cc4c21103d5e7a8
   date: "2026-08-31T13:21:50+00:00"
