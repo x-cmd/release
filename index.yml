@@ -76,6 +76,56 @@ v0.10.9:
             # Start using MiniMax models
             MINIMAX_API_KEY=<KEY> x codex minimax
             ```
+    install:
+      update:
+        - cn: |
+            `x install` 接入项目健康报告 —— 装之前先看看它还活着没。
+
+            挑开源工具最怕装完才发现：issue 区几百条没人回，最近一次 commit 是一年前，release 页就躺着一个 v0.0.1。装都装了，删也不好删。所以这次我把 x-cmd-install-stat 的每日扫描报告直接打通了 —— 2500+ 个常用开源项目，每天自动体检一遍：star/fork/watcher、最近 30/60/90/180/360 天的 release/PR/commit/issue、openssf scorecard（维护状态、Code Review、安全策略）、语言构成和代码行数，一应俱全。
+
+            两个入口：
+
+            - `x install --report jq`：只看体检报告
+            - `x install --info jq`：安装方法 + 体检报告，上半段看怎么装，下半段看它还活不活跃
+
+            不带参数直接 `x install` 进 fzf 选单的话，光标移到任意一行，右侧预览窗格会自动出现报告，j/k 狂翻也不卡（报告缓存一天，不会反复打 GitHub）。
+
+            官网 https://www.x-cmd.com/install/jq 的可视化还在迭代，终端这边已经完整可用。报告里还应该加什么字段（下载量？赞助商？），欢迎提 issue。
+
+            ![x install --info jq](https://github.com/user-attachments/assets/02c39881-bd90-4ac1-9e3b-64a47c410aa7)
+
+            示例：
+            ```bash
+            # 只看 jq 的体检报告
+            x install --report jq
+
+            # 安装方法 + 体检报告一起看
+            x install --info jq
+            ```
+          en: |
+            `x install` now shows project health reports — check if a project is still alive before installing.
+
+            The worst feeling: you pick a tool, install it, and only then notice hundreds of unanswered issues, the last commit was a year ago, and the releases page has a lonely v0.0.1. So I wired the x-cmd-install-stat daily scan straight into install — 2500+ common open-source projects, health-checked every day: stars/forks/watchers, releases/PRs/commits/issues over 30/60/90/180/360-day windows, openssf scorecard (maintenance status, code review, security policy), language breakdown and lines of code.
+
+            Two entry points:
+
+            - `x install --report jq`: report only
+            - `x install --info jq`: install methods on top, health report below — how to install and whether it's still active, in one glance
+
+            Run plain `x install` and the fzf picker shows the report in the right preview pane as you move the cursor — smooth even when you spam j/k (the report is cached for a day, so it won't hammer GitHub).
+
+            The visualization on https://www.x-cmd.com/install/jq is still early-days, but the terminal side is fully working. If you think the report is missing something (download counts? sponsors?), file an issue.
+
+            ![x install --info jq](https://github.com/user-attachments/assets/02c39881-bd90-4ac1-9e3b-64a47c410aa7)
+
+            Example:
+            ```bash
+            # Health report for jq only
+            x install --report jq
+
+            # Install methods + health report together
+            x install --info jq
+            ```
     repo:
       update:
         - cn: |
