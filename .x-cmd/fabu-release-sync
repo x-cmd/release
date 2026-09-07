@@ -28,4 +28,8 @@
     fi
     x:info "正在同步 x-cmd/release 到 gitcode.net 仓库"
     x retry --max 3 --interval 30 command git push "$gitcode_url" main || exit 1
+
+    codeberg_url="git@git.codeberg.org:x-cmd/release"
+    x:info "正在同步 x-cmd/release 到 codeberg.org 仓库"
+    x retry --max 3 --interval 30 command git push "$codeberg_url" main || exit 1
 )
