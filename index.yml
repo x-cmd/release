@@ -1,3 +1,153 @@
+v0.10.10:
+  sum: 0433118614e71962dc8aea2d4df6f998714c2f3b80020cf79f020f6cc2462a55cb30017825bceee7b4d4dbcb0a5d15bd6179e47de4e859ba71dc914b26f1ab5a
+  date: "2026-09-07T12:54:31+00:00"
+  change:
+    fskv:
+      update:
+        - cn: |
+            新增 `fskv` 模块 —— 基于目录共享的简易键值存储。
+
+            以前想让两个脚本互相传点状态，要么写环境变量要么起个服务，都太重了。这次干脆把状态塞进文件系统：每个 key 就是一个同名文件，根目录默认是当前目录下的 `.x-cmd/fskv`。任何对该目录有读写权限的进程或用户，共享的就是同一份键值。
+
+            几个我觉得顺手的点：
+
+            - key 里的 `/` 就是目录层级，`abc//cde` 会自动合并成 `abc/cde`；遇到文件和目录撞名，模块会把它自动挪到目录里的默认值文件，不用你操心
+            - `x fskv root <path>` 可以换存储根目录 —— 放到 NFS / 共享挂载点上，多台机器就共享同一份状态了
+            - `x fskv :<root> <op>` 或 `-r <path>` 能临时切根目录执行单个操作，不改会话状态
+
+            示例：
+            ```bash
+            # 写入并读取一个键值
+            x fskv put greeting hello
+            x fskv get greeting
+
+            # 换到共享根目录，多进程/多用户共享同一份状态
+            x fskv root ~/shared/fskv
+
+            # 临时在 /tmp/fskv-demo 下操作，不改会话状态
+            x fskv -r /tmp/fskv-demo put msg hello
+
+            # 按前缀列出 user 命名空间下的所有 key
+            x fskv ls user
+
+            # 判断 key 是否存在 / 删除一个 key
+            x fskv has user/name
+            x fskv rm user/name
+            ```
+          en: |
+            New `fskv` module — a simple filesystem-directory-shared key-value store.
+
+            Passing state between scripts used to mean environment variables or standing up a service, both overkill. This time we just lean on the filesystem: every key is a file with the same name, and the root directory defaults to `.x-cmd/fskv` under the current directory. Any process or user with read/write access to that directory shares the same state.
+
+            A few things I find handy:
+
+            - `/` in a key is just directory nesting; `abc//cde` collapses to `abc/cde` automatically; if a file collides with a directory name, the module quietly migrates it to the directory's default-value file — nothing for you to babysit
+            - `x fskv root <path>` switches the storage root — point it at an NFS / shared mount and multiple machines share the same state
+            - `x fskv :<root> <op>` or `-r <path>` runs a single operation against another root without touching the session state
+
+            Example:
+            ```bash
+            # Write and read a key-value pair
+            x fskv put greeting hello
+            x fskv get greeting
+
+            # Switch to a shared root so multiple processes/users share state
+            x fskv root ~/shared/fskv
+
+            # One-off operation against /tmp/fskv-demo, session state untouched
+            x fskv -r /tmp/fskv-demo put msg hello
+
+            # List all keys under the user namespace
+            x fskv ls user
+
+            # Check if a key exists / remove a key
+            x fskv has user/name
+            x fskv rm user/name
+            ```
+    str:
+      bugfix:
+        - cn: |
+            修复 `str` 模块的 bug，感谢 @shubo83 在 [#487](https://github.com/x-cmd/x-cmd/issues/487) 的反馈。
+
+            照官网文档敲 `echo "a,b,c" | x str split ","`，结果报错说缺数组名参数 —— 文档示例和实际用法对不上，确实有点坑，这次把 `split` 的行为整顺手了。
+
+            顺便还修了个藏得有点深的潜在 bug（[#489](https://github.com/x-cmd/x-cmd/issues/489)）：`startswith` / `endswith` 判断前缀后缀时，模式没加引号，遇到 `*`、`?` 这类通配符会先跟当前目录做一遍文件名展开，带空格的串还会被拆词，结果完全看你在哪个目录下运行。比如 `x str startswith "hello" "*"`，期望是「不匹配」，旧代码却可能误报。现在按字面量处理了，表现符合直觉。
+
+            示例：
+            ```bash
+            # split 按文档示例直接可用
+            echo "a,b,c" | x str split ","
+
+            # 通配符按字面量匹配，不再受当前目录影响
+            x str startswith "hello" "*"    # 返回非零
+            x str endswith "hello world" " world"  # 匹配成功
+            ```
+          en: |
+            Fixed a bug in the `str` module — thanks to @shubo83 for the report in [#487](https://github.com/x-cmd/x-cmd/issues/487).
+
+            Following the docs and running `echo "a,b,c" | x str split ","` failed with a missing-array-name error — the documented example didn't match actual usage, which was a real gotcha. `split` now behaves as documented.
+
+            Also fixed a sneaky latent bug along the way ([#489](https://github.com/x-cmd/x-cmd/issues/489)): in `startswith` / `endswith`, the pattern slot was unquoted, so prefixes/suffixes containing `*` or `?` were glob-expanded against the current directory first, and ones with whitespace got word-split — the result depended on which directory you happened to be in. E.g. `x str startswith "hello" "*"` should return non-match, but the old code could report otherwise. Patterns are now treated as literals, so behavior matches intuition.
+
+            Example:
+            ```bash
+            # split works as documented out of the box
+            echo "a,b,c" | x str split ","
+
+            # glob chars treated literally, no CWD-dependent surprises
+            x str startswith "hello" "*"          # returns non-zero
+            x str endswith "hello world" " world"  # matches
+            ```
+    eget:
+      bugfix:
+        - cn: |
+            修复 `x eget` 在部分 GitHub Release 中可能选错 asset 的问题。
+
+            此前的匹配算法主要根据 asset 名称与当前平台的匹配程度进行打分。在一些 Release 同时包含 library、源码包和不同架构二进制等多种文件时，可能错误地选择 library、源码包或其他架构的二进制。
+
+            这个 bug 最早是在测试 `epicgames/lore`（[#471](https://github.com/x-cmd/x-cmd/issues/471)）时发现的。随后，在测试 `h5i-dev/h5i`（[#483](https://github.com/x-cmd/x-cmd/issues/483)）时又发现了另一个相关问题：当当前平台没有对应的 Release binary 时，例如 Intel macOS（x86_64）只有 arm64 版本可用，旧算法仍可能错误下载 arm64 binary，而不是正确提示当前平台没有可用版本。
+
+            这次我们改进了匹配算法。新的算法会同时评估每个 asset 与所有平台的匹配程度——不仅判断它是否匹配当前平台，也判断它是否更匹配其他平台。
+
+            只有当当前平台的得分严格高于其他所有平台时，该 asset 才会被视为当前平台的有效候选。对于所有平台得分相同的 asset（例如不包含明确平台信息的源码包、通用压缩包等），现在会直接跳过。
+
+            示例：
+            ```bash
+            # 现在能更精准地挑出真正匹配当前 OS/arch 的 asset
+            x eget use epicgames/lore
+
+            # 平台无对应包时，老老实实报错而不是下个不兼容的二进制
+            x eget use h5i-dev/h5i
+            ```
+
+            感谢 @Koukyosyumei 通过 [h5i-dev/h5i#601](https://github.com/h5i-dev/h5i/pull/601) 将相关问题反馈到上游项目。
+          en: |
+            Fixed `x eget` selecting the wrong asset from some GitHub Releases.
+
+            The previous matching algorithm scored assets primarily by how well their names aligned with the current platform. When a release ships a mix of library archives, source tarballs, and binaries built for different architectures, it could end up picking the library, the source tarball, or a binary built for a different platform.
+
+            The bug first surfaced while testing `epicgames/lore` ([#471](https://github.com/x-cmd/x-cmd/issues/471)). A related case then showed up while testing `h5i-dev/h5i` ([#483](https://github.com/x-cmd/x-cmd/issues/483)): when no Release binary is available for the current platform — for example, on an Intel macOS (x86_64) machine where only arm64 builds exist — the old algorithm would still happily download the arm64 binary instead of correctly reporting that no build is available for the current platform.
+
+            We have now improved the matching algorithm. The new algorithm evaluates each asset against all platforms at once — checking not only whether it matches the current platform, but also whether it matches other platforms better.
+
+            An asset is only treated as a valid candidate for the current platform when its score for the current platform is strictly higher than its score for every other platform. Assets that score identically across all platforms (for example, source tarballs or generic archives that carry no clear platform info) are now skipped outright.
+
+            Example:
+            ```bash
+            # Now reliably picks the asset that actually matches the current OS/arch
+            x eget use epicgames/lore
+
+            # When no asset is available for the platform, it now fails clearly
+            # instead of pulling an incompatible binary
+            x eget use h5i-dev/h5i
+            ```
+
+            Thanks to @Koukyosyumei for reporting the related issue upstream via [h5i-dev/h5i#601](https://github.com/h5i-dev/h5i/pull/601).
+  blog: null
+  name: v0.10.10
+  alpha: true
+  beta: true
+  latest: true
 v0.10.9:
   sum: cbf189821f87301409d39e28e1eb00fbfe3bd2937a496f8f70dc6cd4e95789b1c452a8eed6c6e6df4578c2eb5ff9a726c1721e29e1153e6001bbc7c98fa791e7
   date: "2026-09-05T08:50:23+00:00"
@@ -168,9 +318,6 @@ v0.10.9:
             ```
   blog: null
   name: v0.10.9
-  alpha: true
-  beta: true
-  latest: true
 v0.10.8:
   sum: 9e40c656140c1a7dd35096a28c7be412d73cb576309fb9bf332643489208361d63ca9bda4137b8c0e618dc2743d6c8cd6587476688dde66663e4410c681feef2
   date: "2026-09-02T14:03:31+00:00"
