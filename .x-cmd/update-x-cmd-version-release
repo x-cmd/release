@@ -7,7 +7,7 @@ fun_update_version_release(){
 
     x gh repo release create --prerelease -r x-cmd/x-cmd --tag "$version_tag"
     x cb repo release create --prerelease -r x-cmd/x-cmd --tag "$version_tag"
-    x gt repo release create --prerelease -r x-cmd/x-cmd --tag "$version_tag" --target_commitish "$version_tag" --body "$version_tag"
+    # x gt repo release create --prerelease -r x-cmd/x-cmd --tag "$version_tag" --target_commitish "$version_tag" --body "$version_tag"
 
     x version release sync all "$version_tag"
 }
