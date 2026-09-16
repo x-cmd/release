@@ -1,3 +1,117 @@
+v0.10.11:
+  sum: a4de292c5316108a2c083aaf984f4dfa5b0d6094d3c8007a93dc69a354be18b34e2f7aa6fa3b18245eca7542a12e3b5e941284b7831a17c20527979d2959d144
+  date: "2026-09-16T06:37:34+00:00"
+  change:
+    repo:
+      update:
+        - cn: |
+            增强 `x repo card` 的版本信息展示 —— 以前只有 latestVersion，有点单薄。
+
+            现在 ABOUT 段新增 `Latest rel` / `Latest pre`，TIMELINE 段新增 `Last ver` / `Last release` / `Last pre`。_stable 版、prerelease 版、最近一次发版各自什么状态，一眼就能看清楚，不用再去 release 页面翻了。
+
+            示例：
+            ```bash
+            # 看仓库的完整卡片，版本信息更全了
+            x repo card jqlang/jq
+            ```
+          en: |
+            Enhanced version info in `x repo card` — it used to show only latestVersion, which felt a bit thin.
+
+            The ABOUT section now adds `Latest rel` / `Latest pre`, and the TIMELINE section adds `Last ver` / `Last release` / `Last pre`. Stable vs prerelease vs most-recent release status is visible at a glance, no more digging through the releases page.
+
+            Example:
+            ```bash
+            # Full repo card, now with richer version info
+            x repo card jqlang/jq
+            ```
+    eget:
+      update:
+        - cn: |
+            调整 `eget` 的子命令 —— 改名的改名，新增的新增。
+
+            之前两个诊断命令名字有点长，这次统一改短：
+            - `x eget lsasset` → `x eget asset` —— 列一个 Release 的全部 asset
+            - `x eget lsassetmap` → `x eget fit` —— 每个平台槽位最配哪个 asset
+
+            注意旧名字不再保留，脚本里用到了记得换。
+
+            顺手新增三个子命令，把 release 资产这事儿从两个角度都讲清楚：
+            - `x eget assetfit` —— 反向视角：`fit` 告诉你"哪个槽位配哪个 asset"，它告诉你"每个 asset 适合哪些平台/运行时"，一行一个 asset，带 `native/linux/x64`、`runtime/rpm` 这类标签
+            - `x eget classify` —— 从 stdin 读 release JSON，给每个 asset 打 fit 标签，纯本地，不发请求
+            - `x eget parse` —— release JSON 的格式化器（tsv/json/yml），也是 stdin-only
+
+            `fit` 的输出也比以前细了：平台槽位从 6 个扩到 12 个（linux 拆了 gnu/musl，win 拆了 msvc/gnu），json/yml 格式还会自动附上每个 asset 配对的 `.sha256` / `.sig` 下载地址。另外架构标签统一从 `amd64` 改成了 `x64`，解析过输出的脚本要同步改。
+
+            示例：
+            ```bash
+            # 列 release 全部 asset（原 lsasset）
+            x eget asset sharkdp/bat
+
+            # 每个平台槽位的最佳候选（原 lsassetmap）
+            x eget fit sharkdp/bat
+
+            # 反向看：每个 asset 适合哪些平台/运行时
+            x eget assetfit sharkdp/bat
+
+            # 本地处理已有的 release JSON，不发请求
+            x eget asset --json sharkdp/bat | x eget classify
+            ```
+          en: |
+            Reworked `eget` subcommands — some renamed, some brand new.
+
+            Two diagnostic commands had unwieldy names, so we shortened them:
+            - `x eget lsasset` → `x eget asset` — list every asset of a release
+            - `x eget lsassetmap` → `x eget fit` — the best-fitting asset per platform slot
+
+            Heads up: the old names are gone for good, so update any scripts that call them.
+
+            We also added three new subcommands that cover release assets from both directions:
+            - `x eget assetfit` — the inverse view: where `fit` says "which asset fills slot X", this says "which platforms/runtimes does asset Y fit", one row per asset with labels like `native/linux/x64` or `runtime/rpm`
+            - `x eget classify` — reads release JSON from stdin and labels each asset's fit; fully local, no requests
+            - `x eget parse` — a release-JSON formatter (tsv/json/yml), also stdin-only
+
+            `fit`'s output got finer-grained too: platform slots grew from 6 to 12 (linux split into gnu/musl, win into msvc/gnu), and the json/yml formats now attach each asset's paired `.sha256` / `.sig` download URLs. Also note the arch label changed from `amd64` to `x64` — sync your scripts if you parse the output.
+
+            Example:
+            ```bash
+            # List all assets of a release (formerly lsasset)
+            x eget asset sharkdp/bat
+
+            # Best candidate per platform slot (formerly lsassetmap)
+            x eget fit sharkdp/bat
+
+            # Inverse view: which platforms/runtimes each asset fits
+            x eget assetfit sharkdp/bat
+
+            # Process an existing release JSON locally, no requests
+            x eget asset --json sharkdp/bat | x eget classify
+            ```
+    xrc:
+      update:
+        - cn: |
+            调整 `xrc` 的加载逻辑，移除了针对 Claude Code 初始化阶段的特殊守卫。
+
+            背景是这样的：Claude Code 加载 shell rc 时会对 shell 状态做 snapshot，函数体能保住，但 `_` 开头的变量保不住。x-cmd 偏偏是"函数 + 延迟变量"的运行时，snapshot 一搞，函数还在、变量全空，直接残破。我们前后试了五种修补（v1 到 v5，记录在 [#492](https://github.com/x-cmd/x-cmd/issues/492)），最后一版用 `___X_CMD_CLAUDECODE_READY=1` 协商，靠函数 marker 放行。
+
+            但这个守卫留下了一个隐蔽的 bug：你自己写的脚本，手动跑一切正常；agent 一跑，子进程被注入 `CLAUDECODE=1`，守卫触发，x-cmd 根本没生效。同一份脚本，执行者不同结果不同 —— 开发期完全复现不了，出了问题你只会怀疑人生。
+
+            所以我们决定：放弃对 Claude Code 的全部特殊化处理。`CLAUDECODE` 现在跟其他普通环境变量一样，x-cmd 不做任何区别对待 —— 回归成"普通 POSIX shell 一样的行为"。这是唯一不会因为 Claude Code 升级而失效的策略。
+
+            不变的部分：在 Claude Code REPL 里调 x-cmd，正解还是走 `bin/x` 子进程入口，它本来就绕开 snapshot。
+          en: |
+            Adjusted `xrc` loading logic — removed the special guard for Claude Code's init phase.
+
+            Here's the background: when Claude Code loads your shell rc, it snapshots the shell state. Function bodies survive, but variables starting with `_` don't. x-cmd happens to be a "functions + lazily-initialized variables" runtime, so after a snapshot the functions are there but the variables are empty — a broken half-state. We tried five patches (v1 through v5, documented in [#492](https://github.com/x-cmd/x-cmd/issues/492)); the last one negotiated via `___X_CMD_CLAUDECODE_READY=1` with a function marker as the pass.
+
+            But that guard left behind a subtle bug: take a script you wrote yourself — run it by hand and everything's fine; let an agent run it and the child process gets `CLAUDECODE=1` injected, the guard kicks in, and x-cmd silently never takes effect. Same script, different runner, different result — impossible to reproduce during development, and when it breaks you end up doubting your own sanity.
+
+            So we decided to drop all special handling for Claude Code. `CLAUDECODE` is now treated like any ordinary environment variable — x-cmd behaves exactly like a normal POSIX shell. That's the only strategy that can't break with the next Claude Code update.
+
+            What hasn't changed: inside the Claude Code REPL, the right way to call x-cmd is still the `bin/x` subprocess entry, which sidesteps the snapshot entirely.
+  blog: null
+  name: v0.10.11
+  alpha: true
+  beta: true
 v0.10.10:
   sum: 0433118614e71962dc8aea2d4df6f998714c2f3b80020cf79f020f6cc2462a55cb30017825bceee7b4d4dbcb0a5d15bd6179e47de4e859ba71dc914b26f1ab5a
   date: "2026-09-07T12:54:31+00:00"
@@ -145,8 +259,6 @@ v0.10.10:
             Thanks to @Koukyosyumei for reporting the related issue upstream via [h5i-dev/h5i#601](https://github.com/h5i-dev/h5i/pull/601).
   blog: null
   name: v0.10.10
-  alpha: true
-  beta: true
   latest: true
 v0.10.9:
   sum: cbf189821f87301409d39e28e1eb00fbfe3bd2937a496f8f70dc6cd4e95789b1c452a8eed6c6e6df4578c2eb5ff9a726c1721e29e1153e6001bbc7c98fa791e7
@@ -579,7 +691,7 @@ v0.10.7:
             In other words, the AI will run commands, read and write files, and modify code without asking every time. For day-to-day use, we suggest running it in isolated environments, containers, CI, or backed-up local projects, and reviewing any changes before they land somewhere important.
 
             Thanks to @Galaxy-Husky for reporting this in [x-cmd/x-cmd#476](https://github.com/x-cmd/x-cmd/issues/476).
-  blog: null
+  blog: /blog/260908
   name: v0.10.7
 v0.10.6:
   sum: 702153f2ee4251c6e01d8af6cf21d128886281e187af88a144fbc9ff70ccab619dbf34c23ef8418cc5b9b7d3bb6adf9d8213045a74c3caf9c2e829c9ffcad5f9
