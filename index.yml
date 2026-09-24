@@ -1,3 +1,144 @@
+v0.10.12:
+  sum: 2a240dbed6244e35681aec8b96d37a14bf3f696b108618967d22bffae9bb6f07510427ec2c2d694ed38e21999d6aa754230d3e16c49ca526575831e576a5e798
+  date: "2026-09-24T09:09:09+00:00"
+  change:
+    ghclaw:
+      update:
+        - cn: |
+            新增 `ghclaw` 模块 —— GitHub 事件监视器：轮询 events 时间线（单仓/组织/个人），游标去重，派发给内置 AI 智能体。
+
+            这套监听 + AI 处理的能力，以前跑在 GitHub Actions 上（就是 x-cmd-action 那套），链路绑在 GitHub 的基础设施里，想自己部署一套很麻烦。这个模块相当于把 x-cmd-action 方案本地化了 —— 不依赖 GitHub Actions，在你自己的机器上就能跑起整套监听。
+
+            三种姿势：
+            - `x ghclaw run` —— 一站式前台运行，监听 + 消费一把抓，Ctrl-C 全停
+            - `x ghclaw listen` —— 只后台监听，事件进 MQ，用 `x ghclaw ls` / `x ghclaw stop` 管理
+            - `x ghclaw consume` —— 只消费 MQ，把事件派发给智能体
+
+            监听目标可以是单仓（`--repo`）、整个组织（`--org`）或个人。游标去重，重启不重复处理。
+
+            当前还是初版 —— 内置智能体默认只做新 issue 分类打标签和 @x 自动回复，其他能力还在完善中。但监听和事件处理是分开的：`listen` 把事件攒进 MQ 文件后，你可以用自己的 python / node 脚本、或任何习惯的方式去消费处理，不一定走内置智能体。欢迎上手试试，有问题尽管提 issue 反馈。
+
+            示例：
+            ```bash
+            # 前台一站式：监听 + 自动分类/回复新 issue
+            x ghclaw run --repo x-cmd/x-cmd
+
+            # 只后台监听组织下所有仓库
+            x ghclaw listen --org x-bash
+
+            # 看看现在有哪些监听在跑
+            x ghclaw ls
+            ```
+          en: |
+            Added the `ghclaw` module — a GitHub event monitor: polls the events timeline (single repo / org / user), dedupes with a cursor, and dispatches to built-in AI agents.
+
+            The listen + AI-process capability used to run on GitHub Actions (the x-cmd-action setup), with the pipeline tied to GitHub's infrastructure — self-hosting a copy was a pain. This module is essentially the localized version of that approach: no GitHub Actions dependency, the whole monitoring setup runs on your own machine.
+
+            Three ways to run it:
+            - `x ghclaw run` — one-shot foreground mode, listen + consume together, Ctrl-C stops everything
+            - `x ghclaw listen` — background listen only, events go into the MQ; manage with `x ghclaw ls` / `x ghclaw stop`
+            - `x ghclaw consume` — consume the MQ and dispatch events to agents
+
+            Listen targets can be a single repo (`--repo`), a whole org (`--org`), or a user. Cursor dedup means restarting won't reprocess old events.
+
+            Listen targets can be a single repo (`--repo`), a whole org (`--org`), or a user. Cursor dedup means restarting won't reprocess old events.
+
+            This is still an early first cut — the built-in agent only does new-issue classification/labeling and auto-reply to @x by default, with more capabilities on the way. But listening and event handling are decoupled: once `listen` appends events to the MQ file, you can consume and process them with your own python / node scripts or whatever workflow you prefer — the built-in agent is just one option. Give it a try, and file an issue if anything feels off — feedback is very welcome.
+
+            Example:
+            ```bash
+            # Foreground all-in-one: listen + auto-classify/reply new issues
+            x ghclaw run --repo x-cmd/x-cmd
+
+            # Background-listen to every repo under an org
+            x ghclaw listen --org x-bash
+
+            # See what's listening right now
+            x ghclaw ls
+            ```
+    repo:
+      update:
+        - cn: |
+            新增 `x repo starhistory` —— 想随手看一眼仓库的 star 增长曲线，又不想每次都手搓 GitHub API。
+
+            用法很简单，给一个仓库 id 就行，输出按日期聚合的 TSV（date + count），缓存在 `~/.x-repo/.stat/<owner>/<repo>/star.tsv`。日常跑是增量模式：抓一次当前 star 总数，追加到历史文件里。想看完整历史就加 `--rebuild`。
+
+            有个细节：如果你是仓库 owner，rebuild 会带上 `starred_at` 时间戳全量遍历 stargazers，把历史上每天的 star 数还原出来；不是 owner 的话 API 不给时间戳，只能退化成"从今天开始每天记一笔"，曲线会从你第一次跑的那天开始长。
+
+            数据就是纯 TSV，攒一段时间后 `repo card` 会直接把它画成图。
+
+            示例：
+            ```bash
+            # 看 star 历史（首次跑自动重建，之后每天增量追加）
+            x repo starhistory x-cmd/x-cmd
+
+            # 全量重建历史
+            x repo starhistory --rebuild x-cmd/x-cmd
+            ```
+          en: |
+            Added `x repo starhistory` — I wanted to glance at a repo's star growth curve without hand-rolling the GitHub API every time.
+
+            Usage is simple: pass a repo id and it outputs date-aggregated TSV (date + count), cached in `~/.x-repo/.stat/<owner>/<repo>/star.tsv`. Normal runs are incremental: fetch the current star count once and append it to the history file. Want the full history? Add `--rebuild`.
+
+            One detail: if you're the repo owner, rebuild walks all stargazers with `starred_at` timestamps and reconstructs the daily star counts back through history. If you're not the owner, the API won't give you timestamps, so it falls back to "record one data point per day starting today" — the curve starts growing from your first run.
+
+            The data is plain TSV, and after it accumulates for a while `repo card` will chart it for you.
+
+            Example:
+            ```bash
+            # Star history (auto-rebuilds on first run, then appends daily)
+            x repo starhistory x-cmd/x-cmd
+
+            # Full rebuild
+            x repo starhistory --rebuild x-cmd/x-cmd
+            ```
+    ondb:
+      update:
+        - cn: |
+            先介绍下 `ondb` 是啥：一个基于 TSV 追加日志的类型化知识图谱小工具。实体和关系都以 TSV 行追加到日志文件里，查询、遍历、校验全用 awk 搞定，不需要 Python。schema 约束（必填、枚举、关系类型、无环这些）写在 schema.tsv 里，`validate` 自动检查。
+
+            这次精简了它的命令行 —— 做减法，去掉了 `schema` 子命令和 `-f` 单文件模式。
+
+            ondb 还在早期迭代，与其留一堆用得少的入口，不如先把核心路径整顺手点。这次的改动：
+
+            - `--dir` 改名 `--datadir`（短选项 `-d`），名字更直白
+            - 删除 `-f` 单文件模式，现在只支持目录模式 —— 一个数据目录管 snapshot + log，反而更省心
+            - 删除 `x ondb schema add` / `x ondb schema ls` —— schema.tsv 本来就是普通 TSV 文件，直接手写就行，echo / cat / sed 都能编辑，validate 照旧自动加载校验
+
+            示例：
+            ```bash
+            # 目录参数改名了
+            x ondb add --datadir mydata --type Task --name "Fix bug" --id task_001
+
+            # schema 直接写文件，不再走子命令
+            printf 'type\tTask\trequired\tname,status\n' > mydata/schema.tsv
+            x ondb validate --datadir mydata
+            ```
+          en: |
+            First, what is `ondb`? A typed knowledge-graph tool built on an append-only TSV log. Entities and relations are appended as TSV lines, and querying, traversing and validating are all done in awk — no Python needed. Schema constraints (required, enum, relation types, acyclic, etc.) live in schema.tsv and `validate` checks them automatically.
+
+            This time we slimmed down its CLI — subtraction: the `schema` subcommand and the `-f` single-file mode are gone.
+
+            ondb is still in early iteration, and rather than keeping a bunch of rarely-used entry points, we'd rather make the core path feel right. What changed:
+
+            - `--dir` renamed to `--datadir` (short: `-d`) — more self-explanatory
+            - Removed `-f` single-file mode; directory mode is now the only mode — one data directory managing snapshot + log, which honestly is less fuss
+            - Removed `x ondb schema add` / `x ondb schema ls` — schema.tsv is a plain TSV file anyway, so just write it directly with echo / cat / sed. `validate` still loads and checks it automatically
+
+            Example:
+            ```bash
+            # The directory flag got renamed
+            x ondb add --datadir mydata --type Task --name "Fix bug" --id task_001
+
+            # Write schema.tsv directly, no subcommand needed
+            printf 'type\tTask\trequired\tname,status\n' > mydata/schema.tsv
+            x ondb validate --datadir mydata
+            ```
+  blog: null
+  name: v0.10.12
+  alpha: true
+  beta: true
+  latest: true
 v0.10.11:
   sum: a4de292c5316108a2c083aaf984f4dfa5b0d6094d3c8007a93dc69a354be18b34e2f7aa6fa3b18245eca7542a12e3b5e941284b7831a17c20527979d2959d144
   date: "2026-09-16T06:37:34+00:00"
@@ -110,8 +251,6 @@ v0.10.11:
             What hasn't changed: inside the Claude Code REPL, the right way to call x-cmd is still the `bin/x` subprocess entry, which sidesteps the snapshot entirely.
   blog: null
   name: v0.10.11
-  alpha: true
-  beta: true
 v0.10.10:
   sum: 0433118614e71962dc8aea2d4df6f998714c2f3b80020cf79f020f6cc2462a55cb30017825bceee7b4d4dbcb0a5d15bd6179e47de4e859ba71dc914b26f1ab5a
   date: "2026-09-07T12:54:31+00:00"
@@ -257,9 +396,8 @@ v0.10.10:
             ```
 
             Thanks to @Koukyosyumei for reporting the related issue upstream via [h5i-dev/h5i#601](https://github.com/h5i-dev/h5i/pull/601).
-  blog: null
+  blog: /blog/260920
   name: v0.10.10
-  latest: true
 v0.10.9:
   sum: cbf189821f87301409d39e28e1eb00fbfe3bd2937a496f8f70dc6cd4e95789b1c452a8eed6c6e6df4578c2eb5ff9a726c1721e29e1153e6001bbc7c98fa791e7
   date: "2026-09-05T08:50:23+00:00"
@@ -428,7 +566,7 @@ v0.10.9:
             # Count physical lines of a repo on its own
             x repo loc jqlang/jq
             ```
-  blog: null
+  blog: /blog/260912
   name: v0.10.9
 v0.10.8:
   sum: 9e40c656140c1a7dd35096a28c7be412d73cb576309fb9bf332643489208361d63ca9bda4137b8c0e618dc2743d6c8cd6587476688dde66663e4410c681feef2
@@ -552,7 +690,7 @@ v0.10.8:
             On [cn.x-cmd.com/skill0/](https://cn.x-cmd.com/skill0/) and some Skill docs under `/skill0/`, the navigation and UI labels were already in Chinese, but the main body was still English — which didn't match the Chinese site's intent. We've added the missing Simplified Chinese content and will keep Chinese versions in sync when adding or updating Skill0 docs going forward.
 
             Thanks to @Galaxy-Husky for reporting this in [x-cmd/x-cmd#478](https://github.com/x-cmd/x-cmd/issues/478).
-  blog: null
+  blog: /blog/260910
   name: v0.10.8
 v0.10.7:
   sum: 66803d43ac9e31411bda9305f2a077c8bd59a98b965b9aff94315e68c253854644e7bee778517df70383c31c7b003638fb7392d8f163299b5cc4c21103d5e7a8
