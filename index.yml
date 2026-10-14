@@ -134,7 +134,7 @@ v0.10.12:
             printf 'type\tTask\trequired\tname,status\n' > mydata/schema.tsv
             x ondb validate --datadir mydata
             ```
-  blog: null
+  blog: /blog/261014
   name: v0.10.12
   alpha: true
   beta: true
@@ -249,7 +249,7 @@ v0.10.11:
             So we decided to drop all special handling for Claude Code. `CLAUDECODE` is now treated like any ordinary environment variable — x-cmd behaves exactly like a normal POSIX shell. That's the only strategy that can't break with the next Claude Code update.
 
             What hasn't changed: inside the Claude Code REPL, the right way to call x-cmd is still the `bin/x` subprocess entry, which sidesteps the snapshot entirely.
-  blog: null
+  blog: /blog/261011
   name: v0.10.11
 v0.10.10:
   sum: 0433118614e71962dc8aea2d4df6f998714c2f3b80020cf79f020f6cc2462a55cb30017825bceee7b4d4dbcb0a5d15bd6179e47de4e859ba71dc914b26f1ab5a
