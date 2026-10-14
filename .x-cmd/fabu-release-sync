@@ -5,13 +5,28 @@
 # 优先使用 HTTPS + Token 推送;失败时重试若干次
 
 (
+    x:info "开始同步 x-cmd/release 镜像仓库 (工作目录: $PWD)"
+
+    # 增大 HTTP(S) 推送缓冲,避免推送大文件(tgz)时 RPC failed / HTTP 413
+    x:info "设置 git http.postBuffer=524288000 (HTTPS 推送大文件需要)"
     command git config http.postBuffer 524288000
 
-    [ -d release ] || command git clone git@github.com:x-cmd/release || exit 1
+    if [ -d release ]; then
+        x:info "复用已有的 release 目录: $PWD/release"
+    else
+        x:info "未找到 release 目录,克隆 x-cmd/release ..."
+        command git clone git@github.com:x-cmd/release || {
+            x:error "克隆 x-cmd/release 失败"
+            exit 1
+        }
+    fi
     ___x_cmd_cmds_cd release || {
         x:error "Cannot cd to release"
         exit 1
     }
+
+    x:info "当前仓库: $(command git remote get-url origin 2>/dev/null || echo unknown)"
+    x:info "待推送分支: main ($(command git rev-parse --short HEAD 2>/dev/null || echo unknown))"
 
     # Gitee: 有 token 走 HTTPS,否则退回 SSH
     # gitee_url="git@gitee.com:x-cmd/release"
@@ -24,12 +39,21 @@
     # GitCode: 有 token 走 HTTPS,否则退回 SSH
     gitcode_url="git@gitcode.net:x-cmd/release"
     if [ -n "${GITCODE_TOKEN:-}" ]; then
+        x:info "检测到 GITCODE_TOKEN,使用 HTTPS + Token 推送 gitcode.net"
         gitcode_url="https://oauth2:${GITCODE_TOKEN}@gitcode.net/x-cmd/release.git"
+    else
+        x:info "未检测到 GITCODE_TOKEN,退回 SSH 推送 gitcode.net (境外 IP 可能超时)"
     fi
-    x:info "正在同步 x-cmd/release 到 gitcode.net 仓库"
-    x retry --max 3 --interval 30 command git push "$gitcode_url" main || exit 1
+    x:info "正在同步 x-cmd/release 到 gitcode.net 仓库 (最多重试 3 次)"
+    x retry --max 3 --interval 30 command git push "$gitcode_url" main || {
+        x:error "同步 x-cmd/release 到 gitcode.net 失败"
+        exit 1
+    }
+    x:info "同步 x-cmd/release 到 gitcode.net 成功"
 
     # codeberg_url="git@git.codeberg.org:x-cmd/release"
     # x:info "正在同步 x-cmd/release 到 codeberg.org 仓库"
     # x retry --max 3 --interval 30 command git push "$codeberg_url" main || exit 1
+
+    x:info "镜像同步全部完成"
 )
