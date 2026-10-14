@@ -1,3 +1,97 @@
+v0.10.13:
+  sum: 334e846ea2be7112e38eebcdc3c17f8884fcd0cfed761b6c677663fc3ead1f038c2500a0b5b3cb852aea6986cb9e8f953674eaa4002e24a047359a618fd87502
+  date: "2026-10-14T10:18:32+00:00"
+  change:
+    repo:
+      update:
+        - cn: |
+            新增 `x repo pulse` —— 上个版本刚给了 `starhistory`，这次补上它的姊妹功能：仓库的"脉搏"历史快照。
+
+            一条命令，把仓库最近 10 年 + 12 个月 + 30 天的活动量全记录下来：release 数、merged PR、open PR、closed issue、open issue、PR 总数、issue 总数。采样点是 53 个固定时间点（每年 1 个、每月 1 个、每天 1 个），数据存成纯 TSV，缓存在 `~/.x-repo/.stat/<owner>/<repo>/pulse.tsv`。日常跑是增量模式，只更新今天那一行；首次跑或想全量刷新就加 `--rebuild`。
+
+            实现上有个坑值得一提：GitHub 的 GraphQL 单次查询超过约 16KB 会直接吃 502，而 53 个时间点 × 好几种统计口径拼装起来轻松破限。所以拆成了 6 轮查询，回来再用 jq 合并。每个时间点的"快照值"是用当前总数减去该日期之后创建的数量反推的（快照不会负数，做了下限保护）。
+
+            目前 commit 数还是占位（恒为 0），后续会接上 `/stats/commit_activity` 接口。需要 `GH_TOKEN`。
+
+            示例：
+            ```bash
+            # 记录仓库脉搏（首次自动重建，之后每天增量追加）
+            x repo pulse x-cmd/x-cmd
+
+            # 全量重建
+            x repo pulse --rebuild x-cmd/x-cmd
+            ```
+          en: |
+            Added `x repo pulse` — `starhistory` just landed last release; this time we add its sibling: a "pulse" history snapshot for repos.
+
+            One command records the repo's activity across the last 10 years + 12 months + 30 days: releases, merged PRs, open PRs, closed issues, open issues, plus PR/issue totals. It samples 53 fixed points (1 per year, 1 per month, 1 per day) and stores everything as plain TSV, cached in `~/.x-repo/.stat/<owner>/<repo>/pulse.tsv`. Daily runs are incremental — only today's row gets updated. First run or full refresh? Add `--rebuild`.
+
+            One implementation pitfall worth mentioning: GitHub's GraphQL rejects single queries over ~16KB with a 502, and 53 time points times several metric variants blows past that easily. So we split it into 6 round-trips and merge the results with jq. Each point's "snapshot value" is back-computed as the current total minus everything created after that date (floored at 0 to keep it sane).
+
+            The commit count is still a placeholder (always 0) — the `/stats/commit_activity` wiring comes next. Requires `GH_TOKEN`.
+
+            Example:
+            ```bash
+            # Record repo pulse (auto-rebuilds on first run, then appends daily)
+            x repo pulse x-cmd/x-cmd
+
+            # Full rebuild
+            x repo pulse --rebuild x-cmd/x-cmd
+            ```
+    root:
+      update:
+        - cn: |
+            优化了 `x root repoint` 的帮助文档 —— 之前没写明白，用户反馈看不懂，这次重写了一遍，也补上了 `--help` 支持。
+
+            顺嘴说一句 `x root repoint` 是干嘛的：x-cmd 默认装在 `~/.x-cmd.root`，想挪地方（比如 Windows 上 C 盘太挤）就靠它。文件本体搬到新目录，原位置留个符号链接 —— 路径还是那个路径，东西已经换了地方。`apply` 迁移，`revoke` 还原。
+
+            示例：
+            ```bash
+            # 把 x-cmd 挪到自定义路径
+            x root repoint apply /path/to/newroot
+
+            # 还原
+            x root repoint revoke
+            ```
+          en: |
+            Improved the help docs for `x root repoint` — the old ones weren't clear and users got lost, so we rewrote them and added `--help` support.
+
+            And while we're at it — what does `x root repoint` actually do? x-cmd installs to `~/.x-cmd.root` by default. If you want it somewhere else (like when the C drive is bursting on Windows), this is the tool. It moves the real files to wherever you pick and leaves a symlink behind — same path, new home. `apply` does the move, `revoke` puts it back.
+
+            Example:
+            ```bash
+            # Relocate x-cmd to a custom path
+            x root repoint apply /path/to/newroot
+
+            # Put it back
+            x root repoint revoke
+            ```
+    helpapp:
+      bugfix:
+        - cn: |
+            修复 helpapp 界面宽度判断的一处笔误 —— `(y2 - y2) < 110` 恒为真，高度判断形同虚设。
+
+            感谢 @sclevenger7777 发现的问题和 PR！
+
+            示例：
+            ```bash
+            # 打开帮助界面看看效果
+            x --help
+            ```
+          en: |
+            Fixed a typo in the helpapp width check — `(y2 - y2) < 110` is always true, so the height check never did anything.
+
+            Thanks @sclevenger7777 for spotting the issue and the PR!
+
+            Example:
+            ```bash
+            # Open the help screen and see
+            x --help
+            ```
+  blog: null
+  name: v0.10.13
+  alpha: true
+  beta: true
 v0.10.12:
   sum: 2a240dbed6244e35681aec8b96d37a14bf3f696b108618967d22bffae9bb6f07510427ec2c2d694ed38e21999d6aa754230d3e16c49ca526575831e576a5e798
   date: "2026-09-24T09:09:09+00:00"
@@ -136,8 +230,6 @@ v0.10.12:
             ```
   blog: /blog/261014
   name: v0.10.12
-  alpha: true
-  beta: true
   latest: true
 v0.10.11:
   sum: a4de292c5316108a2c083aaf984f4dfa5b0d6094d3c8007a93dc69a354be18b34e2f7aa6fa3b18245eca7542a12e3b5e941284b7831a17c20527979d2959d144
