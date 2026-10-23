@@ -88,7 +88,7 @@ v0.10.13:
             # Open the help screen and see
             x --help
             ```
-  blog: null
+  blog: /blog/261023
   name: v0.10.13
   alpha: true
   beta: true
