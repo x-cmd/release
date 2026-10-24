@@ -1,3 +1,45 @@
+v0.10.14:
+  sum: 00134a2ec5c854e6d987aa96c00923e47b21d48394f591607c1ea98f3dccfee157a747f5f078bac603ded9b23e3c0b0a5717fd1b271f81853f86f18e9ecee96b
+  date: "2026-10-24T07:45:47+00:00"
+  change:
+    advise:
+      update:
+        - cn: |
+            优化了 advise 的补全加载 —— 改完之后开 shell 明显快了。
+
+            https://github.com/x-cmd/x-cmd/issues/509 提的需求：按 Tab 时再按需加载 advise 的命令数据，而不是在启动的时候全量加载。
+
+            之前每开一个终端，都得先等 advise 把整套补全逻辑装好，哪怕你这个会话一次 Tab 都不按。advise 支持 1000 多个命令的补全，全量加载的代价摆在那儿。
+
+            这次改成懒加载：启动时只挂一个轻量的 Tab 代理，等你真按了 Tab，再去加载真正的补全逻辑，顺带把这次的补全也做了，不用多按一下。bash 上用的是 readline 宏那点小技巧，zsh 上则是 zle widget 代理。
+
+            效果挺明显：zsh 下 advise 这块的启动耗时从 350–400ms 掉到 25–35ms，降幅九成多。bash 也快了一点，从 40ms 上降到 30ms 上下。
+
+            示例：
+            ```bash
+            # 新开一个终端，输入命令后按一下 Tab —— 第一次按键就把补全加载好，正常补全
+            git checkout <Tab>
+            ```
+          en: |
+            Optimized how advise loads completions — opening a shell feels noticeably faster now.
+
+            The request came from https://github.com/x-cmd/x-cmd/issues/509: load advise's command data on demand when you press Tab, instead of loading everything at startup.
+
+            Every new terminal used to wait for advise to load the whole completion machinery up front, even if you never hit Tab in that session. advise covers completions for 1000+ commands, and loading all of that isn't cheap.
+
+            Now it's lazy: startup only hooks up a lightweight Tab proxy, and the real completion logic loads when you actually press Tab — it finishes that completion for you too, so no need to press Tab twice. On bash we use a readline macro trick; on zsh, a zle widget proxy.
+
+            The numbers: on zsh, advise's share of startup went from 350–400ms down to 25–35ms, over 90% off. Bash improved too, from around 40ms to around 30ms.
+
+            Example:
+            ```bash
+            # In a fresh terminal, type a command and hit Tab once — the first press loads completions and completes in one go
+            git checkout <Tab>
+            ```
+  blog: null
+  name: v0.10.14
+  alpha: true
+  beta: true
 v0.10.13:
   sum: 334e846ea2be7112e38eebcdc3c17f8884fcd0cfed761b6c677663fc3ead1f038c2500a0b5b3cb852aea6986cb9e8f953674eaa4002e24a047359a618fd87502
   date: "2026-10-14T10:18:32+00:00"
@@ -90,8 +132,7 @@ v0.10.13:
             ```
   blog: /blog/261023
   name: v0.10.13
-  alpha: true
-  beta: true
+  latest: true
 v0.10.12:
   sum: 2a240dbed6244e35681aec8b96d37a14bf3f696b108618967d22bffae9bb6f07510427ec2c2d694ed38e21999d6aa754230d3e16c49ca526575831e576a5e798
   date: "2026-09-24T09:09:09+00:00"
@@ -230,7 +271,6 @@ v0.10.12:
             ```
   blog: /blog/261014
   name: v0.10.12
-  latest: true
 v0.10.11:
   sum: a4de292c5316108a2c083aaf984f4dfa5b0d6094d3c8007a93dc69a354be18b34e2f7aa6fa3b18245eca7542a12e3b5e941284b7831a17c20527979d2959d144
   date: "2026-09-16T06:37:34+00:00"
