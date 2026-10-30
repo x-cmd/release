@@ -1,3 +1,43 @@
+v0.10.15:
+  sum: 0b8dbc66eadb9bab3869b66cf39a83bca8dc8d73f2b12decf8f04ff4bc2dd0c35be9a1d246cbc2f2d6e5b75d42ed0af3e84ce83529fa3e200493aff0dc424309
+  date: "2026-10-30T13:02:38+00:00"
+  change:
+    advise:
+      update:
+        - cn: |
+            x-cmd advise 数据完成了一次全面整理，—— 覆盖命令从 260 来个增加到 3000+，支持多语言，补齐了各系统的原生命令、zsh 补全，以及此前遗漏的长尾工具。
+
+            同时新增了环境识别：自动判断当前使用的 shell（bash / zsh）和系统（macOS / Linux / Windows），补全时只展示与当前环境相关的选项。
+
+            数据量增长了十几倍，我们对加载做了专门优化，启动速度不受影响，基本无感。
+
+            现有数据已平滑迁移到新格式，更新后无需额外操作，Tab 补全自动生效。
+
+            示例：
+            ```bash
+            git checkout <Tab>
+            ```
+
+            长尾命令的数据仍在持续补充，如有遗漏欢迎提 issue。
+          en: |
+            x-cmd advise's data has been fully reorganized — coverage grew from ~260 commands to 3000+, with support for multiple languages, OS-native commands, zsh completions, and previously missing long-tail tools filled in.
+
+            It also gains environment recognition: it automatically detects your shell (bash / zsh) and OS (macOS / Linux / Windows), and completion now only shows options relevant to your environment.
+
+            Despite the dataset growing more than tenfold, we gave loading a dedicated optimization, so startup remains essentially unnoticeable.
+
+            Existing data has been migrated to the new format smoothly. After updating, no extra steps are needed — Tab completion picks up the new data automatically.
+
+            Example:
+            ```bash
+            git checkout <Tab>
+            ```
+
+            Data for long-tail commands is still being expanded — file an issue if you notice anything missing.
+  blog: null
+  name: v0.10.15
+  alpha: true
+  beta: true
 v0.10.14:
   sum: 00134a2ec5c854e6d987aa96c00923e47b21d48394f591607c1ea98f3dccfee157a747f5f078bac603ded9b23e3c0b0a5717fd1b271f81853f86f18e9ecee96b
   date: "2026-10-24T07:45:47+00:00"
@@ -38,8 +78,7 @@ v0.10.14:
             ```
   blog: null
   name: v0.10.14
-  alpha: true
-  beta: true
+  latest: true
 v0.10.13:
   sum: 334e846ea2be7112e38eebcdc3c17f8884fcd0cfed761b6c677663fc3ead1f038c2500a0b5b3cb852aea6986cb9e8f953674eaa4002e24a047359a618fd87502
   date: "2026-10-14T10:18:32+00:00"
@@ -132,7 +171,6 @@ v0.10.13:
             ```
   blog: /blog/261023
   name: v0.10.13
-  latest: true
 v0.10.12:
   sum: 2a240dbed6244e35681aec8b96d37a14bf3f696b108618967d22bffae9bb6f07510427ec2c2d694ed38e21999d6aa754230d3e16c49ca526575831e576a5e798
   date: "2026-09-24T09:09:09+00:00"
