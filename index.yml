@@ -1,3 +1,123 @@
+v0.11.0:
+  sum: b07756490a2115377247b13952186be9d615f838003f85695c2c2cc7dc786a21fa77a82c4375deadc2922c25cc4b4d602923fc35b0b2721b57e828d09ffd450a
+  date: "2026-11-23T09:35:17+00:00"
+  change:
+    advise:
+      update:
+        - cn: |
+            新增 PowerShell 补全 —— Windows 用户也能按 Tab 补全了。
+
+            之前 advise 已经支持 bash / zsh / fish / elv / nu / tcsh，唯独缺了 pwsh。这次把它做上了：pwsh 启动时自动生成补全 bootcode 并缓存，之后按 Tab 就能补 x 命令和 3000+ 命令的参数，跟在 bash 里体验基本一致。
+
+            不想加载的话也能关掉：在 pwsh 里设 `$env:___X_CMD_ADVISE_ACTIVATION_ON_NON_POSIX_SHELL = "0"` 即可。
+
+            pwsh 补全刚上线，边角 case 可能还有，遇到怪事欢迎提 issue。
+
+            首次在 Windows 上用 pwsh，记得先跑一次 `x pwsh --setup`，把 x-cmd 的启动配置写进 PowerShell profile —— x-cmd 在 pwsh 里起来之后，补全数据才会自动生成。
+
+            示例：
+            ```bash
+            # 把 x-cmd 的启动配置写入 PowerShell profile
+            x pwsh --setup
+            ```
+          en: |
+            Added PowerShell completion — Windows users get Tab completion too.
+
+            advise already covered bash / zsh / fish / elv / nu / tcsh; pwsh was the missing piece. Now it's in: pwsh generates a completion bootcode on startup and caches it, and from then on Tab completes `x` commands plus arguments for 3000+ commands — pretty much the bash experience.
+
+            If you'd rather not load it, set `$env:___X_CMD_ADVISE_ACTIVATION_ON_NON_POSIX_SHELL = "0"` in pwsh and it won't load at all.
+
+            This just shipped, so edge cases may still show up — file an issue if you hit anything weird.
+
+            On Windows, run `x pwsh --setup` once first — it writes x-cmd's startup config into the PowerShell profile. Once x-cmd is up in pwsh, the completion data gets generated automatically.
+
+            Example:
+            ```bash
+            # Write x-cmd's startup config into the PowerShell profile
+            x pwsh --setup
+            ```
+        - cn: |
+            advise 数据包改按语言下发了 —— 先把拆包的机制做出来，给后面的 18 种语言包铺路。
+
+            advise 的描述文本要扩到 18 种语言，一份全量包迟早撑不住。以前不管中文还是英文环境，都得下载解压全量数据包（all.tar.xz）；现在按语言拆包（v0.0.5）：中文环境只下中文包，英文只下英文包，更新轻快了不少。老 release 没有语言清单的话会自动回退全量包，兼容性不用担心。
+
+            这次先落 en 和 zh 两个包，其余语言之后按同一套机制往里加。
+
+            选语言用 `x lang use <lang>`，设好之后 `x advise man update` 就只下对应语言那一份。
+
+            顺带加固了生成逻辑：多个终端同时首次生成 x 的补全数据时，以前可能写出半个文件；现在加锁 + 先写临时文件再原子替换，写失败会直接报错，不会留下一个空文件。
+
+            示例：
+            ```bash
+            # 设置首选使用的语言为中文
+            x lang use zh
+
+            # 更新 advise 数据（按当前语言自动选包）
+            x advise man update
+            ```
+          en: |
+            advise data now ships per language — this lays the groundwork for the 18 language packs to come.
+
+            The advise descriptions are headed for 18 languages, and one all-in-one package won't hold up for that. It used to be: download and extract the full data package (all.tar.xz) no matter your language. Now it's split per language (v0.0.5): Chinese setups fetch only the Chinese package, English setups only the English one — updates are noticeably lighter. Releases without a language manifest fall back to the full package automatically, so compatibility is safe.
+
+            en and zh go out first; the rest get added on the same mechanism later.
+
+            Pick your language with `x lang use <lang>` — once that's set, `x advise man update` pulls only that language's package.
+
+            The generation logic got hardened along the way: when several terminals generate x completion data for the first time at once, they could previously leave a half-written file behind. Now it's locked, written to a temp file, then swapped in atomically — and a failed write errors out instead of quietly leaving an empty file behind.
+
+            Example:
+            ```bash
+            # Set your preferred language to Chinese
+            x lang use zh
+
+            # Update advise data (picks the right language package automatically)
+            x advise man update
+            ```
+    doubao:
+      update:
+        - cn: |
+            doubao 配置改了一轮 —— 火山引擎把套餐拆成了两份，配置也得跟着改。
+
+            以前 doubao 就一个 apikey。现在火山引擎分了 Agent Plan 和 Coding Plan，两种 key 不通用，老配法用不了了。
+
+            `x doubao --cfg` 新增两个字段：
+            - `agentapikey` —— Agent Plan 的 key
+            - `codingapikey` —— Coding Plan 的 key
+
+            模型列表也顺道更新：默认模型换成 `doubao-seed-evolving`，候选项加了 doubao-seed-2.1-pro/lite、glm-5.3、deepseek-v4.x、kimi-k3 这些新面孔。
+
+            另外 `x claude doubao` 和 `x codex doubao` 不再各藏一套配置，统一走 `x doubao --cfg`。注意：以前在 claude doubao 里配过的 key 需要重新填一次，现在它叫 `codingapikey`。
+
+            两个 Plan 我们都还在摸索，遇到对不上的地方欢迎提 issue。
+
+            示例：
+            ```bash
+            x doubao --cfg
+            ```
+          en: |
+            doubao config got reworked — Volcengine split its plans in two, so the config had to change.
+
+            doubao used to have a single apikey. Now Volcengine separates Agent Plan from Coding Plan, and the two keys aren't interchangeable — the old setup no longer works.
+
+            `x doubao --cfg` gains two fields:
+            - `agentapikey` — for the Agent Plan
+            - `codingapikey` — for the Coding Plan
+
+            The model list got a refresh as well: the default is now `doubao-seed-evolving`, with new additions like doubao-seed-2.1-pro/lite, glm-5.3, deepseek-v4.x, and kimi-k3.
+
+            Also, `x claude doubao` and `x codex doubao` no longer keep separate hidden config — both read from `x doubao --cfg` now. Heads up: if you had a key saved under claude doubao, you'll need to enter it again — it's called `codingapikey` now.
+
+            We're still getting to know both plans, so file an issue if something doesn't line up.
+
+            Example:
+            ```bash
+            x doubao --cfg
+            ```
+  blog: null
+  name: v0.11.0
+  alpha: true
+  beta: true
 v0.10.15:
   sum: 0b8dbc66eadb9bab3869b66cf39a83bca8dc8d73f2b12decf8f04ff4bc2dd0c35be9a1d246cbc2f2d6e5b75d42ed0af3e84ce83529fa3e200493aff0dc424309
   date: "2026-10-30T13:02:38+00:00"
@@ -36,8 +156,7 @@ v0.10.15:
             Data for long-tail commands is still being expanded — file an issue if you notice anything missing.
   blog: null
   name: v0.10.15
-  alpha: true
-  beta: true
+  latest: true
 v0.10.14:
   sum: 00134a2ec5c854e6d987aa96c00923e47b21d48394f591607c1ea98f3dccfee157a747f5f078bac603ded9b23e3c0b0a5717fd1b271f81853f86f18e9ecee96b
   date: "2026-10-24T07:45:47+00:00"
@@ -78,7 +197,6 @@ v0.10.14:
             ```
   blog: null
   name: v0.10.14
-  latest: true
 v0.10.13:
   sum: 334e846ea2be7112e38eebcdc3c17f8884fcd0cfed761b6c677663fc3ead1f038c2500a0b5b3cb852aea6986cb9e8f953674eaa4002e24a047359a618fd87502
   date: "2026-10-14T10:18:32+00:00"
