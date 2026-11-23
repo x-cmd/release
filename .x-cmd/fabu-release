@@ -48,11 +48,14 @@
         }
     ) || return 1
 
+    x:info "Running fabu-release-sync"
     # x ws fabu-release-sync || return
 
     [ "$SKIP_RELEASE_OTHER" = "1" ] || {
+        x:info "Running fabu-release-other"
         x ws fabu-release-other || exit 1
     }
 
+    x:info "Running fabu-release-post"
     x ws fabu-release-post || exit 1
 )
