@@ -48,7 +48,7 @@
         }
     ) || return 1
 
-    x ws fabu-release-sync || return
+    # x ws fabu-release-sync || return
 
     [ "$SKIP_RELEASE_OTHER" = "1" ] || {
         x ws fabu-release-other || exit 1
