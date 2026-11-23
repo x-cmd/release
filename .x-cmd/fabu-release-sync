@@ -41,15 +41,17 @@
     if [ -n "${GITCODE_TOKEN:-}" ]; then
         x:info "检测到 GITCODE_TOKEN,使用 HTTPS + Token 推送 gitcode.com"
         gitcode_url="https://oauth2:${GITCODE_TOKEN}@gitcode.com/x-cmd/release.git"
+
+        x:info "正在同步 x-cmd/release 到 gitcode.com 仓库 (最多重试 3 次)"
+        x retry --max 3 --interval 30 command git push "$gitcode_url" main || {
+            x:error "同步 x-cmd/release 到 gitcode.com 失败"
+            exit 1
+        }
+        x:info "同步 x-cmd/release 到 gitcode.com 成功"
     else
-        x:info "未检测到 GITCODE_TOKEN,退回 SSH 推送 gitcode.com (境外 IP 可能超时)"
+        x:info "未检测到 GITCODE_TOKEN,暂不同步"
     fi
-    x:info "正在同步 x-cmd/release 到 gitcode.com 仓库 (最多重试 3 次)"
-    x retry --max 3 --interval 30 command git push "$gitcode_url" main || {
-        x:error "同步 x-cmd/release 到 gitcode.com 失败"
-        exit 1
-    }
-    x:info "同步 x-cmd/release 到 gitcode.com 成功"
+   
 
     # codeberg_url="git@git.codeberg.org:x-cmd/release"
     # x:info "正在同步 x-cmd/release 到 codeberg.org 仓库"
